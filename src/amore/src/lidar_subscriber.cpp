@@ -94,9 +94,9 @@ void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
 	pass.setFilterLimits (0.0, 2.0);
 	pass.filter (*downsampled_XYZ); */
 	
-	pass.setInputCloud (downsampled_XYZ); 
+	pass.setInputCloud (downsampled_XYZ);
 	pass.setFilterFieldName ("x");
-	pass.setFilterLimits (0, 60.0); //these will need to change depending on how the frame of camera is
+	pass.setFilterLimits (0, 30.0);
 	pass.filter (*downsampled_XYZ);
 	
 	pass.setInputCloud (downsampled_XYZ);

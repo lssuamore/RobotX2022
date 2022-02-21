@@ -65,9 +65,6 @@ std::vector <std::vector <cv::Point>> contours;
 std::vector <std::vector <cv::Point>> contours1;
 std::vector <std::vector <cv::Point>> contours2;
 
-int color_x[100];
-int color_y[100];
-
 cv::Mat org_img;
 cv::Mat org_img1;
 cv::Mat org_img2;
@@ -96,14 +93,6 @@ int color_yellow = 0;
 
 int red_x;
 int red_y;
-int green_x;
-int green_y;
-int black_x;
-int black_y;
-int white_x;
-int white_y;
-int orange_x;
-int orange_y;
 
 string color_type_buoy = " ";
 string color_type = " ";
@@ -115,27 +104,6 @@ float centriody;
 float array_lidar_x [100];
 float array_lidar_y [100];
 int track;
-int camera_track;
-
-
-float xdistance_red;
-float xdistance_green;
-float ydistance_red;
-float ydistance_green;
-float ydistance_orange;
-float ydistance_black;
-float xdistance_orange;
-float xdistance_black;
-float xdistance_white;
-float ydistance_white;
-
-int size_red = 0;
-int size_green = 0;
-int size_orange = 0;
-int size_black = 0;
-int size_white = 0;
-int size_mask_t = 0;
-
 
 void LidarCallBackTaylor(const geometry_msgs::Point::ConstPtr& lidar_point) {
 	
@@ -143,9 +111,9 @@ void LidarCallBackTaylor(const geometry_msgs::Point::ConstPtr& lidar_point) {
 
 	centriodx = lidar_point->x;
 	centriody = lidar_point->y;
-	//printf("%f\n", lidar_point->x);
-	//printf("%f\n", lidar_point->y);
-	//printf("%d\n", size_indicies);
+	printf("%f\n", lidar_point->x);
+	printf("%f\n", lidar_point->y);
+	printf("%d\n", size_indicies);
 	
 	//saves to array incoming points in x and y
 	array_lidar_x[track] = lidar_point->x;
@@ -155,24 +123,12 @@ void LidarCallBackTaylor(const geometry_msgs::Point::ConstPtr& lidar_point) {
 	if (track == size_indicies) {
 		track = 0;
 	}
-	
-	camera_track = track;
-	
-	//printf("x0 is: %f\n", array_lidar_x[0]);
-	//printf("x1 is: %f\n", array_lidar_x[1]);
-	//printf("y0 is: %f\n", array_lidar_y[0]);
-	//printf("y1 is: %f\n", array_lidar_y[1]);
 	//left of here
-	if (track == size_indicies - 1) {
-	std::sort(array_lidar_x,array_lidar_x+size_indicies); //sorts smallest to biggest
-	std::sort(array_lidar_y,array_lidar_y+size_indicies); 
 	
-	//printf("x0 is: %f\n", array_lidar_x[0]);
-	//printf("x1 is: %f\n", array_lidar_x[1]);
-	//printf("y0 is: %f\n", array_lidar_y[0]);
-	//printf("y1 is: %f\n", array_lidar_y[1]);
-	}
-	
+	printf("x0 is: %f\n", array_lidar_x[0]);
+	printf("x1 is: %f\n", array_lidar_x[1]);
+	printf("y0 is: %f\n", array_lidar_y[0]);
+	printf("y1 is: %f\n", array_lidar_y[1]);
 	
 }
 
@@ -240,41 +196,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 				
 		//to calculate moments using built in function moments contours must be found
 		cv::findContours(mask_t, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-		for (size_t i=0; i < contours.size(); ++i) {
-		cv::Rect boundRect = cv::boundingRect(contours[i]);
-		if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
-		size_mask_t = contours.size();
-		
-		vector<Moments> mu(contours.size());
-		for( int i = 0; i<contours.size(); i++ ) {
-			mu[i] = cv::moments(contours[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
-			
-			
-			std::vector<cv::Point> pts;
-			vector<Point2f> mc(contours.size());
-			pts = contours[i];
-				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
-				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
-			
-				color_x[i] = mc[i].x;
-				color_y[i] = mc[i].y;
-				
-				std::sort(color_x, color_x+size_mask_t); //sorts smallest to biggest
-				std::sort(color_y, color_y+size_mask_t); 
-				
-				printf("color_x0 is: %d\n", color_x[0]);
-				printf("color_x1 is: %d\n", color_x[1]);
-				printf("color_y0 is: %d\n", color_y[0]);
-				printf("color_y1 is: %d\n", color_y[1]);
-		}
-		}
-		
 		
 		//for each findContours it looks at each colored mask and calculates the contrours of the object and then draws the correct colored rectangle around the object
 		cv::findContours(red_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE); //finds contour around coloured objects and draws a rectangle around the object
@@ -284,7 +205,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			
 			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 255), 3);
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
-			size_red = contours.size();
 			
 			float x1;
 			float x2;
@@ -333,32 +253,11 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			
 			
 			
-			
-			
 				red_x = mc[i].x;
 				red_y = mc[i].y;
 				printf("x centriod of red is: %d\n", red_x);
 				printf("y centriod of red is: %d\n", red_y);
-				//need to repeat below for y
-					 for(int i = 0; i < sizeof(color_x); i++) {
-					if(color_x[i] == red_x){
-						cout << "Red element found at index " << i <<"\n";
-						ydistance_red = array_lidar_y[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
-						printf("Red buoy x is: %f\n", ydistance_red);
-					break;
-					}
-				 }
-				
-				/* if ((red_x != 0 || red_y != 0) && (size_indicies = contours.size())) { //all red because contours == size of centriods being published
-					for (size_t i=0; i < contours.size(); ++i) {
-						xdistance_red = array_lidar_y[i];
-						ydistance_red = array_lidar_x[i];
-					}
-				}
 			
-			
-			printf("red_y is: %f\n", xdistance_red);
-			printf("red_x is: %f\n", ydistance_red); */
 			
 			
 			
@@ -403,7 +302,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
 			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
 			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 255, 0), 3);
-			size_green = contours.size();	
 				
 			float x1;
 			float x2;
@@ -448,39 +346,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			
 				Ry = y1 / y2;
 				Rx = x1 / x2;
-				
-				
-				
-				
-				green_x = mc[i].x;
-				green_y = mc[i].y;
-				printf("x centriod of green is: %d\n", green_x);
-				printf("y centriod of green is: %d\n", green_y);
-				
-					 for(int i = 0; i < sizeof(color_x); i++) {
-					if(color_x[i] == green_x){
-						cout << "Green element found at index " << i <<"\n";
-						ydistance_green = array_lidar_y[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
-						printf("Green buoy x is: %f\n", ydistance_green);
-					break;
-					}
-				 }
-				
-/* 				
-				if ((green_x != 0 || green_y != 0) && (size_indicies = contours.size())) {
-					for (size_t i=0; i < contours.size(); ++i) {
-						xdistance_green = array_lidar_y[i];
-						ydistance_green = array_lidar_x[i];
-					}
-				}
-				
-			
-			printf("green_y is: %f\n", xdistance_green);
-			printf("green_x is: %f\n", ydistance_green);  */
-				
-				
-				
-				
 			
 			
 			area = cv::contourArea(contours[i]);
@@ -611,7 +476,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
 			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { //need to add this because with fog the background of trees are white and it draws a big rectangle around the trees
 			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(255, 255, 255), 3);
-			size_white = contours.size();
 					
 			float x1;
 			float x2;
@@ -658,34 +522,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 				Rx = x1 / x2;
 			
 			
-			
-				white_x = mc[i].x;
-				white_y = mc[i].y;
-				printf("x centriod of white is: %d\n", white_x);
-				printf("y centriod of white is: %d\n", white_y);
-			
-					 for(int i = 0; i < sizeof(color_x); i++) {
-					if(color_x[i] == white_x){
-						cout << "White element found at index " << i <<"\n";
-						ydistance_white = array_lidar_y[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
-						printf("White buoy x is: %f\n", ydistance_white);
-					break;
-					}
-				 }
-			
-	/* 		if ((white_x != 0 || white_y != 0) && (size_indicies = contours.size())) {
-					for (size_t i=0; i < contours.size(); ++i) {
-						xdistance_white = array_lidar_y[i];
-						ydistance_white = array_lidar_x[i];
-					}
-				}
-			
-						
-			printf("white_y is: %f\n", xdistance_white);
-			printf("white_x is: %f\n", ydistance_white);  */
-			
-			
-			
 			area = cv::contourArea(contours[i]);
 			perimeter = cv::arcLength(contours[i], true);
 //					printf("the area is: %f\n", area); 
@@ -727,7 +563,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
 			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
 			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 179, 255), 3);
-			size_orange = contours.size();
 			
 			float x1;
 			float x2;
@@ -772,38 +607,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			
 				Ry = y1 / y2;
 				Rx = x1 / x2;
-				
-				
-				
-				
-				
-				orange_x = mc[i].x;
-				orange_y = mc[i].y;
-				printf("x centriod of orange is: %d\n", orange_x);
-				printf("y centriod of orange is: %d\n", orange_y);
-				
-						 for(int i = 0; i < sizeof(color_x); i++) {
-					if(color_x[i] == orange_x){
-						cout << "Orange element found at index " << i <<"\n";
-						ydistance_orange = array_lidar_y[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
-						printf("Orange buoy x is: %f\n", ydistance_orange);
-					break;
-					}
-				 }
-				
-				/* if ((orange_x != 0 || orange_y != 0) && (size_indicies = contours.size())) {
-					for (size_t i=0; i < contours.size(); ++i) {
-						xdistance_orange = array_lidar_y[i];
-						ydistance_orange = array_lidar_x[i];
-					}
-				}
-				
-						
-			printf("orange_y is: %f\n", xdistance_orange);
-			printf("orange_x is: %f\n", ydistance_orange); 
-				 */
-				
-				
 			
 			
 			area = cv::contourArea(contours[i]);
@@ -847,7 +650,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
 			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
 			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 0), 3); 
-			size_black = contours.size();
 			
 			float x1;
 			float x2;
@@ -892,38 +694,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			
 				Ry = y1 / y2;
 				Rx = x1 / x2;
-				
-				
-				
-				
-				black_x = mc[i].x;
-				black_y = mc[i].y;
-				printf("x centriod of black is: %d\n", black_x);
-				printf("y centriod of black is: %d\n", black_y);
-				
-					for(int i = 0; i < sizeof(color_x); i++) {
-					if(color_x[i] == black_x){
-						cout << "Black element found at index " << i <<"\n";
-						ydistance_black = array_lidar_y[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
-						printf("Black buoy x is: %f\n", ydistance_black);
-					break;
-					}
-				 }
-				
-				
-				
-			/* 			if ((black_x != 0 || black_y != 0) && (size_indicies = contours.size())) {
-					for (size_t i=0; i < contours.size(); ++i) {
-						xdistance_black = array_lidar_y[i];
-						ydistance_black = array_lidar_x[i];
-					}
-				}
-				
-						
-			printf("black_y is: %f\n", xdistance_black);
-			printf("black_x is: %f\n", ydistance_black);  */
-				
-				
 			
 			
 			area = cv::contourArea(contours[i]);
@@ -1052,93 +822,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 
 			//while(ros::ok())
 	
-
-
-			//left off here
-		/* 	if (size_red != 0 && size_white != 0) {
-				for (size_t i=0; i < size_indicies; ++i) {
-					if (red_x<=white_x) {
-					xdistance_red = array_lidar_y[(size_indicies-1)-i];
-					xdistance_white = array_lidar_y[i];
-					}
-					else {
-						xdistance_red = array_lidar_y[i];
-						xdistance_white = array_lidar_y[(size_indicies-1)-i];
-					}
-					if (red_y<=white_y) {
-					ydistance_red = array_lidar_x[(size_indicies-1)-i];
-					ydistance_white = array_lidar_x[i];
-					}
-					else {
-						ydistance_red = array_lidar_x[i];
-						ydistance_white = array_lidar_x[(size_indicies-1)-i];
-					}
-				}
-			}
-			 */
-			
-			
-
-
-			/* 	if ((red_x<=green_x) && (red_x<=white_x)) {
-					xdistance_red = array_lidar_y[(size_indicies-1)-0];
-				}
-				else if ((red_x>=green_x) && (red_x>=white_x)) {
-					xdistance_red = array_lidar_y[0];
-				}
-				else if ((red_x<=green_x) && (red_x>=white_x)) {
-					xdistance_red = array_lidar_y[(size_indicies-2)-0];
-				}
-				else if ((red_x>=green_x) && (red_x<=white_x)) {
-					xdistance_red = array_lidar_y[(camera_track-2)-0];
-				}
-				//third in order would be -3
-				//fourth is -4
-				if ((red_y<=green_y) && (red_y<=white_y)) {
-					ydistance_red = array_lidar_x[(size_indicies-1)-0];
-				}
-				else if ((red_y>=green_y) && (red_y>=white_y)) {
-					ydistance_red = array_lidar_x[0];
-				}
-				else if ((red_y<=green_y) && (red_y>=white_y)) {
-					ydistance_red = array_lidar_x[(size_indicies-2)-0];
-				}
-				else if ((red_y>=green_y) && (red_y<=white_y)) {
-					ydistance_red = array_lidar_x[(camera_track-2)-0];
-				}
- */
-
-
-
-	/* 		 for(int i = 0; i < sizeof(color_x); i++) {
-					if(color_x[i] == red_x){
-						cout << "Red element found at index " << i;
-					break;
-					}
-					if(color_x[i] == green_x){
-						cout << "Green element found at index " << i;
-					break;
-					}
-					if(color_x[i] == white_x){
-						cout << "White element found at index " << i;
-					break;
-					}
-					if(color_x[i] == orange_x){
-						cout << "Orange element found at index " << i;
-					break;
-					}
-					if(color_x[i] == black_x){
-						cout << "Black element found at index " << i;
-					break;
-					}	
-			} */
-				
-				
-				
-				
-
-
-
 		
 		cv::imshow("updated", background);  //shows background where the colors are detected 
 		cv::imshow("mask_new", mask_t);  //corner detection window
