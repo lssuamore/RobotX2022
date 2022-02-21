@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/RobotX2022/devel/lib/jetson/gps_ublox"
-  "/home/brad/RobotX2022/devel/lib/jetson/gps_ublox.pdb"
+  "/home/taylor/RobotX2022/devel/lib/jetson/gps_ublox"
+  "/home/taylor/RobotX2022/devel/lib/jetson/gps_ublox.pdb"
   "CMakeFiles/gps_ublox.dir/src/gps_ublox.cpp.o"
 )
 
