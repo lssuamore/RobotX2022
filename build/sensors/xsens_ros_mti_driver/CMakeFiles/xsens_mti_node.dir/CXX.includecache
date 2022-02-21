@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/abstractadditionallogger.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/abstractadditionallogger.h
 journalloglevel.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/journalloglevel.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/journalloglevel.h
 string
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/journaller.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/journaller.h
 journalloglevel.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/journalloglevel.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/journalloglevel.h
 abstractadditionallogger.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/abstractadditionallogger.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/abstractadditionallogger.h
 sstream
 -
 iomanip
@@ -26,11 +26,11 @@ xstypes/xsstring.h
 memory
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/journalloglevel.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/journalloglevel.h
 android/log.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/xsens_mutex.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscommon/xsens_mutex.h
 cstdint
 -
 atomic
@@ -42,27 +42,27 @@ xstypes/xstimestamp.h
 deque
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/callbackmanagerxda.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/callbackmanagerxda.h
 xscallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscallback.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/communicator.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/communicator.h
 callbackmanagerxda.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/callbackmanagerxda.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/callbackmanagerxda.h
 openportstage.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/openportstage.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/openportstage.h
 protocolmanager.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/protocolmanager.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/protocolmanager.h
 replyobject.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/replyobject.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/replyobject.h
 xscommon/xsens_mutex.h
 -
 iointerfacefile.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iointerfacefile.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iointerfacefile.h
 iprotocolhandler.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iprotocolhandler.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iprotocolhandler.h
 serialinterface.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/serialinterface.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/serialinterface.h
 xstypes/xsresultvalue.h
 -
 xstypes/xstimestamp.h
@@ -72,13 +72,13 @@ memory
 vector
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/datapacketcache.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/datapacketcache.h
 xstypes/pstdint.h
 -
 map
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/devicefactory.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/devicefactory.h
 memory
 -
 map
@@ -86,9 +86,9 @@ map
 xstypes/xsdeviceid.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iointerface.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iointerface.h
 xscontrollerconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
 xstypes/xsplatform.h
 -
 xstypes/xsmessage.h
@@ -106,71 +106,71 @@ xstypes/xsfile.h
 stdlib.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iointerfacefile.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iointerfacefile.h
 xstypes/xsplatform.h
 -
 iointerface.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iointerface.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iointerface.h
 xstypes/xsresultvalue.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iprotocolhandler.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iprotocolhandler.h
 messagelocation.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/messagelocation.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/messagelocation.h
 xsprotocoltype.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsprotocoltype.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsprotocoltype.h
 xstypes/xsmessage.h
 -
 xstypes/xsbytearray.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iprotocolmanager.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iprotocolmanager.h
 xstypes/xsmessage.h
 -
 messagelocation.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/messagelocation.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/messagelocation.h
 xsprotocoltype.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsprotocoltype.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsprotocoltype.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/lastresultmanager.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/lastresultmanager.h
 xstypes/xsresultvalue.h
 -
 xstypes/xsstring.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/messagelocation.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/messagelocation.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/openportstage.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/openportstage.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/packetstamper.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/packetstamper.h
 xstypes/pstdint.h
 -
 list
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/protocolmanager.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/protocolmanager.h
 messagelocation.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/messagelocation.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/messagelocation.h
 iprotocolmanager.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iprotocolmanager.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iprotocolmanager.h
 list
 -
 memory
 -
 xsprotocoltype.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsprotocoltype.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsprotocoltype.h
 memory
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/replyobject.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/replyobject.h
 xstypes/xsmessage.h
 -
 xstypes/xsdeviceid.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/serialinterface.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/serialinterface.h
 streaminterface.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/streaminterface.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/streaminterface.h
 xstypes/xsplatform.h
 -
 xstypes/xsmessage.h
@@ -180,21 +180,21 @@ xstypes/xsbaud.h
 xstypes/xscontrolline.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/streaminterface.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/streaminterface.h
 iointerface.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iointerface.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/iointerface.h
 xstypes/xsresultvalue.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsaccesscontrolmode.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsaccesscontrolmode.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsalignmentframe.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsalignmentframe.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscallback.h
 xscallbackplainc.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscallbackplainc.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscallbackplainc.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscallbackplainc.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscallbackplainc.h
 xstypes/pstdint.h
 -
 xstypes/xsresultvalue.h
@@ -202,23 +202,23 @@ xstypes/xsresultvalue.h
 xstypes/xsinforequest.h
 -
 xsdevicestate.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevicestate.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevicestate.h
 xsconnectivitystate.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsconnectivitystate.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsconnectivitystate.h
 xsprotocoltype.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsprotocoltype.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsprotocoltype.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsconnectivitystate.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsconnectivitystate.h
 ostream
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrol_def.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrol_def.h
 xsdef.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdef.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdef.h
 vector
 -
 xscallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscallback.h
 atomic
 -
 xstypes/xsdeviceid.h
@@ -236,77 +236,77 @@ xscommon/xsens_mutex.h
 xstypes/xsresetmethod.h
 -
 devicefactory.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/devicefactory.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/devicefactory.h
 callbackmanagerxda.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/callbackmanagerxda.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/callbackmanagerxda.h
 xstypes/xsvector3.h
 -
 lastresultmanager.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/lastresultmanager.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/lastresultmanager.h
 xstypes/xsoption.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
 limits.h
 -
 xscommon/journaller.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdef.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdef.h
 xscontrollerconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevice_def.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevice_def.h
 xstypes/xssyncrole.h
 -
 xstypes/xsversion.h
 -
 packetstamper.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/packetstamper.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/packetstamper.h
 xsdeviceconfiguration.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdeviceconfiguration.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdeviceconfiguration.h
 xserrormode.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xserrormode.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xserrormode.h
 xstypes/xsresetmethod.h
 -
 callbackmanagerxda.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/callbackmanagerxda.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/callbackmanagerxda.h
 xstypes/xsoption.h
 -
 xsrejectreason.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsrejectreason.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsrejectreason.h
 communicator.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/communicator.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/communicator.h
 xsalignmentframe.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsalignmentframe.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsalignmentframe.h
 xsaccesscontrolmode.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsaccesscontrolmode.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsaccesscontrolmode.h
 datapacketcache.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/datapacketcache.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/datapacketcache.h
 xstypes/xsdeviceoptionflag.h
 -
 xstypes/xsoutputconfigurationarray.h
 -
 lastresultmanager.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/lastresultmanager.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/lastresultmanager.h
 xsgnssplatform.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsgnssplatform.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsgnssplatform.h
 functional
 -
 xsoperationalmode.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsoperationalmode.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsoperationalmode.h
 xsdevice_public.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevice_public.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevice_public.h
 xsdeviceex.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdeviceex.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdeviceex.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevice_public.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevice_public.h
 xsdevice_def.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevice_def.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevice_def.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdeviceconfiguration.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdeviceconfiguration.h
 xscontrollerconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
 xstypes/pstdint.h
 -
 xstypes/xsbusid.h
@@ -316,29 +316,29 @@ xstypes/xstypedefs.h
 xstypes/xsexception.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevicestate.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsdevicestate.h
 xscontrollerconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
 xstypes/xsarray.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xserrormode.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xserrormode.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsgnssplatform.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsgnssplatform.h
 xsubloxgnssplatform.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsubloxgnssplatform.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsubloxgnssplatform.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsoperationalmode.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsoperationalmode.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsprotocoltype.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsprotocoltype.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsrejectreason.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsrejectreason.h
 xscontrollerconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsscanner.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsscanner.h
 xscontrollerconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
 xstypes/xsbaud.h
 -
 xstypes/xsportinfoarray.h
@@ -348,19 +348,19 @@ xstypes/xsintarray.h
 xstypes/xsstringarray.h
 -
 xsusbhubinfo.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsusbhubinfo.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsusbhubinfo.h
 xstypes/xsstring.h
 -
 sstream
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsubloxgnssplatform.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsubloxgnssplatform.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsusbhubinfo.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xsusbhubinfo.h
 xscontrollerconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xscontroller/xscontrollerconfig.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 stdint.h
 -
 stddef.h
@@ -378,13 +378,13 @@ stdio.h
 string.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsanalogindata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsanalogindata.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 iterator
 -
 stdexcept
@@ -392,341 +392,341 @@ stdexcept
 type_traits
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaud.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaud.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 xsbaudcode.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaudcode.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaudcode.h
 xsbaudrate.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaudrate.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaudrate.h
 ostream
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaudcode.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaudcode.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaudrate.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaudrate.h
 windows.h
 -
 termios.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbusid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbusid.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbytearray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbytearray.h
 xsarray.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 xsstring.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xscalibrateddata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xscalibrateddata.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 xsvector3.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector3.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector3.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xscontrolline.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xscontrolline.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifier.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifier.h
 xsdataidentifiervalue.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifiervalue.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifiervalue.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifiervalue.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifiervalue.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdatapacket.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdatapacket.h
 xstypedefs.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypedefs.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypedefs.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 xsmessage.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmessage.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmessage.h
 xstimestamp.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimestamp.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimestamp.h
 xsdataidentifier.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifier.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifier.h
 xsushortvector.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsushortvector.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsushortvector.h
 xsscrdata.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsscrdata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsscrdata.h
 xscalibrateddata.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xscalibrateddata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xscalibrateddata.h
 xspressure.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xspressure.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xspressure.h
 xssdidata.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssdidata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssdidata.h
 xsvector.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector.h
 xsquaternion.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsquaternion.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsquaternion.h
 xsmatrix.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmatrix.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmatrix.h
 xseuler.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xseuler.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xseuler.h
 xsanalogindata.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsanalogindata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsanalogindata.h
 xstimeinfo.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimeinfo.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimeinfo.h
 xsrawgnsspvtdata.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrawgnsspvtdata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrawgnsspvtdata.h
 xsrawgnsssatinfo.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrawgnsssatinfo.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrawgnsssatinfo.h
 xsdeviceid.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceid.h
 xsrange.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrange.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrange.h
 xstriggerindicationdata.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstriggerindicationdata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstriggerindicationdata.h
 xssnapshot.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssnapshot.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssnapshot.h
 xsglovesnapshot.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsglovesnapshot.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsglovesnapshot.h
 xsglovedata.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsglovedata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsglovedata.h
 xshandid.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xshandid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xshandid.h
 map
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceid.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 xsstring.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 xshandid.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xshandid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xshandid.h
 cstring
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceoptionflag.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceoptionflag.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xseuler.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xseuler.h
 xsmath.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
 math.h
 -
 xsvector.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsexception.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsexception.h
 exception
 -
 xsresultvalue.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsresultvalue.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsresultvalue.h
 xsstring.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 ostream
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsfile.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsfile.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 stdio.h
 -
 xsresultvalue.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsresultvalue.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsresultvalue.h
 xsfilepos.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsfilepos.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsfilepos.h
 xsstring.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 xsbytearray.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbytearray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbytearray.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsfilepos.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsfilepos.h
 stdio.h
 -
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 windows.h
 -
 sys/types.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsfloatmath.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsfloatmath.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsglovedata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsglovedata.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 xsvector3.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector3.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector3.h
 xsquaternion.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsquaternion.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsquaternion.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsglovesnapshot.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsglovesnapshot.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 xsdeviceid.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceid.h
 math.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xshandid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xshandid.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsinforequest.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsinforequest.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsintarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsintarray.h
 xsarray.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 xstypedefs.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypedefs.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypedefs.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 math.h
 -
 float.h
 -
 xsfloatmath.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsfloatmath.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsfloatmath.h
 xsmath2.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath2.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath2.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath2.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath2.h
 xsmath.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmatrix.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmatrix.h
 xsmath.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
 math.h
 -
 stddef.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmessage.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmessage.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 xsbytearray.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbytearray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbytearray.h
 xsdataidentifier.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifier.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifier.h
 xsxbusmessageid.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsxbusmessageid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsxbusmessageid.h
 xsstring.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 xsresultvalue.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsresultvalue.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsresultvalue.h
 xsbusid.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbusid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbusid.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsoption.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsoption.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsoutputconfiguration.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsoutputconfiguration.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 xsdataidentifier.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifier.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdataidentifier.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsoutputconfigurationarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsoutputconfigurationarray.h
 xsarray.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
 xsoutputconfiguration.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsoutputconfiguration.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsoutputconfiguration.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsplatform.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsplatform.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 windows.h
 -
 stdint.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsportinfo.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsportinfo.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 xsdeviceid.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceid.h
 xsbaud.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaud.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsbaud.h
 xsstring.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 stdio.h
 -
 ostream
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsportinfoarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsportinfoarray.h
 xsarray.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
 xsportinfo.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsportinfo.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsportinfo.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xspressure.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xspressure.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsquaternion.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsquaternion.h
 xsmath.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrange.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrange.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 ostream
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrawgnsspvtdata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrawgnsspvtdata.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 cstring
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrawgnsssatinfo.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsrawgnsssatinfo.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsresetmethod.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsresetmethod.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsresultvalue.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsresultvalue.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsscrdata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsscrdata.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 xsushortvector.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsushortvector.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsushortvector.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssdidata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssdidata.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 xsvector3.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector3.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector3.h
 xsquaternion.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsquaternion.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsquaternion.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssimpleversion.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssimpleversion.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssnapshot.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssnapshot.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 xsdeviceid.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsdeviceid.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 xsarray.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
 wchar.h
 -
 string.h
@@ -738,17 +738,17 @@ cstdlib
 cstdio
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstringarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstringarray.h
 xsarray.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsarray.h
 xsstring.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssyncrole.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssyncrole.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsthread.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsthread.h
 xstime.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstime.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstime.h
 intrin.h
 -
 windows.h
@@ -760,67 +760,67 @@ semaphore.h
 errno.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstime.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstime.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 windows.h
 -
 time.h
 -
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 xstimestamp.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimestamp.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimestamp.h
 xsstring.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimeinfo.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimeinfo.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 memory
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimestamp.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimestamp.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 xsstring.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 xstimeinfo.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimeinfo.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstimeinfo.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstriggerindicationdata.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstriggerindicationdata.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypedefs.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypedefs.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 pstdint.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/pstdint.h
 stddef.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 limits.h
 -
 assert.h
 -
 xstypedefs.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypedefs.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypedefs.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsushortvector.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsushortvector.h
 xstypedefs.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypedefs.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypedefs.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector.h
 xsmath.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsmath.h
 stddef.h
 -
 string.h
@@ -832,25 +832,25 @@ algorithm
 type_traits
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector3.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector3.h
 xsvector.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsvector.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsversion.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsversion.h
 xstypesconfig.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xstypesconfig.h
 xssimpleversion.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssimpleversion.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xssimpleversion.h
 xsstring.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsstring.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsxbusmessageid.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/lib/xspublic/xstypes/xsxbusmessageid.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/main.cpp
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/main.cpp
 ros/ros.h
 -
 xdainterface.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdainterface.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdainterface.h
 iostream
 -
 stdexcept
@@ -858,119 +858,119 @@ stdexcept
 string
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/accelerationpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/accelerationpublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/Vector3Stamped.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/angularvelocitypublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/angularvelocitypublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/Vector3Stamped.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/freeaccelerationpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/freeaccelerationpublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/Vector3Stamped.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/gnsspublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/gnsspublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 sensor_msgs/NavSatFix.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/imupublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/imupublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 sensor_msgs/Imu.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/magneticfieldpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/magneticfieldpublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/Vector3Stamped.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/orientationincrementspublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/orientationincrementspublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/QuaternionStamped.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/orientationpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/orientationpublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/QuaternionStamped.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 ros/ros.h
 -
 xstypes/xsdatapacket.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/positionllapublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/positionllapublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/Vector3Stamped.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/pressurepublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/pressurepublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 sensor_msgs/FluidPressure.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/temperaturepublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/temperaturepublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 sensor_msgs/Temperature.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/timereferencepublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/timereferencepublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 sensor_msgs/TimeReference.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/transformpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/transformpublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/TransformStamped.h
 -
 tf2_ros/transform_broadcaster.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/twistpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/twistpublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/TwistStamped.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/velocityincrementpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/velocityincrementpublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/Vector3Stamped.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/velocitypublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/velocitypublisher.h
 packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 geometry_msgs/Vector3Stamped.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdacallback.cpp
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdacallback.cpp
 xdacallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdacallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdacallback.h
 xscontroller/xsdevice_def.h
 -
 xstypes/xsdatapacket.h
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdacallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdacallback.h
 ros/ros.h
 -
 xscontroller/xscallback.h
@@ -982,9 +982,9 @@ condition_variable
 list
 -
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdainterface.cpp
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdainterface.cpp
 xdainterface.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdainterface.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdainterface.h
 xscontroller/xsscanner.h
 -
 xscontroller/xscontrol_def.h
@@ -992,49 +992,49 @@ xscontroller/xscontrol_def.h
 xscontroller/xsdevice_def.h
 -
 messagepublishers/packetcallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/packetcallback.h
 messagepublishers/accelerationpublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/accelerationpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/accelerationpublisher.h
 messagepublishers/angularvelocitypublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/angularvelocitypublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/angularvelocitypublisher.h
 messagepublishers/freeaccelerationpublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/freeaccelerationpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/freeaccelerationpublisher.h
 messagepublishers/gnsspublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/gnsspublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/gnsspublisher.h
 messagepublishers/imupublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/imupublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/imupublisher.h
 messagepublishers/magneticfieldpublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/magneticfieldpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/magneticfieldpublisher.h
 messagepublishers/orientationincrementspublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/orientationincrementspublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/orientationincrementspublisher.h
 messagepublishers/orientationpublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/orientationpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/orientationpublisher.h
 messagepublishers/pressurepublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/pressurepublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/pressurepublisher.h
 messagepublishers/temperaturepublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/temperaturepublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/temperaturepublisher.h
 messagepublishers/timereferencepublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/timereferencepublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/timereferencepublisher.h
 messagepublishers/transformpublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/transformpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/transformpublisher.h
 messagepublishers/twistpublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/twistpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/twistpublisher.h
 messagepublishers/velocityincrementpublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/velocityincrementpublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/velocityincrementpublisher.h
 messagepublishers/positionllapublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/positionllapublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/positionllapublisher.h
 messagepublishers/velocitypublisher.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/velocitypublisher.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/messagepublishers/velocitypublisher.h
 
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdainterface.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdainterface.h
 ros/ros.h
 -
 xdacallback.h
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdacallback.h
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/xdacallback.h
 xstypes/xsportinfo.h
 -
 chrono
-/home/brad/RobotX2022/src/sensors/xsens_ros_mti_driver/src/chrono
+/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/src/chrono
 
 /opt/ros/noetic/include/geometry_msgs/Quaternion.h
 string

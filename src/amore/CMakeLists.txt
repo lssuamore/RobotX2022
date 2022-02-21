@@ -166,6 +166,7 @@ add_executable(object_d src/object_d.cpp)
 add_executable(High_Level_trajectory_processor src/High_Level_trajectory_processor.cpp)
 add_executable(traj_pub src/traj_pub.cpp)
 add_executable(lidar_subscriber src/lidar_subscriber.cpp)
+add_executable(color_test src/color_test.cpp)
 
 # TASK 1: STATION-KEEPING
 add_executable(Task1_SK_gps_imu src/Task1_SK_gps_imu.cpp)
@@ -200,7 +201,8 @@ target_link_libraries(camera_subscriber ${catkin_LIBRARIES} ${OpenCV_LIBS})
 target_link_libraries(object_d ${catkin_LIBRARIES} ${OpenCV_LIBS})
 target_link_libraries(High_Level_trajectory_processor ${catkin_LIBRARIES})
 target_link_libraries(traj_pub ${catkin_LIBRARIES})
-target_link_libraries(lidar_subscriber ${catkin_LIBRARIES})
+target_link_libraries(lidar_subscriber ${catkin_LIBRARIES} ${PCL_LIBS})
+target_link_libraries(color_test ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
 # TASK 1: STATION-KEEPING
 target_link_libraries(Task1_SK_gps_imu ${catkin_LIBRARIES})
