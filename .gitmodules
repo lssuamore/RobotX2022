@@ -1,3 +1,9 @@
 [submodule "src/vrx"]
 	path = src/vrx
 	url = https://github.com/lssuamore/vrx.git
+[submodule "opencv"]
+	path = opencv
+	url = https://github.com/opencv/opencv.git
+[submodule "geonav_transform"]
+	path = geonav_transform
+	url = https://github.com/bsb808/geonav_transform.git
