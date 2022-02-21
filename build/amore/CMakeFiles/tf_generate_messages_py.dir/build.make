@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/brad/RobotX2022/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/catkin_ws/build
+CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
 
 # Utility rule file for tf_generate_messages_py.
 
@@ -63,10 +63,10 @@ amore/CMakeFiles/tf_generate_messages_py.dir/build: tf_generate_messages_py
 .PHONY : amore/CMakeFiles/tf_generate_messages_py.dir/build
 
 amore/CMakeFiles/tf_generate_messages_py.dir/clean:
-	cd /home/brad/catkin_ws/build/amore && $(CMAKE_COMMAND) -P CMakeFiles/tf_generate_messages_py.dir/cmake_clean.cmake
+	cd /home/brad/RobotX2022/build/amore && $(CMAKE_COMMAND) -P CMakeFiles/tf_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : amore/CMakeFiles/tf_generate_messages_py.dir/clean
 
 amore/CMakeFiles/tf_generate_messages_py.dir/depend:
-	cd /home/brad/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/catkin_ws/src /home/brad/catkin_ws/src/amore /home/brad/catkin_ws/build /home/brad/catkin_ws/build/amore /home/brad/catkin_ws/build/amore/CMakeFiles/tf_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brad/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/RobotX2022/src /home/brad/RobotX2022/src/amore /home/brad/RobotX2022/build /home/brad/RobotX2022/build/amore /home/brad/RobotX2022/build/amore/CMakeFiles/tf_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : amore/CMakeFiles/tf_generate_messages_py.dir/depend
 

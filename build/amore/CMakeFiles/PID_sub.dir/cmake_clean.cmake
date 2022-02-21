@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/catkin_ws/devel/lib/amore/PID_sub"
-  "/home/brad/catkin_ws/devel/lib/amore/PID_sub.pdb"
+  "/home/brad/RobotX2022/devel/lib/amore/PID_sub"
+  "/home/brad/RobotX2022/devel/lib/amore/PID_sub.pdb"
   "CMakeFiles/PID_sub.dir/src/PID_sub.cpp.o"
 )
 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/catkin_ws/devel/lib/amore/gps_subscriber"
-  "/home/brad/catkin_ws/devel/lib/amore/gps_subscriber.pdb"
+  "/home/brad/RobotX2022/devel/lib/amore/gps_subscriber"
+  "/home/brad/RobotX2022/devel/lib/amore/gps_subscriber.pdb"
   "CMakeFiles/gps_subscriber.dir/src/gps_subscriber.cpp.o"
 )
 

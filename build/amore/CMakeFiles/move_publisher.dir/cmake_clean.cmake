@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/catkin_ws/devel/lib/amore/move_publisher"
-  "/home/brad/catkin_ws/devel/lib/amore/move_publisher.pdb"
+  "/home/brad/RobotX2022/devel/lib/amore/move_publisher"
+  "/home/brad/RobotX2022/devel/lib/amore/move_publisher.pdb"
   "CMakeFiles/move_publisher.dir/src/move_publisher.cpp.o"
 )
 

@@ -7,4 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export PWD='/home/brad/catkin_ws/build'
+export CMAKE_PREFIX_PATH="/home/brad/RobotX2022/devel:$CMAKE_PREFIX_PATH"
+export PWD='/home/brad/RobotX2022/build'
+export ROSLISP_PACKAGE_DIRECTORIES="/home/brad/RobotX2022/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/brad/RobotX2022/src:$ROS_PACKAGE_PATH"

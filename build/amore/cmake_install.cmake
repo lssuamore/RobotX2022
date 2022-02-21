@@ -1,8 +1,8 @@
-# Install script for directory: /home/brad/catkin_ws/src/amore
+# Install script for directory: /home/brad/RobotX2022/src/amore
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/brad/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/brad/RobotX2022/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,73 +38,37 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/msg" TYPE FILE FILES "/home/brad/catkin_ws/src/amore/msg/NED_waypoints.msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/cmake" TYPE FILE FILES "/home/brad/RobotX2022/build/amore/catkin_generated/installspace/amore-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/cmake" TYPE FILE FILES "/home/brad/catkin_ws/build/amore/catkin_generated/installspace/amore-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/brad/RobotX2022/devel/share/roseus/ros/amore")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/brad/catkin_ws/devel/include/amore")
+  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/brad/RobotX2022/devel/lib/python3/dist-packages/amore")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/brad/catkin_ws/devel/share/roseus/ros/amore")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/brad/RobotX2022/devel/lib/python3/dist-packages/amore")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/brad/catkin_ws/devel/share/common-lisp/ros/amore")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/brad/RobotX2022/build/amore/catkin_generated/installspace/amore.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/brad/catkin_ws/devel/share/gennodejs/ros/amore")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/brad/catkin_ws/devel/lib/python3/dist-packages/amore")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/brad/catkin_ws/devel/lib/python3/dist-packages/amore")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/brad/catkin_ws/build/amore/catkin_generated/installspace/amore.pc")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/cmake" TYPE FILE FILES "/home/brad/catkin_ws/build/amore/catkin_generated/installspace/amore-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/cmake" TYPE FILE FILES "/home/brad/RobotX2022/build/amore/catkin_generated/installspace/amore-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/cmake" TYPE FILE FILES
-    "/home/brad/catkin_ws/build/amore/catkin_generated/installspace/amoreConfig.cmake"
-    "/home/brad/catkin_ws/build/amore/catkin_generated/installspace/amoreConfig-version.cmake"
+    "/home/brad/RobotX2022/build/amore/catkin_generated/installspace/amoreConfig.cmake"
+    "/home/brad/RobotX2022/build/amore/catkin_generated/installspace/amoreConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/brad/catkin_ws/src/amore/package.xml")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/brad/catkin_ws/src/amore/launch/Visions_SSP_BH.launch")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/brad/catkin_ws/src/amore/launch/SK.launch")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/brad/catkin_ws/src/amore/launch/Task1_SK.launch")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/brad/catkin_ws/src/amore/launch/Task2_WF.launch")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/brad/catkin_ws/src/amore/launch/traj_track.launch")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/brad/RobotX2022/src/amore/package.xml")
 endif()
 
