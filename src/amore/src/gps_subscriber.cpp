@@ -1,25 +1,10 @@
-//  Filename:						        gps_subscriber.cpp
-//  Creation Date:						10/15/2021
-//  Last Revision Date:                
-//  Author(s) [email]:					Taylor Lamorie [tlamorie@lssu.edu]
-//  Revisor(s) [Revision Date]:    
-//  Organization/Institution:			Lake Superior State University
-// 
-// ...........................gps_subscriber.cpp.......................
-//  This code publishes the USV lat and long coordinates to nav_odom.
-//  This allows the geonav_transform package to subscribe to the nav_odom node.
-//  Geonav_transform allows USV coordinates to be read off in NED coordinates. 
-//
-//  Inputs and Outputs of the gps_subscriber.cpp file
-//				Inputs: USV lat, long, amplitude, orientation, and speed
-//				Outputs: nav_msgs::Odometry
-
 #include "ros/ros.h"
 #include "tf/transform_broadcaster.h"
 #include "nav_msgs/Odometry.h"
 #include "sensor_msgs/NavSatFix.h"
 #include "sensor_msgs/Imu.h"
 #include "geometry_msgs/Vector3Stamped.h"
+#include "geometry_msgs/Vector3.h"
 #include "iostream"
 #include "stdio.h"
 #include "time.h"
@@ -30,7 +15,7 @@ float q1;
 float q2;
 float q3;
 float q0;
-float psi;                          // this variable is updated as the WAM-V z-orientation in real time through the compass
+float psi;                          // this variable is updated as the WAM-V z-orientation in real time through 
 
 double latitude;
 double longitude;
@@ -41,6 +26,14 @@ float orientationy;
 float orientationz;
 float orientationw;
 
+double pitch;
+double yaw;
+double roll;
+
+float ang_velx;
+float ang_vely;
+float ang_velz;
+
 float velx;
 float vely;
 float velz;
@@ -49,22 +42,27 @@ void gpsCallBack(const sensor_msgs::NavSatFix::ConstPtr& gps_msg) {
 	latitude = gps_msg->latitude; //sets latitude from gps
 	longitude = gps_msg->longitude; //sets longitude from gps
 	th = gps_msg->altitude; //sets altitude rom gps
-	//printf("the latitude is: %f\n", latitude); //prints
-	//printf("the longitude is: %f\n", longitude);
-	//printf("the altitude is: %f\n", th);
+	/* printf("the latitude is: %f\n", latitude); //prints
+	printf("the longitude is: %f\n", longitude);
+	printf("the altitude is: %f\n", th); */
 }
 
-// nav_msgs odometry
 void callback(const nav_msgs::Odometry::ConstPtr& odom) {
-	// ROS_FATAL("USV x is: %f\n", odom->pose.pose.position.y); //extracts x coor from nav_odometery
-	// ROS_FATAL("USV y is: %f\n", odom->pose.pose.position.x); //extracts y coor from nav_odometery
-	//printf("the x orientation is: %f\n", odom->pose.pose.orientation.x); //extracts x orientation
-	//printf("the y orientation is: %f\n", odom->pose.pose.orientation.y); //extracts y orientation
-	//printf("the z orientation is: %f\n", odom->pose.pose.orientation.z); //extracts z orientation
-	//printf("the w orientation is: %f\n", odom->pose.pose.orientation.w); //extracts w orientation
-	//printf("the velocity x is: %f\n", odom-> twist.twist.linear.x);//prints velocity x
-	//printf("the velocity y is: %f\n", odom-> twist.twist.linear.y);//prints velocity y
-	//printf("the velocity z is: %f\n", odom-> twist.twist.linear.z);//prints velocity z
+	printf("the x is: %f\n", odom->pose.pose.position.x); //extracts x coor from nav_odometery
+	printf("the y is: %f\n", odom->pose.pose.position.y); //extracts y coor from nav_odometery
+//	printf("the x orientation is: %f\n", odom->pose.pose.orientation.x); //extracts x orientation
+//	printf("the y orientation is: %f\n", odom->pose.pose.orientation.y); //extracts y orientation
+//	printf("the z orientation is: %f\n", odom->pose.pose.orientation.z); //extracts z orientation
+//	printf("the w orientation is: %f\n", odom->pose.pose.orientation.w); //extracts w orientation
+	/* printf("the velocity x is: %f\n", odom-> twist.twist.linear.x);//prints velocity x
+	printf("the velocity y is: %f\n", odom-> twist.twist.linear.y);//prints velocity y
+	printf("the velocity z is: %f\n", odom-> twist.twist.linear.z);//prints velocity z */	
+//	printf("the roll is: %f\n", roll);//prints velocity x
+//	printf("the pitch is: %f\n", pitch); //prints velocity y
+//	printf("the yaw is: %f\n", yaw); 
+//	printf("the angular velocity x is: %f\n", odom-> twist.twist.angular.x);//prints velocity x
+//	printf("the angular velocity y is: %f\n", odom-> twist.twist.angular.y);//prints velocity x
+//	printf("the angular velocity z is: %f\n", odom-> twist.twist.angular.z);//prints velocity x
 }
 
  void imuCallBack(const sensor_msgs::Imu::ConstPtr& imu_msg) {
@@ -72,23 +70,40 @@ void callback(const nav_msgs::Odometry::ConstPtr& odom) {
 	orientationy = imu_msg->orientation.y; //sets orientationy
 	orientationz = imu_msg->orientation.z; //sets orientationz
 	orientationw = imu_msg->orientation.w; //sets orientationw
-//	q1 = orientationx;
-//	q2 = orientationy;
-//	q3 = orientationz;
-//	q0 = orientationw;
+	/* q1 = orientationx;
+	q2 = orientationy;
+	q3 = orientationz;
+	q0 = orientationw;
 	// calculate current heading in radians
-//	psi = atan2((2.0*(q3*q0 + q1*q2)) , (1 - 2*(pow(q2,2.0) + pow(q3,2.0))));
-//	printf("the orientation is: %f\n", psi);                  // prints current heading
-//	printf("the orientation x is: %f\n", orientationx); //prints
+	psi = atan2((2.0*(q3*q0 + q1*q2)) , (1 - 2*(pow(q2,2.0) + pow(q3,2.0))));
+	printf("the orientation is: %f\n", psi);                  // prints current heading */
+	ang_velx = imu_msg->angular_velocity.x; //sets orientationx
+	ang_vely = imu_msg->angular_velocity.y; //sets orientationy
+	ang_velz = imu_msg->angular_velocity.z; //sets orientationz
+
+/* // finding roll pitch and yaw in euler angles	
+	tf::Quaternion quat;
+	tf::quaternionMsgToTF(odom->orientation, quat);
+	tf::Matrix3x3(quat).getRPY(roll, pitch, yaw);
+	
+	geometry_msgs::Vector3 ryp;
+	ryp.x = roll;
+	ryp.y= pitch;
+	ryp.z = yaw;
+	
+//	printf("the roll is: %f\n", roll);//prints velocity x
+//	printf("the pitch is: %f\n", pitch); //prints velocity y
+	printf("the yaw is: %f\n", yaw);  */
+//	printf("the orientation x is: %f\n", orientationx);//prints
 //	printf("the orientation y is: %f\n", orientationy); //prints
 //	printf("the orientation z is: %f\n", orientationz); //prints
 //	printf("the orientation w is: %f\n", orientationw); //prints
 }
 
 void gps_velCallBack(const geometry_msgs::Vector3Stamped::ConstPtr& vel_msg) {
-	velx = vel_msg->vector.x; //sets velx
-	vely = vel_msg->vector.y; //sets vely
-	velz = vel_msg->vector.z; //sets velz
+	velx = vel_msg->vector.x; //sets orientationx
+	vely = vel_msg->vector.y; //sets orientationy
+	velz = vel_msg->vector.z; //sets orientationz
 //	printf("the velocity x is: %f\n", velx);//prints velocity x
 //	printf("the velocity y is: %f\n", vely); //prints velocity y
 //	printf("the velocity z is: %f\n", velz); //prints velocity z
@@ -112,7 +127,7 @@ int main(int argc, char **argv) {
 	ros::Time current_time, last_time; //takes current time
 	current_time = ros::Time::now(); //sets current time to the time it is now
 	last_time = ros::Time::now(); //sets last time to the time it is now
-	ros::Rate loop_rate(10);
+	ros::Rate loop_rate(100);
 
 	while(ros::ok()) {
 
@@ -138,9 +153,9 @@ int main(int argc, char **argv) {
 	nav_odom.twist.twist.linear.x = velx; //sets velocity values all to zero
 	nav_odom.twist.twist.linear.y = vely;
 	nav_odom.twist.twist.linear.z = velz;
-	nav_odom.twist.twist.angular.x = 0.0;
-	nav_odom.twist.twist.angular.y = 0.0;
-	nav_odom.twist.twist.angular.z = 0.0;
+	nav_odom.twist.twist.angular.x = ang_velx;
+	nav_odom.twist.twist.angular.y = ang_vely;
+	nav_odom.twist.twist.angular.z = ang_velz;
 	nav_odom.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 	position_pub.publish(nav_odom); //publishes above to position_pub
 

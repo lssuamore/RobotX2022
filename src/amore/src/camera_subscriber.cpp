@@ -26,27 +26,32 @@ std::vector <std::vector <cv::Point>> contours;
 std::vector <std::vector <cv::Point>> contours1;
 std::vector <std::vector <cv::Point>> contours2;
 
-cv::Scalar yellow_low = cv::Scalar(16, 154, 82); //180
+cv::Scalar yellow_low = cv::Scalar(16, 154, 65); //180
 cv::Scalar yellow_high = cv::Scalar(54, 255, 255); 
-cv::Scalar green_low = cv::Scalar(59, 180, 25);  //70 //59 now includes the totem //30
+cv::Scalar green_low = cv::Scalar(59, 115, 25);  //180
 cv::Scalar green_high = cv::Scalar(100, 255, 255); 
 cv::Scalar blue_low = cv::Scalar(112, 170, 0);   
 cv::Scalar blue_high = cv::Scalar(125, 255, 255);
 
-cv::Scalar blue_water_low = cv::Scalar(92, 0, 0);   
-cv::Scalar blue_water_high = cv::Scalar(148, 255, 255);
+cv::Scalar blue_water_low = cv::Scalar(93, 0, 0);   
+cv::Scalar blue_water_high = cv::Scalar(119, 255, 255);
+cv::Scalar trees_low = cv::Scalar(0, 10, 0);   
+cv::Scalar trees_high = cv::Scalar(85, 255, 38);
+cv::Scalar pontoons_low = cv::Scalar(89, 0, 0);   
+cv::Scalar pontoons_high = cv::Scalar(90, 255, 255);
+
 //cv::Scalar purple_low = cv::Scalar(130, 117, 89);
 //cv::Scalar purple_high = cv::Scalar(160, 255, 255);
-cv::Scalar red_low = cv::Scalar(130, 200, 60);  //bitwise add //200 //60
+cv::Scalar red_low = cv::Scalar(130, 170, 60);  //170
 cv::Scalar red_high = cv::Scalar(179, 255, 255); //sometimes detects red mutliple times
-cv::Scalar red_low1 = cv::Scalar(0, 80, 82);  //bitwise add
+cv::Scalar red_low1 = cv::Scalar(0, 185, 54);  //200
 cv::Scalar red_high1 = cv::Scalar(1, 255, 255); //sometimes detects red mutliple times
 cv::Scalar orange_low = cv::Scalar(2, 170, 50); //detects orange but also red sometimes
 cv::Scalar orange_high = cv::Scalar(15, 255, 255); //belive this works now
 cv::Scalar white_low = cv::Scalar(0, 0, 80); 
 cv::Scalar white_high = cv::Scalar(0, 0, 255); 
 cv::Scalar black_low = cv::Scalar(0, 0, 0); //black works but detects background black in the tree line
-cv::Scalar black_high = cv::Scalar(179, 0, 3); //black works
+cv::Scalar black_high = cv::Scalar(179, 0, 35); //14
 
 cv::Mat org_img;
 cv::Mat imgHSV;
@@ -80,7 +85,7 @@ float height; //height and width of image
 float width; 
 float area; //area of contour
 
-/* void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
+void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
 	sensor_msgs::PointCloud2 in_cloud; //creates pointcloud2 message
 	sensor_msgs::PointCloud out_cloud; //creates pointclud message for ease of printing and reading
 	in_cloud = *lidar_msg; //makes in_cloud equal to the pointer lidar_msg
@@ -92,45 +97,44 @@ float area; //area of contour
 //		printf("the fields is: %d\n", lidar_msg->fields); //extracts x orientation
 //	}
 
- 	for (int i=0; i < out_cloud.points.size(); i++) //for loop for iteration through coordinates
+ 	for (int i=0; i < out_cloud.points.size(); i++) //for loop for iteration throught coordinates
 	{
 		geometry_msgs::Point32 point;
-		printf("#####:   LiDAR Point %i   :#####\n", i); 
 		point.x = out_cloud.points[i].x;  //goes through x coordinates
-		printf("         x:  %f\n", point.x); 
+		printf("the x: %f\n", point.x); 
 		point.y = out_cloud.points[i].y; //goes through y coordinates
-		printf("         y:  %f\n", point.y); 
+		printf("the y is: %f\n", point.y); 
 		point.z = out_cloud.points[i].z; //goes through z coordinates
-		printf("         z:  %f\n\n\n\n", point.z);
+		printf("the z is: %f\n\n\n\n", point.z);
 	} 
 
-} */
+}
 
 void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 	try 
 	{
 		org_img = cv_bridge::toCvShare(camera_msg, "bgr8") -> image;		//converts message camera_msg into bgr8 type image
-		//cv::imshow("front_left", org_img); //converts the ros image to bgr type
+		cv::imshow("front_left", org_img); //converts the ros image to bgr type
 		height = camera_msg->height; 
 		width = camera_msg->width; 
-		//printf("the height is: %f\n", height); 
-		//printf("the width is: %f\n", width); 
-	 	cv::Mat base_mask;
-		cv::Mat black_mask;
+		printf("the height is: %f\n", height); 
+		printf("the width is: %f\n", width); 
+	 	cv::Mat water_mask;
+		cv::Mat trees_mask;
+		cv::Mat pontoons_mask;
 		cv::Mat main_mask;
+		cv::Mat main_mask_f;
 		cv::cvtColor(org_img, imgHSV, cv::COLOR_BGR2HSV); //converts BGR to HSV image
 		
-/* 		cv::Scalar color_low_a = cv::Scalar(0, 150, 0);   
-		cv::Scalar color_high_a = cv::Scalar(179, 255, 255);
-		cv::inRange(imgHSV, color_low_a, color_high_a, base_mask);
-		cv::Scalar color_low_b = cv::Scalar(0, 0, 0);   
-		cv::Scalar color_high_b = cv::Scalar(179, 100, 30);
-		cv::inRange(imgHSV, color_low_b, color_high_b, black_mask);
-		cv::bitwise_or(base_mask, black_mask, main_mask); //check order is correct
+		/* cv::inRange(imgHSV, blue_water_low, blue_water_high, water_mask);
+		cv::inRange(imgHSV, trees_low, trees_high, trees_mask);
+		cv::inRange(imgHSV, pontoons_low, pontoons_high, pontoons_mask);
+		cv::bitwise_or(water_mask, pontoons_mask, main_mask); //check order is correct
+		cv::bitwise_or(main_mask, trees_mask, main_mask_f);
 		
-//		cv::imshow("updated", main_mask);
+		cv::imshow("updated", main_mask_f); */
 		
-		cv::Mat anti_blue;
+	/* 	cv::Mat anti_blue;
 		cv::Mat anti_blue1;
 		cv::Mat anti_blue2;
 		cv::Mat all_mask;
@@ -143,21 +147,17 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 		cv::inRange(imgHSV, color_low_d, color_high_d, anti_blue2);
 		cv::bitwise_or(anti_blue1, anti_blue2, anti_blue); //check order is correct
 		
-//		cv::imshow("updated", anti_blue);
+		cv::imshow("updated", anti_blue); */
 		
-		cv::bitwise_or(anti_blue, main_mask, all_mask); //check order is correct
+//		cv::bitwise_or(anti_blue, main_mask, all_mask); //check order is correct
 //		cv::imshow("updated", all_mask);
-		cv::bitwise_not(all_mask, img_i); //check order is correct
-		cv::imshow("updated", img_i); */
+//		cv::bitwise_not(all_mask, img_i); //check order is correct
+//		cv::imshow("updated", img_i);
 		
 //		cv::imshow("updated", imgHSV); 
 //		cv::Mat threshold_test;
 //		cv::inRange(imgHSV, cv::Scalar(hue_low, sat_low, value_low), cv::Scalar(hue_high, sat_high, value_high), threshold_test); 
 //		cv::imshow("updated", threshold_test); 
-		
-		cv::inRange(imgHSV, red_low, red_high, red_mask); 
-		cv::inRange(imgHSV, red_low1, red_high1, red_mask1); 
-		red_mask = red_mask + red_mask1;
 		
 		cv::Mat background;
 		cv::Mat grey_frame;
@@ -169,12 +169,18 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 //		cv::cvtColor(org_img, grey_frame, cv::COLOR_BGR2GRAY); //converts RGB to GRAY format for ease of detecting objects
 //		cv::threshold(grey_frame, threshold ,40, 255, cv::THRESH_BINARY_INV); //threshold image conversion
 //		cv::imshow("updated", cropped_image); 
+
 		cv::cvtColor(org_img, imgHSV, cv::COLOR_BGR2HSV);
+		
+		cv::inRange(imgHSV, red_low, red_high, red_mask); 
+		cv::inRange(imgHSV, red_low1, red_high1, red_mask1); 
+		red_mask = red_mask + red_mask1;
+//		cv::bitwise_and(red_mask, red_mask1, red_mask);
+		
 		cv::inRange(imgHSV, blue_low, blue_high, blue_mask); 
 		cv::inRange(imgHSV, white_low, white_high, white_mask);  //detects white, orange, black, red, green and blue
 		cv::inRange(imgHSV, orange_low, orange_high, orange_mask); 
-		cv::inRange(imgHSV, black_low, black_high, black_mask); 
-		cv::inRange(imgHSV, red_low, red_high, red_mask); 
+		cv::inRange(imgHSV, black_low, black_high, black_mask);  
 		cv::inRange(imgHSV, green_low, green_high, green_mask);  
 		cv::inRange(imgHSV, yellow_low, yellow_high, yellow_mask);
 
@@ -200,15 +206,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 		cv::bitwise_and(org_img, org_img, mask=green_mask, green_res);
 		cv::bitwise_and(org_img, org_img, mask=black_mask, black_res);
 		cv::bitwise_and(org_img, org_img, mask=yellow_mask, yellow_res);
-
- 	 /*  cv::findContours(threshold, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-		for (size_t i=0; i < contours.size(); ++i) {
-			cv::Rect boundRect = cv::boundingRect(contours[i]);
-			area = cv::contourArea(contours[i]);
-			std::string str1 = std::to_string(area);
-			cv::putText(cropped_image, str1, (boundRect.tl(), boundRect.br()), 1, 1, (255, 0, 0));
-			cv::rectangle(cropped_image, boundRect.tl(), boundRect.br(), (0, 255, 0), 3);
-		}    */
 		
  		cv::findContours(red_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE); //finds contour around coloured objects and draws a rectangle around the object
 		for (size_t i=0; i < contours.size(); ++i) {
@@ -238,8 +235,10 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 		cv::findContours(white_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 		for (size_t i=0; i < contours.size(); ++i) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
+			if (boundRect.width < 1000) { //need to add this because with fog the background of trees are white and it draws a big rectangle around the trees
 			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(255, 255, 255), 3);
 //			cv::putText(background, "white",(boundRect.br(), boundRect.tl()), 2, 1, (255, 0, 0));
+			}
 		}
 //		cv::imshow("updated", white_mask);  	
 		
@@ -259,11 +258,11 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 //		cv::imshow("updated", black_mask);  	
 		
 		cv::findContours(yellow_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-		/* for (size_t i=0; i < contours.size(); ++i) {
+		for (size_t i=0; i < contours.size(); ++i) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
-			//cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 255, 255), 3); 
+			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 255, 255), 3); 
 //			cv::putText(background, "yellow",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-		}   */  
+		}    
 		
 		cv::imshow("updated", background);  		
 		cv::waitKey(30);
@@ -293,7 +292,7 @@ void cameraCallBack1(const sensor_msgs::ImageConstPtr& camera_msg) {
 			cv::Rect boundRect = cv::boundingRect(contours1[i]);
 			cv::rectangle(background1, boundRect.tl(), boundRect.br(), (0, 0, 0), 3);
 		}
-		//cv::imshow("updated1", background1); 
+		cv::imshow("updated1", background1); 
 		cv::waitKey(30);
 	}
 	catch (cv_bridge::Exception& e) //looks for errors 
@@ -303,7 +302,7 @@ void cameraCallBack1(const sensor_msgs::ImageConstPtr& camera_msg) {
 	
 }
 
-/* void cameraCallBack2(const sensor_msgs::ImageConstPtr& camera_msg) {
+void cameraCallBack2(const sensor_msgs::ImageConstPtr& camera_msg) {
 
 	try 
 	{
@@ -329,7 +328,7 @@ void cameraCallBack1(const sensor_msgs::ImageConstPtr& camera_msg) {
 		ROS_ERROR("Could not convert from '%s' to 'bgr8'.", camera_msg -> encoding.c_str()); //prints out the encoding string
 	}
 	
-} */
+}
 
 
 int main(int argc, char **argv) {
@@ -339,12 +338,12 @@ int main(int argc, char **argv) {
 	ros::NodeHandle nh2;
 	ros::NodeHandle nh3;
 	
-	//cv::namedWindow("front_left"); //creates new windows for each camera
+	cv::namedWindow("front_left"); //creates new windows for each camera
 	cv::namedWindow("front_right");
-	//cv::namedWindow("middle_right");
+	cv::namedWindow("middle_right");
 	cv::namedWindow("updated", cv::WINDOW_AUTOSIZE);
-	//cv::namedWindow("updated1", cv::WINDOW_AUTOSIZE);
-	//cv::namedWindow("updated2", cv::WINDOW_AUTOSIZE);
+	cv::namedWindow("updated1", cv::WINDOW_AUTOSIZE);
+	cv::namedWindow("updated2", cv::WINDOW_AUTOSIZE);
 	
 	cv::createTrackbar("LowH", "front_left", &hue_low, 179); //trackbar for hue
 	cv::createTrackbar("HighH", "front_left", &hue_high, 179); 
@@ -360,13 +359,13 @@ int main(int argc, char **argv) {
 	image_transport::ImageTransport it2(nh2);
 	image_transport::Subscriber camera_sub = it.subscribe("/wamv/sensors/cameras/front_left_camera/image_raw", 1, cameraCallBack); //front left camera
 	image_transport::Subscriber camera_sub1 = it1.subscribe("/wamv/sensors/cameras/front_right_camera/image_raw", 1, cameraCallBack1); //front rightcamera
-	//image_transport::Subscriber camera_sub2 = it2.subscribe("/wamv/sensors/cameras/middle_right_camera/image_raw", 1, cameraCallBack2); //middle_right camera
-	//ros::Subscriber lidar_sub = nh3.subscribe("/wamv/sensors/lidars/lidar_wamv/points", 10, LidarCallBack); //subscribes to Lidar
+	image_transport::Subscriber camera_sub2 = it2.subscribe("/wamv/sensors/cameras/middle_right_camera/image_raw", 1, cameraCallBack2); //middle_right camera
+	ros::Subscriber lidar_sub = nh3.subscribe("/wamv/sensors/lidars/lidar_wamv/points", 10, LidarCallBack); //subscribes to Lidar
 
 	ros::spin();
-	//cv::destroyWindow("front_left"); //destroys the new windows
+	cv::destroyWindow("front_left"); //destroys the new windows
 	cv::destroyWindow("front_right");
-	//cv::destroyWindow("middle_right");
+	cv::destroyWindow("middle_right");
 	
 	ros::Rate loop_rate(10);
 	

@@ -1,0 +1,23 @@
+<launch>
+
+  <!-- This is the format for a comment in HTML --> 
+
+
+  <!-- Launches the geonav_transform file --> 
+  <include file="$(find geonav_transform)/launch/geonav_transform.launch" >
+  <!-- Launches the TurtleBot's navigation file --> 
+  <!-- include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch" -->
+    <!-- Sets the map to be the map generated in lab 4 --> 
+    <!-- Change “pfkb” to whatever your username is -->
+    <!-- arg name="map_file" value="/home/pfkb/map.yaml" -->
+  </include>
+
+  <!-- creates all the parameters --> 
+  <param name="/Kp_xy_G" value="0.2" />
+  <param name="/Kp_psi_G" value="3.0" />
+
+  <!-- Launches PID codes --> 
+  <node pkg="move" type="gps_subscriber" name="PID_launch" output="screen">
+  </node>
+
+</launch>
