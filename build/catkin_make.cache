@@ -1,0 +1,2 @@
+amore:geonav_transform:gps_umd/gps_common:gps_umd/gps_umd:gps_umd/gpsd_client:vrx_ws/src/vrx/usv_gazebo_plugins:vrx_ws/src/vrx/usv_msgs:vrx_ws/src/vrx/vrx_2019:vrx_ws/src/vrx/vrx_gazebo:vrx_ws/src/vrx/wamv_description:vrx_ws/src/vrx/wamv_gazebo:vrx_ws/src/vrx/wave_gazebo:vrx_ws/src/vrx/wave_gazebo_plugins
+-DCATKIN_DEVEL_PREFIX=/home/brad/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/brad/catkin_ws/install -G Unix Makefiles
