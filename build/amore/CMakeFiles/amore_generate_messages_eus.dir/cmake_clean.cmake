@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/brad/catkin_ws/devel/share/roseus/ros/amore/manifest.l"
-  "/home/brad/catkin_ws/devel/share/roseus/ros/amore/msg/NED_waypoints.l"
+  "/home/brad/RobotX2022/devel/share/roseus/ros/amore/manifest.l"
   "CMakeFiles/amore_generate_messages_eus"
 )
 

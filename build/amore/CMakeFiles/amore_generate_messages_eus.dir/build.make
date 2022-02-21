@@ -43,33 +43,25 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/brad/RobotX2022/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/catkin_ws/build
+CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
 
 # Utility rule file for amore_generate_messages_eus.
 
 # Include the progress variables for this target.
 include amore/CMakeFiles/amore_generate_messages_eus.dir/progress.make
 
-amore/CMakeFiles/amore_generate_messages_eus: /home/brad/catkin_ws/devel/share/roseus/ros/amore/msg/NED_waypoints.l
-amore/CMakeFiles/amore_generate_messages_eus: /home/brad/catkin_ws/devel/share/roseus/ros/amore/manifest.l
+amore/CMakeFiles/amore_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/amore/manifest.l
 
 
-/home/brad/catkin_ws/devel/share/roseus/ros/amore/msg/NED_waypoints.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-/home/brad/catkin_ws/devel/share/roseus/ros/amore/msg/NED_waypoints.l: /home/brad/catkin_ws/src/amore/msg/NED_waypoints.msg
-/home/brad/catkin_ws/devel/share/roseus/ros/amore/msg/NED_waypoints.l: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from amore/NED_waypoints.msg"
-	cd /home/brad/catkin_ws/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/catkin_ws/src/amore/msg/NED_waypoints.msg -Iamore:/home/brad/catkin_ws/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/catkin_ws/devel/share/roseus/ros/amore/msg
-
-/home/brad/catkin_ws/devel/share/roseus/ros/amore/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp manifest code for amore"
-	cd /home/brad/catkin_ws/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/brad/catkin_ws/devel/share/roseus/ros/amore amore geometry_msgs std_msgs
+/home/brad/RobotX2022/devel/share/roseus/ros/amore/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp manifest code for amore"
+	cd /home/brad/RobotX2022/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/brad/RobotX2022/devel/share/roseus/ros/amore amore std_msgs
 
 amore_generate_messages_eus: amore/CMakeFiles/amore_generate_messages_eus
-amore_generate_messages_eus: /home/brad/catkin_ws/devel/share/roseus/ros/amore/msg/NED_waypoints.l
-amore_generate_messages_eus: /home/brad/catkin_ws/devel/share/roseus/ros/amore/manifest.l
+amore_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/amore/manifest.l
 amore_generate_messages_eus: amore/CMakeFiles/amore_generate_messages_eus.dir/build.make
 
 .PHONY : amore_generate_messages_eus
@@ -80,10 +72,10 @@ amore/CMakeFiles/amore_generate_messages_eus.dir/build: amore_generate_messages_
 .PHONY : amore/CMakeFiles/amore_generate_messages_eus.dir/build
 
 amore/CMakeFiles/amore_generate_messages_eus.dir/clean:
-	cd /home/brad/catkin_ws/build/amore && $(CMAKE_COMMAND) -P CMakeFiles/amore_generate_messages_eus.dir/cmake_clean.cmake
+	cd /home/brad/RobotX2022/build/amore && $(CMAKE_COMMAND) -P CMakeFiles/amore_generate_messages_eus.dir/cmake_clean.cmake
 .PHONY : amore/CMakeFiles/amore_generate_messages_eus.dir/clean
 
 amore/CMakeFiles/amore_generate_messages_eus.dir/depend:
-	cd /home/brad/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/catkin_ws/src /home/brad/catkin_ws/src/amore /home/brad/catkin_ws/build /home/brad/catkin_ws/build/amore /home/brad/catkin_ws/build/amore/CMakeFiles/amore_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brad/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/RobotX2022/src /home/brad/RobotX2022/src/amore /home/brad/RobotX2022/build /home/brad/RobotX2022/build/amore /home/brad/RobotX2022/build/amore/CMakeFiles/amore_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : amore/CMakeFiles/amore_generate_messages_eus.dir/depend
 

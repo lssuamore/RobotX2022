@@ -1,0 +1,8 @@
+prefix=/home/brad/RobotX2022/install
+
+Name: jetson
+Description: Description of jetson
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,8 +1,8 @@
-prefix=/home/brad/catkin_ws/install
+prefix=/home/brad/RobotX2022/install
 
 Name: amore
 Description: Description of amore
 Version: 0.0.0
-Cflags: -I${prefix}/include
+Cflags: 
 Libs: -L${prefix}/lib 
-Requires: message_generation message_runtime roscpp std_msgs geometry_msgs
+Requires: 

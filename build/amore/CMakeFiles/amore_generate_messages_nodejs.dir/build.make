@@ -43,27 +43,16 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/brad/RobotX2022/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/catkin_ws/build
+CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
 
 # Utility rule file for amore_generate_messages_nodejs.
 
 # Include the progress variables for this target.
 include amore/CMakeFiles/amore_generate_messages_nodejs.dir/progress.make
 
-amore/CMakeFiles/amore_generate_messages_nodejs: /home/brad/catkin_ws/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js
-
-
-/home/brad/catkin_ws/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
-/home/brad/catkin_ws/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js: /home/brad/catkin_ws/src/amore/msg/NED_waypoints.msg
-/home/brad/catkin_ws/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from amore/NED_waypoints.msg"
-	cd /home/brad/catkin_ws/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/catkin_ws/src/amore/msg/NED_waypoints.msg -Iamore:/home/brad/catkin_ws/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/catkin_ws/devel/share/gennodejs/ros/amore/msg
-
-amore_generate_messages_nodejs: amore/CMakeFiles/amore_generate_messages_nodejs
-amore_generate_messages_nodejs: /home/brad/catkin_ws/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js
 amore_generate_messages_nodejs: amore/CMakeFiles/amore_generate_messages_nodejs.dir/build.make
 
 .PHONY : amore_generate_messages_nodejs
@@ -74,10 +63,10 @@ amore/CMakeFiles/amore_generate_messages_nodejs.dir/build: amore_generate_messag
 .PHONY : amore/CMakeFiles/amore_generate_messages_nodejs.dir/build
 
 amore/CMakeFiles/amore_generate_messages_nodejs.dir/clean:
-	cd /home/brad/catkin_ws/build/amore && $(CMAKE_COMMAND) -P CMakeFiles/amore_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/brad/RobotX2022/build/amore && $(CMAKE_COMMAND) -P CMakeFiles/amore_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : amore/CMakeFiles/amore_generate_messages_nodejs.dir/clean
 
 amore/CMakeFiles/amore_generate_messages_nodejs.dir/depend:
-	cd /home/brad/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/catkin_ws/src /home/brad/catkin_ws/src/amore /home/brad/catkin_ws/build /home/brad/catkin_ws/build/amore /home/brad/catkin_ws/build/amore/CMakeFiles/amore_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brad/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/RobotX2022/src /home/brad/RobotX2022/src/amore /home/brad/RobotX2022/build /home/brad/RobotX2022/build/amore /home/brad/RobotX2022/build/amore/CMakeFiles/amore_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : amore/CMakeFiles/amore_generate_messages_nodejs.dir/depend
 

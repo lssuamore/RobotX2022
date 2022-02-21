@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/brad/catkin_ws/src/amore/src/lidar_subscriber.cpp" "/home/brad/catkin_ws/build/amore/CMakeFiles/lidar_subscriber.dir/src/lidar_subscriber.cpp.o"
+  "/home/brad/RobotX2022/src/amore/src/lidar_subscriber.cpp" "/home/brad/RobotX2022/build/amore/CMakeFiles/lidar_subscriber.dir/src/lidar_subscriber.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -23,14 +23,13 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/brad/catkin_ws/devel/include"
   "/usr/include/vtk-7.1"
   "/usr/include/freetype2"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
-  "/usr/include/opencv4"
   "/usr/include/eigen3"
   "/usr/include/pcl-1.10"
+  "/usr/include/opencv4"
   "/usr/include/ni"
   "/usr/include/openni2"
   )

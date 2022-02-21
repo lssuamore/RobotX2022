@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/catkin_ws/devel/lib/amore/object_d"
-  "/home/brad/catkin_ws/devel/lib/amore/object_d.pdb"
+  "/home/brad/RobotX2022/devel/lib/amore/object_d"
+  "/home/brad/RobotX2022/devel/lib/amore/object_d.pdb"
   "CMakeFiles/object_d.dir/src/object_d.cpp.o"
 )
 
