@@ -13,12 +13,16 @@
 #include "cv_bridge/cv_bridge.h"
 #include "opencv2/opencv.hpp"
 #include "geometry_msgs/Point.h"
+#include "amore/NED_waypoints.h"
+#include "geographic_msgs/GeoPoseStamped.h"
 #include <vector>
 #include <string>
 
 using namespace cv;
 using namespace std;
 
+geographic_msgs::GeoPoseStamped task3_message; //publisher message type
+ros::Publisher task3_pub; //publisher for judges topic
 
 //below is the hsv ranges for each color default lighting
 cv::Scalar yellow_low = cv::Scalar(16, 154, 65); 
@@ -65,9 +69,11 @@ std::vector <std::vector <cv::Point>> contours;
 std::vector <std::vector <cv::Point>> contours1;
 std::vector <std::vector <cv::Point>> contours2;
 
+//arrays for x and y pixel centriod
 int color_x[100];
 int color_y[100];
 
+//original images from cameras
 cv::Mat org_img;
 cv::Mat org_img1;
 cv::Mat org_img2;
@@ -76,6 +82,7 @@ cv::Mat org_img2;
 float height;
 float width; 
 
+//buoy classification
 float compactness;
 float area;
 float perimeter;
@@ -112,12 +119,13 @@ int size_indicies;
 float centriodx;
 float centriody;
 
+//lidar data array
 float array_lidar_x [100];
 float array_lidar_y [100];
 int track;
 int camera_track;
 
-
+//distances in x and y for each color
 float xdistance_red;
 float xdistance_green;
 float ydistance_red;
@@ -136,46 +144,28 @@ int size_black = 0;
 int size_white = 0;
 int size_mask_t = 0;
 
-
-void LidarCallBackTaylor(const geometry_msgs::Point::ConstPtr& lidar_point) {
+//subscribes to lidar points
+void LidarCallBackTaylor(const amore::NED_waypoints::ConstPtr& lidar_point) {
 	
-	size_indicies = lidar_point->z; //remeber this is the amount of clusters from the lidar_subscriber 
-
-	centriodx = lidar_point->x;
-	centriody = lidar_point->y;
-	//printf("%f\n", lidar_point->x);
-	//printf("%f\n", lidar_point->y);
-	//printf("%d\n", size_indicies);
+	size_indicies = lidar_point->quantity; //remeber this is the amount of clusters from the lidar_subscriber 
 	
+	for (size_t i = 0; i < size_indicies; i++){
 	//saves to array incoming points in x and y
-	array_lidar_x[track] = lidar_point->x;
-	array_lidar_y[track] = lidar_point->y;
-	track = track+1;
-	printf("track is %d\n", track);
-	if (track == size_indicies) {
-		track = 0;
+		array_lidar_x[i] = lidar_point->points[i].x;
+		array_lidar_y[i] = lidar_point->points[i].y;
+		printf("x coming in is: %f\n", array_lidar_x[i]);
+		printf("x coming in is: %f\n", array_lidar_y[i]);
 	}
 	
-	camera_track = track;
-	
-	//printf("x0 is: %f\n", array_lidar_x[0]);
-	//printf("x1 is: %f\n", array_lidar_x[1]);
-	//printf("y0 is: %f\n", array_lidar_y[0]);
-	//printf("y1 is: %f\n", array_lidar_y[1]);
-	//left of here
-	if (track == size_indicies - 1) {
-	std::sort(array_lidar_x,array_lidar_x+size_indicies); //sorts smallest to biggest
+	std::sort(array_lidar_x,array_lidar_x+size_indicies); //sorts smallest to biggest //how to sort array of points
 	std::sort(array_lidar_y,array_lidar_y+size_indicies); 
 	
-	//printf("x0 is: %f\n", array_lidar_x[0]);
-	//printf("x1 is: %f\n", array_lidar_x[1]);
-	//printf("y0 is: %f\n", array_lidar_y[0]);
-	//printf("y1 is: %f\n", array_lidar_y[1]);
+	for (size_t i = 0; i < size_indicies; i++){
+	//printd array of incoming points in x and y sorted
+		printf("x coming in array sorted array is: %f\n", array_lidar_x[i]);
+		printf("x coming in array sorted array is: %f\n", array_lidar_y[i]);
 	}
-	
-	
 }
-
 
 
 void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
@@ -225,55 +215,40 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 		cv::bitwise_and(org_img, org_img, mask=mask, green_res);
 		cv::bitwise_and(org_img, org_img, mask=black_mask, black_res);
 		cv::bitwise_and(org_img, org_img, mask=yellow_mask, yellow_res);
-		
-		
-			
-//				printf("%f\n", Ry); 
-//			printf("Rx is: %f\n", Rx); 
-			
-//				circle(background, leftmost, 8, (0, 50, 255), -1)
-//				circle(background, val.second->x, 8, (0, 255, 255), -1)
-//				circle(background, val.first->y, 8, (255, 50, 0), -1)
-//				circle(background, val.second->y, 8, (255, 255, 0), -1)
-			
-			//look up table for compactness and calculate r1 and r2 for each buoy 
 				
 		//to calculate moments using built in function moments contours must be found
 		cv::findContours(mask_t, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 		for (size_t i=0; i < contours.size(); ++i) {
-		cv::Rect boundRect = cv::boundingRect(contours[i]);
-		if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
-		size_mask_t = contours.size();
+			cv::Rect boundRect = cv::boundingRect(contours[i]);
+			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
+				size_mask_t = contours.size();
 		
-		vector<Moments> mu(contours.size());
-		for( int i = 0; i<contours.size(); i++ ) {
-			mu[i] = cv::moments(contours[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
+				vector<Moments> mu(contours.size());
+				for( int i = 0; i<contours.size(); i++ ) {
+					mu[i] = cv::moments(contours[i], false);
+				}
 			
-			
-			std::vector<cv::Point> pts;
-			vector<Point2f> mc(contours.size());
-			pts = contours[i];
+				//finds contours of all colored buoys
+				std::vector<cv::Point> pts;
+				vector<Point2f> mc(contours.size());
+				pts = contours[i];
 				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
-				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
-			
+				//saves to array x centriod and y centriod
 				color_x[i] = mc[i].x;
 				color_y[i] = mc[i].y;
-				
-				std::sort(color_x, color_x+size_mask_t); //sorts smallest to biggest
-				std::sort(color_y, color_y+size_mask_t); 
-				
-				printf("color_x0 is: %d\n", color_x[0]);
-				printf("color_x1 is: %d\n", color_x[1]);
-				printf("color_y0 is: %d\n", color_y[0]);
-				printf("color_y1 is: %d\n", color_y[1]);
+			}
 		}
-		}
+		
+		std::sort(color_x, color_x+size_mask_t); //sorts smallest to biggest
+		std::sort(color_y, color_y+size_mask_t); 
+		
+		//prints the sorted arrays
+		/* 	for (size_t i = 0; i < sizeof(color_x); i++){
+			printf("x color_x is  %d\n", color_x[i]);
+			}
+				for (size_t i = 0; i < sizeof(color_y); i++){
+			printf("y color_y is  %d\n", color_y[i]);
+			} */
 		
 		
 		//for each findContours it looks at each colored mask and calculates the contrours of the object and then draws the correct colored rectangle around the object
@@ -282,119 +257,102 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
 			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
 			
-			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 255), 3);
-			cv::Rect boundRect = cv::boundingRect(contours[i]);
-			size_red = contours.size();
+				cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 255), 3);
+				cv::Rect boundRect = cv::boundingRect(contours[i]);
+				size_red = contours.size();
 			
-			float x1;
-			float x2;
-			float y1;
-			float y2;
+				float x1;
+				float x2;
+				float y1;
+				float y2;
 			
-			//this calculates the moments of the contours but these change depeding on scaling
-		vector<Moments> mu(contours.size());
-		for( int i = 0; i<contours.size(); i++ ) {
-			mu[i] = cv::moments(contours[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
+				//this calculates the moments of the contours but these change depeding on scaling
+				vector<Moments> mu(contours.size());
+				for( int i = 0; i<contours.size(); i++ ) {
+					mu[i] = cv::moments(contours[i], false);
+				}
 			
 			
-			std::vector<cv::Point> pts;
-			vector<Point2f> mc(contours.size());
-			pts = contours[i];
+				std::vector<cv::Point> pts;
+				vector<Point2f> mc(contours.size());
+				pts = contours[i];
 				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
 				Scalar color = Scalar(128,0,0);
 				circle(mask_t, mc[i], 4, color, -1, 8, 0 );
 				
+				//finds extreme points of buoys
 				auto val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
 					return a.x < b.x;
-					});
-//				leftmost.x = val.first->x;
-//				leftmost.y = val.first->y;
-//				printf("leftMost x is: %d\n", val.first->x); 
-//				printf("rightMost x is: %d\n", val.second->x); 
+				});
 
 				val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
 					return a.y < b.y;
 				});
-				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
 			
 				x2 = (val.second -> x) - mc[i].x;
 				y2 = (val.second -> y) - mc[i].y;
 				x1 = mc[i].x - (val.first -> x);
 				y1 = mc[i].y - (val.first -> y);
-			
+				//buoy classification Ry and Rx
 				Ry = y1 / y2;
 				Rx = x1 / x2;
-			
-			
-			
-			
 			
 				red_x = mc[i].x;
 				red_y = mc[i].y;
 				printf("x centriod of red is: %d\n", red_x);
 				printf("y centriod of red is: %d\n", red_y);
-				//need to repeat below for y
-					 for(int i = 0; i < sizeof(color_x); i++) {
+				//finds color centriod in the array of color_x
+				for(int i = 0; i < sizeof(color_x); i++) {
 					if(color_x[i] == red_x){
-						cout << "Red element found at index " << i <<"\n";
+						cout << "Red x element found at index " << i <<"\n";
 						ydistance_red = array_lidar_y[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
-						printf("Red buoy x is: %f\n", ydistance_red);
+						printf("Red buoy y is: %f\n", ydistance_red);
 					break;
 					}
 				 }
-				
-				/* if ((red_x != 0 || red_y != 0) && (size_indicies = contours.size())) { //all red because contours == size of centriods being published
-					for (size_t i=0; i < contours.size(); ++i) {
-						xdistance_red = array_lidar_y[i];
-						ydistance_red = array_lidar_x[i];
+				 //finds color centriod in the array of color_y
+				 for(int i = 0; i < sizeof(color_y); i++) {
+					if(color_y[i] == red_y){
+						cout << "Red y element found at index " << i <<"\n";
+						xdistance_red = array_lidar_x[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
+						printf("Red buoy x is: %f\n", xdistance_red);
+					break;
+					}
+				 }
+			
+				area = cv::contourArea(contours[i]);
+				perimeter = cv::arcLength(contours[i], true);
+				compactness = (area) / (pow(perimeter, 2));
+				if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
+					reg_buoy = reg_buoy + 1;	
+					if (reg_buoy >=5) {
+						color_type = "mb_marker_buoy_";
+						color_type_buoy = "red";
+						color_type_buoy.insert(0, color_type);
+						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
+						task3_message.pose.position.latitude = ydistance_red;
+						task3_message.pose.position.longitude = xdistance_red;
+						reg_buoy = 0;
+						color_type_buoy = " ";
+						break;
 					}
 				}
-			
-			
-			printf("red_y is: %f\n", xdistance_red);
-			printf("red_x is: %f\n", ydistance_red); */
-			
-			
-			
-			area = cv::contourArea(contours[i]);
-			perimeter = cv::arcLength(contours[i], true);
-//					printf("the area is: %f\n", area); 
-//					printf("the arc length is: %f\n", perimeter);
-					compactness = (area) / (pow(perimeter, 2));
-//					printf("%f\n", compactness);
-						if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
-						reg_buoy = reg_buoy + 1;	
-						if (reg_buoy >=5) {
-							color_type = "mb_marker_buoy_";
-								color_type_buoy = "red";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							//printf("regular buoy\n");
-							//cv::putText(background, "Cone Buoy ",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
+				if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
+					circle_buoy = circle_buoy + 1;
+					if (circle_buoy >=5) {
+						color_type = "mb_round_buoy_";
+						color_type_buoy = "red";
+						color_type_buoy.insert(0, color_type);
+						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
+						task3_message.pose.position.latitude = ydistance_red;
+						task3_message.pose.position.longitude = xdistance_red;
+						circle_buoy = 0;
+						color_type_buoy = " ";
+						break;
 					}
-					if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
-						circle_buoy = circle_buoy + 1;
-						if (circle_buoy >=5) {
-							color_type = "mb_round_buoy_";
-								color_type_buoy = "red";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							circle_buoy = 0;
-							color_type_buoy = " ";
-							//printf("circle buoy\n");
-							//cv::putText(background, "Circle Buoy",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-					
+				}	
 			}
 		}	
 		
@@ -402,252 +360,134 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 		for (size_t i=0; i < contours.size(); ++i) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
 			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
-			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 255, 0), 3);
-			size_green = contours.size();	
+				cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 255, 0), 3);
+				size_green = contours.size();	
 				
-			float x1;
-			float x2;
-			float y1;
-			float y2;
+				float x1;
+				float x2;
+				float y1;
+				float y2;
 			
 			//this calculates the moments of the contours but these change depeding on scaling
-		vector<Moments> mu(contours.size());
-		for( int i = 0; i<contours.size(); i++ ) {
-			mu[i] = cv::moments(contours[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
+				vector<Moments> mu(contours.size());
+				for( int i = 0; i<contours.size(); i++ ) {
+					mu[i] = cv::moments(contours[i], false);
+				}
 			
-			std::vector<cv::Point> pts;
-			vector<Point2f> mc(contours.size());
-			pts = contours[i];
+				std::vector<cv::Point> pts;
+				vector<Point2f> mc(contours.size());
+				pts = contours[i];
 				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
 				Scalar color = Scalar(128,0,0);
 				circle(mask_t, mc[i], 4, color, -1, 8, 0 );
 				
 				auto val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
 					return a.x < b.x;
-					});
-//				leftmost.x = val.first->x;
-//				leftmost.y = val.first->y;
-//				printf("leftMost x is: %d\n", val.first->x); 
-//				printf("rightMost x is: %d\n", val.second->x); 
+				});
 
 				val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
 					return a.y < b.y;
 				});
 				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
-			
 				x2 = (val.second -> x) - mc[i].x;
 				y2 = (val.second -> y) - mc[i].y;
 				x1 = mc[i].x - (val.first -> x);
 				y1 = mc[i].y - (val.first -> y);
 			
 				Ry = y1 / y2;
-				Rx = x1 / x2;
-				
-				
-				
+				Rx = x1 / x2;		
 				
 				green_x = mc[i].x;
 				green_y = mc[i].y;
 				printf("x centriod of green is: %d\n", green_x);
 				printf("y centriod of green is: %d\n", green_y);
 				
-					 for(int i = 0; i < sizeof(color_x); i++) {
+				for(int i = 0; i < sizeof(color_x); i++) {
 					if(color_x[i] == green_x){
-						cout << "Green element found at index " << i <<"\n";
+						cout << "Green x element found at index " << i <<"\n";
 						ydistance_green = array_lidar_y[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
-						printf("Green buoy x is: %f\n", ydistance_green);
+						printf("Green buoy y is: %f\n", ydistance_green);
 					break;
 					}
 				 }
-				
-/* 				
-				if ((green_x != 0 || green_y != 0) && (size_indicies = contours.size())) {
-					for (size_t i=0; i < contours.size(); ++i) {
-						xdistance_green = array_lidar_y[i];
-						ydistance_green = array_lidar_x[i];
+				 
+				 for(int i = 0; i < sizeof(color_y); i++) {
+					if(color_y[i] == green_y){
+						cout << "Green y element found at index " << i <<"\n";
+						xdistance_green = array_lidar_x[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
+						printf("Green buoy x is: %f\n", xdistance_green);
+					break;
+					}
+				 }
+			
+				area = cv::contourArea(contours[i]);
+				perimeter = cv::arcLength(contours[i], true);
+				compactness = (area) / (pow(perimeter, 2));
+				if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
+					reg_buoy = reg_buoy + 1;	
+					if (reg_buoy >=5) {
+						color_type = "mb_marker_buoy_";
+						color_type_buoy = "green";
+						color_type_buoy.insert(0, color_type);
+						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
+						task3_message.pose.position.latitude = ydistance_red;
+						task3_message.pose.position.longitude = xdistance_red;
+						reg_buoy = 0;
+						color_type_buoy = " ";
+					break;
 					}
 				}
-				
-			
-			printf("green_y is: %f\n", xdistance_green);
-			printf("green_x is: %f\n", ydistance_green);  */
-				
-				
-				
-				
-			
-			
-			area = cv::contourArea(contours[i]);
-			perimeter = cv::arcLength(contours[i], true);
-//					printf("the area is: %f\n", area); 
-//					printf("the arc length is: %f\n", perimeter);
-					compactness = (area) / (pow(perimeter, 2));
-//					printf("%f\n", compactness);
-						if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
-						reg_buoy = reg_buoy + 1;	
-						if (reg_buoy >=5) {
-							color_type = "mb_marker_buoy_";
-								color_type_buoy = "green";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							//printf("regular buoy\n");
-							//cv::putText(background, "Cone Buoy ",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
+				if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
+					circle_buoy = circle_buoy + 1;
+					if (circle_buoy >=5) {
+						color_type = "mb_round_buoy_";
+						color_type_buoy = "green";
+						color_type_buoy.insert(0, color_type);
+						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
+						task3_message.pose.position.latitude = ydistance_red;
+						task3_message.pose.position.longitude = xdistance_red;
+						circle_buoy = 0;
+						color_type_buoy = " ";
+					break;
 					}
-					if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
-						circle_buoy = circle_buoy + 1;
-						if (circle_buoy >=5) {
-							color_type = "mb_round_buoy_";
-								color_type_buoy = "green";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							circle_buoy = 0;
-							color_type_buoy = " ";
-							//printf("circle buoy\n");
-							//cv::putText(background, "Circle Buoy",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-			
+				}
 			}
 		}	
-		
-		/* cv::findContours(blue_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-		for (size_t i=0; i < contours.size(); ++i) {
-			cv::Rect boundRect = cv::boundingRect(contours[i]);
-			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
-			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(255, 0, 0), 3);
-				
-			float x1;
-			float x2;
-			float y1;
-			float y2;
-			
-			//this calculates the moments of the contours but these change depeding on scaling
-		vector<Moments> mu(contours.size());
-		for( int i = 0; i<contours.size(); i++ ) {
-			mu[i] = cv::moments(contours[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
-			
-			std::vector<cv::Point> pts;
-			vector<Point2f> mc(contours.size());
-			pts = contours[i];
-				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
-				Scalar color = Scalar(128,0,0);
-				circle(mask_t, mc[i], 4, color, -1, 8, 0 );
-				
-				auto val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
-					return a.x < b.x;
-					});
-//				leftmost.x = val.first->x;
-//				leftmost.y = val.first->y;
-//				printf("leftMost x is: %d\n", val.first->x); 
-//				printf("rightMost x is: %d\n", val.second->x); 
-
-				val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
-					return a.y < b.y;
-				});
-				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
-			
-				x2 = (val.second -> x) - mc[i].x;
-				y2 = (val.second -> y) - mc[i].y;
-				x1 = mc[i].x - (val.first -> x);
-				y1 = mc[i].y - (val.first -> y);
-			
-				Ry = y1 / y2;
-				Rx = x1 / x2;
-			
-			
-			area = cv::contourArea(contours[i]);
-			perimeter = cv::arcLength(contours[i], true);
-//					printf("the area is: %f\n", area); 
-//					printf("the arc length is: %f\n", perimeter);
-					compactness = (area) / (pow(perimeter, 2));
-//					printf("%f\n", compactness);
-						if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
-						reg_buoy = reg_buoy + 1;	
-						if (reg_buoy >=5) {
-							color_type = "mb_marker_buoy_";
-								color_type_buoy = "blue";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							//printf("regular buoy\n");
-							//cv::putText(background, "Cone Buoy ",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-					if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
-						circle_buoy = circle_buoy + 1;
-						if (circle_buoy >=5) {
-							color_type = "mb_round_buoy_";
-								color_type_buoy = "blue";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							circle_buoy = 0;
-							color_type_buoy = " ";
-							//printf("circle buoy\n");
-							//cv::putText(background, "Circle Buoy",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-			
-			}
-		} */
 
 		cv::findContours(white_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 		for (size_t i=0; i < contours.size(); ++i) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
 			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { //need to add this because with fog the background of trees are white and it draws a big rectangle around the trees
-			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(255, 255, 255), 3);
-			size_white = contours.size();
+				cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(255, 255, 255), 3);
+				size_white = contours.size();
 					
-			float x1;
-			float x2;
-			float y1;
-			float y2;
+				float x1;
+				float x2;
+				float y1;
+				float y2;
 			
 			//this calculates the moments of the contours but these change depeding on scaling
-		vector<Moments> mu(contours.size());
-		for( int i = 0; i<contours.size(); i++ ) {
-			mu[i] = cv::moments(contours[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
+				vector<Moments> mu(contours.size());
+				for( int i = 0; i<contours.size(); i++ ) {
+					mu[i] = cv::moments(contours[i], false);
+				}
 			
-			std::vector<cv::Point> pts;
-			vector<Point2f> mc(contours.size());
-			pts = contours[i];
+				std::vector<cv::Point> pts;
+				vector<Point2f> mc(contours.size());
+				pts = contours[i];
 				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
 				Scalar color = Scalar(128,0,0);
 				circle(mask_t, mc[i], 4, color, -1, 8, 0 );
 				
 				auto val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
 					return a.x < b.x;
-					});
-//				leftmost.x = val.first->x;
-//				leftmost.y = val.first->y;
-//				printf("leftMost x is: %d\n", val.first->x); 
-//				printf("rightMost x is: %d\n", val.second->x); 
+				});
 
 				val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
 					return a.y < b.y;
 				});
-				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
 			
 				x2 = (val.second -> x) - mc[i].x;
 				y2 = (val.second -> y) - mc[i].y;
@@ -656,69 +496,63 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			
 				Ry = y1 / y2;
 				Rx = x1 / x2;
-			
-			
 			
 				white_x = mc[i].x;
 				white_y = mc[i].y;
 				printf("x centriod of white is: %d\n", white_x);
 				printf("y centriod of white is: %d\n", white_y);
 			
-					 for(int i = 0; i < sizeof(color_x); i++) {
+				for(int i = 0; i < sizeof(color_x); i++) {
 					if(color_x[i] == white_x){
-						cout << "White element found at index " << i <<"\n";
+						cout << "White x element found at index " << i <<"\n";
 						ydistance_white = array_lidar_y[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
-						printf("White buoy x is: %f\n", ydistance_white);
+						printf("White buoy y is: %f\n", ydistance_white);
+					break;
+					}
+				 }
+				 
+				 for(int i = 0; i < sizeof(color_y); i++) {
+					if(color_y[i] == white_y){
+						cout << "White y element found at index " << i <<"\n";
+						xdistance_white = array_lidar_x[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
+						printf("White buoy x is: %f\n", xdistance_white);
 					break;
 					}
 				 }
 			
-	/* 		if ((white_x != 0 || white_y != 0) && (size_indicies = contours.size())) {
-					for (size_t i=0; i < contours.size(); ++i) {
-						xdistance_white = array_lidar_y[i];
-						ydistance_white = array_lidar_x[i];
+				area = cv::contourArea(contours[i]);
+				perimeter = cv::arcLength(contours[i], true);
+				compactness = (area) / (pow(perimeter, 2));
+				if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
+					reg_buoy = reg_buoy + 1;	
+					if (reg_buoy >=5) {
+						color_type = "mb_marker_buoy_";
+						color_type_buoy = "white";
+						color_type_buoy.insert(0, color_type);
+						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
+						task3_message.pose.position.latitude = ydistance_red;
+						task3_message.pose.position.longitude = xdistance_red;
+						reg_buoy = 0;
+						color_type_buoy = " ";
+						break;
 					}
 				}
-			
-						
-			printf("white_y is: %f\n", xdistance_white);
-			printf("white_x is: %f\n", ydistance_white);  */
-			
-			
-			
-			area = cv::contourArea(contours[i]);
-			perimeter = cv::arcLength(contours[i], true);
-//					printf("the area is: %f\n", area); 
-//					printf("the arc length is: %f\n", perimeter);
-					compactness = (area) / (pow(perimeter, 2));
-//					printf("%f\n", compactness);
-						if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
-						reg_buoy = reg_buoy + 1;	
-						if (reg_buoy >=5) {
-							color_type = "mb_marker_buoy_";
-								color_type_buoy = "white";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							//printf("regular buoy\n");
-							//cv::putText(background, "Cone Buoy ",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
+				if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
+					circle_buoy = circle_buoy + 1;
+					if (circle_buoy >=5) {
+						color_type = "mb_round_buoy_";
+						color_type_buoy = "white";
+						color_type_buoy.insert(0, color_type);
+						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
+						task3_message.pose.position.latitude = ydistance_red;
+						task3_message.pose.position.longitude = xdistance_red;
+						circle_buoy = 0;
+						color_type_buoy = " ";
 							break;
-						}
 					}
-					if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
-						circle_buoy = circle_buoy + 1;
-						if (circle_buoy >=5) {
-							color_type = "mb_round_buoy_";
-								color_type_buoy = "white";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							circle_buoy = 0;
-							color_type_buoy = " ";
-							//printf("circle buoy\n");
-							//cv::putText(background, "Circle Buoy",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-			
+				}
 			}
 		} 	
 		
@@ -726,44 +560,34 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 		for (size_t i=0; i < contours.size(); ++i) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
 			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
-			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 179, 255), 3);
-			size_orange = contours.size();
+				cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 179, 255), 3);
+				size_orange = contours.size();
 			
-			float x1;
-			float x2;
-			float y1;
-			float y2;
+				float x1;
+				float x2;
+				float y1;
+				float y2;
 			
 			//this calculates the moments of the contours but these change depeding on scaling
-		vector<Moments> mu(contours.size());
-		for( int i = 0; i<contours.size(); i++ ) {
-			mu[i] = cv::moments(contours[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
+				vector<Moments> mu(contours.size());
+				for( int i = 0; i<contours.size(); i++ ) {
+					mu[i] = cv::moments(contours[i], false);
+				}
 			
-			std::vector<cv::Point> pts;
-			vector<Point2f> mc(contours.size());
-			pts = contours[i];
+				std::vector<cv::Point> pts;
+				vector<Point2f> mc(contours.size());
+				pts = contours[i];
 				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
 				Scalar color = Scalar(128,0,0);
 				circle(mask_t, mc[i], 4, color, -1, 8, 0 );
 				
 				auto val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
 					return a.x < b.x;
-					});
-//				leftmost.x = val.first->x;
-//				leftmost.y = val.first->y;
-//				printf("leftMost x is: %d\n", val.first->x); 
-//				printf("rightMost x is: %d\n", val.second->x); 
-
+				});
+					
 				val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
 					return a.y < b.y;
 				});
-				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
 			
 				x2 = (val.second -> x) - mc[i].x;
 				y2 = (val.second -> y) - mc[i].y;
@@ -773,72 +597,62 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 				Ry = y1 / y2;
 				Rx = x1 / x2;
 				
-				
-				
-				
-				
 				orange_x = mc[i].x;
 				orange_y = mc[i].y;
 				printf("x centriod of orange is: %d\n", orange_x);
 				printf("y centriod of orange is: %d\n", orange_y);
 				
-						 for(int i = 0; i < sizeof(color_x); i++) {
+				for(int i = 0; i < sizeof(color_x); i++) {
 					if(color_x[i] == orange_x){
-						cout << "Orange element found at index " << i <<"\n";
+						cout << "Orange x element found at index " << i <<"\n";
 						ydistance_orange = array_lidar_y[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
-						printf("Orange buoy x is: %f\n", ydistance_orange);
+						printf("Orange buoy y is: %f\n", ydistance_orange);
 					break;
 					}
 				 }
-				
-				/* if ((orange_x != 0 || orange_y != 0) && (size_indicies = contours.size())) {
-					for (size_t i=0; i < contours.size(); ++i) {
-						xdistance_orange = array_lidar_y[i];
-						ydistance_orange = array_lidar_x[i];
+				 
+				 for(int i = 0; i < sizeof(color_y); i++) {
+					if(color_y[i] == orange_y){
+						cout << "Orange y element found at index " << i <<"\n";
+						xdistance_orange = array_lidar_x[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
+						printf("Orange buoy x is: %f\n", xdistance_orange);
+					break;
+					}
+				 }
+			
+				area = cv::contourArea(contours[i]);
+				perimeter = cv::arcLength(contours[i], true);
+				compactness = (area) / (pow(perimeter, 2));
+				if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
+					reg_buoy = reg_buoy + 1;	
+					if (reg_buoy >=5) {
+						color_type = "mb_marker_buoy_";
+						color_type_buoy = "orange";
+						color_type_buoy.insert(0, color_type);
+						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
+						task3_message.pose.position.latitude = ydistance_red;
+						task3_message.pose.position.longitude = xdistance_red;
+						reg_buoy = 0;
+						color_type_buoy = " ";
+					break;
 					}
 				}
-				
-						
-			printf("orange_y is: %f\n", xdistance_orange);
-			printf("orange_x is: %f\n", ydistance_orange); 
-				 */
-				
-				
-			
-			
-			area = cv::contourArea(contours[i]);
-			perimeter = cv::arcLength(contours[i], true);
-//					printf("the area is: %f\n", area); 
-//					printf("the arc length is: %f\n", perimeter);
-					compactness = (area) / (pow(perimeter, 2));
-//					printf("%f\n", compactness);
-						if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
-						reg_buoy = reg_buoy + 1;	
-						if (reg_buoy >=5) {
-							color_type = "mb_marker_buoy_";
-								color_type_buoy = "orange";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							//printf("regular buoy\n");
-							//cv::putText(background, "Cone Buoy ",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
+				if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
+					circle_buoy = circle_buoy + 1;
+					if (circle_buoy >=5) {
+						color_type = "mb_round_buoy_";
+						color_type_buoy = "orange";
+						color_type_buoy.insert(0, color_type);
+						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
+						task3_message.pose.position.latitude = ydistance_red;
+						task3_message.pose.position.longitude = xdistance_red;
+						circle_buoy = 0;
+						color_type_buoy = " ";
+					break;
 					}
-					if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
-						circle_buoy = circle_buoy + 1;
-						if (circle_buoy >=5) {
-							color_type = "mb_round_buoy_";
-								color_type_buoy = "orange";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							circle_buoy = 0;
-							color_type_buoy = " ";
-							//printf("circle buoy\n");
-							//cv::putText(background, "Circle Buoy",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-			
+				}
 			}
 		}
 		
@@ -846,44 +660,34 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 		for (size_t i=0; i < contours.size(); ++i) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
 			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
-			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 0), 3); 
-			size_black = contours.size();
+				cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 0), 3); 
+				size_black = contours.size();
 			
-			float x1;
-			float x2;
-			float y1;
-			float y2;
+				float x1;
+				float x2;
+				float y1;
+				float y2;
 			
 			//this calculates the moments of the contours but these change depeding on scaling
-		vector<Moments> mu(contours.size());
-		for( int i = 0; i<contours.size(); i++ ) {
-			mu[i] = cv::moments(contours[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
+				vector<Moments> mu(contours.size());
+				for( int i = 0; i<contours.size(); i++ ) {
+					mu[i] = cv::moments(contours[i], false);
+				}
 			
-			std::vector<cv::Point> pts;
-			vector<Point2f> mc(contours.size());
-			pts = contours[i];
+				std::vector<cv::Point> pts;
+				vector<Point2f> mc(contours.size());
+				pts = contours[i];
 				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
 				Scalar color = Scalar(128,0,0);
 				circle(mask_t, mc[i], 4, color, -1, 8, 0 );
 				
 				auto val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
 					return a.x < b.x;
-					});
-//				leftmost.x = val.first->x;
-//				leftmost.y = val.first->y;
-//				printf("leftMost x is: %d\n", val.first->x); 
-//				printf("rightMost x is: %d\n", val.second->x); 
+				});
 
 				val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
 					return a.y < b.y;
 				});
-				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
 			
 				x2 = (val.second -> x) - mc[i].x;
 				y2 = (val.second -> y) - mc[i].y;
@@ -892,253 +696,65 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 			
 				Ry = y1 / y2;
 				Rx = x1 / x2;
-				
-				
-				
 				
 				black_x = mc[i].x;
 				black_y = mc[i].y;
 				printf("x centriod of black is: %d\n", black_x);
 				printf("y centriod of black is: %d\n", black_y);
 				
-					for(int i = 0; i < sizeof(color_x); i++) {
+				for(int i = 0; i < sizeof(color_x); i++) {
 					if(color_x[i] == black_x){
-						cout << "Black element found at index " << i <<"\n";
+						cout << "Black x element found at index " << i <<"\n";
 						ydistance_black = array_lidar_y[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
-						printf("Black buoy x is: %f\n", ydistance_black);
+						printf("Black buoy y is: %f\n", ydistance_black);
 					break;
 					}
 				 }
-				
-				
-				
-			/* 			if ((black_x != 0 || black_y != 0) && (size_indicies = contours.size())) {
-					for (size_t i=0; i < contours.size(); ++i) {
-						xdistance_black = array_lidar_y[i];
-						ydistance_black = array_lidar_x[i];
+				 
+				 for(int i = 0; i < sizeof(color_y); i++) {
+					if(color_y[i] == black_y){
+						cout << "Black y element found at index " << i <<"\n";
+						xdistance_black = array_lidar_x[(size_indicies-1)-i]; //lidar distance coordinates so y is left to right
+						printf("Black x is: %f\n", xdistance_black);
+					break;
+					}
+				 }
+			
+				area = cv::contourArea(contours[i]);
+				perimeter = cv::arcLength(contours[i], true);
+				compactness = (area) / (pow(perimeter, 2));
+				if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
+					reg_buoy = reg_buoy + 1;	
+					if (reg_buoy >=5) {
+						color_type = "mb_marker_buoy_";
+						color_type_buoy = "black";
+						color_type_buoy.insert(0, color_type);
+						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
+						task3_message.pose.position.latitude = ydistance_red;
+						task3_message.pose.position.longitude = xdistance_red;
+						reg_buoy = 0;
+						color_type_buoy = " ";
+						break;
 					}
 				}
-				
-						
-			printf("black_y is: %f\n", xdistance_black);
-			printf("black_x is: %f\n", ydistance_black);  */
-				
-				
-			
-			
-			area = cv::contourArea(contours[i]);
-			perimeter = cv::arcLength(contours[i], true);
-//					printf("the area is: %f\n", area); 
-//					printf("the arc length is: %f\n", perimeter);
-					compactness = (area) / (pow(perimeter, 2));
-//					printf("%f\n", compactness);
-						if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
-						reg_buoy = reg_buoy + 1;	
-						if (reg_buoy >=5) {
-							color_type = "mb_marker_buoy_";
-								color_type_buoy = "black";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							//printf("regular buoy\n");
-							//cv::putText(background, "Cone Buoy ",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-					if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
-						circle_buoy = circle_buoy + 1;
-						if (circle_buoy >=5) {
-							color_type = "mb_round_buoy_";
-								color_type_buoy = "black";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							circle_buoy = 0;
-							color_type_buoy = " ";
-							//printf("circle buoy\n");
-							//cv::putText(background, "Circle Buoy",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-				
-			}
-		} 	
-		
-		/* cv::findContours(yellow_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-		for (size_t i=0; i < contours.size(); ++i) {
-			cv::Rect boundRect = cv::boundingRect(contours[i]);
-			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
-			cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 255, 255), 3); 
-			
-			float x1;
-			float x2;
-			float y1;
-			float y2;
-			
-			//this calculates the moments of the contours but these change depeding on scaling
-		vector<Moments> mu(contours.size());
-		for( int i = 0; i<contours.size(); i++ ) {
-			mu[i] = cv::moments(contours[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
-			
-			std::vector<cv::Point> pts;
-			vector<Point2f> mc(contours.size());
-			pts = contours[i];
-				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
-				Scalar color = Scalar(128,0,0);
-				circle(mask_t, mc[i], 4, color, -1, 8, 0 );
-				
-				auto val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
-					return a.x < b.x;
-					});
-//				leftmost.x = val.first->x;
-//				leftmost.y = val.first->y;
-//				printf("leftMost x is: %d\n", val.first->x); 
-//				printf("rightMost x is: %d\n", val.second->x); 
-
-				val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
-					return a.y < b.y;
-				});
-				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
-			
-				x2 = (val.second -> x) - mc[i].x;
-				y2 = (val.second -> y) - mc[i].y;
-				x1 = mc[i].x - (val.first -> x);
-				y1 = mc[i].y - (val.first -> y);
-			
-				Ry = y1 / y2;
-				Rx = x1 / x2;
-			
-			
-			area = cv::contourArea(contours[i]);
-			perimeter = cv::arcLength(contours[i], true);
-//					printf("the area is: %f\n", area); 
-//					printf("the arc length is: %f\n", perimeter);
-					compactness = (area) / (pow(perimeter, 2));
-//					printf("%f\n", compactness);
-						if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
-						reg_buoy = reg_buoy + 1;	
-						if (reg_buoy >=5) {
-							color_type = "mb_marker_buoy_";
-								color_type_buoy = "yellow";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							//printf("regular buoy\n");
-							//cv::putText(background, "Cone Buoy ",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-					if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
-						circle_buoy = circle_buoy + 1;
-						if (circle_buoy >=5) {
-							color_type = "mb_round_buoy_";
-								color_type_buoy = "yellow";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-							circle_buoy = 0;
-							color_type_buoy = " ";
-							//printf("circle buoy\n");
-							//cv::putText(background, "Circle Buoy",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-					
-			}
-		}     */
-			
-
-			//while(ros::ok())
-	
-
-
-			//left off here
-		/* 	if (size_red != 0 && size_white != 0) {
-				for (size_t i=0; i < size_indicies; ++i) {
-					if (red_x<=white_x) {
-					xdistance_red = array_lidar_y[(size_indicies-1)-i];
-					xdistance_white = array_lidar_y[i];
-					}
-					else {
-						xdistance_red = array_lidar_y[i];
-						xdistance_white = array_lidar_y[(size_indicies-1)-i];
-					}
-					if (red_y<=white_y) {
-					ydistance_red = array_lidar_x[(size_indicies-1)-i];
-					ydistance_white = array_lidar_x[i];
-					}
-					else {
-						ydistance_red = array_lidar_x[i];
-						ydistance_white = array_lidar_x[(size_indicies-1)-i];
+				if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
+					circle_buoy = circle_buoy + 1;
+					if (circle_buoy >=5) {
+						color_type = "mb_round_buoy_";
+						color_type_buoy = "black";
+						color_type_buoy.insert(0, color_type);
+						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
+						task3_message.pose.position.latitude = ydistance_red;
+						task3_message.pose.position.longitude = xdistance_red;
+						circle_buoy = 0;
+						color_type_buoy = " ";
+						break;
 					}
 				}
 			}
-			 */
-			
-			
-
-
-			/* 	if ((red_x<=green_x) && (red_x<=white_x)) {
-					xdistance_red = array_lidar_y[(size_indicies-1)-0];
-				}
-				else if ((red_x>=green_x) && (red_x>=white_x)) {
-					xdistance_red = array_lidar_y[0];
-				}
-				else if ((red_x<=green_x) && (red_x>=white_x)) {
-					xdistance_red = array_lidar_y[(size_indicies-2)-0];
-				}
-				else if ((red_x>=green_x) && (red_x<=white_x)) {
-					xdistance_red = array_lidar_y[(camera_track-2)-0];
-				}
-				//third in order would be -3
-				//fourth is -4
-				if ((red_y<=green_y) && (red_y<=white_y)) {
-					ydistance_red = array_lidar_x[(size_indicies-1)-0];
-				}
-				else if ((red_y>=green_y) && (red_y>=white_y)) {
-					ydistance_red = array_lidar_x[0];
-				}
-				else if ((red_y<=green_y) && (red_y>=white_y)) {
-					ydistance_red = array_lidar_x[(size_indicies-2)-0];
-				}
-				else if ((red_y>=green_y) && (red_y<=white_y)) {
-					ydistance_red = array_lidar_x[(camera_track-2)-0];
-				}
- */
-
-
-
-	/* 		 for(int i = 0; i < sizeof(color_x); i++) {
-					if(color_x[i] == red_x){
-						cout << "Red element found at index " << i;
-					break;
-					}
-					if(color_x[i] == green_x){
-						cout << "Green element found at index " << i;
-					break;
-					}
-					if(color_x[i] == white_x){
-						cout << "White element found at index " << i;
-					break;
-					}
-					if(color_x[i] == orange_x){
-						cout << "Orange element found at index " << i;
-					break;
-					}
-					if(color_x[i] == black_x){
-						cout << "Black element found at index " << i;
-					break;
-					}	
-			} */
-				
-				
-				
-				
-
-
-
+		} 	
 		
 		cv::imshow("updated", background);  //shows background where the colors are detected 
 		cv::imshow("mask_new", mask_t);  //corner detection window
@@ -1150,7 +766,6 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 	}
 	
 }
-
 
 void cameraCallBack1(const sensor_msgs::ImageConstPtr& camera_msg) {
 
@@ -1200,18 +815,6 @@ void cameraCallBack1(const sensor_msgs::ImageConstPtr& camera_msg) {
 		cv::bitwise_and(org_img1, org_img1, mask=mask, green_res);
 		cv::bitwise_and(org_img1, org_img1, mask=black_mask, black_res);
 		cv::bitwise_and(org_img1, org_img1, mask=yellow_mask, yellow_res);
-		
-		
-			
-//				printf("%f\n", Ry); 
-//			printf("Rx is: %f\n", Rx); 
-			
-//				circle(background, leftmost, 8, (0, 50, 255), -1)
-//				circle(background, val.second->x, 8, (0, 255, 255), -1)
-//				circle(background, val.first->y, 8, (255, 50, 0), -1)
-//				circle(background, val.second->y, 8, (255, 255, 0), -1)
-			
-			//look up table for compactness and calculate r1 and r2 for each buoy 
 				
 		//to calculate moments using built in function moments contours must be found
 		cv::findContours(mask_t1, contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
@@ -1401,101 +1004,6 @@ void cameraCallBack1(const sensor_msgs::ImageConstPtr& camera_msg) {
 			
 			}
 		}	
-		
-		/* cv::findContours(blue_mask, contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-		for (size_t i=0; i < contours1.size(); ++i) {
-			cv::Rect boundRect = cv::boundingRect(contours1[i]);
-			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
-			cv::rectangle(background1, boundRect.tl(), boundRect.br(), cv::Scalar(255, 0, 0), 3);
-				
-			float x1;
-			float x2;
-			float y1;
-			float y2;
-			
-			//this calculates the moments of the contours but these change depeding on scaling
-		vector<Moments> mu1(contours1.size());
-		for( int i = 0; i<contours1.size(); i++ ) {
-			mu1[i] = cv::moments(contours1[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
-			
-			std::vector<cv::Point> pts;
-			//vector<Point2f> mc1(contours1.size());
-			pts = contours1[i];
-				mc1[i] = Point2f(mu1[i].m10/mu1[i].m00 , mu1[i].m01/mu1[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
-				Scalar color = Scalar(128,0,0);
-				//circle(mask_t, mc[i], 4, color, -1, 8, 0 );
-				
-				right_blob_cnt = right_blob_cnt + 1;
-				
-				auto val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
-					return a.x < b.x;
-					});
-//				leftmost.x = val.first->x;
-//				leftmost.y = val.first->y;
-//				printf("leftMost x is: %d\n", val.first->x); 
-//				printf("rightMost x is: %d\n", val.second->x); 
-
-				val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
-					return a.y < b.y;
-				});
-				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
-			
-				x2 = (val.second -> x) - mc1[i].x;
-				y2 = (val.second -> y) - mc1[i].y;
-				x1 = mc1[i].x - (val.first -> x);
-				y1 = mc1[i].y - (val.first -> y);
-			
-				Ry = y1 / y2;
-				Rx = x1 / x2;
-			
-			
-			area = cv::contourArea(contours1[i]);
-			perimeter = cv::arcLength(contours1[i], true);
-//					printf("the area is: %f\n", area); 
-//					printf("the arc length is: %f\n", perimeter);
-					compactness = (area) / (pow(perimeter, 2));
-//					printf("%f\n", compactness);
-						if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
-						reg_buoy = reg_buoy + 1;	
-						if (reg_buoy >=5) {
-							color_type = "mb_marker_buoy_";
-								color_type_buoy = "blue";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-									DisparityFunc();
-							reg_buoy = 0;
-							color_type_buoy = " ";
-							color_type = " ";
-							//printf("regular buoy\n");
-							//cv::putText(background, "Cone Buoy ",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-					if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
-						circle_buoy = circle_buoy + 1;
-						if (circle_buoy >=5) {
-							color_type = "mb_round_buoy_";
-								color_type_buoy = "blue";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-									DisparityFunc();
-							color_type = " ";
-							circle_buoy = 0;
-							color_type_buoy = " ";
-							//printf("circle buoy\n");
-							//cv::putText(background, "Circle Buoy",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-			
-			}
-		} */
 
 		cv::findContours(white_mask, contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 		for (size_t i=0; i < contours1.size(); ++i) {
@@ -1770,105 +1278,6 @@ void cameraCallBack1(const sensor_msgs::ImageConstPtr& camera_msg) {
 			}
 		} 	
 		
-		/* cv::findContours(yellow_mask, contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-		for (size_t i=0; i < contours1.size(); ++i) {
-			cv::Rect boundRect = cv::boundingRect(contours1[i]);
-			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
-			cv::rectangle(background1, boundRect.tl(), boundRect.br(), cv::Scalar(0, 255, 255), 3); 
-			
-			float x1;
-			float x2;
-			float y1;
-			float y2;
-			
-			//this calculates the moments of the contours but these change depeding on scaling
-		vector<Moments> mu1(contours1.size());
-		for( int i = 0; i<contours1.size(); i++ ) {
-			mu1[i] = cv::moments(contours1[i], false);
-	//		printf("moments: %f %f %f %f %f %f %f %f %f %f\n", mu[i].m00, mu[i].m10, mu[i].m01, mu[i].m20, mu[i].m11, mu[i].m02, mu[i].m30,mu[i].m21, mu[i].m12, mu[i].m03);
-		}
-			
-			std::vector<cv::Point> pts;
-			//vector<Point2f> mc1(contours1.size());
-			pts = contours1[i];
-				mc1[i] = Point2f(mu1[i].m10/mu1[i].m00 , mu1[i].m01/mu1[i].m00);   
-//				printf("the x centriod is: %f\n", mc[i].x);
-//				printf("the y centriod is: %f\n", mc[i].y);
-				Scalar color = Scalar(128,0,0);
-				//circle(mask_t, mc[i], 4, color, -1, 8, 0 );
-				
-				right_blob_cnt = right_blob_cnt + 1;
-				
-				auto val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
-					return a.x < b.x;
-					});
-//				leftmost.x = val.first->x;
-//				leftmost.y = val.first->y;
-//				printf("leftMost x is: %d\n", val.first->x); 
-//				printf("rightMost x is: %d\n", val.second->x); 
-
-				val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){
-					return a.y < b.y;
-				});
-				
-//				printf("topMost y is: %d\n", val.first->y); 
-//				printf("bottomMost y is: %d\n", val.second->y); 
-			
-				x2 = (val.second -> x) - mc1[i].x;
-				y2 = (val.second -> y) - mc1[i].y;
-				x1 = mc1[i].x - (val.first -> x);
-				y1 = mc1[i].y - (val.first -> y);
-			
-				Ry = y1 / y2;
-				Rx = x1 / x2;
-			
-			
-			area = cv::contourArea(contours1[i]);
-			perimeter = cv::arcLength(contours1[i], true);
-//					printf("the area is: %f\n", area); 
-//					printf("the arc length is: %f\n", perimeter);
-					compactness = (area) / (pow(perimeter, 2));
-//					printf("%f\n", compactness);
-						if ((compactness >= 0.01942425 & compactness <= 0.03975825) && (Ry >= 1.50754025 & Ry <= 1.74948625)) {
-						reg_buoy = reg_buoy + 1;	
-						if (reg_buoy >=5) {
-							color_type = "mb_marker_buoy_";
-								color_type_buoy = "yellow";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-									DisparityFunc();
-							reg_buoy = 0;
-							color_type_buoy = " ";
-							color_type = " ";
-							//printf("regular buoy\n");
-							//cv::putText(background, "Cone Buoy ",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-					if ((compactness >= 0.065152 & compactness <= 0.071328)  && (Ry >= 1.016995375 & Ry <= 1.342738375)) { //could do or but picks up totem
-						circle_buoy = circle_buoy + 1;
-						if (circle_buoy >=5) {
-							color_type = "mb_round_buoy_";
-								color_type_buoy = "yellow";
-								color_type_buoy.insert(0, color_type);
-								printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
-									DisparityFunc();
-							color_type = " ";
-							circle_buoy = 0;
-							color_type_buoy = " ";
-							//printf("circle buoy\n");
-							//cv::putText(background, "Circle Buoy",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
-							break;
-						}
-					}
-					
-			}
-		}     */
-			
-
-			//while(ros::ok())
-	
-		
 		cv::imshow("updated1", background1);  //shows background where the colors are detected 
 		//cv::imshow("mask_new", mask_t);  //corner detection window
 		cv::waitKey(30);
@@ -1888,6 +1297,8 @@ int main(int argc, char **argv) {
 	ros::NodeHandle nh1;
 	ros::NodeHandle nh2;
 	
+	ros::NodeHandle nh3;
+	
 	cv::namedWindow("front_left"); //creates new windows for each camera
 	cv::namedWindow("updated", cv::WINDOW_AUTOSIZE);
 	cv::namedWindow("front_right"); //creates new windows for each camera
@@ -1903,6 +1314,9 @@ int main(int argc, char **argv) {
 	image_transport::Subscriber camera_sub1 = it1.subscribe("/wamv/sensors/cameras/front_right_camera/image_raw", 1, cameraCallBack1); //front rightcamera
 	
 	ros::Subscriber lidar_sub = nh2.subscribe("lidar_point", 100, LidarCallBackTaylor); //subscribes to my lidar points
+
+
+	task3_pub = nh3.advertise<geographic_msgs::GeoPoseStamped>("perception_point", 100); 
 
 
 	ros::spin();
