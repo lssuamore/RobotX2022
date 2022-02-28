@@ -438,19 +438,49 @@ _amore_generate_messages_check_deps_NED_waypoints/fast:
 .PHONY : _amore_generate_messages_check_deps_NED_waypoints/fast
 
 # Convenience name for target.
-amore/CMakeFiles/amore_generate_messages.dir/rule:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/amore_generate_messages.dir/rule
-.PHONY : amore/CMakeFiles/amore_generate_messages.dir/rule
+amore/CMakeFiles/camera_lidar.dir/rule:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/camera_lidar.dir/rule
+.PHONY : amore/CMakeFiles/camera_lidar.dir/rule
 
 # Convenience name for target.
-amore_generate_messages: amore/CMakeFiles/amore_generate_messages.dir/rule
+camera_lidar: amore/CMakeFiles/camera_lidar.dir/rule
 
-.PHONY : amore_generate_messages
+.PHONY : camera_lidar
 
 # fast build rule for target.
-amore_generate_messages/fast:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/amore_generate_messages.dir/build.make amore/CMakeFiles/amore_generate_messages.dir/build
-.PHONY : amore_generate_messages/fast
+camera_lidar/fast:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_lidar.dir/build.make amore/CMakeFiles/camera_lidar.dir/build
+.PHONY : camera_lidar/fast
+
+# Convenience name for target.
+amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
+.PHONY : amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
+
+# Convenience name for target.
+nodelet_topic_tools_gencfg: amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
+
+.PHONY : nodelet_topic_tools_gencfg
+
+# fast build rule for target.
+nodelet_topic_tools_gencfg/fast:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/build.make amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/build
+.PHONY : nodelet_topic_tools_gencfg/fast
+
+# Convenience name for target.
+amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule
+.PHONY : amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+pcl_msgs_generate_messages_cpp: amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : pcl_msgs_generate_messages_cpp
+
+# fast build rule for target.
+pcl_msgs_generate_messages_cpp/fast:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/build.make amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/build
+.PHONY : pcl_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 amore/CMakeFiles/bond_generate_messages_nodejs.dir/rule:
@@ -586,66 +616,6 @@ dynamic_reconfigure_gencfg: amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule
 dynamic_reconfigure_gencfg/fast:
 	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/build.make amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/build
 .PHONY : dynamic_reconfigure_gencfg/fast
-
-# Convenience name for target.
-amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
-.PHONY : amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
-
-# Convenience name for target.
-nodelet_topic_tools_gencfg: amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
-
-.PHONY : nodelet_topic_tools_gencfg
-
-# fast build rule for target.
-nodelet_topic_tools_gencfg/fast:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/build.make amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/build
-.PHONY : nodelet_topic_tools_gencfg/fast
-
-# Convenience name for target.
-amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule
-.PHONY : amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-pcl_msgs_generate_messages_cpp: amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : pcl_msgs_generate_messages_cpp
-
-# fast build rule for target.
-pcl_msgs_generate_messages_cpp/fast:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/build.make amore/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/build
-.PHONY : pcl_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-amore/CMakeFiles/_catkin_empty_exported_target.dir/rule:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_catkin_empty_exported_target.dir/rule
-.PHONY : amore/CMakeFiles/_catkin_empty_exported_target.dir/rule
-
-# Convenience name for target.
-_catkin_empty_exported_target: amore/CMakeFiles/_catkin_empty_exported_target.dir/rule
-
-.PHONY : _catkin_empty_exported_target
-
-# fast build rule for target.
-_catkin_empty_exported_target/fast:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/_catkin_empty_exported_target.dir/build.make amore/CMakeFiles/_catkin_empty_exported_target.dir/build
-.PHONY : _catkin_empty_exported_target/fast
-
-# Convenience name for target.
-amore/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-.PHONY : amore/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_lisp: amore/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-
-.PHONY : actionlib_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_generate_messages_lisp/fast:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make amore/CMakeFiles/actionlib_generate_messages_lisp.dir/build
-.PHONY : actionlib_generate_messages_lisp/fast
 
 # Convenience name for target.
 amore/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/rule:
@@ -1428,6 +1398,21 @@ actionlib_generate_messages_eus/fast:
 .PHONY : actionlib_generate_messages_eus/fast
 
 # Convenience name for target.
+amore/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+.PHONY : amore/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+actionlib_generate_messages_lisp: amore/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+
+.PHONY : actionlib_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_generate_messages_lisp/fast:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make amore/CMakeFiles/actionlib_generate_messages_lisp.dir/build
+.PHONY : actionlib_generate_messages_lisp/fast
+
+# Convenience name for target.
 amore/CMakeFiles/actionlib_generate_messages_py.dir/rule:
 	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/actionlib_generate_messages_py.dir/rule
 .PHONY : amore/CMakeFiles/actionlib_generate_messages_py.dir/rule
@@ -1473,21 +1458,6 @@ amore_gennodejs/fast:
 .PHONY : amore_gennodejs/fast
 
 # Convenience name for target.
-amore/CMakeFiles/bond_generate_messages_cpp.dir/rule:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/bond_generate_messages_cpp.dir/rule
-.PHONY : amore/CMakeFiles/bond_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-bond_generate_messages_cpp: amore/CMakeFiles/bond_generate_messages_cpp.dir/rule
-
-.PHONY : bond_generate_messages_cpp
-
-# fast build rule for target.
-bond_generate_messages_cpp/fast:
-	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/bond_generate_messages_cpp.dir/build.make amore/CMakeFiles/bond_generate_messages_cpp.dir/build
-.PHONY : bond_generate_messages_cpp/fast
-
-# Convenience name for target.
 amore/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule:
 	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
 .PHONY : amore/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
@@ -1503,6 +1473,21 @@ dynamic_reconfigure_generate_messages_nodejs/fast:
 .PHONY : dynamic_reconfigure_generate_messages_nodejs/fast
 
 # Convenience name for target.
+amore/CMakeFiles/bond_generate_messages_cpp.dir/rule:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/bond_generate_messages_cpp.dir/rule
+.PHONY : amore/CMakeFiles/bond_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+bond_generate_messages_cpp: amore/CMakeFiles/bond_generate_messages_cpp.dir/rule
+
+.PHONY : bond_generate_messages_cpp
+
+# fast build rule for target.
+bond_generate_messages_cpp/fast:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/bond_generate_messages_cpp.dir/build.make amore/CMakeFiles/bond_generate_messages_cpp.dir/build
+.PHONY : bond_generate_messages_cpp/fast
+
+# Convenience name for target.
 amore/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule:
 	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
 .PHONY : amore/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
@@ -1516,6 +1501,21 @@ tf2_msgs_generate_messages_py: amore/CMakeFiles/tf2_msgs_generate_messages_py.di
 tf2_msgs_generate_messages_py/fast:
 	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make amore/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
 .PHONY : tf2_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+amore/CMakeFiles/amore_generate_messages.dir/rule:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/amore_generate_messages.dir/rule
+.PHONY : amore/CMakeFiles/amore_generate_messages.dir/rule
+
+# Convenience name for target.
+amore_generate_messages: amore/CMakeFiles/amore_generate_messages.dir/rule
+
+.PHONY : amore_generate_messages
+
+# fast build rule for target.
+amore_generate_messages/fast:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/amore_generate_messages.dir/build.make amore/CMakeFiles/amore_generate_messages.dir/build
+.PHONY : amore_generate_messages/fast
 
 src/High_Level_trajectory_processor.o: src/High_Level_trajectory_processor.cpp.o
 
@@ -1814,6 +1814,33 @@ src/Visions_Path_Planner.cpp.s:
 	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Visions_Path_Planner.dir/build.make amore/CMakeFiles/Visions_Path_Planner.dir/src/Visions_Path_Planner.cpp.s
 .PHONY : src/Visions_Path_Planner.cpp.s
 
+src/camera_lidar.o: src/camera_lidar.cpp.o
+
+.PHONY : src/camera_lidar.o
+
+# target to build an object file
+src/camera_lidar.cpp.o:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_lidar.dir/build.make amore/CMakeFiles/camera_lidar.dir/src/camera_lidar.cpp.o
+.PHONY : src/camera_lidar.cpp.o
+
+src/camera_lidar.i: src/camera_lidar.cpp.i
+
+.PHONY : src/camera_lidar.i
+
+# target to preprocess a source file
+src/camera_lidar.cpp.i:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_lidar.dir/build.make amore/CMakeFiles/camera_lidar.dir/src/camera_lidar.cpp.i
+.PHONY : src/camera_lidar.cpp.i
+
+src/camera_lidar.s: src/camera_lidar.cpp.s
+
+.PHONY : src/camera_lidar.s
+
+# target to generate assembly for a file
+src/camera_lidar.cpp.s:
+	cd /home/taylor/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_lidar.dir/build.make amore/CMakeFiles/camera_lidar.dir/src/camera_lidar.cpp.s
+.PHONY : src/camera_lidar.cpp.s
+
 src/camera_subscriber.o: src/camera_subscriber.cpp.o
 
 .PHONY : src/camera_subscriber.o
@@ -2060,7 +2087,9 @@ help:
 	@echo "... amore_geneus"
 	@echo "... amore_generate_messages_eus"
 	@echo "... _amore_generate_messages_check_deps_NED_waypoints"
-	@echo "... amore_generate_messages"
+	@echo "... camera_lidar"
+	@echo "... nodelet_topic_tools_gencfg"
+	@echo "... pcl_msgs_generate_messages_cpp"
 	@echo "... bond_generate_messages_nodejs"
 	@echo "... nodelet_generate_messages_nodejs"
 	@echo "... bond_generate_messages_eus"
@@ -2070,10 +2099,6 @@ help:
 	@echo "... gps_imu"
 	@echo "... amore_gencpp"
 	@echo "... dynamic_reconfigure_gencfg"
-	@echo "... nodelet_topic_tools_gencfg"
-	@echo "... pcl_msgs_generate_messages_cpp"
-	@echo "... _catkin_empty_exported_target"
-	@echo "... actionlib_generate_messages_lisp"
 	@echo "... geographic_msgs_generate_messages_cpp"
 	@echo "... geographic_msgs_generate_messages_py"
 	@echo "... bond_generate_messages_lisp"
@@ -2127,12 +2152,14 @@ help:
 	@echo "... tf_generate_messages_nodejs"
 	@echo "... actionlib_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_eus"
+	@echo "... actionlib_generate_messages_lisp"
 	@echo "... actionlib_generate_messages_py"
 	@echo "... tf2_msgs_generate_messages_lisp"
 	@echo "... amore_gennodejs"
-	@echo "... bond_generate_messages_cpp"
 	@echo "... dynamic_reconfigure_generate_messages_nodejs"
+	@echo "... bond_generate_messages_cpp"
 	@echo "... tf2_msgs_generate_messages_py"
+	@echo "... amore_generate_messages"
 	@echo "... src/High_Level_trajectory_processor.o"
 	@echo "... src/High_Level_trajectory_processor.i"
 	@echo "... src/High_Level_trajectory_processor.s"
@@ -2166,6 +2193,9 @@ help:
 	@echo "... src/Visions_Path_Planner.o"
 	@echo "... src/Visions_Path_Planner.i"
 	@echo "... src/Visions_Path_Planner.s"
+	@echo "... src/camera_lidar.o"
+	@echo "... src/camera_lidar.i"
+	@echo "... src/camera_lidar.s"
 	@echo "... src/camera_subscriber.o"
 	@echo "... src/camera_subscriber.i"
 	@echo "... src/camera_subscriber.s"
