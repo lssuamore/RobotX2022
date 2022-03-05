@@ -110,7 +110,7 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 	try 
 	{
 		org_img = cv_bridge::toCvShare(camera_msg, "bgr8") -> image;		//converts message camera_msg into bgr8 type image
-		//cv::imshow("front_left", org_img); //converts the ros image to bgr type
+		cv::imshow("front_left", org_img); //converts the ros image to bgr type
 		height = camera_msg->height; 
 		width = camera_msg->width; 
 		//printf("the height is: %f\n", height); 
@@ -265,7 +265,7 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 //			cv::putText(background, "yellow",(boundRect.br(), boundRect.tl()), 2, 2, (255, 0, 0));
 		}   */  
 		
-		cv::imshow("updated", background);  		
+//		cv::imshow("updated", background);  		
 		cv::waitKey(30);
 	}
 	catch (cv_bridge::Exception& e) //looks for errors 
@@ -303,7 +303,7 @@ void cameraCallBack1(const sensor_msgs::ImageConstPtr& camera_msg) {
 	
 }
 
-/* void cameraCallBack2(const sensor_msgs::ImageConstPtr& camera_msg) {
+void cameraCallBack2(const sensor_msgs::ImageConstPtr& camera_msg) {
 
 	try 
 	{
@@ -321,7 +321,7 @@ void cameraCallBack1(const sensor_msgs::ImageConstPtr& camera_msg) {
 			cv::Rect boundRect = cv::boundingRect(contours2[i]);
 			cv::rectangle(background2, boundRect.tl(), boundRect.br(), (0, 0, 0), 3);
 		}
-		cv::imshow("updated2", background2); 
+		//cv::imshow("updated2", background2); 
 		cv::waitKey(30);
 	}
 	catch (cv_bridge::Exception& e) //looks for errors 
@@ -329,7 +329,7 @@ void cameraCallBack1(const sensor_msgs::ImageConstPtr& camera_msg) {
 		ROS_ERROR("Could not convert from '%s' to 'bgr8'.", camera_msg -> encoding.c_str()); //prints out the encoding string
 	}
 	
-} */
+}
 
 
 int main(int argc, char **argv) {
@@ -339,9 +339,9 @@ int main(int argc, char **argv) {
 	ros::NodeHandle nh2;
 	ros::NodeHandle nh3;
 	
-	//cv::namedWindow("front_left"); //creates new windows for each camera
+	cv::namedWindow("front_left"); //creates new windows for each camera
 	cv::namedWindow("front_right");
-	//cv::namedWindow("middle_right");
+	cv::namedWindow("middle_right");
 	cv::namedWindow("updated", cv::WINDOW_AUTOSIZE);
 	//cv::namedWindow("updated1", cv::WINDOW_AUTOSIZE);
 	//cv::namedWindow("updated2", cv::WINDOW_AUTOSIZE);
@@ -358,15 +358,15 @@ int main(int argc, char **argv) {
 	image_transport::ImageTransport it(nh); //transports the images from the subscriber
 	image_transport::ImageTransport it1(nh1);
 	image_transport::ImageTransport it2(nh2);
-	image_transport::Subscriber camera_sub = it.subscribe("/wamv/sensors/cameras/front_left_camera/image_raw", 1, cameraCallBack); //front left camera
-	image_transport::Subscriber camera_sub1 = it1.subscribe("/wamv/sensors/cameras/front_right_camera/image_raw", 1, cameraCallBack1); //front rightcamera
-	//image_transport::Subscriber camera_sub2 = it2.subscribe("/wamv/sensors/cameras/middle_right_camera/image_raw", 1, cameraCallBack2); //middle_right camera
+	image_transport::Subscriber camera_sub = it.subscribe("/wamv/sensors/cameras/left_camera/image_raw", 1, cameraCallBack); //front left camera
+	image_transport::Subscriber camera_sub1 = it1.subscribe("/wamv/sensors/cameras/right_camera/image_raw", 1, cameraCallBack1); //front rightcamera
+	image_transport::Subscriber camera_sub2 = it2.subscribe("/wamv/sensors/cameras/middle_camera/image_raw", 1, cameraCallBack2); //middle_right camera
 	//ros::Subscriber lidar_sub = nh3.subscribe("/wamv/sensors/lidars/lidar_wamv/points", 10, LidarCallBack); //subscribes to Lidar
 
 	ros::spin();
-	//cv::destroyWindow("front_left"); //destroys the new windows
+	cv::destroyWindow("front_left"); //destroys the new windows
 	cv::destroyWindow("front_right");
-	//cv::destroyWindow("middle_right");
+	cv::destroyWindow("middle_right");
 	
 	ros::Rate loop_rate(10);
 	

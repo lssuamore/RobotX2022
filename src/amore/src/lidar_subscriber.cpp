@@ -55,16 +55,16 @@ void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
     sensor_msgs::PointCloud2::Ptr downsampled (new sensor_msgs::PointCloud2);
 	
 	pcl_conversions::toPCL(*lidar_msg, *cloud);
-	printf ("Before filtering Cloud= %d Points.\n", cloud->width * cloud->height); 
+//	printf ("Before filtering Cloud= %d Points.\n", cloud->width * cloud->height); 
 	
 	
-	pcl::VoxelGrid<pcl::PCLPointCloud2> sor; //VoxelGrid downsamples the lidar data
+/* 	pcl::VoxelGrid<pcl::PCLPointCloud2> sor; //VoxelGrid downsamples the lidar data
 	sor.setInputCloud (cloudPtr);
 	sor.setLeafSize (0.08f, 0.08f, 0.08f); //8 cm leaf size
-	sor.filter (*cloud);
+	sor.filter (*cloud); */
 	
-	std::cerr << "PointCloud after filtering: " << cloud->width * cloud->height 
-    << " data points (" << pcl::getFieldsList (*cloud) << ")." << std::endl;
+//	std::cerr << "PointCloud after filtering: " << cloud->width * cloud->height 
+ //   << " data points (" << pcl::getFieldsList (*cloud) << ")." << std::endl;
 	
 	pcl::fromPCLPointCloud2(*cloud, *downsampled_XYZ);
 	
@@ -77,7 +77,7 @@ void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
 	
 	pass.setInputCloud (downsampled_XYZ); 
 	pass.setFilterFieldName ("x");
-	pass.setFilterLimits (0, 60.0); //these will need to change depending on how the frame of camera is
+	pass.setFilterLimits (0, 100.0); //these will need to change depending on how the frame of camera is
 	pass.filter (*downsampled_XYZ);
 	
 	pass.setInputCloud (downsampled_XYZ);
@@ -97,7 +97,7 @@ void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
 	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ>);
     tree->setInputCloud (downsampled_XYZ);
 	
-	printf ("After filtering Cloud using tree = %ld Points.\n", downsampled_XYZ->points.size()); //has 126 points
+//	printf ("After filtering Cloud using tree = %ld Points.\n", downsampled_XYZ->points.size()); //has 126 points
 
 	std::vector<pcl::PointIndices> cluster_indices;
     pcl::EuclideanClusterExtraction<pcl::PointXYZ> ec;
@@ -108,8 +108,8 @@ void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
     ec.setInputCloud (downsampled_XYZ);
     ec.extract (cluster_indices);
 	
-	printf ("indicies size = %ld Points.\n", cluster_indices.size()); //prints zero
-	printf ("indicies length = %ld Points.\n", (cluster_indices.end() - cluster_indices.begin())); //prints zero
+//	printf ("indicies size = %ld Points.\n", cluster_indices.size()); //prints zero
+//	printf ("indicies length = %ld Points.\n", (cluster_indices.end() - cluster_indices.begin())); //prints zero
 	
 	float centriodx;
 	float centriody;
@@ -137,8 +137,8 @@ void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
 		centriody = centriody / cloud_cluster->size(); 
 		x_lidar[j] = centriodx;
 		y_lidar[j] = centriody;
-		printf("x is %f\n", centriodx);
-		printf("y is %f\n", centriody);
+//		printf("x is %f\n", centriodx);
+//		printf("y is %f\n", centriody);
 		centriodx = 0;
 		centriody = 0;
 		if (j == (cluster_indices.size() -1)) {	  
@@ -159,8 +159,8 @@ void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
 				point.y = y_lidar[i];
 				point.z = 0;
 				lidar_point.points.push_back(point);
-				printf("x in array is %f\n", point.x);
-				printf("y in array is %f\n", point.y);
+//				printf("x in array is %f\n", point.x);
+//				printf("y in array is %f\n", point.y);
 			}  
 			lidar_pub.publish(lidar_point); 
 			ROS_INFO("Points HAVE BEEN PUBLISHED");
