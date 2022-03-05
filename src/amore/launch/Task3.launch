@@ -1,0 +1,7 @@
+<launch>
+  
+  <node pkg="amore" type="lidar_subscriber" name="lidar_point" output="screen"></node>
+  
+  <node pkg="amore" type="object_d" name="vision_task" output="screen"></node>
+  
+</launch>

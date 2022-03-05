@@ -109,8 +109,8 @@ int main(int argc, char **argv) {
 	ros::NodeHandle nh3;
 	
 	cv::namedWindow("front_left"); //creates new windows for each camera
-	cv::namedWindow("front_right");
-	cv::namedWindow("middle_right");
+//	cv::namedWindow("front_right");
+//	cv::namedWindow("middle_right");
 	cv::namedWindow("updated", cv::WINDOW_AUTOSIZE);
 	cv::namedWindow("updated1", cv::WINDOW_AUTOSIZE);
 	cv::namedWindow("updated2", cv::WINDOW_AUTOSIZE);
@@ -145,7 +145,7 @@ int main(int argc, char **argv) {
 	image_transport::ImageTransport it(nh); //transports the images from the subscriber
 	image_transport::ImageTransport it1(nh1);
 	image_transport::ImageTransport it2(nh2);
-	image_transport::Subscriber camera_sub = it.subscribe("/wamv/sensors/cameras/front_left_camera/image_raw", 1, cameraCallBack); //front left camera
+	image_transport::Subscriber camera_sub = it.subscribe("/wamv/sensors/cameras/middle_camera/image_raw", 1, cameraCallBack); //front left camera
 	image_transport::Subscriber camera_sub1 = it1.subscribe("/wamv/sensors/cameras/front_right_camera/image_raw", 1, cameraCallBack1); //front rightcamera
 	image_transport::Subscriber camera_sub2 = it2.subscribe("/wamv/sensors/cameras/middle_right_camera/image_raw", 1, cameraCallBack2); //middle_right camera
 

@@ -108,3 +108,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/taylor/RobotX2022/src/amore/launch/traj_track.launch")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/taylor/RobotX2022/src/amore/launch/Task3.launch")
+endif()
+
