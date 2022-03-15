@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/taylor/RobotX2022/devel/lib/amore/lidar_subscriber"
-  "/home/taylor/RobotX2022/devel/lib/amore/lidar_subscriber.pdb"
+  "/home/brad/RobotX2022/devel/lib/amore/lidar_subscriber"
+  "/home/brad/RobotX2022/devel/lib/amore/lidar_subscriber.pdb"
   "CMakeFiles/lidar_subscriber.dir/src/lidar_subscriber.cpp.o"
 )
 

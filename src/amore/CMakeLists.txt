@@ -28,9 +28,7 @@ find_package(PCL REQUIRED)
 include_directories(${catkin_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${PCL_INCLUDE_DIRS})
-
 link_directories(${PCL_LIBRARY_DIRS})
-
 add_definitions(${PCL_DEFINITIONS})
 
 
@@ -157,24 +155,22 @@ include_directories(
 add_executable(PID_sub src/PID_sub.cpp)
 add_executable(PID_HP_control src/PID_HP_control.cpp)
 add_executable(Station_keeping src/Station_keeping.cpp)
-add_executable(stereo_vis src/stereo_vis.cpp)
 add_executable(gps_subscriber src/gps_subscriber.cpp)
-add_executable(gps_imu src/gps_imu.cpp)
 add_executable(Visions_Path_Planner src/Visions_Path_Planner.cpp)
 add_executable(camera_subscriber src/camera_subscriber.cpp)
 add_executable(object_d src/object_d.cpp)
 add_executable(High_Level_trajectory_processor src/High_Level_trajectory_processor.cpp)
 add_executable(traj_pub src/traj_pub.cpp)
 add_executable(lidar_subscriber src/lidar_subscriber.cpp)
-add_executable(color_test src/color_test.cpp)
+add_executable(stereo_vis src/stereo_vis.cpp)
+add_executable(gps_imu src/gps_imu.cpp)
 
 # TASK 1: STATION-KEEPING
-add_executable(Task1_SK_gps_imu src/Task1_SK_gps_imu.cpp)
-add_executable(Task1_SK_Controller src/Task1_SK_Controller.cpp)
+add_executable(Task1_SK_point_converter src/Task1_SK_point_converter.cpp)
+add_executable(SK_Controller src/SK_Controller.cpp)
 add_executable(Task1_SK_Planner src/Task1_SK_Planner.cpp)
 
 # TASK 2: WAYFINDING
-add_executable(Task2_WF_gps_imu src/Task2_WF_gps_imu.cpp)
 add_executable(Task2_WF_waypoints_converter src/Task2_WF_waypoints_converter.cpp)
 add_executable(Task2_WF_Planner src/Task2_WF_Planner.cpp)
 
@@ -193,24 +189,22 @@ add_executable(Task2_WF_Planner src/Task2_WF_Planner.cpp)
 target_link_libraries(PID_sub ${catkin_LIBRARIES})
 target_link_libraries(PID_HP_control ${catkin_LIBRARIES})
 target_link_libraries(Station_keeping ${catkin_LIBRARIES})
-target_link_libraries(stereo_vis ${catkin_LIBRARIES})
 target_link_libraries(gps_subscriber ${catkin_LIBRARIES})
-target_link_libraries(gps_imu ${catkin_LIBRARIES})
 target_link_libraries(Visions_Path_Planner ${catkin_LIBRARIES})
 target_link_libraries(camera_subscriber ${catkin_LIBRARIES} ${OpenCV_LIBS})
 target_link_libraries(object_d ${catkin_LIBRARIES} ${OpenCV_LIBS})
 target_link_libraries(High_Level_trajectory_processor ${catkin_LIBRARIES})
 target_link_libraries(traj_pub ${catkin_LIBRARIES})
-target_link_libraries(lidar_subscriber ${catkin_LIBRARIES} ${PCL_LIBS})
-target_link_libraries(color_test ${catkin_LIBRARIES} ${OpenCV_LIBS})
+target_link_libraries(lidar_subscriber ${catkin_LIBRARIES})
+target_link_libraries(stereo_vis ${catkin_LIBRARIES})
+target_link_libraries(gps_imu ${catkin_LIBRARIES})
 
 # TASK 1: STATION-KEEPING
-target_link_libraries(Task1_SK_gps_imu ${catkin_LIBRARIES})
-target_link_libraries(Task1_SK_Controller ${catkin_LIBRARIES})
+target_link_libraries(Task1_SK_point_converter ${catkin_LIBRARIES})
+target_link_libraries(SK_Controller ${catkin_LIBRARIES})
 target_link_libraries(Task1_SK_Planner ${catkin_LIBRARIES})
 
 # TASK 2: WAYFINDING
-target_link_libraries(Task2_WF_gps_imu ${catkin_LIBRARIES})
 target_link_libraries(Task2_WF_waypoints_converter ${catkin_LIBRARIES})
 target_link_libraries(Task2_WF_Planner ${catkin_LIBRARIES})
 

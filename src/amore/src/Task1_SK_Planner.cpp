@@ -26,6 +26,7 @@
 #include <iostream>
 #include "stdio.h"
 #include "time.h"
+#include "vrx_gazebo/Task.h"
 
 // include necessary message libraries
 #include "std_msgs/Float32.h"
@@ -56,6 +57,7 @@ bool goal_recieved = false;  // if goal_recieved = false, goal position has not 
 int loop_goal_recieved;          // this is kept in order to ensure planner doesn't start until sytem is through initial startup
 bool point_reached = false;   // if point_reached is false this means the current point has not been reached
 bool E_reached = false;        // if E_reached is false this means the last point has not been reached
+bool function = false;                           // if convert = false, this means according to the current task status, conversion shouldn't be done
 
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
 {
@@ -94,6 +96,18 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 		{
 			psi_NED = psi_NED - 2.0*PI;
 		}
+	}
+}
+
+void update_task(const vrx_gazebo::Task::ConstPtr& msg)
+{
+	if (((msg->name == "station_keeping") && (msg->state == "ready")) || ((msg->name == "station_keeping") && (msg->state == "running")))
+	{
+		function = true;
+	}
+	else
+	{
+		function = false;
 	}
 }
 
@@ -143,7 +157,7 @@ int main(int argc, char **argv)
 	  }
 	  SK_Planner_status_pub.publish(publish_status);
 	  
-	  if ((goal_recieved) && (loop_count > loop_goal_recieved+10))
+	  if ((goal_recieved) && (loop_count > loop_goal_recieved+10) && (function))
 	  {
 		  // determine error in x and y (position)
 		  e_x = x_goal - x_usv_NED;                                                // calculate error in x position

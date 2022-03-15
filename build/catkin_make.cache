@@ -1,2 +1,2 @@
 amore:jetson:sensors/xsens_ros_mti_driver
--DCATKIN_DEVEL_PREFIX=/home/taylor/RobotX2022/devel -DCMAKE_INSTALL_PREFIX=/home/taylor/RobotX2022/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/brad/RobotX2022/devel -DCMAKE_INSTALL_PREFIX=/home/brad/RobotX2022/install -G Unix Makefiles

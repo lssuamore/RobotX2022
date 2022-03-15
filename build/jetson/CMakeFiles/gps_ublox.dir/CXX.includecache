@@ -6,27 +6,27 @@
 
 #IncludeRegexTransform: 
 
-/home/taylor/RobotX2022/src/jetson/src/gps_ublox.cpp
+/home/brad/RobotX2022/src/jetson/src/gps_ublox.cpp
 ros/ros.h
-/home/taylor/RobotX2022/src/jetson/src/ros/ros.h
+/home/brad/RobotX2022/src/jetson/src/ros/ros.h
 tf/transform_broadcaster.h
-/home/taylor/RobotX2022/src/jetson/src/tf/transform_broadcaster.h
+/home/brad/RobotX2022/src/jetson/src/tf/transform_broadcaster.h
 nav_msgs/Odometry.h
-/home/taylor/RobotX2022/src/jetson/src/nav_msgs/Odometry.h
+/home/brad/RobotX2022/src/jetson/src/nav_msgs/Odometry.h
 sensor_msgs/NavSatFix.h
-/home/taylor/RobotX2022/src/jetson/src/sensor_msgs/NavSatFix.h
+/home/brad/RobotX2022/src/jetson/src/sensor_msgs/NavSatFix.h
 sensor_msgs/Imu.h
-/home/taylor/RobotX2022/src/jetson/src/sensor_msgs/Imu.h
+/home/brad/RobotX2022/src/jetson/src/sensor_msgs/Imu.h
 geometry_msgs/Vector3Stamped.h
-/home/taylor/RobotX2022/src/jetson/src/geometry_msgs/Vector3Stamped.h
+/home/brad/RobotX2022/src/jetson/src/geometry_msgs/Vector3Stamped.h
 geometry_msgs/Vector3.h
-/home/taylor/RobotX2022/src/jetson/src/geometry_msgs/Vector3.h
+/home/brad/RobotX2022/src/jetson/src/geometry_msgs/Vector3.h
 iostream
-/home/taylor/RobotX2022/src/jetson/src/iostream
+/home/brad/RobotX2022/src/jetson/src/iostream
 stdio.h
-/home/taylor/RobotX2022/src/jetson/src/stdio.h
+/home/brad/RobotX2022/src/jetson/src/stdio.h
 time.h
-/home/taylor/RobotX2022/src/jetson/src/time.h
+/home/brad/RobotX2022/src/jetson/src/time.h
 
 /opt/ros/noetic/include/geometry_msgs/Point.h
 string

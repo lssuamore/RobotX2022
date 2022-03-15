@@ -40,6 +40,7 @@
 
 #include "geometry_msgs/Point.h"
 #include "amore/NED_waypoints.h"
+#include "vrx_gazebo/Task.h"
 //...........................................End of Included Libraries and Message Types....................................
 
 //.................................................................Constants..................................................................
@@ -76,6 +77,7 @@ bool point_published = false;              // if point_published = false, the cu
 bool goal_lat_long = false;                  // if goal_lat_long = false, goal waypoint poses in lat and long coordinates have not been acquired
 bool waypoints_converted = false;     // if waypoints_converted = false, goal waypoints in NED have not been converted
 bool waypoints_published = false;     // if waypoints_published = false, goal waypoints in NED have not been published
+bool convert = false;                           // if convert = false, this means according to the current task status, conversion shouldn't be done
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
@@ -169,6 +171,19 @@ void NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
 	// Convert the angular velocity to NED
 	
 } // end of NED_Func()
+
+
+void update_task(const vrx_gazebo::Task::ConstPtr& msg)
+{
+	if ((msg->name == "wayfinding") && (msg->state == "ready"))
+	{
+		convert = true;
+	}
+	else
+	{
+		convert = false;
+	}
+}
 //............................................................End of Functions............................................................
 
 //...............................................................Main Program..............................................................
@@ -180,6 +195,7 @@ int main(int argc, char **argv)
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
 	
 	// Node handles
+	ros::NodeHandle nh3;
 	ros::NodeHandle nh4;
 	ros::NodeHandle nh5;
 	ros::NodeHandle nh6;
@@ -188,6 +204,7 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh9;
   
 	// Subscribers
+	//ros::Subscriber task_status = nh3.subscribe("/vrx/task/info", 1, update_task);
 	ros::Subscriber ned_sub = nh4.subscribe("geonav_odom", 1000, NED_Func);
 	ros::Subscriber pose_sub = nh5.subscribe("/vrx/wayfinding/waypoints", 100, goal_pose_sub);                         			// subscriber for goal pose given by Task2_WF
 	
@@ -229,8 +246,8 @@ int main(int argc, char **argv)
 	{
 		current_time = ros::Time::now();
 		
-		// publish whether or not the goal pose has been acquired, converted, and published 
-		if (!waypoints_published)
+		// publish whether or not this code is using geonav transform package
+		if (!convert)
 		{
 		  publish_status.data = false;
 		}
@@ -240,7 +257,7 @@ int main(int argc, char **argv)
 		}
 		WF_Converter_status_pub.publish(publish_status);
 		
-		if ((loop_count > 5) && (!waypoints_converted) && (goal_lat_long))
+		if ((loop_count > 5) && (!waypoints_converted) && (goal_lat_long) && (convert))
 		{
 			// UPDATE NAV_ODOM MSG
 			GPS_Position();

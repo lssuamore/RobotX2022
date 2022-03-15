@@ -1,4 +1,4 @@
-prefix=/home/taylor/RobotX2022/install
+prefix=/home/brad/RobotX2022/install
 
 Name: jetson
 Description: Description of jetson

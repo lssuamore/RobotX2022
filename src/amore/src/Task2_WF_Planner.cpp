@@ -29,6 +29,7 @@
 
 #include "geometry_msgs/Point.h"
 #include "amore/NED_waypoints.h"
+#include "vrx_gazebo/Task.h"
 
 // include necessary message libraries
 #include "std_msgs/Float32.h"
@@ -52,7 +53,7 @@ float x_usv_NED, y_usv_NED, psi_NED;
 float ON_OFF = 0.0;      // if 0.0, the controller is OFF, if it is a 1.0, the controller is ON
 
 // error variables used to calculate magnitude of pose error
-float e_x, e_y, e_xy;
+float e_x, e_y, e_xy, e_psi;
 
 bool goal_recieved = false;   // if goal_recieved = false, goal position has not been acquired from "mpp_goal" yet
 int loop_goal_recieved;          // this is kept in order to ensure planner doesn't start until sytem is through initial startup
@@ -60,6 +61,7 @@ bool point_reached = false;   // if point_reached is false this means the curren
 int point_reached_loop = -1; // keeps track of which loop the point is reached
 bool E_reached = false;        // if E_reached is false this means the last point has not been reached
 bool waypoints_published = false;        // if waypoints_published is false this means the NED poses have not yet been calculated and published 
+bool function = false;                           // if convert = false, this means according to the current task status, conversion shouldn't be done
 
 //..................................................................Functions.................................................................
 // this function subscribes to the WF_Converter_status node to see when goal waypoints have been converted
@@ -115,6 +117,19 @@ void goal_update(const amore::NED_waypoints::ConstPtr& goal)
 	}
 }
 
+void update_task(const vrx_gazebo::Task::ConstPtr& msg)
+{
+	if (((msg->name == "wayfinding") && (msg->state == "ready")) || ((msg->name == "wayfinding") && (msg->state == "running")))
+	{
+		function = true;
+	}
+	else
+	{
+		function = false;
+	}
+}
+//............................................................End of Functions............................................................
+
 int main(int argc, char **argv)
 {
   //names the program for visual purposes
@@ -151,14 +166,15 @@ int main(int argc, char **argv)
   {
 	  current_time = ros::Time::now(); // update time
 	  
-	  if ((goal_recieved) && (loop_count > loop_goal_recieved+1000))
+	  if ((goal_recieved) && (loop_count > loop_goal_recieved+1000) && (function))
 	  {
 		  // determine error in x and y (position)
 		  e_x = x_goal[point] - x_usv_NED;                                       // calculate error in x position
 		  e_y = y_goal[point] - y_usv_NED;                                       // calculate error in y position
 		  e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
+		  e_psi = psi_goal[point] - psi_NED;
 		  // ADD E_PSI
-		  if ((e_xy < 0.5) && (!E_reached))
+		  if ((e_xy < 0.5) && (e_psi < 0.1) && (!E_reached))
 		  {
 			  point = point + 1;
 			  ROS_INFO("Point %i reached.", point);
