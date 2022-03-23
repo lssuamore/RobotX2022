@@ -15,6 +15,8 @@ cd RobotX2022
 delete devel and build folders
 #note you will need to git clone all the empty folders like opencv and geonav_transform. Might also need to git clone PCL
 catkin_make
+#after catkin_make update amore folder cmakelist(add_dependicies and target_link_libraries) by uncommenting the commented out programs
+
 
 #dependencies
 sudo apt-get install libpcap-dev
