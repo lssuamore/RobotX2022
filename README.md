@@ -15,17 +15,16 @@ cd RobotX2022
 delete devel and build folders
 #note you will need to git clone all the empty folders like opencv and geonav_transform. Might also need to git clone PCL
 catkin_make
-#after catkin_make update amore folder cmakelist(add_dependicies and target_link_libraries) by uncommenting the commented out programs
+#after catkin_make update amore folder CMakelist(add_dependicies and target_link_libraries) by uncommenting the commented out programs
 
 
 #dependencies
-sudo apt-get install libpcap-dev
-sudo apt install ros-noetic-geographic-msgs
-sudo apt install ros-noetic-costmap-2d
-sudo apt install ros-noetic-move-base-msgs
-sudo apt install ros-noetic-robot-localization
-sudo apt install ros-noetic-pointcloud-to-laserscan
-
+#note if CMake error occurs below:
+CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:75 (find_package):
+  Could not find a package configuration file provided by ""
+  with any of the following names:
+#download the appropriate packages by finding the download on google 
+usually in the form sudo apt install ros-noetic-""
 
 #OpenCV install
 mkdir opencv
