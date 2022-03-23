@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/taylor/RobotX2022/devel/include/amore/NED_waypoints.h"
+  "/home/brad/RobotX2022/devel/include/amore/NED_waypoints.h"
   "CMakeFiles/amore_generate_messages_cpp"
 )
 

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/taylor/RobotX2022/src/amore/src/Visions_Path_Planner.cpp" "/home/taylor/RobotX2022/build/amore/CMakeFiles/Visions_Path_Planner.dir/src/Visions_Path_Planner.cpp.o"
+  "/home/brad/RobotX2022/src/amore/src/Visions_Path_Planner.cpp" "/home/brad/RobotX2022/build/amore/CMakeFiles/Visions_Path_Planner.dir/src/Visions_Path_Planner.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -23,7 +23,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/taylor/RobotX2022/devel/include"
+  "/home/brad/RobotX2022/devel/include"
   "/usr/include/vtk-7.1"
   "/usr/include/freetype2"
   "/opt/ros/noetic/include"
@@ -31,7 +31,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/opencv4"
   "/usr/include/eigen3"
   "/usr/include/pcl-1.10"
-  "/usr/local/include/opencv4"
   "/usr/include/ni"
   "/usr/include/openni2"
   )

@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/taylor/RobotX2022/src/amore/src/color_test.cpp
+/home/brad/RobotX2022/src/amore/src/color_test.cpp
 ros/ros.h
-/home/taylor/RobotX2022/src/amore/src/ros/ros.h
+/home/brad/RobotX2022/src/amore/src/ros/ros.h
 image_transport/image_transport.h
-/home/taylor/RobotX2022/src/amore/src/image_transport/image_transport.h
+/home/brad/RobotX2022/src/amore/src/image_transport/image_transport.h
 sensor_msgs/Image.h
-/home/taylor/RobotX2022/src/amore/src/sensor_msgs/Image.h
+/home/brad/RobotX2022/src/amore/src/sensor_msgs/Image.h
 ros/ros.h
-/home/taylor/RobotX2022/src/amore/src/ros/ros.h
+/home/brad/RobotX2022/src/amore/src/ros/ros.h
 opencv2/highgui/highgui.hpp
-/home/taylor/RobotX2022/src/amore/src/opencv2/highgui/highgui.hpp
+/home/brad/RobotX2022/src/amore/src/opencv2/highgui/highgui.hpp
 opencv2/imgproc/imgproc.hpp
-/home/taylor/RobotX2022/src/amore/src/opencv2/imgproc/imgproc.hpp
+/home/brad/RobotX2022/src/amore/src/opencv2/imgproc/imgproc.hpp
 iostream
-/home/taylor/RobotX2022/src/amore/src/iostream
+/home/brad/RobotX2022/src/amore/src/iostream
 stdio.h
-/home/taylor/RobotX2022/src/amore/src/stdio.h
+/home/brad/RobotX2022/src/amore/src/stdio.h
 cv_bridge/cv_bridge.h
-/home/taylor/RobotX2022/src/amore/src/cv_bridge/cv_bridge.h
+/home/brad/RobotX2022/src/amore/src/cv_bridge/cv_bridge.h
 vector
 -
 string

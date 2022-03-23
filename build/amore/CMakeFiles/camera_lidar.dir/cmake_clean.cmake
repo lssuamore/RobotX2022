@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/taylor/RobotX2022/devel/lib/amore/camera_lidar"
-  "/home/taylor/RobotX2022/devel/lib/amore/camera_lidar.pdb"
+  "/home/brad/RobotX2022/devel/lib/amore/camera_lidar"
+  "/home/brad/RobotX2022/devel/lib/amore/camera_lidar.pdb"
   "CMakeFiles/camera_lidar.dir/src/camera_lidar.cpp.o"
 )
 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/taylor/RobotX2022/devel/lib/amore/color_test"
-  "/home/taylor/RobotX2022/devel/lib/amore/color_test.pdb"
+  "/home/brad/RobotX2022/devel/lib/amore/color_test"
+  "/home/brad/RobotX2022/devel/lib/amore/color_test.pdb"
   "CMakeFiles/color_test.dir/src/color_test.cpp.o"
 )
 

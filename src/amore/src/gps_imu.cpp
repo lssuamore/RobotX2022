@@ -24,11 +24,15 @@
 #include "std_msgs/Int32.h"
 #include "std_msgs/Float32.h"
 #include "std_msgs/Float64.h"
+#include "std_msgs/Bool.h"
 #include "nav_msgs/Odometry.h"
 #include "sensor_msgs/NavSatFix.h"
 #include "sensor_msgs/Imu.h"
 #include "geometry_msgs/Vector3Stamped.h"
+#include "geographic_msgs/GeoPath.h"
 #include "tf/transform_broadcaster.h"
+
+#include "vrx_gazebo/Task.h"
 //...........................................End of Included Libraries and Message Types....................................
 
 //.................................................................Constants..................................................................
@@ -36,18 +40,49 @@
 //............................................................End of Constants.............................................................
 
 //..............................................................Global Variables............................................................
+int loop_count=0;                                    // used to keep track of loop, first 10 loops are used to just intitialize the subscribers
 double latitude, longitude, altitude;			// The ECEF position variables in spherical coordinates
 float qx, qy, qz, qw;								//
 float omega_x, omega_y, omega_z;		// angular velocities
 float vx, vy, vz;										// linear velocities
-double xNED, yNED, zNED;										// The NED position
-float q1NED, q2NED, q3NED, q0NED;						//
+double xNED, yNED, zNED;			        // The NED position
+float q1NED, q2NED, q3NED, q0NED;
 float phiNED, thetaNED, psiNED;
 float omega_xNED, omega_yNED, omega_zNED;		// angular velocities
 float vxNED, vyNED, vzNED;										// linear velocities
+float qx_goal[100], qy_goal[100], qz_goal[100], qw_goal[100];
+float goal_lat[100], goal_long[100];
+bool WF_conv = true;   // if WF_conv = true, this means the WF waypoint converter is being used
+bool SK_conv = true;   // if SK_conv = true, this means the SK point converter is being used
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
+// this function subscribes to the WF_Converter_status node to see when goal waypoints have been converted and nav_odom is no longer being published to
+void WF_conv_status(const std_msgs::Bool published) 
+{
+	if (published.data)
+	{
+		WF_conv = true;
+	}
+	else
+	{
+		WF_conv = false;
+	}
+}
+
+// this function subscribes to the SK_Converter_status node to see when goal pose has been converted and nav_odom is no longer being published to
+void SK_conv_status(const std_msgs::Bool published) 
+{
+	if (published.data)
+	{
+		SK_conv = true;
+	}
+	else
+	{
+		SK_conv = false;
+	}
+}
+
 void GPS_Position(const sensor_msgs::NavSatFix::ConstPtr& gps_msg)
 {
 	latitude = gps_msg->latitude; //sets latitude from gps
@@ -63,7 +98,7 @@ void GPS_Velocity(const geometry_msgs::Vector3Stamped::ConstPtr& vel_msg)
 	vz = vel_msg->vector.z;
 } // end of GPS_Velocity()
 
-void IMU_processor(const sensor_msgs::Imu::ConstPtr& imu_msg)
+ void IMU_processor(const sensor_msgs::Imu::ConstPtr& imu_msg)
 {
 	// gather orientation quaternion
 	qx = imu_msg->orientation.x;
@@ -114,6 +149,15 @@ void NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
 	phiNED = theta;
 	thetaNED = phi;
 	psiNED = PI/2.0 - psi;
+	// Adjust psiNED back within -PI and PI
+	if (psiNED < -PI)
+	{
+		psiNED = psiNED + 2.0*PI;
+	}
+	if (psiNED > PI)
+	{
+		psiNED = psiNED - 2.0*PI;
+	}
 	// Convert the linear velocity to NED from NWU
 	vxNED = vx;
 	vyNED = -vy;
@@ -127,7 +171,9 @@ int main(int argc, char **argv)
 {
 	// names the program for visual purposes
 	ros::init(argc, argv, "gps_imu");
-  
+	
+	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
+	
 	// Variables
 	nav_msgs::Odometry nav_odom, nav_NED;
   
@@ -138,20 +184,22 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh4;
 	ros::NodeHandle nh5;
 	ros::NodeHandle nh6;
+	ros::NodeHandle nh7;
+	ros::NodeHandle nh8;
   
 	// Subscribers
 	ros::Subscriber gpspos_sub = nh1.subscribe("/wamv/sensors/gps/gps/fix", 10, GPS_Position); // subscribes to GPS position
 	ros::Subscriber imu_sub = nh2.subscribe("/wamv/sensors/imu/imu/data", 1000, IMU_processor);  // subscribes to IMU
 	ros::Subscriber gpsvel_sub = nh3.subscribe("/wamv/sensors/gps/gps/fix_velocity", 1000, GPS_Velocity);  // subscribes to GPS velocity
-	ros::Subscriber ned_sub = nh4.subscribe("geonav_odom", 1000, NED_Func);  // subscribes
+	ros::Subscriber ned_sub = nh4.subscribe("geonav_odom", 1000, NED_Func);
+	ros::Subscriber SK_Converter_sub = nh5.subscribe("SK_Converter_status", 1, SK_conv_status);              // subscriber for whether or not goal SK pose has been converted yet
+	ros::Subscriber WF_Converter_sub = nh6.subscribe("WF_geonav_transform_status", 1, WF_conv_status);            // subscriber for whether or not goal waypoints have been converted yet
 	// ros::Subscriber state_sub = nh2.subscribe("usv_ned", 10, HMI);  // subscribes to local odometry frame, "geonav_odom" was the topic
 	
 	// Publishers
-	ros::Publisher usvstate_pub = nh5.advertise<nav_msgs::Odometry>("nav_odom", 1000); // USV state publisher
-	ros::Publisher nedstate_pub = nh6.advertise<nav_msgs::Odometry>("usv_ned", 1000); // USV state publisher in NED	
-  
-	// Initialize simulation time
-	ros::Time::init();
+	ros::Publisher usvstate_pub = nh7.advertise<nav_msgs::Odometry>("nav_odom", 1000); // USV state publisher
+	ros::Publisher nedstate_pub = nh8.advertise<nav_msgs::Odometry>("usv_ned", 1000); // USV state publisher in NED	
+	
 	ros::Time current_time, last_time;  // creates time variables
 	current_time = ros::Time::now();   // sets current time to the time it is now
 	last_time = ros::Time::now();        // sets last time to the time it is now
@@ -162,65 +210,79 @@ int main(int argc, char **argv)
 	while(ros::ok())
 	{
 		current_time = ros::Time::now(); //time
-
-		// Fill the odometry header for nav_odom, the USV state in ENU and NWU
-		nav_odom.header.seq +=1;								// sequence number
-		nav_odom.header.stamp = current_time;				// sets stamp to current time
-		nav_odom.header.frame_id = "odom";					// header frame
-		nav_odom.child_frame_id = "base_link";				// child frame
 		
-		// Fill the USV pose
-		nav_odom.pose.pose.position.x = longitude; //sets long
-		nav_odom.pose.pose.position.y = latitude; //sets lat
-		nav_odom.pose.pose.position.z = altitude; //sets altitude
-		nav_odom.pose.pose.orientation.x = qx;
-		nav_odom.pose.pose.orientation.y = qy;
-		nav_odom.pose.pose.orientation.z = qz;
-		nav_odom.pose.pose.orientation.w = qw;
-		nav_odom.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		/* if ((!WF_conv) && (!SK_conv))
+		{
+			ROS_INFO("POSE CONVERTER ON");
+		}
+		else
+		{
+			ROS_INFO("POSE CONVERTER OFF");
+		} */
 		
-		// Fill the USV velocities
-		nav_odom.twist.twist.linear.x = vx;
-		nav_odom.twist.twist.linear.y = vy;
-		nav_odom.twist.twist.linear.z = vz;
-		nav_odom.twist.twist.angular.x = omega_x;
-		nav_odom.twist.twist.angular.y = omega_y;
-		nav_odom.twist.twist.angular.z = omega_z;
-		nav_odom.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		if ((loop_count > 10) && (!WF_conv) && (!SK_conv))
+		{
+			// Fill the odometry header for nav_odom, the USV state in ENU and NWU
+			nav_odom.header.seq +=1;								// sequence number
+			nav_odom.header.stamp = current_time;				// sets stamp to current time
+			nav_odom.header.frame_id = "odom";					// header frame
+			nav_odom.child_frame_id = "base_link";				// child frame
 		
-		// publish the USV state to be transformed to ENU
-		usvstate_pub.publish(nav_odom);
+			// Fill the USV pose
+			nav_odom.pose.pose.position.x = longitude; //sets long
+			nav_odom.pose.pose.position.y = latitude; //sets lat
+			nav_odom.pose.pose.position.z = altitude; //sets altitude
+			nav_odom.pose.pose.orientation.x = qx;
+			nav_odom.pose.pose.orientation.y = qy;
+			nav_odom.pose.pose.orientation.z = qz;
+			nav_odom.pose.pose.orientation.w = qw;
+			nav_odom.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 		
-		// Fill the odometry header for nav_NED, the USV state in NED
-		nav_NED.header.seq +=1;								// sequence number
-		nav_NED.header.stamp = current_time;				// sets stamp to current time
-		nav_NED.header.frame_id = "odom";					// header frame
-		nav_NED.child_frame_id = "base_link";				// child frame
+			// Fill the USV velocities
+			nav_odom.twist.twist.linear.x = vx;
+			nav_odom.twist.twist.linear.y = vy;
+			nav_odom.twist.twist.linear.z = vz;
+			nav_odom.twist.twist.angular.x = omega_x;
+			nav_odom.twist.twist.angular.y = omega_y;
+			nav_odom.twist.twist.angular.z = omega_z;
+			nav_odom.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 		
-		// Fill the USV pose in NED
-		nav_NED.pose.pose.position.x = xNED; //sets long
-		nav_NED.pose.pose.position.y = yNED; //sets lat
-		nav_NED.pose.pose.position.z = zNED; //sets altitude
-		nav_NED.pose.pose.orientation.x = phiNED;
-		nav_NED.pose.pose.orientation.y = thetaNED;
-		nav_NED.pose.pose.orientation.z = psiNED;
-		nav_NED.pose.pose.orientation.w = 1.23456;
-		nav_NED.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+			// publish the USV state to be transformed to ENU
+			usvstate_pub.publish(nav_odom);
 		
-		// Fill the USV velocities in NED
-		nav_NED.twist.twist.linear.x = vxNED;
-		nav_NED.twist.twist.linear.y = vyNED;
-		nav_NED.twist.twist.linear.z = vzNED;
-		nav_NED.twist.twist.angular.x = omega_x;
-		nav_NED.twist.twist.angular.y = omega_y;
-		nav_NED.twist.twist.angular.z = omega_z;
-		nav_NED.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-		// publish the NED USV state
-		nedstate_pub.publish(nav_NED);
-
-	//	last_time = current_time
+			// Fill the odometry header for nav_NED, the USV state in NED
+			nav_NED.header.seq +=1;								// sequence number
+			nav_NED.header.stamp = current_time;				// sets stamp to current time
+			nav_NED.header.frame_id = "odom";					// header frame
+			nav_NED.child_frame_id = "base_link";				// child frame
+		
+			// Fill the USV pose in NED
+			nav_NED.pose.pose.position.x = xNED; //sets long
+			nav_NED.pose.pose.position.y = yNED; //sets lat
+			nav_NED.pose.pose.position.z = zNED; //sets altitude
+			nav_NED.pose.pose.orientation.x = phiNED;
+			nav_NED.pose.pose.orientation.y = thetaNED;
+			nav_NED.pose.pose.orientation.z = psiNED;
+			nav_NED.pose.pose.orientation.w = 1.23456;
+			nav_NED.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		
+			// Fill the USV velocities in NED
+			nav_NED.twist.twist.linear.x = vxNED;
+			nav_NED.twist.twist.linear.y = vyNED;
+			nav_NED.twist.twist.linear.z = vzNED;
+			nav_NED.twist.twist.angular.x = omega_x;
+			nav_NED.twist.twist.angular.y = omega_y;
+			nav_NED.twist.twist.angular.z = omega_z;
+			nav_NED.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		
+			// publish the NED USV state
+			nedstate_pub.publish(nav_NED);
+		} // if ((loop_count > 10) && (!WF_conv) && (!SK_conv))
+		
+		//last_time = current_time
 		ros::spinOnce();
 		loop_rate.sleep();
+		loop_count = loop_count + 1;
 	}
 	return 0;
 } // end of main()

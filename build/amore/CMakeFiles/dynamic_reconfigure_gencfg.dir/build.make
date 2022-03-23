@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/taylor/RobotX2022/src
+CMAKE_SOURCE_DIR = /home/brad/RobotX2022/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/taylor/RobotX2022/build
+CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
 
 # Utility rule file for dynamic_reconfigure_gencfg.
 
@@ -63,10 +63,10 @@ amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/build: dynamic_reconfigure_gencf
 .PHONY : amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/build
 
 amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/clean:
-	cd /home/taylor/RobotX2022/build/amore && $(CMAKE_COMMAND) -P CMakeFiles/dynamic_reconfigure_gencfg.dir/cmake_clean.cmake
+	cd /home/brad/RobotX2022/build/amore && $(CMAKE_COMMAND) -P CMakeFiles/dynamic_reconfigure_gencfg.dir/cmake_clean.cmake
 .PHONY : amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/clean
 
 amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/depend:
-	cd /home/taylor/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/taylor/RobotX2022/src /home/taylor/RobotX2022/src/amore /home/taylor/RobotX2022/build /home/taylor/RobotX2022/build/amore /home/taylor/RobotX2022/build/amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brad/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/RobotX2022/src /home/brad/RobotX2022/src/amore /home/brad/RobotX2022/build /home/brad/RobotX2022/build/amore /home/brad/RobotX2022/build/amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : amore/CMakeFiles/dynamic_reconfigure_gencfg.dir/depend
 
