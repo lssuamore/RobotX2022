@@ -3,7 +3,7 @@
 This is LSSU/UniBz WAMV Codebase for VRX and RobotX.  
 
 ## Installation Process:
-Run the following. Things grouped together can be run together
+Run the following.
 ```
 
 #codebase download and install
