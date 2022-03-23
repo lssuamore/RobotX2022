@@ -8,13 +8,9 @@ Run the following. Things grouped together can be run together
 
 #codebase download and install
 cd ~
-mkdir catkin_ws
-cd catkin_ws
-mkdir src
-cd src
 git clone https://github.com/lssuamore/RobotX2022.git
 cd RobotX2022
-cd ../..
+cd src
 #note you will need to git clone all the empty folders like opencv and geonav_transform. Might also need to git clone PCL
 catkin_make
 
