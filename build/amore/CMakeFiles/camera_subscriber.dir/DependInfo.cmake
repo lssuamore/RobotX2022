@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/taylor/RobotX2022/src/amore/src/camera_subscriber.cpp" "/home/taylor/RobotX2022/build/amore/CMakeFiles/camera_subscriber.dir/src/camera_subscriber.cpp.o"
+  "/home/brad/RobotX2022/src/amore/src/camera_subscriber.cpp" "/home/brad/RobotX2022/build/amore/CMakeFiles/camera_subscriber.dir/src/camera_subscriber.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -23,17 +23,16 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/taylor/RobotX2022/devel/include"
+  "/home/brad/RobotX2022/devel/include"
   "/usr/include/vtk-7.1"
   "/usr/include/freetype2"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
-  "/usr/include/opencv4"
   "/usr/include/eigen3"
   "/usr/include/pcl-1.10"
   "/usr/include/ni"
   "/usr/include/openni2"
-  "/usr/local/include/opencv4"
+  "/usr/include/opencv4"
   )
 
 # Targets to which this target links.

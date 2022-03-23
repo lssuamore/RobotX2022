@@ -40,6 +40,7 @@
 
 #include "geometry_msgs/Point.h"
 #include "amore/NED_waypoints.h"
+#include "vrx_gazebo/Task.h"
 //...........................................End of Included Libraries and Message Types....................................
 
 //.................................................................Constants..................................................................
@@ -76,14 +77,17 @@ bool point_published = false;              // if point_published = false, the cu
 bool goal_lat_long = false;                  // if goal_lat_long = false, goal waypoint poses in lat and long coordinates have not been acquired
 bool waypoints_converted = false;     // if waypoints_converted = false, goal waypoints in NED have not been converted
 bool waypoints_published = false;     // if waypoints_published = false, goal waypoints in NED have not been published
+bool convert = false;                           // if convert = false, this means according to the current task status, conversion shouldn't be done
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
 // this function subscribes to the goal position in lat and long published by the station_keeping task
-void goal_pose_sub(const geographic_msgs::GeoPath::ConstPtr& goal) 
+void goal_pose_sub(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
-	if ((loop_count>5) && (!goal_lat_long))
+	ROS_INFO("H....................................................................................................H");
+	if ((!goal_lat_long) && (convert)) // (loop_count>5) && 
 	{
+		ROS_INFO("ENTERING IF.");
 		for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
 		{
 			goal_lat[i] = goal->poses[i].pose.position.latitude;
@@ -92,14 +96,16 @@ void goal_pose_sub(const geographic_msgs::GeoPath::ConstPtr& goal)
 			qy_goal[i] = goal->poses[i].pose.orientation.y;
 			qz_goal[i] = goal->poses[i].pose.orientation.z;
 			qw_goal[i] = goal->poses[i].pose.orientation.w;
-			//ROS_INFO("goal_lat: %.4f", goal_lat[i]);
-			//ROS_INFO("goal_long: %.4f", goal_long[i]);
 		}
 		goal_lat_long = true;
 		// UPDATES STATUSES TO USER ///////////////////////////////////////////////
 		ROS_INFO("GOAL POSITIONS HAVE BEEN ACQUIRED FROM THE VRX TASK 2 WAYPOINTS NODE.");
 		ROS_INFO("Size of array: %i", (int)sizeof(goal->poses)/8);
 		goal_poses = (int)sizeof(goal->poses)/8;
+	}
+	else
+	{
+		ROS_INFO("NOT ENTERING IF.");
 	}
 }
 
@@ -169,25 +175,42 @@ void NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
 	// Convert the angular velocity to NED
 	
 } // end of NED_Func()
+
+void update_task(const vrx_gazebo::Task::ConstPtr& msg)
+{
+	if ((msg->name == "wayfinding") && (!waypoints_published) && ((msg->state == "ready") || (msg->state == "running")))
+	{
+		convert = true;
+		ROS_INFO("WF POINT CONVERTER ON");
+	}
+	else
+	{
+		convert = false;
+		//ROS_INFO("WF POINT CONVERTER OFF");
+	}
+}
 //............................................................End of Functions............................................................
 
 //...............................................................Main Program..............................................................
 int main(int argc, char **argv)
 {
 	// names the program for visual purposes
-	ros::init(argc, argv, "gps_imu");
+	ros::init(argc, argv, "T2_WAYPOINT_CONVERTER");
 	
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
 	
 	// Node handles
+	ros::NodeHandle nh3;
 	ros::NodeHandle nh4;
 	ros::NodeHandle nh5;
 	ros::NodeHandle nh6;
 	ros::NodeHandle nh7;
 	ros::NodeHandle nh8;
 	ros::NodeHandle nh9;
+	ros::NodeHandle nh10;
   
 	// Subscribers
+	ros::Subscriber task_status = nh3.subscribe("/vrx/task/info", 1, update_task);
 	ros::Subscriber ned_sub = nh4.subscribe("geonav_odom", 1000, NED_Func);
 	ros::Subscriber pose_sub = nh5.subscribe("/vrx/wayfinding/waypoints", 100, goal_pose_sub);                         			// subscriber for goal pose given by Task2_WF
 	
@@ -196,13 +219,14 @@ int main(int argc, char **argv)
 	ros::Publisher waypoints_pub = nh7.advertise<amore::NED_waypoints>("waypoints_NED", 100); 							// NED waypoints publisher with Float64 []
 	ros::Publisher usvstate_pub = nh8.advertise<nav_msgs::Odometry>("nav_odom", 1000);   										// USV state publisher
 	ros::Publisher WF_Converter_status_pub = nh9.advertise<std_msgs::Bool>("WF_Converter_status", 1);                 // WF_Converter_status publisher
+	ros::Publisher WF_geonav_transform_status_pub = nh10.advertise<std_msgs::Bool>("WF_geonav_transform_status", 1);                 // WF_geonav_transform_status publisher
 	
 	// Variables
 	nav_msgs::Odometry nav_odom;
 	//std_msgs::Float32MultiArray NED_POSES;    // THE ARRAY OF CONVERTED NED POSES
 	geographic_msgs::GeoPath waypoints_NED;
 	geographic_msgs::GeoPoseStamped pose_NED;
-	std_msgs::Bool publish_status;
+	std_msgs::Bool publish_status, geonav_transform_status;
 	amore::NED_waypoints NED_waypoints;
 	
 	// creating the vector
@@ -216,10 +240,7 @@ int main(int argc, char **argv)
 	}
 	std::vector<Point> point_vector (point_array, point_array + sizeof(point_array) / sizeof(Point));
 	
-	// Initialize simulation time
-	ros::Time::init();
 	ros::Time current_time, last_time; 	// creates time variables
-	current_time = ros::Time::now();   	// sets current time to the time it is now
 	last_time = ros::Time::now();      		// sets last time to the time it is now
   
 	// Set the loop sleep rate
@@ -229,7 +250,7 @@ int main(int argc, char **argv)
 	{
 		current_time = ros::Time::now();
 		
-		// publish whether or not the goal pose has been acquired, converted, and published 
+		// publish whether or not this code has published the waypoints
 		if (!waypoints_published)
 		{
 		  publish_status.data = false;
@@ -240,7 +261,18 @@ int main(int argc, char **argv)
 		}
 		WF_Converter_status_pub.publish(publish_status);
 		
-		if ((loop_count > 5) && (!waypoints_converted) && (goal_lat_long))
+		// publish whether or not this code is using geonav transform package
+		if (!convert)
+		{
+		  geonav_transform_status.data = false;
+		}
+		else
+		{
+		  geonav_transform_status.data = true;
+		}
+		WF_geonav_transform_status_pub.publish(geonav_transform_status);
+		
+		if ((loop_count > 5) && (!waypoints_converted) && (goal_lat_long) && (convert))
 		{
 			// UPDATE NAV_ODOM MSG
 			GPS_Position();

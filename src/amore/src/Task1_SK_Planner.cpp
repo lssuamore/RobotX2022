@@ -26,6 +26,7 @@
 #include <iostream>
 #include "stdio.h"
 #include "time.h"
+#include "vrx_gazebo/Task.h"
 
 // include necessary message libraries
 #include "std_msgs/Float32.h"
@@ -56,10 +57,12 @@ bool goal_recieved = false;  // if goal_recieved = false, goal position has not 
 int loop_goal_recieved;          // this is kept in order to ensure planner doesn't start until sytem is through initial startup
 bool point_reached = false;   // if point_reached is false this means the current point has not been reached
 bool E_reached = false;        // if E_reached is false this means the last point has not been reached
+bool function = false;                           // if convert = false, this means according to the current task status, conversion shouldn't be done
+bool SK_Ready = false;        // if SK_Ready = false, this means the station keeping task is not in the ready stage
 
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
 {
-	if ((!goal_recieved) && (loop_count>20))
+	if ((!goal_recieved) && (loop_count>20) && (SK_Ready))
 	{
 		// Collect coordinates in NED
 		x_goal = odom->pose.pose.position.x;
@@ -77,6 +80,7 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 		}
 		goal_recieved = true;
 		loop_goal_recieved = loop_count;
+		ROS_INFO("SK PLANNER HAS RECIEVED GOAL POSE");
 	}
 	else if (goal_recieved)
 	{
@@ -97,6 +101,28 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 	}
 }
 
+void update_task(const vrx_gazebo::Task::ConstPtr& msg)
+{
+	if ((msg->name == "station_keeping") && (msg->state == "ready"))
+	{
+		SK_Ready = true;
+	}
+	else
+	{
+		SK_Ready = false;
+	}
+	if ((msg->name == "station_keeping") && (msg->state == "running"))
+	{
+		function = true;
+		ROS_INFO("SK PLANNER FEEDING POINTS");
+	}
+	else
+	{
+		function = false;
+		//ROS_INFO("SK PLANNER OFF");
+	}
+}
+
 int main(int argc, char **argv)
 {
   //names the program for visual purposes
@@ -105,11 +131,13 @@ int main(int argc, char **argv)
   ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
   
   // set up NodeHandles
+  ros::NodeHandle nh1;
   ros::NodeHandle nh2;  // subscriber to usv_ned which provides pose in NED
   ros::NodeHandle nh5;  // publisher to SK_Planner_status
   ros::NodeHandle nh6;  // publisher to mpp_goal
   
   // start publishers and subscribers
+  ros::Subscriber task_status = nh1.subscribe("/vrx/task/info", 1, update_task);
   ros::Subscriber ned_sub = nh2.subscribe("usv_ned", 1, pose_update);                                                               // subscriber for current position converted to NED
   
   ros::Publisher SK_Planner_status_pub = nh5.advertise<std_msgs::Bool>("SK_Planner_status", 1);                // SK_Planner status publisher
@@ -118,6 +146,7 @@ int main(int argc, char **argv)
   // local variables //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   nav_msgs::Odometry nav_odom; // mpp_goal position
   std_msgs::Bool publish_status;     // SK_Planner_status
+  
   ros::Time current_time, last_time;  // creates time variables
   current_time = ros::Time::now();   // sets current time to the time it is now
   last_time = ros::Time::now();        // sets last time to the time it is now
@@ -143,7 +172,7 @@ int main(int argc, char **argv)
 	  }
 	  SK_Planner_status_pub.publish(publish_status);
 	  
-	  if ((goal_recieved) && (loop_count > loop_goal_recieved+10))
+	  if ((goal_recieved) && (loop_count > loop_goal_recieved+10) && (function))
 	  {
 		  // determine error in x and y (position)
 		  e_x = x_goal - x_usv_NED;                                                // calculate error in x position
@@ -151,7 +180,7 @@ int main(int argc, char **argv)
 		  e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                           // calculate magnitude of positional error
 		  if ((e_xy < 0.02) && (!E_reached))
 		  {
-			  E_reached = true;
+			  //E_reached = true;
 			  ROS_INFO("e_xy: %.2f", e_xy);
 			  ROS_INFO("End point has been reached.\n");
 		  }
@@ -191,7 +220,8 @@ int main(int argc, char **argv)
 		  mpp_goal_pub.publish(nav_odom); // publishes desired pose to mpp_goal node
 	  } // if (goal_recieved)
 		  
-	  ROS_INFO("ON_OFF: %.1f", ON_OFF);
+	  // DEBUG INFO
+	  /* ROS_INFO("ON_OFF: %.1f", ON_OFF);
 	  if (publish_status.data)
 	  {
 		  ROS_INFO("goal recieved!");
@@ -199,7 +229,7 @@ int main(int argc, char **argv)
 	  else
 	  {
 		  ROS_INFO("goal NOT recieved!");
-	  }
+	  } */
 	  
 	  last_time = current_time; 
   	  ros::spinOnce();

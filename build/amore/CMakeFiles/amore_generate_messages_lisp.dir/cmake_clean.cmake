@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/taylor/RobotX2022/devel/share/common-lisp/ros/amore/msg/NED_waypoints.lisp"
+  "/home/brad/RobotX2022/devel/share/common-lisp/ros/amore/msg/NED_waypoints.lisp"
   "CMakeFiles/amore_generate_messages_lisp"
 )
 

@@ -1,8 +1,8 @@
-# Install script for directory: /home/taylor/RobotX2022/src/jetson
+# Install script for directory: /home/brad/RobotX2022/src/jetson
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/taylor/RobotX2022/install")
+  set(CMAKE_INSTALL_PREFIX "/home/brad/RobotX2022/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/taylor/RobotX2022/build/jetson/catkin_generated/installspace/jetson.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/brad/RobotX2022/build/jetson/catkin_generated/installspace/jetson.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/jetson/cmake" TYPE FILE FILES
-    "/home/taylor/RobotX2022/build/jetson/catkin_generated/installspace/jetsonConfig.cmake"
-    "/home/taylor/RobotX2022/build/jetson/catkin_generated/installspace/jetsonConfig-version.cmake"
+    "/home/brad/RobotX2022/build/jetson/catkin_generated/installspace/jetsonConfig.cmake"
+    "/home/brad/RobotX2022/build/jetson/catkin_generated/installspace/jetsonConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/jetson" TYPE FILE FILES "/home/taylor/RobotX2022/src/jetson/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/jetson" TYPE FILE FILES "/home/brad/RobotX2022/src/jetson/package.xml")
 endif()
 

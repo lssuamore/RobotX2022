@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/taylor/RobotX2022/src/amore/src/gps_subscriber.cpp
+/home/brad/RobotX2022/src/amore/src/gps_subscriber.cpp
 ros/ros.h
-/home/taylor/RobotX2022/src/amore/src/ros/ros.h
+/home/brad/RobotX2022/src/amore/src/ros/ros.h
 tf/transform_broadcaster.h
-/home/taylor/RobotX2022/src/amore/src/tf/transform_broadcaster.h
+/home/brad/RobotX2022/src/amore/src/tf/transform_broadcaster.h
 nav_msgs/Odometry.h
-/home/taylor/RobotX2022/src/amore/src/nav_msgs/Odometry.h
+/home/brad/RobotX2022/src/amore/src/nav_msgs/Odometry.h
 sensor_msgs/NavSatFix.h
-/home/taylor/RobotX2022/src/amore/src/sensor_msgs/NavSatFix.h
+/home/brad/RobotX2022/src/amore/src/sensor_msgs/NavSatFix.h
 sensor_msgs/Imu.h
-/home/taylor/RobotX2022/src/amore/src/sensor_msgs/Imu.h
+/home/brad/RobotX2022/src/amore/src/sensor_msgs/Imu.h
 geometry_msgs/Vector3Stamped.h
-/home/taylor/RobotX2022/src/amore/src/geometry_msgs/Vector3Stamped.h
+/home/brad/RobotX2022/src/amore/src/geometry_msgs/Vector3Stamped.h
 iostream
-/home/taylor/RobotX2022/src/amore/src/iostream
+/home/brad/RobotX2022/src/amore/src/iostream
 stdio.h
-/home/taylor/RobotX2022/src/amore/src/stdio.h
+/home/brad/RobotX2022/src/amore/src/stdio.h
 time.h
-/home/taylor/RobotX2022/src/amore/src/time.h
+/home/brad/RobotX2022/src/amore/src/time.h
 
 /opt/ros/noetic/include/geometry_msgs/Point.h
 string
