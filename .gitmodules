@@ -1,6 +1,6 @@
 [submodule "src/vrx"]
 	path = src/vrx
-	url = https://github.com/lssuamore/vrx.git
+	url = https://github.com/osrf/vrx.git
 [submodule "opencv"]
 	path = opencv
 	url = https://github.com/opencv/opencv.git
