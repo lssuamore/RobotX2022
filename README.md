@@ -13,6 +13,7 @@ username:lssuamore
 password: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
 
 cd RobotX2022
+git submodule update --init --recursive
 git submodule init
 git submodule update
 delete devel and build folders
