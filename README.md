@@ -9,6 +9,8 @@ Run the following. Things grouped together can be run together
 #codebase download and install
 cd ~
 git clone https://github.com/lssuamore/RobotX2022.git
+username:lssuamore
+password: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
 cd RobotX2022
 cd src
 #note you will need to git clone all the empty folders like opencv and geonav_transform. Might also need to git clone PCL
