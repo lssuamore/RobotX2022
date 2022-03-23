@@ -31,8 +31,6 @@ image_transport/image_transport.h
 /home/taylor/RobotX2022/src/amore/src/image_transport/image_transport.h
 sensor_msgs/Image.h
 /home/taylor/RobotX2022/src/amore/src/sensor_msgs/Image.h
-ros/ros.h
-/home/taylor/RobotX2022/src/amore/src/ros/ros.h
 sensor_msgs/PointCloud2.h
 /home/taylor/RobotX2022/src/amore/src/sensor_msgs/PointCloud2.h
 sensor_msgs/PointCloud.h
@@ -59,6 +57,8 @@ amore/NED_waypoints.h
 /home/taylor/RobotX2022/src/amore/src/amore/NED_waypoints.h
 geographic_msgs/GeoPoseStamped.h
 /home/taylor/RobotX2022/src/amore/src/geographic_msgs/GeoPoseStamped.h
+time.h
+/home/taylor/RobotX2022/src/amore/src/time.h
 vector
 -
 string

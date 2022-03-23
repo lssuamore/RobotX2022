@@ -221,6 +221,13 @@
 /home/taylor/RobotX2022/build/amore/CMakeFiles/bond_generate_messages_cpp.dir
 /home/taylor/RobotX2022/build/amore/CMakeFiles/tf2_msgs_generate_messages_py.dir
 /home/taylor/RobotX2022/build/amore/CMakeFiles/amore_generate_messages.dir
+/home/taylor/RobotX2022/build/sensors/sparton_ahrs8_driver/CMakeFiles/install/strip.dir
+/home/taylor/RobotX2022/build/sensors/sparton_ahrs8_driver/CMakeFiles/install/local.dir
+/home/taylor/RobotX2022/build/sensors/sparton_ahrs8_driver/CMakeFiles/install.dir
+/home/taylor/RobotX2022/build/sensors/sparton_ahrs8_driver/CMakeFiles/list_install_components.dir
+/home/taylor/RobotX2022/build/sensors/sparton_ahrs8_driver/CMakeFiles/rebuild_cache.dir
+/home/taylor/RobotX2022/build/sensors/sparton_ahrs8_driver/CMakeFiles/edit_cache.dir
+/home/taylor/RobotX2022/build/sensors/sparton_ahrs8_driver/CMakeFiles/test.dir
 /home/taylor/RobotX2022/build/sensors/ublox/ublox_serialization/CMakeFiles/install/strip.dir
 /home/taylor/RobotX2022/build/sensors/ublox/ublox_serialization/CMakeFiles/install/local.dir
 /home/taylor/RobotX2022/build/sensors/ublox/ublox_serialization/CMakeFiles/install.dir

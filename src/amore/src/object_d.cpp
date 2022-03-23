@@ -1,7 +1,6 @@
-	#include "ros/ros.h"
+#include "ros/ros.h"
 #include "image_transport/image_transport.h"
 #include "sensor_msgs/Image.h"
-#include "ros/ros.h"
 #include "sensor_msgs/PointCloud2.h"
 #include "sensor_msgs/PointCloud.h"
 #include "sensor_msgs/point_cloud_conversion.h"
@@ -15,6 +14,7 @@
 #include "geometry_msgs/Point.h"
 #include "amore/NED_waypoints.h"
 #include "geographic_msgs/GeoPoseStamped.h"
+#include "time.h"
 #include <vector>
 #include <string>
 
@@ -23,6 +23,7 @@ using namespace std;
 
 geographic_msgs::GeoPoseStamped task3_message; //publisher message type
 ros::Publisher task3_pub; //publisher for judges topic
+ros::Time current_time, last_time;  // creates time variables
 
 //below is the hsv ranges for each color default lighting
 cv::Scalar green_low; 
@@ -217,7 +218,7 @@ void HSV_change(cv::Mat imgHSV){
 		
 			
 	
-		cv::inRange(imgHSV, red_low, red_high, red_mask); 
+/* 		cv::inRange(imgHSV, red_low, red_high, red_mask); 
 		cv::inRange(imgHSV, red_low1, red_high1, red_mask1); 
 		
 		//add first red mask with the new red mask
@@ -233,7 +234,7 @@ void HSV_change(cv::Mat imgHSV){
 		cv::findContours(orange_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE); //finds contour around coloured objects and draws a rectangle around the object
 		cv::findContours(green_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE); //finds contour around coloured objects and draws a rectangle around the object
 		cv::findContours(white_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE); //finds contour around coloured objects and draws a rectangle around the object
-		cv::findContours(black_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE); //finds contour around coloured objects and draws a rectangle around the object
+		cv::findContours(black_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE); //finds contour around coloured objects and draws a rectangle around the object */
 	
 	
 }
@@ -255,11 +256,11 @@ void LidarCallBackTaylor(const amore::NED_waypoints::ConstPtr& lidar_point) {
 	std::sort(array_lidar_x,array_lidar_x+size_indicies); //sorts smallest to biggest //how to sort array of points
 	std::sort(array_lidar_y,array_lidar_y+size_indicies); 
 	
-	for (size_t i = 0; i < size_indicies; i++){
+	//for (size_t i = 0; i < size_indicies; i++){
 	//printd array of incoming points in x and y sorted
 //		printf("x coming in array sorted array is: %f\n", array_lidar_x[i]);
 //		printf("x coming in array sorted array is: %f\n", array_lidar_y[i]);
-	}
+	//}
 }
 
 
@@ -278,7 +279,7 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 		HSV_change(imgHSV);
 		
 		
-		/* //this is used to also detect the red totem because its Hue value is from 0-1
+		//this is used to also detect the red totem because its Hue value is from 0-1
 		cv::inRange(imgHSV, red_low, red_high, red_mask); 
 		cv::inRange(imgHSV, red_low1, red_high1, red_mask1); 
 		
@@ -289,7 +290,7 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 		cv::inRange(imgHSV, white_low, white_high, white_mask);
 		cv::inRange(imgHSV, orange_low, orange_high, orange_mask); 
 		cv::inRange(imgHSV, black_low, black_high, black_mask); 
-		cv::inRange(imgHSV, green_low, green_high, green_mask);   */
+		cv::inRange(imgHSV, green_low, green_high, green_mask);  
 		
 		//using a median filter build in function apply it to each mask with a kernal size of 3 to get rid of small noise
 		cv::medianBlur(black_mask, black_mask, 3);
@@ -304,16 +305,16 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 		
 		//applies each mask to the original image using bitwise_and and outputs it to a new mat file which isn't useful rn
 		cv::bitwise_and(org_img, org_img, mask=red_mask, red_res);
-		cv::bitwise_and(org_img, org_img, mask=mask, white_res); 
+		cv::bitwise_and(org_img, org_img, mask=white_mask, white_res); 
 		cv::bitwise_and(org_img, org_img, mask=orange_mask, orange_res);
-		cv::bitwise_and(org_img, org_img, mask=mask, green_res);
+		cv::bitwise_and(org_img, org_img, mask=green_mask, green_res);
 		cv::bitwise_and(org_img, org_img, mask=black_mask, black_res);
 				
 		//to calculate moments using built in function moments contours must be found
 		cv::findContours(mask_t, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 		for (size_t i=0; i < contours.size(); ++i) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
-			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
+			if ((boundRect.area() > 100) && (boundRect.width < 1000)) { 
 				size_mask_t = contours.size();
 		
 				vector<Moments> mu(contours.size());
@@ -423,9 +424,13 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 						color_type_buoy = "red";
 						color_type_buoy.insert(0, color_type);
 						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						current_time = ros::Time::now(); //time
+						task3_message.header.seq +=1;								// sequence number
+						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
 						task3_message.pose.position.latitude = ydistance_red;
 						task3_message.pose.position.longitude = xdistance_red;
+						task3_pub.publish(task3_message); 
 						reg_buoy = 0;
 						color_type_buoy = " ";
 						break;
@@ -438,9 +443,13 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 						color_type_buoy = "red";
 						color_type_buoy.insert(0, color_type);
 						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						current_time = ros::Time::now(); //time
+						task3_message.header.seq +=1;								// sequence number
+						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
 						task3_message.pose.position.latitude = ydistance_red;
 						task3_message.pose.position.longitude = xdistance_red;
+						task3_pub.publish(task3_message); 
 						circle_buoy = 0;
 						color_type_buoy = " ";
 						break;
@@ -452,7 +461,7 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
  		cv::findContours(green_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 		for (size_t i=0; i < contours.size(); ++i) {
 			cv::Rect boundRect = cv::boundingRect(contours[i]);
-			if ((boundRect.area() > 20) && (boundRect.width < 1000)) { 
+			if ((boundRect.area() > 100) && (boundRect.width < 1000)) { 
 				cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 255, 0), 3);
 				size_green = contours.size();	
 				
@@ -523,9 +532,13 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 						color_type_buoy = "green";
 						color_type_buoy.insert(0, color_type);
 						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						current_time = ros::Time::now(); //time
+						task3_message.header.seq +=1;								// sequence number
+						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
 						task3_message.pose.position.latitude = ydistance_green;
 						task3_message.pose.position.longitude = xdistance_green;
+						task3_pub.publish(task3_message); 
 						reg_buoy = 0;
 						color_type_buoy = " ";
 					break;
@@ -538,9 +551,13 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 						color_type_buoy = "green";
 						color_type_buoy.insert(0, color_type);
 						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						current_time = ros::Time::now(); //time
+						task3_message.header.seq +=1;								// sequence number
+						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
 						task3_message.pose.position.latitude = ydistance_green;
 						task3_message.pose.position.longitude = xdistance_green;
+						task3_pub.publish(task3_message); 
 						circle_buoy = 0;
 						color_type_buoy = " ";
 					break;
@@ -623,9 +640,13 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 						color_type_buoy = "white";
 						color_type_buoy.insert(0, color_type);
 						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						current_time = ros::Time::now(); //time
+						task3_message.header.seq +=1;								// sequence number
+						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
 						task3_message.pose.position.latitude = ydistance_white;
 						task3_message.pose.position.longitude = xdistance_white;
+						task3_pub.publish(task3_message); 
 						reg_buoy = 0;
 						color_type_buoy = " ";
 						break;
@@ -638,9 +659,13 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 						color_type_buoy = "white";
 						color_type_buoy.insert(0, color_type);
 						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						current_time = ros::Time::now(); //time
+						task3_message.header.seq +=1;								// sequence number
+						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
 						task3_message.pose.position.latitude = ydistance_white;
 						task3_message.pose.position.longitude = xdistance_white;
+						task3_pub.publish(task3_message); 
 						circle_buoy = 0;
 						color_type_buoy = " ";
 							break;
@@ -723,9 +748,13 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 						color_type_buoy = "orange";
 						color_type_buoy.insert(0, color_type);
 						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						current_time = ros::Time::now(); //time
+						task3_message.header.seq +=1;								// sequence number
+						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
 						task3_message.pose.position.latitude = ydistance_orange;
 						task3_message.pose.position.longitude = xdistance_orange;
+						task3_pub.publish(task3_message); 
 						reg_buoy = 0;
 						color_type_buoy = " ";
 					break;
@@ -738,9 +767,13 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 						color_type_buoy = "orange";
 						color_type_buoy.insert(0, color_type);
 						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						current_time = ros::Time::now(); //time
+						task3_message.header.seq +=1;								// sequence number
+						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
 						task3_message.pose.position.latitude = ydistance_orange;
 						task3_message.pose.position.longitude = xdistance_orange;
+						task3_pub.publish(task3_message); 
 						circle_buoy = 0;
 						color_type_buoy = " ";
 					break;
@@ -823,9 +856,13 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 						color_type_buoy = "black";
 						color_type_buoy.insert(0, color_type);
 						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						current_time = ros::Time::now(); //time
+						task3_message.header.seq +=1;								// sequence number
+						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
 						task3_message.pose.position.latitude = ydistance_black;
 						task3_message.pose.position.longitude = xdistance_black;
+						task3_pub.publish(task3_message); 
 						reg_buoy = 0;
 						color_type_buoy = " ";
 						break;
@@ -838,9 +875,13 @@ void cameraCallBack(const sensor_msgs::ImageConstPtr& camera_msg) {
 						color_type_buoy = "black";
 						color_type_buoy.insert(0, color_type);
 						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						current_time = ros::Time::now(); //time
+						task3_message.header.seq +=1;								// sequence number
+						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
 						task3_message.pose.position.latitude = ydistance_black;
 						task3_message.pose.position.longitude = xdistance_black;
+						task3_pub.publish(task3_message); 
 						circle_buoy = 0;
 						color_type_buoy = " ";
 						break;
@@ -874,16 +915,21 @@ int main(int argc, char **argv) {
 	
 	image_transport::ImageTransport it(nh); //transports the images from the subscriber
 	
-	image_transport::Subscriber camera_sub = it.subscribe("/wamv/sensors/cameras/middle_camera/image_raw", 1, cameraCallBack); //front left camera
+	//image_transport::Subscriber camera_sub = it.subscribe("/wamv/sensors/cameras/middle_camera/image_raw", 1, cameraCallBack); //front left camera
+	image_transport::Subscriber camera_sub = it.subscribe("/wamv/sensors/cameras/front_left_camera/image_raw", 1, cameraCallBack); //front left camera
 	
-	ros::Subscriber lidar_sub = nh2.subscribe("lidar_point", 100, LidarCallBackTaylor); //subscribes to my lidar points
+	ros::Subscriber lidar_sub = nh2.subscribe("lidar_point", 10, LidarCallBackTaylor); //subscribes to my lidar points
 
-	task3_pub = nh3.advertise<geographic_msgs::GeoPoseStamped>("perception_point", 100); 
+	task3_pub = nh3.advertise<geographic_msgs::GeoPoseStamped>("/vrx/perception/landmark", 10); 
+	
+	ros::Time::init();
+	current_time = ros::Time::now();   // sets current time to the time it is now
+	last_time = ros::Time::now();        // sets last time to the time it is now
 
 	ros::spin();
 	cv::destroyWindow("front_left"); //destroys the new windows
 	
-	ros::Rate loop_rate(10);
+	ros::Rate loop_rate(100);
 	
 	while(ros::ok()) {
 		

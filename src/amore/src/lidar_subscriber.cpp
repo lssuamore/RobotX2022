@@ -61,8 +61,8 @@ void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
 /* 	pcl::VoxelGrid<pcl::PCLPointCloud2> sor; //VoxelGrid downsamples the lidar data
 	sor.setInputCloud (cloudPtr);
 	sor.setLeafSize (0.08f, 0.08f, 0.08f); //8 cm leaf size
-	sor.filter (*cloud); */
-	
+	sor.filter (*cloud);
+	 */
 //	std::cerr << "PointCloud after filtering: " << cloud->width * cloud->height 
  //   << " data points (" << pcl::getFieldsList (*cloud) << ")." << std::endl;
 	
@@ -82,7 +82,7 @@ void LidarCallBack(const sensor_msgs::PointCloud2::ConstPtr& lidar_msg) {
 	
 	pass.setInputCloud (downsampled_XYZ);
 	pass.setFilterFieldName ("y");
-	pass.setFilterLimits (-30.0, 30.0); //this is left and right in the x direction
+	pass.setFilterLimits (-18.0, 18.0); //this is left and right in the x direction
 	pass.filter (*downsampled_XYZ);
 	
 	std::cerr << "Cloud after filtering: " << std::endl;
@@ -175,11 +175,11 @@ int main(int argc, char **argv) {
 	ros::NodeHandle nh;
 	ros::NodeHandle nh2;
 
-	ros::Subscriber topic_sub = nh.subscribe("/wamv/sensors/lidars/lidar_wamv/points", 100, LidarCallBack); //subscribes to Lidar
+	ros::Subscriber topic_sub = nh.subscribe("/wamv/sensors/lidars/lidar_wamv/points", 10, LidarCallBack); //subscribes to Lidar
 	
-	lidar_pub = nh2.advertise<amore::NED_waypoints>("lidar_point", 100); 
+	lidar_pub = nh2.advertise<amore::NED_waypoints>("lidar_point", 10); 
 
-	ros::Rate loop_rate(100);
+	ros::Rate loop_rate(10);
 
 	while(ros::ok()) {
 	
