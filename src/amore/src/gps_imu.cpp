@@ -52,8 +52,9 @@ float omega_xNED, omega_yNED, omega_zNED;		// angular velocities
 float vxNED, vyNED, vzNED;										// linear velocities
 float qx_goal[100], qy_goal[100], qz_goal[100], qw_goal[100];
 float goal_lat[100], goal_long[100];
-bool WF_conv = true;   // if WF_conv = true, this means the WF waypoint converter is being used
-bool SK_conv = true;   // if SK_conv = true, this means the SK point converter is being used
+bool WF_conv = true; 							 // WF_conv = true means the WF waypoint converter is being used
+bool SK_conv = true;   							// SK_conv = true means the SK point converter is being used
+bool function = false;								// function = false means this should not function, thus not publish to nodes that are in use elsewhere
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
@@ -62,7 +63,7 @@ void WF_conv_status(const std_msgs::Bool published)
 {
 	if (published.data)
 	{
-		WF_conv = true;
+		WF_conv = true; // this means WF_Converter_status is active
 	}
 	else
 	{
@@ -75,7 +76,7 @@ void SK_conv_status(const std_msgs::Bool published)
 {
 	if (published.data)
 	{
-		SK_conv = true;
+		SK_conv = true; // this means SK_Converter_status is active
 	}
 	else
 	{
@@ -211,16 +212,18 @@ int main(int argc, char **argv)
 	{
 		current_time = ros::Time::now(); //time
 		
-		/* if ((!WF_conv) && (!SK_conv))
+		if ((loop_count > 10) &&(!WF_conv) && (!SK_conv))
 		{
-			ROS_INFO("POSE CONVERTER ON");
+			function = true;
+			//ROS_INFO("POSE CONVERTER ON");
 		}
 		else
 		{
-			ROS_INFO("POSE CONVERTER OFF");
-		} */
+			function = false;
+			//ROS_INFO("POSE CONVERTER OFF");
+		}
 		
-		if ((loop_count > 10) && (!WF_conv) && (!SK_conv))
+		if (function)
 		{
 			// Fill the odometry header for nav_odom, the USV state in ENU and NWU
 			nav_odom.header.seq +=1;								// sequence number

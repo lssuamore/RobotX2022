@@ -1,2 +1,2 @@
-amore:jetson:sensors/xsens_ros_mti_driver
+amore:jetson:sensors/rtcm_msgs:sensors/ublox/ublox:sensors/ublox/ublox_gps:sensors/ublox/ublox_msg_filters:sensors/ublox/ublox_msgs:sensors/ublox/ublox_serialization:sensors/xsens_ros_mti_driver:vrx/usv_gazebo_plugins:vrx/usv_msgs:vrx/vrx_2019:vrx/vrx_gazebo:vrx/wamv_description:vrx/wamv_gazebo:vrx/wave_gazebo:vrx/wave_gazebo_plugins
 -DCATKIN_DEVEL_PREFIX=/home/brad/RobotX2022/devel -DCMAKE_INSTALL_PREFIX=/home/brad/RobotX2022/install -G Unix Makefiles

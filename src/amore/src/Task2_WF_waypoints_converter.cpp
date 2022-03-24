@@ -77,15 +77,15 @@ bool point_published = false;              // if point_published = false, the cu
 bool goal_lat_long = false;                  // if goal_lat_long = false, goal waypoint poses in lat and long coordinates have not been acquired
 bool waypoints_converted = false;     // if waypoints_converted = false, goal waypoints in NED have not been converted
 bool waypoints_published = false;     // if waypoints_published = false, goal waypoints in NED have not been published
-bool convert = false;                           // if convert = false, this means according to the current task status, conversion shouldn't be done
+bool convert = true;                           // if convert = false, this means according to the current task status, conversion shouldn't be done ################################################################ should start false
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
 // this function subscribes to the goal position in lat and long published by the station_keeping task
 void goal_pose_sub(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
-	ROS_INFO("H....................................................................................................H");
-	if ((!goal_lat_long) && (convert)) // (loop_count>5) && 
+	ROS_INFO("CHECK IF.");
+	if ((!goal_lat_long) && (convert)) //(loop_count>5) && 
 	{
 		ROS_INFO("ENTERING IF.");
 		for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
@@ -178,6 +178,7 @@ void NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
 
 void update_task(const vrx_gazebo::Task::ConstPtr& msg)
 {
+	// if the task is wayfinding and the state is ready or running and the waypoints haven't been published, converter will run
 	if ((msg->name == "wayfinding") && (!waypoints_published) && ((msg->state == "ready") || (msg->state == "running")))
 	{
 		convert = true;
@@ -187,7 +188,7 @@ void update_task(const vrx_gazebo::Task::ConstPtr& msg)
 	{
 		convert = false;
 		//ROS_INFO("WF POINT CONVERTER OFF");
-	}
+	}	
 }
 //............................................................End of Functions............................................................
 
@@ -215,7 +216,6 @@ int main(int argc, char **argv)
 	ros::Subscriber pose_sub = nh5.subscribe("/vrx/wayfinding/waypoints", 100, goal_pose_sub);                         			// subscriber for goal pose given by Task2_WF
 	
 	// Publishers
-	//ros::Publisher waypoints_pub = nh7.advertise<geographic_msgs::GeoPath>("waypoints_NED", 10); 							// NED waypoints publisher with GeoPath
 	ros::Publisher waypoints_pub = nh7.advertise<amore::NED_waypoints>("waypoints_NED", 100); 							// NED waypoints publisher with Float64 []
 	ros::Publisher usvstate_pub = nh8.advertise<nav_msgs::Odometry>("nav_odom", 1000);   										// USV state publisher
 	ros::Publisher WF_Converter_status_pub = nh9.advertise<std_msgs::Bool>("WF_Converter_status", 1);                 // WF_Converter_status publisher
@@ -223,7 +223,6 @@ int main(int argc, char **argv)
 	
 	// Variables
 	nav_msgs::Odometry nav_odom;
-	//std_msgs::Float32MultiArray NED_POSES;    // THE ARRAY OF CONVERTED NED POSES
 	geographic_msgs::GeoPath waypoints_NED;
 	geographic_msgs::GeoPoseStamped pose_NED;
 	std_msgs::Bool publish_status, geonav_transform_status;
@@ -253,11 +252,11 @@ int main(int argc, char **argv)
 		// publish whether or not this code has published the waypoints
 		if (!waypoints_published)
 		{
-		  publish_status.data = false;
+		  publish_status.data = true;
 		}
 		else
 		{
-		  publish_status.data = true;
+		  publish_status.data = false;
 		}
 		WF_Converter_status_pub.publish(publish_status);
 		
@@ -344,49 +343,15 @@ int main(int argc, char **argv)
 				point.y = y_NED[i];
 				point.z = psi_NED[i];
 				NED_waypoints.points.push_back(point);
-				/* ROS_INFO("loop: %i", i);
+				ROS_INFO("point: %i", i);
 				ROS_INFO("x: %f", x_NED[i]);
 				ROS_INFO("y: %f", y_NED[i]);
-				ROS_INFO("psi: %f", psi_NED[i]); */
-				/* if (i == 0)
-				{
-					// Fill the header for waypoints_NED
-					waypoints_NED.header.seq +=1;								  		// sequence number
-					waypoints_NED.header.stamp = current_time;				// sets stamp to current time
-					waypoints_NED.header.frame_id = "odom";						// header frame
-				}
-				// Fill the header for pose_NED
-				pose_NED.header.seq +=1;													// sequence number
-				pose_NED.header.stamp = current_time;							// sets stamp to current time
-				pose_NED.header.frame_id = "odom";									// header frame
-				// Fill the USV pose
-				pose_NED.pose.position.latitude = x_NED[i];
-				pose_NED.pose.position.longitude = y_NED[i];
-				pose_NED.pose.position.altitude = 0.0;
-				pose_NED.pose.orientation.x = 0.0;
-				pose_NED.pose.orientation.y = 0.0;
-				pose_NED.pose.orientation.z = psi_NED[i];
-				pose_NED.pose.orientation.w = 0.0;
-				// Fill the place in the GeoPath
-				//waypoints_NED.poses[i] = pose_NED;
-				// Fill the header for waypoints_NED
-				waypoints_NED.poses[i].header.seq +=1;									// sequence number
-				waypoints_NED.poses[i].header.stamp = current_time;				// sets stamp to current time
-				waypoints_NED.poses[i].header.frame_id = "odom";					// header frame
-				// Fill the USV pose
-				waypoints_NED.poses[i].pose.position.latitude = x_NED[i];
-				waypoints_NED.poses[i].pose.position.longitude = y_NED[i];
-				waypoints_NED.poses[i].pose.position.altitude = 0.0;
-				waypoints_NED.poses[i].pose.orientation.x = 0.0;
-				waypoints_NED.poses[i].pose.orientation.y = 0.0;
-				waypoints_NED.poses[i].pose.orientation.z = psi_NED[i];
-				waypoints_NED.poses[i].pose.orientation.w = 0.0; */
+				ROS_INFO("psi: %f", psi_NED[i]);
 			}
-			//waypoints_pub.publish(waypoints_NED);
 			waypoints_pub.publish(NED_waypoints);
 			waypoints_published = true;
 			ROS_INFO("WAYPOINTS HAVE BEEN PUBLISHED");
-		}
+		} // if ((waypoints_converted) && (!waypoints_published))
 		
 		if (waypoints_published)
 		{

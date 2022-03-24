@@ -50,22 +50,36 @@ float omega_xNED, omega_yNED, omega_zNED;		// angular velocities
 float vxNED, vyNED, vzNED;										// linear velocities
 float qx_goal[100], qy_goal[100], qz_goal[100], qw_goal[100];
 float goal_lat[100], goal_long[100];
-bool waypoints_converted = false;   // if waypoints_converted = false, goal waypoints in NED have not been converted
+bool WF_conv = true;   // if WF_conv = true, this means the WF waypoint converter is being used
+//bool SK_conv = true;   // if SK_conv = true, this means the SK point converter is being used
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
-// this function subscribes to the WF_Converter_status node to see when goal waypoints have been converted and nav_odom is no longer being published to elsewhere
-void goal_publish_check(const std_msgs::Bool published) 
+// this function subscribes to the WF_Converter_status node to see when goal waypoints have been converted and nav_odom is no longer being published to
+void WF_conv_status(const std_msgs::Bool published) 
 {
 	if (published.data)
 	{
-		waypoints_converted = true;
+		WF_conv = true;
 	}
 	else
 	{
-		waypoints_converted = false;
+		WF_conv = false;
 	}
 }
+
+/* // this function subscribes to the SK_Converter_status node to see when goal pose has been converted and nav_odom is no longer being published to
+void SK_conv_status(const std_msgs::Bool published) 
+{
+	if (published.data)
+	{
+		SK_conv = true;
+	}
+	else
+	{
+		SK_conv = false;
+	}
+} */
 
 void GPS_Position(const sensor_msgs::NavSatFix::ConstPtr& gps_msg)
 {
@@ -176,7 +190,8 @@ int main(int argc, char **argv)
 	ros::Subscriber imu_sub = nh2.subscribe("/wamv/sensors/imu/imu/data", 1000, IMU_processor);  // subscribes to IMU
 	ros::Subscriber gpsvel_sub = nh3.subscribe("/wamv/sensors/gps/gps/fix_velocity", 1000, GPS_Velocity);  // subscribes to GPS velocity
 	ros::Subscriber ned_sub = nh4.subscribe("geonav_odom", 1000, NED_Func);
-	ros::Subscriber WF_Converter_sub = nh6.subscribe("WF_Converter_status", 1, goal_publish_check);            // subscriber for whether or not goal waypoints have been converted yet
+	//ros::Subscriber SK_Converter_sub = nh5.subscribe("SK_Converter_status", 1, SK_conv_status);              // subscriber for whether or not goal SK pose has been converted yet
+	ros::Subscriber WF_Converter_sub = nh6.subscribe("WF_geonav_transform_status", 1, WF_conv_status);            // subscriber for whether or not goal waypoints have been converted yet
 	// ros::Subscriber state_sub = nh2.subscribe("usv_ned", 10, HMI);  // subscribes to local odometry frame, "geonav_odom" was the topic
 	
 	// Publishers
@@ -196,7 +211,7 @@ int main(int argc, char **argv)
 	{
 		current_time = ros::Time::now(); //time
 		
-		if ((loop_count > 10) && (waypoints_converted))
+		if ((loop_count > 10) && (!WF_conv)) // && (!SK_conv)
 		{
 			// Fill the odometry header for nav_odom, the USV state in ENU and NWU
 			nav_odom.header.seq +=1;								// sequence number
@@ -253,7 +268,7 @@ int main(int argc, char **argv)
 		
 			// publish the NED USV state
 			nedstate_pub.publish(nav_NED);
-		} // if ((loop_count > 10) && (waypoints_converted))
+		} // if ((loop_count > 10) && (!WF_conv) && (!SK_conv))
 		
 		//last_time = current_time
 		ros::spinOnce();

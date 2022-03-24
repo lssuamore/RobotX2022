@@ -59,8 +59,8 @@ float e_x, e_y, e_xy, e_psi;
 float e_xy_prev, e_psi_prev;
 
 // error tolerance thresholds, NOTE: these should be as small as possible
-float e_xy_allowed = 0.01;       // positional 
-float e_psi_allowed = 0.01;      // heading
+float e_xy_allowed = 0.4;       // positional 
+float e_psi_allowed = 0.4;      // heading
 
 bool goal_recieved = false;   // if goal_recieved = false, goal position has not been acquired from "mpp_goal" yet
 int loop_goal_recieved;          // this is kept in order to ensure planner doesn't start until sytem is through initial startup
@@ -129,7 +129,7 @@ void goal_update(const amore::NED_waypoints::ConstPtr& goal)
 
 void update_task(const vrx_gazebo::Task::ConstPtr& msg)
 {
-	if ((msg->name == "wayfinding") && (waypoints_published) && ((msg->state == "ready") || (msg->state == "running")))
+	if ((msg->name == "wayfinding") && (goal_recieved) && ((msg->state == "ready") || (msg->state == "running")))
 	{
 		function = true;
 		if (loop_ON == -1)
@@ -159,6 +159,7 @@ int main(int argc, char **argv)
   ros::NodeHandle nh2;  // subscriber to usv_ned which provides pose in NED
   ros::NodeHandle nh3;  // subscriber to waypoints_NED which provides goal waypoints in NED
   ros::NodeHandle nh4;
+  ros::NodeHandle nh5;
   ros::NodeHandle nh6;  // publisher to mpp_goal
   
   // start publishers and subscribers
@@ -167,11 +168,12 @@ int main(int argc, char **argv)
   ros::Subscriber waypoints_ned_sub = nh3.subscribe("waypoints_NED", 1, goal_update);                                 // subscriber for goal waypoints converted to NED
   ros::Subscriber WF_Converter_sub = nh4.subscribe("WF_Converter_status", 1, goal_publish_check);           // subscriber for whether or not goal waypoints have been converted yet
   
+  ros::Publisher WF_Planner_status_pub = nh5.advertise<std_msgs::Bool>("WF_Planner_status", 1);              // WF_Planner status publisher
   ros::Publisher mpp_goal_pub = nh6.advertise<nav_msgs::Odometry>("mpp_goal", 1);                                    // publisher for current goal for low level controller
   
   // local variables //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   nav_msgs::Odometry nav_odom; // mpp_goal position
-  std_msgs::Bool publish_status;     // SK_Planner_status
+  std_msgs::Bool publish_status;     // WF_Planner_status
   
   // Timers ///////////////////////////////////////////////////////////////////////////////////////////////////////////
   ros::Time current_time, last_time, next_timer;  // creates time variables
@@ -189,6 +191,17 @@ int main(int argc, char **argv)
   {
 	  current_time = ros::Time::now(); // update time
 	  
+	  // publish whether or not the goal pose has been acquired
+	  if (!goal_recieved)
+	  {
+		  publish_status.data = false;
+	  }
+	  else
+	  {
+		  publish_status.data = true;
+	  }
+	  WF_Planner_status_pub.publish(publish_status);
+	  
 	  if ((goal_recieved) && (loop_count > loop_goal_recieved+1000) && (function))
 	  {
 		  // determine error in x and y (position)
@@ -197,7 +210,7 @@ int main(int argc, char **argv)
 		  e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
 		  e_psi = psi_goal[point] - psi_NED;
 		  
-		  // only check error derivative if the previous errors are attained
+		  /* // only check error derivative if the previous errors are attained
 		  if (loop_count > loop_ON)
 		  {
 			  // if neither errors are improving, increment counter
@@ -230,7 +243,7 @@ int main(int argc, char **argv)
 				  e_psi = psi_goal[point] - psi_NED;
 				  TIMER_SET = false;
 			  }
-		  }
+		  } */
 		  
 		  if ((e_xy < e_xy_allowed) && (e_psi < e_psi_allowed) && (!E_reached))
 		  {
@@ -241,7 +254,7 @@ int main(int argc, char **argv)
 				  E_reached = true;
 				  ROS_INFO("End point has been reached.\n");
 			  }
-			  TIMER_SET = false;
+			  //TIMER_SET = false;
 		  }
 	
 		  if (E_reached)
