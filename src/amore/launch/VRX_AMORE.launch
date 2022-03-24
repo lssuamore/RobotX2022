@@ -28,7 +28,7 @@
   </node>
   <node pkg="amore" type="Task1_SK_Planner" name="SK_Planner" output="screen">
   </node>
-  <node pkg="amore" type="stereo_vis" name="Task_3" output="screen">
-  </node>
+  <!-- node pkg="amore" type="stereo_vis" name="Task_3" output="screen" -->
+  <!-- /node -->
   
 </launch>
