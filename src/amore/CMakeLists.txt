@@ -170,6 +170,8 @@ add_executable(gps_imu src/gps_imu.cpp)
 add_executable(camera_lidar src/camera_lidar.cpp)
 add_executable(lidar_subscriber src/lidar_subscriber.cpp)
 add_executable(SK_Controller src/SK_Controller.cpp)
+add_executable(new_gps_imu src/new_gps_imu.cpp)
+add_executable(mission_control src/mission_control.cpp)
 
 # TASK 1: STATION-KEEPING
 add_executable(Task1_SK_point_converter src/Task1_SK_point_converter.cpp)
@@ -208,6 +210,8 @@ target_link_libraries(gps_imu ${catkin_LIBRARIES})
 target_link_libraries(camera_lidar ${catkin_LIBRARIES} ${OpenCV_LIBS} ${PCL_LIBS})
 target_link_libraries(lidar_subscriber ${catkin_LIBRARIES} ${PCL_LIBS})
 target_link_libraries(SK_Controller ${catkin_LIBRARIES})
+target_link_libraries(new_gps_imu ${catkin_LIBRARIES})
+target_link_libraries(mission_control ${catkin_LIBRARIES})
 
 # TASK 1: STATION-KEEPING
 target_link_libraries(Task1_SK_point_converter ${catkin_LIBRARIES})

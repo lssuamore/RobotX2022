@@ -15,19 +15,24 @@
   <param name="/Ki_xy_G" value="0.0" />
   <param name="/Ki_psi_G" value="0.0" />
 
-  <!-- Launches codes --> 
-  <node pkg="amore" type="Task2_WF_waypoints_converter" name="WF_Pose_Converter" output="screen">
-  </node>
-  <node pkg="amore" type="Task1_SK_point_converter" name="SK_Pose_Converter" output="screen">
-  </node>
-  <node pkg="amore" type="gps_imu" name="Pose_Converter" output="screen">
-  </node>
+  <!-- Launches codes -->
   <node pkg="amore" type="SK_Controller" name="SK_Controller" output="screen">
   </node>
+  <!-- node pkg="amore" type="gps_imu" name="NED_Pose_Converter" output="screen" -->
+  <!-- /node -->
+  <node pkg="amore" type="new_gps_imu" name="NED_Pose_Converter" output="screen">
+  </node>
+  
+  <!-- node pkg="amore" type="Task1_SK_point_converter" name="SK_Converter" output="screen" -->
+  <!-- /node -->
+  <!-- node pkg="amore" type="Task1_SK_Planner" name="SK_Planner" output="screen" -->
+  <!-- /node -->
+  
+  <!-- node pkg="amore" type="Task2_WF_waypoints_converter" name="WF_Converter" output="screen" -->
+  <!-- /node -->  
   <node pkg="amore" type="Task2_WF_Planner" name="WF_Planner" output="screen">
   </node>
-  <node pkg="amore" type="Task1_SK_Planner" name="SK_Planner" output="screen">
-  </node>
+  
   <!-- node pkg="amore" type="stereo_vis" name="Task_3" output="screen" -->
   <!-- /node -->
   

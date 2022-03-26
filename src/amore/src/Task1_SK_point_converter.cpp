@@ -12,7 +12,6 @@
 //				Inputs: 
 //				Outputs:
 
-
 //................................................Included Libraries and Message Types..........................................
 #include "ros/ros.h"
 #include "ros/console.h"
@@ -21,139 +20,103 @@
 #include <iostream>
 #include "math.h"
 #include "stdio.h"
-#include "std_msgs/Int32.h"
-#include "std_msgs/Float32.h"
-#include "std_msgs/Float64.h"
-#include "std_msgs/Bool.h"
-#include "nav_msgs/Odometry.h"
-#include "sensor_msgs/NavSatFix.h"
-#include "sensor_msgs/Imu.h"
-#include "geometry_msgs/Vector3Stamped.h"
-#include "geographic_msgs/GeoPoseStamped.h"
-#include "tf/transform_broadcaster.h"
 
-#include "vrx_gazebo/Task.h"
+#include "nav_msgs/Odometry.h"
+
+#include "geographic_msgs/GeoPoseStamped.h"				// message type published by VRX Task 1
+#include "geometry_msgs/Point.h"
+
+#include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
+
+#include "std_msgs/Int32.h"
+#include "std_msgs/Bool.h"
 //...........................................End of Included Libraries and Message Types....................................
 
-//.................................................................Constants..................................................................
+//.................................................................Constants....................................................................
 #define PI 3.14159265
+#define CONFIRM 15 // count of loops to hold the same data point for
 //............................................................End of Constants.............................................................
 
+
 //..............................................................Global Variables............................................................
-int loop_count=0;            // used to keep track of loop, first 10 loops are used to just intitialize the subscribers
-double latitude, longitude, altitude;			// The ECEF position variables in spherical coordinates
-float qx_goal, qy_goal, qz_goal, qw_goal;								//
-float qx, qy, qz, qw;								//
-float omega_x, omega_y, omega_z;		// angular velocities
-float vx, vy, vz;										// linear velocities
-double xNED, yNED, zNED;										// The NED position
-float q1NED, q2NED, q3NED, q0NED;						//
+int loop_count = 0;                                    						// loop counter, first 10 loops used to intitialize subscribers
+
+double latitude, longitude, altitude;									// ECEF position variables in spherical coordinates
+float qx, qy, qz, qw;														// 
+float omega_x, omega_y, omega_z;								// angular velocities
+float vx, vy, vz;																// linear velocities
+
+double xNED, yNED, zNED;			        						// NED position
+float q1NED, q2NED, q3NED, q0NED;
 float phiNED, thetaNED, psiNED;
 float omega_xNED, omega_yNED, omega_zNED;		// angular velocities
 float vxNED, vyNED, vzNED;										// linear velocities
-float goal_lat, goal_long;
-bool goal_lat_long = false;     // if goal_lat_long = false, goal position in lat and long coordinates has not been acquired
-bool goal_aqcuired = false;   // if goal_aqcuired = false, goal position has not been aqcuired from SK_Planner
-bool convert = false;                           // if convert = false, this means according to the current task status, conversion shouldn't be done
+
+float SK_qx_goal, SK_qy_goal, SK_qz_goal, SK_qw_goal;
+float SK_goal_lat, SK_goal_long;
+float SK_x_NED, SK_y_NED, SK_psi_NED;
+
+int SK_loops_sent = 0;                                  					// count of loops to hold the same data point for before sending next
+int SK_point_num = 0;                                             	  	// used to keep track of the point being converted
+int SK_goal_poses_quantity = 1;									// used to keep track of the number of goal poses to convert
+
+bool SK_point_sent = false;              																			// if SK_point_sent = false, the current point has not been published to nav_odom for conversion
+bool SK_goal_lat_long_acquired = false;     // if SK_goal_lat_long_acquired = false, goal position in lat and long coordinates has not been acquired
+bool SK_pose_converted = false;     // if SK_pose_converted = false, goal pose has not been converted to NED
+bool SK_NED_goal_published = false;     // if SK_NED_goal_published = false, goal waypoints in NED have not been published
+bool SK_conv = true;                           // if SK_conv = false, this means according to the current task status, conversion shouldn't be done
+
+//bool SK_planner_acquired_goal = false;   // if SK_planner_acquired_goal = false, goal position has not been aqcuired from SK_Planner
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
 // this function subscribes to the goal position in lat and long published by the station_keeping task
-void goal_pose_sub(const geographic_msgs::GeoPoseStamped::ConstPtr& goal) 
+void SK_goal_pose_sub(const geographic_msgs::GeoPoseStamped::ConstPtr& goal) 
 {
-	if ((loop_count>5) && (!goal_lat_long))
+	if ((!SK_goal_lat_long_acquired) && (SK_conv))
 	{
-		goal_lat = goal->pose.position.latitude;
-	    goal_long = goal->pose.position.longitude;
-		qx_goal = goal->pose.orientation.x;
-		qy_goal = goal->pose.orientation.y;
-		qz_goal = goal->pose.orientation.z;
-		qw_goal = goal->pose.orientation.w;
-		goal_lat_long = true;
+		SK_goal_lat = goal->pose.position.latitude;
+	    SK_goal_long = goal->pose.position.longitude;
+		SK_qx_goal = goal->pose.orientation.x;
+		SK_qy_goal = goal->pose.orientation.y;
+		SK_qz_goal = goal->pose.orientation.z;
+		SK_qw_goal = goal->pose.orientation.w;
+		SK_goal_lat_long_acquired = true;
 		// UPDATES STATUSES TO USER ///////////////////////////////////////////////
 		ROS_DEBUG("GOAL POSITION HAS BEEN ACQUIRED FROM THE VRX TASK 1 GOAL POSE NODE.");
-		ROS_DEBUG("goal_lat: %.2f", goal_lat);
-		ROS_DEBUG("goal_long: %.2f", goal_long);
+		//ROS_DEBUG("goal_lat: %.2f", SK_goal_lat);
+		//ROS_DEBUG("goal_long: %.2f", SK_goal_long);
 	}
 }
 
-// this function subscribes to the SK_Planner node to see when goal pose has been acquired
-void goal_publish_check(const std_msgs::Bool published) 
+void SK_GPS_Position()
 {
-	if (published.data)
-	{
-		goal_aqcuired = true;
-	}
-	else
-	{
-		goal_aqcuired = false;
-	}
-}
+	latitude = SK_goal_lat;
+	longitude = SK_goal_long;
+	altitude = 0.0; 														//sets altitude to 0
+} // end of SK_GPS_Position()
 
-void GPS_Position(const sensor_msgs::NavSatFix::ConstPtr& gps_msg)
+void SK_GPS_Velocity() 
 {
-	if ((goal_lat_long) && (!goal_aqcuired))
-	{
-		latitude = goal_lat; //sets latitude to goal for SK_Controller
-		longitude = goal_long; //sets longitude to goal for SK_Controller
-		altitude = gps_msg->altitude; //sets altitude from gps
-	}
-	else
-	{
-		latitude = gps_msg->latitude; //sets latitude from gps
-		longitude = gps_msg->longitude; //sets longitude from gps
-		altitude = gps_msg->altitude; //sets altitude rom gps
-	}
-} // end of GPS_Position()
+	// set velocity to zero since it isn't pertinent
+	vx = 0.0;
+	vy = 0.0;
+	vz = 0.0;
+} // end of SK_GPS_Velocity()
 
-void GPS_Velocity(const geometry_msgs::Vector3Stamped::ConstPtr& vel_msg) 
+ void SK_IMU_processor()
 {
-	// gather the velocity, which is in NWU, wrt the GPS sensor (which I think is almost the USV origin)
-	vx = vel_msg->vector.x;
-	vy = vel_msg->vector.y;
-	vz = vel_msg->vector.z;
-} // end of GPS_Velocity()
-
- void IMU_processor(const sensor_msgs::Imu::ConstPtr& imu_msg)
- {
-	 if ((goal_lat_long) && (!goal_aqcuired))
-	 {
-		 // gather orientation quaternion
-		 qx = qx_goal;
-		 qy = qy_goal;
-		 qz = qz_goal;
-		 qw = qw_goal;
-	 }
-	 else
-	 {
-		 // gather orientation quaternion
-		 qx = imu_msg->orientation.x;
-		 qy = imu_msg->orientation.y;
-		 qz = imu_msg->orientation.z;
-		 qw = imu_msg->orientation.w;
-	 }
+	// set orientation quaternion
+	qx = SK_qx_goal;
+	qy = SK_qy_goal;
+	qz = SK_qz_goal;
+	qw = SK_qw_goal;
 	
-	 // gather body-fixed angular velocity
-	 omega_x = imu_msg->angular_velocity.x;
-	 omega_y = imu_msg->angular_velocity.y;
-	 omega_z = imu_msg->angular_velocity.z;
-} // end of IMU_processor()
-
-/* void HMI(const nav_msgs::Odometry::ConstPtr& odom)
-{
-	printf("the x is: %f\n", odom->pose.pose.position.x); //extracts x coor from nav_odometery
-	printf("the y is: %f\n", odom->pose.pose.position.y); //extracts y coor from nav_odometery
-	printf("the x orientation is: %f\n", odom->pose.pose.orientation.x); //extracts x orientation
-	printf("the y orientation is: %f\n", odom->pose.pose.orientation.y); //extracts y orientation
-	printf("the z orientation is: %f\n", odom->pose.pose.orientation.z); //extracts z orientation
-	printf("the w orientation is: %f\n", odom->pose.pose.orientation.w); //extracts w orientation
-	printf("the velocity x is: %f\n", odom-> twist.twist.linear.x);//prints velocity x
-	printf("the velocity y is: %f\n", odom-> twist.twist.linear.y);//prints velocity y
-	printf("the velocity z is: %f\n", odom-> twist.twist.linear.z);//prints velocity z
-	printf("the angular velocity x is: %f\n", odom-> twist.twist.angular.x);//prints velocity x
-	printf("the angular velocity y is: %f\n", odom-> twist.twist.angular.y);//prints velocity x
-	printf("the angular velocity z is: %f\n", odom-> twist.twist.angular.z);//prints velocity x
-} // end of HMI() */
+	// set body-fixed angular velocity to zero since it isn't pertinent
+	omega_x = 0.0;
+	omega_y = 0.0;
+	omega_z = 0.0;
+} // end of SK_IMU_processor()
 
 void NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
 {
@@ -185,30 +148,41 @@ void NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
 
 void update_task(const vrx_gazebo::Task::ConstPtr& msg)
 {
-	if ((msg->name == "station_keeping") && (msg->state == "ready"))
+	if ((msg->name == "station_keeping") && (!SK_NED_goal_published) && ((msg->state == "ready") || (msg->state == "running")))
 	{
-		convert = true;
+		SK_conv = true;
 		ROS_INFO("SK POINT CONVERTER ON");
 	}
 	else
 	{
-		convert = false;
-		//ROS_INFO("SK POINT CONVERTER OFF");
+		SK_conv = false;
+		//ROS_INFO("SK POINT CONVERER OFF");
 	}
 }
 
-//............................................................End of Functions............................................................
+/* // this function subscribes to the SK_Planner node to see when goal pose has been acquired
+void goal_publish_check(const std_msgs::Bool published) 
+{
+	if (published.data)
+	{
+		SK_planner_acquired_goal = true;
+	}
+	else
+	{
+		SK_planner_acquired_goal = false;
+	}
+} */
 
+//............................................................End of Functions............................................................
 //...............................................................Main Program..............................................................
 int main(int argc, char **argv)
 {
 	// names the program for visual purposes
-	ros::init(argc, argv, "gps_imu");
-  
-	// Variables
-	nav_msgs::Odometry nav_odom, nav_NED;
-  
-	// Node handles
+	ros::init(argc, argv, "T1_POSE_CONVERTER");
+	
+	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
+	
+	// NodeHandles
 	ros::NodeHandle nh1;
 	ros::NodeHandle nh2;
 	ros::NodeHandle nh3;
@@ -221,103 +195,135 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh10;
   
 	// Subscribers
-	ros::Subscriber gpspos_sub = nh1.subscribe("/wamv/sensors/gps/gps/fix", 10, GPS_Position); // subscribes to GPS position
-	ros::Subscriber imu_sub = nh2.subscribe("/wamv/sensors/imu/imu/data", 1000, IMU_processor);  // subscribes to IMU
-	ros::Subscriber gpsvel_sub = nh3.subscribe("/wamv/sensors/gps/gps/fix_velocity", 1000, GPS_Velocity);  // subscribes to GPS velocity
-	ros::Subscriber ned_sub = nh4.subscribe("geonav_odom", 1000, NED_Func);
-	ros::Subscriber pose_sub = nh5.subscribe("/vrx/station_keeping/goal", 1, goal_pose_sub);                         // subscriber for goal pose given by Task1_SK
-	ros::Subscriber SK_Planner_sub = nh6.subscribe("SK_Planner_status", 1, goal_publish_check);               // subscriber for whether or not goal has been acquired by SK_Planner
-	ros::Subscriber task_status = nh7.subscribe("/vrx/task/info", 1, update_task);
-	// ros::Subscriber state_sub = nh2.subscribe("usv_ned", 10, HMI);  // subscribes to local odometry frame, "geonav_odom" was the topic
+	ros::Subscriber task_status = nh1.subscribe("/vrx/task/info", 1, update_task);
+	ros::Subscriber pose_sub = nh2.subscribe("/vrx/station_keeping/goal", 1, SK_goal_pose_sub);                         // subscriber for goal pose given by Task1_SK
+	ros::Subscriber ned_sub = nh3.subscribe("geonav_odom", 1000, NED_Func);
+	//ros::Subscriber SK_Planner_sub = nh4.subscribe("SK_Planner_status", 1, goal_publish_check);               // subscriber for whether or not goal has been acquired by SK_Planner
 	
 	// Publishers
-	ros::Publisher usvstate_pub = nh8.advertise<nav_msgs::Odometry>("nav_odom", 1000); // USV state publisher
-	ros::Publisher nedstate_pub = nh9.advertise<nav_msgs::Odometry>("usv_ned", 1000); // USV state publisher in NED
-	ros::Publisher SK_Converter_status_pub = nh10.advertise<std_msgs::Bool>("SK_Converter_status", 1);                 // SK_Converter_status publisher
+	ros::Publisher usvstate_pub = nh5.advertise<nav_msgs::Odometry>("nav_odom", 1000); 										// USV state publisher
+	ros::Publisher SK_NED_goal_pub = nh6.advertise<geometry_msgs::Point>("SK_NED_goal", 100); 							// SK goal pose converted to NED publisher
+	ros::Publisher SK_Converter_status_pub = nh7.advertise<std_msgs::Bool>("SK_Converter_status", 1);				// SK_Converter_status publisher
+	ros::Publisher SK_geonav_transform_status_pub = nh8.advertise<std_msgs::Bool>("SK_geonav_transform_status", 1);                 // SK_geonav_transform_status publisher
 	
-	// Variables
-	std_msgs::Bool publish_status;
+	// Local variables
+	nav_msgs::Odometry nav_odom;
+	std_msgs::Bool SK_publish_status, SK_geonav_transform_status;
+	geometry_msgs::Point SK_NED_pose;
   
-	/* // Initialize simulation time
-	ros::Time::init(); */
+	// Initialize simulation time
+	ros::Time::init();
 	ros::Time current_time, last_time;  // creates time variables
 	current_time = ros::Time::now();   // sets current time to the time it is now
 	last_time = ros::Time::now();        // sets last time to the time it is now
   
 	// Set the loop sleep rate
-	ros::Rate loop_rate(200); //  {Hz}
+	ros::Rate loop_rate(100); //  {Hz}
 
 	while(ros::ok())
 	{
 		current_time = ros::Time::now(); //time
 		
-		// publish whether or not this code is using geonav transform package
-		if (!convert)
+		// publish whether or not the SK goal pose converter has published the pose for the SK planner
+		if (!SK_pose_converted)
 		{
-		  publish_status.data = false;
+		  SK_publish_status.data = false;
 		}
 		else
 		{
-		  publish_status.data = true;
+		  SK_publish_status.data = true;
 		}
-		SK_Converter_status_pub.publish(publish_status);
+		SK_Converter_status_pub.publish(SK_publish_status);
 		
-		// Fill the odometry header for nav_odom, the USV state in ENU and NWU
-		nav_odom.header.seq +=1;								// sequence number
-		nav_odom.header.stamp = current_time;				// sets stamp to current time
-		nav_odom.header.frame_id = "odom";					// header frame
-		nav_odom.child_frame_id = "base_link";				// child frame
+		// publish whether or not this code is using geonav transform package
+		if (!SK_conv)
+		{
+		  SK_geonav_transform_status.data = false;
+		}
+		else
+		{
+		  SK_geonav_transform_status.data = true;
+		}
+		SK_Converter_status_pub.publish(SK_geonav_transform_status);
 		
-		// Fill the USV pose
-		nav_odom.pose.pose.position.x = longitude; //sets long
-		nav_odom.pose.pose.position.y = latitude; //sets lat
-		nav_odom.pose.pose.position.z = altitude; //sets altitude
-		nav_odom.pose.pose.orientation.x = qx;
-		nav_odom.pose.pose.orientation.y = qy;
-		nav_odom.pose.pose.orientation.z = qz;
-		nav_odom.pose.pose.orientation.w = qw;
-		nav_odom.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		if ((!SK_pose_converted) && (SK_goal_lat_long_acquired) && (SK_conv))
+		{
+			if (!SK_point_sent)
+			{
+				// UPDATE NAV_ODOM MSG
+				SK_GPS_Position();
+				SK_GPS_Velocity();
+				SK_IMU_processor();
+				// Fill the odometry header for nav_odom, the USV state in ENU and NWU
+				nav_odom.header.seq +=1;								// sequence number
+				nav_odom.header.stamp = current_time;				// sets stamp to current time
+				nav_odom.header.frame_id = "odom";					// header frame
+				nav_odom.child_frame_id = "base_link";				// child frame
+			
+				// Fill the USV pose
+				nav_odom.pose.pose.position.x = longitude; //sets long
+				nav_odom.pose.pose.position.y = latitude; //sets lat
+				nav_odom.pose.pose.position.z = altitude; //sets altitude
+				nav_odom.pose.pose.orientation.x = qx;
+				nav_odom.pose.pose.orientation.y = qy;
+				nav_odom.pose.pose.orientation.z = qz;
+				nav_odom.pose.pose.orientation.w = qw;
+				nav_odom.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+	
+				// Fill the USV velocities
+				nav_odom.twist.twist.linear.x = vx;
+				nav_odom.twist.twist.linear.y = vy;
+				nav_odom.twist.twist.linear.z = vz;
+				nav_odom.twist.twist.angular.x = omega_x;
+				nav_odom.twist.twist.angular.y = omega_y;
+				nav_odom.twist.twist.angular.z = omega_z;
+				nav_odom.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+				usvstate_pub.publish(nav_odom);
+				SK_point_sent = true;
+			}
+			
+			// Update goal pose in NED units
+			if (SK_point_num < SK_goal_poses_quantity)
+			{
+				SK_x_NED = xNED;
+				SK_y_NED = yNED;
+				SK_psi_NED = psiNED;
+				
+				SK_loops_sent += 1;
+				if (SK_loops_sent == CONFIRM)
+				{
+					SK_loops_sent = 0;								// reset WF_loops_sent counter
+					SK_point_num += 1;
+					SK_point_sent = false;
+				}
+			}
+			if (SK_point_num == SK_goal_poses_quantity) 							// means all coordinates have been converted
+			{
+				SK_pose_converted = true;
+				ROS_INFO("GOAL POSE HAS BEEN CONVERTED");
+			}
+		} // if ((!SK_pose_converted) && (SK_goal_lat_long_acquired) && (SK_conv))
 		
-		// Fill the USV velocities
-		nav_odom.twist.twist.linear.x = vx;
-		nav_odom.twist.twist.linear.y = vy;
-		nav_odom.twist.twist.linear.z = vz;
-		nav_odom.twist.twist.angular.x = omega_x;
-		nav_odom.twist.twist.angular.y = omega_y;
-		nav_odom.twist.twist.angular.z = omega_z;
-		nav_odom.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		if ((SK_pose_converted) && (!SK_NED_goal_published))
+		{
+			SK_NED_pose.x = SK_x_NED;
+			SK_NED_pose.y = SK_y_NED;
+			SK_NED_pose.z = SK_psi_NED;
+			ROS_INFO("x: %f", SK_x_NED);
+			ROS_INFO("y: %f", SK_y_NED);
+			ROS_INFO("psi: %f", SK_psi_NED);
+			
+			SK_NED_goal_pub.publish(SK_NED_pose);
+			SK_NED_goal_published = true;
+			ROS_INFO("WAYPOINTS HAVE BEEN PUBLISHED");
+		} // if ((SK_pose_converted) && (!SK_NED_goal_published))
 		
-		// publish the USV state to be transformed to ENU
-		usvstate_pub.publish(nav_odom);
-		
-		// Fill the odometry header for nav_NED, the USV state in NED
-		nav_NED.header.seq +=1;								// sequence number
-		nav_NED.header.stamp = current_time;				// sets stamp to current time
-		nav_NED.header.frame_id = "odom";					// header frame
-		nav_NED.child_frame_id = "base_link";				// child frame
-		
-		// Fill the USV pose in NED
-		nav_NED.pose.pose.position.x = xNED; //sets long
-		nav_NED.pose.pose.position.y = yNED; //sets lat
-		nav_NED.pose.pose.position.z = zNED; //sets altitude
-		nav_NED.pose.pose.orientation.x = phiNED;
-		nav_NED.pose.pose.orientation.y = thetaNED;
-		nav_NED.pose.pose.orientation.z = psiNED;
-		nav_NED.pose.pose.orientation.w = 1.23456;
-		nav_NED.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-		
-		// Fill the USV velocities in NED
-		nav_NED.twist.twist.linear.x = vxNED;
-		nav_NED.twist.twist.linear.y = vyNED;
-		nav_NED.twist.twist.linear.z = vzNED;
-		nav_NED.twist.twist.angular.x = omega_x;
-		nav_NED.twist.twist.angular.y = omega_y;
-		nav_NED.twist.twist.angular.z = omega_z;
-		nav_NED.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-		// publish the NED USV state
-		nedstate_pub.publish(nav_NED);
+		if (SK_NED_goal_published)
+		{
+			SK_NED_goal_pub.publish(SK_NED_pose);
+		}
 
-	//	last_time = current_time
+		last_time = current_time;
 		ros::spinOnce();
 		loop_rate.sleep();
 		loop_count = loop_count + 1;

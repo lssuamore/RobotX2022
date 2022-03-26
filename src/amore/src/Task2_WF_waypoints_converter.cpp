@@ -1,6 +1,6 @@
 // Filename:                         Task2_WF_waypoints_converter.cpp
 // Creation Date:                 02/02/2022
-// Last Revision Date:         02/02/2022
+// Last Revision Date:         03/25/2022
 // Author(s) [email]:			    Brad Hacker [bhacker@lssu.edu]
 // Revisor(s) {Date}:        	
 // Organization/Institution:	Lake Superior State University
@@ -22,121 +22,111 @@
 #include "time.h"
 #include <sstream>
 #include <iostream>
-#include <vector>
 #include "math.h"
 #include "stdio.h"
+
 #include "std_msgs/Int32.h"
-#include "std_msgs/Float32.h"
-#include "std_msgs/Float32MultiArray.h"
-#include "std_msgs/Float64.h"
 #include "std_msgs/Bool.h"
 #include "nav_msgs/Odometry.h"
-#include "sensor_msgs/NavSatFix.h"
-#include "sensor_msgs/Imu.h"
-#include "geometry_msgs/Vector3Stamped.h"
-#include "geographic_msgs/GeoPath.h"
-#include "geographic_msgs/GeoPoseStamped.h"
-#include "tf/transform_broadcaster.h"
 
-#include "geometry_msgs/Point.h"
-#include "amore/NED_waypoints.h"
-#include "vrx_gazebo/Task.h"
+#include "geographic_msgs/GeoPath.h"								// message type published by VRX Task 2
+#include "amore/NED_waypoints.h"										// message created to hold an array of the converted WF goal waypoints w/ headings and the number of goal poses in the array
+#include "geometry_msgs/Point.h"										// message type used to hold the goal waypoints w/headings
+
+#include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
 //...........................................End of Included Libraries and Message Types....................................
 
 //.................................................................Constants..................................................................
 #define PI 3.14159265
-#define CONFIRM 15 // count of loops to hold the same data point for before sending next
+#define CONFIRM 15 // count of loops to hold the same data point for before sending next pose to convert
 //............................................................End of Constants.............................................................
 
-//.................................................................Structures..................................................................
-struct Point {
-	float x;
-	float y;
-};
-//............................................................Structures.............................................................
-
 //..............................................................Global Variables............................................................
-int loop_count=0;                                     // used to keep track of loop, first 10 loops are used to just intitialize the subscribers
-int loop_confirm=0;                                  // count of loops to hold the same data point for before sending next
-int point_num=0;                                               // used to keep track of the point being converted
-int goal_poses=-1;                                   // used to keep track of the number of goal poses to convert
-double latitude, longitude, altitude;			 // The ECEF position variables in spherical coordinates
-float qx, qy, qz, qw;
-float omega_x, omega_y, omega_z;		 // angular velocities
-float vx, vy, vz;										 // linear velocities
-double xNED, yNED, zNED;				     // The NED position
-float x_NED[100], y_NED[100], psi_NED[100];			 // The NED poses
+int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
+
+double latitude, longitude, altitude;									// ECEF position variables in spherical coordinates
+float qx, qy, qz, qw;														// 
+float omega_x, omega_y, omega_z;								// angular velocities
+float vx, vy, vz;																// linear velocities
+
+double xNED, yNED, zNED;			        						// NED position
 float q1NED, q2NED, q3NED, q0NED;
 float phiNED, thetaNED, psiNED;
 float omega_xNED, omega_yNED, omega_zNED;		// angular velocities
 float vxNED, vyNED, vzNED;										// linear velocities
-float qx_goal[100], qy_goal[100], qz_goal[100], qw_goal[100];
-float goal_lat[100], goal_long[100];
-float NED_POSES[100];                    // used to hold NED poses: x,y,psi
-bool point_published = false;              // if point_published = false, the current point has not been published
-bool goal_lat_long = false;                  // if goal_lat_long = false, goal waypoint poses in lat and long coordinates have not been acquired
-bool waypoints_converted = false;     // if waypoints_converted = false, goal waypoints in NED have not been converted
-bool waypoints_published = false;     // if waypoints_published = false, goal waypoints in NED have not been published
-bool convert = true;                           // if convert = false, this means according to the current task status, conversion shouldn't be done ################################################################ should start false
+
+int WF_loops_sent = 0;                                  																// count of loops to hold the same data point for before sending next
+int WF_point_num = 0;                                               														// used to keep track of the point being converted
+int WF_goal_poses_quantity = -1;                                   												// used to keep track of the number of goal poses to convert
+
+float WF_qx_goal[100], WF_qy_goal[100], WF_qz_goal[100], WF_qw_goal[100];
+float WF_goal_lat[100], WF_goal_long[100];
+float WF_x_NED[100], WF_y_NED[100], WF_psi_NED[100];
+
+bool WF_point_sent = false;              																			// if WF_point_sent = false, the current point has not been published to nav_odom for conversion
+bool WF_goal_lat_long_acquired = false;                  													// if WF_goal_lat_long_acquired = false, goal waypoint poses in lat and long coordinates have not been acquired
+bool WF_waypoints_converted = false;     																	// if WF_waypoints_converted = false, goal waypoints in NED have not been converted
+bool WF_waypoints_published = false;     																	// if WF_waypoints_published = false, goal waypoints in NED have not been published
+bool WF_conv = true; 																									// WF_conv = true means the WF waypoint converter is being used, ######## should start false
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
 // this function subscribes to the goal position in lat and long published by the station_keeping task
-void goal_pose_sub(const geographic_msgs::GeoPath::ConstPtr& goal)
+void WF_goal_pose_sub(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
 	ROS_INFO("CHECK IF.");
-	if ((!goal_lat_long) && (convert)) //(loop_count>5) && 
+	if ((!WF_goal_lat_long_acquired) && (WF_conv))
 	{
 		ROS_INFO("ENTERING IF.");
 		for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
 		{
-			goal_lat[i] = goal->poses[i].pose.position.latitude;
-			goal_long[i] = goal->poses[i].pose.position.longitude;
-			qx_goal[i] = goal->poses[i].pose.orientation.x;
-			qy_goal[i] = goal->poses[i].pose.orientation.y;
-			qz_goal[i] = goal->poses[i].pose.orientation.z;
-			qw_goal[i] = goal->poses[i].pose.orientation.w;
+			WF_goal_lat[i] = goal->poses[i].pose.position.latitude;
+			WF_goal_long[i] = goal->poses[i].pose.position.longitude;
+			WF_qx_goal[i] = goal->poses[i].pose.orientation.x;
+			WF_qy_goal[i] = goal->poses[i].pose.orientation.y;
+			WF_qz_goal[i] = goal->poses[i].pose.orientation.z;
+			WF_qw_goal[i] = goal->poses[i].pose.orientation.w;
 		}
-		goal_lat_long = true;
+		WF_goal_lat_long_acquired = true;
 		// UPDATES STATUSES TO USER ///////////////////////////////////////////////
 		ROS_INFO("GOAL POSITIONS HAVE BEEN ACQUIRED FROM THE VRX TASK 2 WAYPOINTS NODE.");
 		ROS_INFO("Size of array: %i", (int)sizeof(goal->poses)/8);
-		goal_poses = (int)sizeof(goal->poses)/8;
+		WF_goal_poses_quantity = (int)sizeof(goal->poses)/8;
 	}
 	else
 	{
 		ROS_INFO("NOT ENTERING IF.");
 	}
-}
+} // end of WF_goal_pose_sub()
 
-void GPS_Position()
+void WF_GPS_Position()
 {
-	latitude = goal_lat[point_num]; //sets latitude from gps
-	longitude = goal_long[point_num]; //sets longitude from gps
-	altitude = 0.0; //sets altitude to 0
-} // end of GPS_Position()
+	latitude = WF_goal_lat[WF_point_num];
+	longitude = WF_goal_long[WF_point_num];
+	altitude = 0.0; 														//sets altitude to 0
+} // end of WF_GPS_Position()
 
-void GPS_Velocity() 
+void WF_GPS_Velocity() 
 {
-	// gather the velocity, which is in NWU, wrt the GPS sensor (which I think is almost the USV origin)
+	// set velocity to zero since it isn't pertinent
 	vx = 0.0;
 	vy = 0.0;
 	vz = 0.0;
-} // end of GPS_Velocity()
+} // end of WF_GPS_Velocity()
 
- void IMU_processor()
+ void WF_IMU_processor()
 {
-	// gather orientation quaternion
-	qx = qx_goal[point_num];
-	qy = qy_goal[point_num];
-	qz = qz_goal[point_num];
-	qw = qw_goal[point_num];
+	// set orientation quaternion
+	qx = WF_qx_goal[WF_point_num];
+	qy = WF_qy_goal[WF_point_num];
+	qz = WF_qz_goal[WF_point_num];
+	qw = WF_qw_goal[WF_point_num];
 	
-	// gather body-fixed angular velocity
+	// set body-fixed angular velocity to zero since it isn't pertinent
 	omega_x = 0.0;
 	omega_y = 0.0;
 	omega_z = 0.0;
-} // end of IMU_processor()
+} // end of WF_IMU_processor()
 
 void NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
 {
@@ -179,14 +169,14 @@ void NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
 void update_task(const vrx_gazebo::Task::ConstPtr& msg)
 {
 	// if the task is wayfinding and the state is ready or running and the waypoints haven't been published, converter will run
-	if ((msg->name == "wayfinding") && (!waypoints_published) && ((msg->state == "ready") || (msg->state == "running")))
+	if ((msg->name == "wayfinding") && (!WF_waypoints_published) && ((msg->state == "ready") || (msg->state == "running")))
 	{
-		convert = true;
+		WF_conv = true;
 		ROS_INFO("WF POINT CONVERTER ON");
 	}
 	else
 	{
-		convert = false;
+		WF_conv = false;
 		//ROS_INFO("WF POINT CONVERTER OFF");
 	}	
 }
@@ -200,7 +190,9 @@ int main(int argc, char **argv)
 	
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
 	
-	// Node handles
+	// NodeHandles
+	ros::NodeHandle nh1;
+	ros::NodeHandle nh2;
 	ros::NodeHandle nh3;
 	ros::NodeHandle nh4;
 	ros::NodeHandle nh5;
@@ -211,151 +203,141 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh10;
   
 	// Subscribers
-	ros::Subscriber task_status = nh3.subscribe("/vrx/task/info", 1, update_task);
-	ros::Subscriber ned_sub = nh4.subscribe("geonav_odom", 1000, NED_Func);
-	ros::Subscriber pose_sub = nh5.subscribe("/vrx/wayfinding/waypoints", 100, goal_pose_sub);                         			// subscriber for goal pose given by Task2_WF
+	ros::Subscriber task_status = nh1.subscribe("/vrx/task/info", 1, update_task);
+	ros::Subscriber WF_waypoints_sub = nh2.subscribe("/vrx/wayfinding/waypoints", 100, WF_goal_pose_sub);                         			// subscriber for goal waypoints given by Task2_WF
+	ros::Subscriber ned_sub = nh3.subscribe("geonav_odom", 1000, NED_Func);
 	
 	// Publishers
-	ros::Publisher waypoints_pub = nh7.advertise<amore::NED_waypoints>("waypoints_NED", 100); 							// NED waypoints publisher with Float64 []
-	ros::Publisher usvstate_pub = nh8.advertise<nav_msgs::Odometry>("nav_odom", 1000);   										// USV state publisher
+	ros::Publisher usvstate_pub = nh7.advertise<nav_msgs::Odometry>("nav_odom", 1000);   										// USV state publisher
+	ros::Publisher WF_waypoints_pub = nh8.advertise<amore::NED_waypoints>("waypoints_NED", 100); 							// WF goal poses converted to NED publisher
 	ros::Publisher WF_Converter_status_pub = nh9.advertise<std_msgs::Bool>("WF_Converter_status", 1);                 // WF_Converter_status publisher
 	ros::Publisher WF_geonav_transform_status_pub = nh10.advertise<std_msgs::Bool>("WF_geonav_transform_status", 1);                 // WF_geonav_transform_status publisher
 	
-	// Variables
+	// Local variables
 	nav_msgs::Odometry nav_odom;
-	geographic_msgs::GeoPath waypoints_NED;
-	geographic_msgs::GeoPoseStamped pose_NED;
-	std_msgs::Bool publish_status, geonav_transform_status;
-	amore::NED_waypoints NED_waypoints;
+	std_msgs::Bool WF_publish_status, WF_geonav_transform_status;
+	amore::NED_waypoints WF_NED_waypoints;
 	
-	// creating the vector
-	Point point_array[100];
-	Point point;
-	for (int i=0; i<100; i++)
-	{
-		point.x = i;
-		point.y = i;
-		point_array[i] = point;
-	}
-	std::vector<Point> point_vector (point_array, point_array + sizeof(point_array) / sizeof(Point));
-	
-	ros::Time current_time, last_time; 	// creates time variables
-	last_time = ros::Time::now();      		// sets last time to the time it is now
+	// Initialize simulation time
+	ros::Time::init();
+	ros::Time current_time, last_time;  // creates time variables
+	current_time = ros::Time::now();   // sets current time to the time it is now
+	last_time = ros::Time::now();        // sets last time to the time it is now
   
 	// Set the loop sleep rate
 	ros::Rate loop_rate(100); // {Hz} THIS IS TOUCHY BUSINESS
+
 
 	while(ros::ok())
 	{
 		current_time = ros::Time::now();
 		
-		// publish whether or not this code has published the waypoints
-		if (!waypoints_published)
+		// publish whether or not the WF goal waypoints converter has published the waypoints for the WF planner
+		if (!WF_waypoints_published)
 		{
-		  publish_status.data = true;
+		  WF_publish_status.data = false;
 		}
 		else
 		{
-		  publish_status.data = false;
+		  WF_publish_status.data = true;
 		}
-		WF_Converter_status_pub.publish(publish_status);
+		WF_Converter_status_pub.publish(WF_publish_status);
 		
 		// publish whether or not this code is using geonav transform package
-		if (!convert)
+		if (!WF_conv)
 		{
-		  geonav_transform_status.data = false;
+		  WF_geonav_transform_status.data = false;
 		}
 		else
 		{
-		  geonav_transform_status.data = true;
+		  WF_geonav_transform_status.data = true;
 		}
-		WF_geonav_transform_status_pub.publish(geonav_transform_status);
+		WF_geonav_transform_status_pub.publish(WF_geonav_transform_status);
 		
-		if ((loop_count > 5) && (!waypoints_converted) && (goal_lat_long) && (convert))
+		if ((!WF_waypoints_converted) && (WF_goal_lat_long_acquired) && (WF_conv))
 		{
-			// UPDATE NAV_ODOM MSG
-			GPS_Position();
-			GPS_Velocity();
-			IMU_processor();
-			// Fill the odometry header for nav_odom, the USV state in ENU and NWU
-			nav_odom.header.seq +=1;								// sequence number
-			nav_odom.header.stamp = current_time;				// sets stamp to current time
-			nav_odom.header.frame_id = "odom";					// header frame
-			nav_odom.child_frame_id = "base_link";				// child frame
-		
-			// Fill the USV pose
-			nav_odom.pose.pose.position.x = longitude; //sets long
-			nav_odom.pose.pose.position.y = latitude; //sets lat
-			nav_odom.pose.pose.position.z = altitude; //sets altitude
-			nav_odom.pose.pose.orientation.x = qx;
-			nav_odom.pose.pose.orientation.y = qy;
-			nav_odom.pose.pose.orientation.z = qz;
-			nav_odom.pose.pose.orientation.w = qw;
-			nav_odom.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-		
-			// Fill the USV velocities
-			nav_odom.twist.twist.linear.x = vx;
-			nav_odom.twist.twist.linear.y = vy;
-			nav_odom.twist.twist.linear.z = vz;
-			nav_odom.twist.twist.angular.x = omega_x;
-			nav_odom.twist.twist.angular.y = omega_y;
-			nav_odom.twist.twist.angular.z = omega_z;
-			nav_odom.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-			
-			if (!point_published)
+			if (!WF_point_sent)
 			{
+				// UPDATE NAV_ODOM MSG
+				WF_GPS_Position();
+				WF_GPS_Velocity();
+				WF_IMU_processor();
+				// Fill the odometry header for nav_odom, the USV state in ENU and NWU
+				nav_odom.header.seq +=1;								// sequence number
+				nav_odom.header.stamp = current_time;				// sets stamp to current time
+				nav_odom.header.frame_id = "odom";					// header frame
+				nav_odom.child_frame_id = "base_link";				// child frame
+			
+				// Fill the USV pose
+				nav_odom.pose.pose.position.x = longitude; //sets long
+				nav_odom.pose.pose.position.y = latitude; //sets lat
+				nav_odom.pose.pose.position.z = altitude; //sets altitude
+				nav_odom.pose.pose.orientation.x = qx;
+				nav_odom.pose.pose.orientation.y = qy;
+				nav_odom.pose.pose.orientation.z = qz;
+				nav_odom.pose.pose.orientation.w = qw;
+				nav_odom.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+	
+				// Fill the USV velocities
+				nav_odom.twist.twist.linear.x = vx;
+				nav_odom.twist.twist.linear.y = vy;
+				nav_odom.twist.twist.linear.z = vz;
+				nav_odom.twist.twist.angular.x = omega_x;
+				nav_odom.twist.twist.angular.y = omega_y;
+				nav_odom.twist.twist.angular.z = omega_z;
+				nav_odom.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 				usvstate_pub.publish(nav_odom);
-				point_published = true;
+				WF_point_sent = true;
 			}
 			
 			// Update waypoint array in NED units
-			if (point_num < goal_poses)
+			if (WF_point_num < WF_goal_poses_quantity)
 			{
-				x_NED[point_num] = xNED;
-				y_NED[point_num] = yNED;
-				psi_NED[point_num] = psiNED;
+				WF_x_NED[WF_point_num] = xNED;
+				WF_y_NED[WF_point_num] = yNED;
+				WF_psi_NED[WF_point_num] = psiNED;
 				
-				loop_confirm += 1;
-				if (loop_confirm == CONFIRM)
+				WF_loops_sent += 1;
+				if (WF_loops_sent == CONFIRM)
 				{
-					loop_confirm = 0;								// reset loop_confirm counter
-					point_num = point_num +1;
-					point_published = false;
+					WF_loops_sent = 0;								// reset WF_loops_sent counter
+					WF_point_num += 1;
+					WF_point_sent = false;
 				}
 			}
-			if (point_num == goal_poses) 							// means all coordinates have been converted
+			if (WF_point_num == WF_goal_poses_quantity) 							// means all coordinates have been converted
 			{
-				waypoints_converted = true;
+				WF_waypoints_converted = true;
 				ROS_INFO("WAYPOINTS HAVE BEEN CONVERTED");
 			}
-		} // if ((loop_count > 5) && (!waypoints_published))
+		} // if ((!WF_waypoints_converted) && (WF_goal_lat_long_acquired) && (WF_conv))
 		
-	    if ((waypoints_converted) && (!waypoints_published))
+	    if ((WF_waypoints_converted) && (!WF_waypoints_published))
 		{
-			NED_waypoints.points.clear();
+			WF_NED_waypoints.points.clear();
 			
-			NED_waypoints.quantity = goal_poses;        // publish quantity of poses so the high level control knows
+			WF_NED_waypoints.quantity = WF_goal_poses_quantity;        // publish quantity of poses so the high level control knows
 			
-			for (int i = 0; i < goal_poses; i++)
+			for (int i = 0; i < WF_goal_poses_quantity; i++)
 			{
 				geometry_msgs::Point point;
-				point.x = x_NED[i];
-				point.y = y_NED[i];
-				point.z = psi_NED[i];
-				NED_waypoints.points.push_back(point);
+				point.x = WF_x_NED[i];
+				point.y = WF_y_NED[i];
+				point.z = WF_psi_NED[i];
+				WF_NED_waypoints.points.push_back(point);
 				ROS_INFO("point: %i", i);
-				ROS_INFO("x: %f", x_NED[i]);
-				ROS_INFO("y: %f", y_NED[i]);
-				ROS_INFO("psi: %f", psi_NED[i]);
+				ROS_INFO("x: %f", WF_x_NED[i]);
+				ROS_INFO("y: %f", WF_y_NED[i]);
+				ROS_INFO("psi: %f", WF_psi_NED[i]);
 			}
-			waypoints_pub.publish(NED_waypoints);
-			waypoints_published = true;
+			WF_waypoints_pub.publish(WF_NED_waypoints);
+			WF_waypoints_published = true;
 			ROS_INFO("WAYPOINTS HAVE BEEN PUBLISHED");
-		} // if ((waypoints_converted) && (!waypoints_published))
+		} // if ((WF_waypoints_converted) && (!WF_waypoints_published))
 		
-		if (waypoints_published)
+		if (WF_waypoints_published)
 		{
-			waypoints_pub.publish(NED_waypoints);
+			WF_waypoints_pub.publish(WF_NED_waypoints);
 		}
 		
 		last_time = current_time;
