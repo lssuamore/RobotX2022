@@ -17,28 +17,28 @@
 //				Inputs: Position (x,y) to reach in global NED frame
 //				Outputs: Thruster outputs and angles for left and right thrusters
 
-// Includes all of the ROS libraries needed
+//................................................Included Libraries and Message Types..........................................
 #include "ros/ros.h"
-#include "tf/transform_broadcaster.h"
 #include "ros/console.h"
-#include "nav_msgs/Odometry.h"
-#include "sensor_msgs/NavSatFix.h"
-#include "sensor_msgs/Imu.h"
-#include "geometry_msgs/Vector3Stamped.h"
+#include "time.h"
 #include <sstream>
 #include <iostream>
+#include "math.h"
 #include "stdio.h"
-#include "time.h"
+
+#include "nav_msgs/Odometry.h"
 
 // include necessary message libraries
-#include "std_msgs/Float32.h"
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int32.h"
+#include "std_msgs/Float32.h"								// thruster commands
+#include "std_msgs/Bool.h"
+//...........................................End of Included Libraries and Message Types....................................
 
-// DEFINING GLOBAL VARIABLES
+//.................................................................Constants....................................................................
 #define PI 3.14159265
-// ---------------------------------------------------------------------------------------------------------------------
-int loop_count = 0;                          // used to stop the differential and integration term from being  processed first time through the loop
+//............................................................End of Constants.............................................................
+
+//..............................................................Global Variables............................................................
+int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
 float duration = 1000;      // amount of time to finish the path 
 float dt = 0.25;                 // [s] used for differential term
 
@@ -192,9 +192,7 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "Station_keeping");
   ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
   
-  std_msgs::Float32 LT, RT, LA, RA;            // LT is left thrust, RT is right thrust, LA is left thruster angle, RA is right thruster angle
-  
-  // set up NodeHandles
+  // NodeHandles
   ros::NodeHandle nh2;  // this node handle is used for subscribing to usv_ned which provides position in x, y
   ros::NodeHandle nh4;  // this node handle is used for subscribing to the desired pose, which is published by the high level controller
   ros::NodeHandle nh5;  // this node handle is used for publishing thrust speed to starboard side 
@@ -202,15 +200,18 @@ int main(int argc, char **argv)
   ros::NodeHandle nh7;  // this node handle is used for publishing thrust angle to starboard side 
   ros::NodeHandle nh8;  // this node handle is used for publishing thrust angle to port side
   
-  // start subscribers and publishers
+  // Subscribers
   ros::Subscriber ned_sub = nh2.subscribe("usv_ned", 1, pose_update);                                                               // subscriber for current position converted to NED
   ros::Subscriber pose_sub = nh4.subscribe("mpp_goal", 1, goal_pose_update);                                                  // subscriber for goal pose given by path planners
   
+  // Publishers
   ros::Publisher stbd_T_pub = nh5.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_cmd", 10);      // publishes float value between -1.0 and 1.0, speed to right thruster
   ros::Publisher port_T_pub = nh6.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_cmd", 10);         // publishes float value between -1.0 and 1.0, speed to left thruster
   ros::Publisher stbd_A_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_angle", 10);     // publishes float value between -PI to PI, angle to right thruster
   ros::Publisher port_A_pub = nh8.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_angle", 10);        // publishes float value between -PI to PI, angle to left thruster
   
+  // Local variables
+  std_msgs::Float32 LT, RT, LA, RA;            // LT is left thrust, RT is right thrust, LA is left thruster angle, RA is right thruster angle
   ros::Time current_time, last_time;  // creates time variables
   current_time = ros::Time::now();   // sets current time to the time it is now
   last_time = ros::Time::now();        // sets last time to the time it is now

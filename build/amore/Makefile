@@ -198,6 +198,36 @@ Task1_SK_Planner/fast:
 .PHONY : Task1_SK_Planner/fast
 
 # Convenience name for target.
+amore/CMakeFiles/mission_control.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/mission_control.dir/rule
+.PHONY : amore/CMakeFiles/mission_control.dir/rule
+
+# Convenience name for target.
+mission_control: amore/CMakeFiles/mission_control.dir/rule
+
+.PHONY : mission_control
+
+# fast build rule for target.
+mission_control/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/build
+.PHONY : mission_control/fast
+
+# Convenience name for target.
+amore/CMakeFiles/new_gps_imu.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/new_gps_imu.dir/rule
+.PHONY : amore/CMakeFiles/new_gps_imu.dir/rule
+
+# Convenience name for target.
+new_gps_imu: amore/CMakeFiles/new_gps_imu.dir/rule
+
+.PHONY : new_gps_imu
+
+# fast build rule for target.
+new_gps_imu/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/new_gps_imu.dir/build.make amore/CMakeFiles/new_gps_imu.dir/build
+.PHONY : new_gps_imu/fast
+
+# Convenience name for target.
 amore/CMakeFiles/stereo_vis.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/stereo_vis.dir/rule
 .PHONY : amore/CMakeFiles/stereo_vis.dir/rule
@@ -1976,6 +2006,60 @@ src/lidar_subscriber.cpp.s:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/lidar_subscriber.dir/build.make amore/CMakeFiles/lidar_subscriber.dir/src/lidar_subscriber.cpp.s
 .PHONY : src/lidar_subscriber.cpp.s
 
+src/mission_control.o: src/mission_control.cpp.o
+
+.PHONY : src/mission_control.o
+
+# target to build an object file
+src/mission_control.cpp.o:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/src/mission_control.cpp.o
+.PHONY : src/mission_control.cpp.o
+
+src/mission_control.i: src/mission_control.cpp.i
+
+.PHONY : src/mission_control.i
+
+# target to preprocess a source file
+src/mission_control.cpp.i:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/src/mission_control.cpp.i
+.PHONY : src/mission_control.cpp.i
+
+src/mission_control.s: src/mission_control.cpp.s
+
+.PHONY : src/mission_control.s
+
+# target to generate assembly for a file
+src/mission_control.cpp.s:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/src/mission_control.cpp.s
+.PHONY : src/mission_control.cpp.s
+
+src/new_gps_imu.o: src/new_gps_imu.cpp.o
+
+.PHONY : src/new_gps_imu.o
+
+# target to build an object file
+src/new_gps_imu.cpp.o:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/new_gps_imu.dir/build.make amore/CMakeFiles/new_gps_imu.dir/src/new_gps_imu.cpp.o
+.PHONY : src/new_gps_imu.cpp.o
+
+src/new_gps_imu.i: src/new_gps_imu.cpp.i
+
+.PHONY : src/new_gps_imu.i
+
+# target to preprocess a source file
+src/new_gps_imu.cpp.i:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/new_gps_imu.dir/build.make amore/CMakeFiles/new_gps_imu.dir/src/new_gps_imu.cpp.i
+.PHONY : src/new_gps_imu.cpp.i
+
+src/new_gps_imu.s: src/new_gps_imu.cpp.s
+
+.PHONY : src/new_gps_imu.s
+
+# target to generate assembly for a file
+src/new_gps_imu.cpp.s:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/new_gps_imu.dir/build.make amore/CMakeFiles/new_gps_imu.dir/src/new_gps_imu.cpp.s
+.PHONY : src/new_gps_imu.cpp.s
+
 src/object_d.o: src/object_d.cpp.o
 
 .PHONY : src/object_d.o
@@ -2068,9 +2152,11 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
 	@echo "... Task2_WF_gps_imu"
 	@echo "... Task1_SK_Planner"
+	@echo "... edit_cache"
+	@echo "... mission_control"
+	@echo "... new_gps_imu"
 	@echo "... stereo_vis"
 	@echo "... object_d"
 	@echo "... traj_pub"
@@ -2211,6 +2297,12 @@ help:
 	@echo "... src/lidar_subscriber.o"
 	@echo "... src/lidar_subscriber.i"
 	@echo "... src/lidar_subscriber.s"
+	@echo "... src/mission_control.o"
+	@echo "... src/mission_control.i"
+	@echo "... src/mission_control.s"
+	@echo "... src/new_gps_imu.o"
+	@echo "... src/new_gps_imu.i"
+	@echo "... src/new_gps_imu.s"
 	@echo "... src/object_d.o"
 	@echo "... src/object_d.i"
 	@echo "... src/object_d.s"

@@ -21,40 +21,34 @@
 #include <iostream>
 #include "math.h"
 #include "stdio.h"
-#include "std_msgs/Int32.h"
-#include "std_msgs/Float32.h"
-#include "std_msgs/Float64.h"
 #include "std_msgs/Bool.h"
 #include "nav_msgs/Odometry.h"
-#include "sensor_msgs/NavSatFix.h"
-#include "sensor_msgs/Imu.h"
-#include "geometry_msgs/Vector3Stamped.h"
-#include "geographic_msgs/GeoPath.h"
-#include "tf/transform_broadcaster.h"
-
-#include "vrx_gazebo/Task.h"
+#include "sensor_msgs/NavSatFix.h"									// message type of lat and long coordinates given by the gps_sensor
+#include "sensor_msgs/Imu.h"												// message type of orientation quaternion and angular velocities given by the GPS
+#include "geometry_msgs/Vector3Stamped.h"						// message type of linear velocities given by the IMU
 //...........................................End of Included Libraries and Message Types....................................
 
-//.................................................................Constants..................................................................
+//.................................................................Constants....................................................................
 #define PI 3.14159265
 //............................................................End of Constants.............................................................
 
 //..............................................................Global Variables............................................................
-int loop_count=0;                                    // used to keep track of loop, first 10 loops are used to just intitialize the subscribers
-double latitude, longitude, altitude;			// The ECEF position variables in spherical coordinates
-float qx, qy, qz, qw;								//
-float omega_x, omega_y, omega_z;		// angular velocities
-float vx, vy, vz;										// linear velocities
-double xNED, yNED, zNED;			        // The NED position
+int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
+
+double latitude, longitude, altitude;									// ECEF position variables in spherical coordinates
+float qx, qy, qz, qw;														// 
+float omega_x, omega_y, omega_z;								// angular velocities
+float vx, vy, vz;																// linear velocities
+
+double xNED, yNED, zNED;			        						// NED position
 float q1NED, q2NED, q3NED, q0NED;
 float phiNED, thetaNED, psiNED;
 float omega_xNED, omega_yNED, omega_zNED;		// angular velocities
 float vxNED, vyNED, vzNED;										// linear velocities
-float qx_goal[100], qy_goal[100], qz_goal[100], qw_goal[100];
-float goal_lat[100], goal_long[100];
-bool WF_conv = true; 							 // WF_conv = true means the WF waypoint converter is being used
-bool SK_conv = true;   							// SK_conv = true means the SK point converter is being used
-bool function = false;								// function = false means this should not function, thus not publish to nodes that are in use elsewhere
+
+bool WF_conv = false; 													// WF_conv = true means the WF waypoint converter is being used
+bool SK_conv = false;   												// SK_conv = true means the SK point converter is being used
+bool NED_conv = false;												// NED_conv = false means this should not function, thus not publish to nodes that are in use elsewhere
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
@@ -174,11 +168,8 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "gps_imu");
 	
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
-	
-	// Variables
-	nav_msgs::Odometry nav_odom, nav_NED;
   
-	// Node handles
+	// NodeHandles
 	ros::NodeHandle nh1;
 	ros::NodeHandle nh2;
 	ros::NodeHandle nh3;
@@ -193,7 +184,7 @@ int main(int argc, char **argv)
 	ros::Subscriber imu_sub = nh2.subscribe("/wamv/sensors/imu/imu/data", 1000, IMU_processor);  // subscribes to IMU
 	ros::Subscriber gpsvel_sub = nh3.subscribe("/wamv/sensors/gps/gps/fix_velocity", 1000, GPS_Velocity);  // subscribes to GPS velocity
 	ros::Subscriber ned_sub = nh4.subscribe("geonav_odom", 1000, NED_Func);
-	ros::Subscriber SK_Converter_sub = nh5.subscribe("SK_Converter_status", 1, SK_conv_status);              // subscriber for whether or not goal SK pose has been converted yet
+	//ros::Subscriber SK_Converter_sub = nh5.subscribe("SK_Converter_status", 1, SK_conv_status);              // subscriber for whether or not goal SK pose has been converted yet
 	ros::Subscriber WF_Converter_sub = nh6.subscribe("WF_geonav_transform_status", 1, WF_conv_status);            // subscriber for whether or not goal waypoints have been converted yet
 	// ros::Subscriber state_sub = nh2.subscribe("usv_ned", 10, HMI);  // subscribes to local odometry frame, "geonav_odom" was the topic
 	
@@ -201,12 +192,17 @@ int main(int argc, char **argv)
 	ros::Publisher usvstate_pub = nh7.advertise<nav_msgs::Odometry>("nav_odom", 1000); // USV state publisher
 	ros::Publisher nedstate_pub = nh8.advertise<nav_msgs::Odometry>("usv_ned", 1000); // USV state publisher in NED	
 	
+	// Local variables
+	nav_msgs::Odometry nav_odom, nav_NED;
+	
+	// Initialize simulation time
+	ros::Time::init();
 	ros::Time current_time, last_time;  // creates time variables
 	current_time = ros::Time::now();   // sets current time to the time it is now
 	last_time = ros::Time::now();        // sets last time to the time it is now
   
 	// Set the loop sleep rate
-	ros::Rate loop_rate(200); //  {Hz}
+	ros::Rate loop_rate(20);						// {Hz} GPS update rate: 20 Hz, IMU update rate: 100 Hz
 
 	while(ros::ok())
 	{
@@ -214,16 +210,16 @@ int main(int argc, char **argv)
 		
 		if ((loop_count > 10) &&(!WF_conv) && (!SK_conv))
 		{
-			function = true;
+			NED_conv = true;
 			//ROS_INFO("POSE CONVERTER ON");
 		}
 		else
 		{
-			function = false;
+			NED_conv = false;
 			//ROS_INFO("POSE CONVERTER OFF");
 		}
 		
-		if (function)
+		if (NED_conv)
 		{
 			// Fill the odometry header for nav_odom, the USV state in ENU and NWU
 			nav_odom.header.seq +=1;								// sequence number

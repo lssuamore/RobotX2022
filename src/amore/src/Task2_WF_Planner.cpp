@@ -13,54 +13,46 @@
 //				Inputs [subscribers]: waypoints in lat and long from VRX Task 1
 //				Outputs [publishers]: goal pose for SK controller to subscribe to
 
-// Includes all of the ROS libraries needed
+//................................................Included Libraries and Message Types..........................................
 #include "ros/ros.h"
-#include "tf/transform_broadcaster.h"
 #include "ros/console.h"
-#include "nav_msgs/Odometry.h"
-#include "sensor_msgs/NavSatFix.h"
-#include "sensor_msgs/Imu.h"
-#include "geometry_msgs/Vector3Stamped.h"
-#include "geographic_msgs/GeoPath.h"
+#include "time.h"
 #include <sstream>
 #include <iostream>
+#include "math.h"
 #include "stdio.h"
-#include "time.h"
 
-#include "geometry_msgs/Point.h"
+#include "nav_msgs/Odometry.h"
 #include "amore/NED_waypoints.h"
-#include "vrx_gazebo/Task.h"
+
+#include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
 
 // include necessary message libraries
 #include "std_msgs/Float32.h"
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int32.h"
 #include "std_msgs/Bool.h"
+//...........................................End of Included Libraries and Message Types....................................
 
-// DEFINING GLOBAL VARIABLES
+//.................................................................Constants....................................................................
 #define PI 3.14159265
+//............................................................End of Constants.............................................................
 
-// Global Variables ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int loop_count = 0;      					// used to keep track of loop, first 10 loops are used to just intitialize the subscribers
-int loop_ON = -1;           		 			// keeps track of loop when this controller comes on
-int consecutive_loops = 0;         	// keeps track of consecutive loops of no improvement in errors
-int point = 0;                     		    	// used to keep track of the number of points on trajectory reached 
-int goal_poses;              					// total number of points to reach 
+//..............................................................Global Variables............................................................
+int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
+int loop_ON = -1;           		 								// loop controller's activated (WF_Planner_active)
+int consecutive_loops = 0;         						// consecutive loops of no improvement in heading or position errors
+int point = 0;                     		    						// number of points on trajectory reached 
+int goal_poses;              										// total number of poses to reach 
 
-float x_goal[100], y_goal[100], psi_goal[100];  // array to hold the NED goal poses
+float x_goal[100], y_goal[100], psi_goal[100];	// arrays to hold the NED goal poses
+float x_usv_NED, y_usv_NED, psi_NED; 		// vehicle position and heading (pose) in NED
 
-// for holding vehicle position and heading in NED
-float x_usv_NED, y_usv_NED, psi_NED;
+float ON_OFF = 0.0;      									// 0.0 = controller OFF, 1.0 = controller ON
 
-float ON_OFF = 0.0;      // 0.0 = controller OFF, 1.0 = controller ON
+float e_x, e_y, e_xy, e_psi;								// current errors between goal pose and usv pose
+float e_xy_prev, e_psi_prev;								// previous errors
 
-// error variables used to calculate magnitude of pose error
-float e_x, e_y, e_xy, e_psi;
-float e_xy_prev, e_psi_prev;
-
-// error tolerance thresholds, NOTE: these should be as small as possible
-float e_xy_allowed = 0.4;       // positional 
-float e_psi_allowed = 0.4;      // heading
+float e_xy_allowed = 0.4;       							// positional error tolerance threshold; NOTE: make as small as possible
+float e_psi_allowed = 0.4;      								// heading error tolerance threshold; NOTE: make as small as possible
 
 bool goal_recieved = false;   // if goal_recieved = false, goal position has not been acquired from "mpp_goal" yet
 int loop_goal_recieved;          // this is kept in order to ensure planner doesn't start until sytem is through initial startup
@@ -68,7 +60,7 @@ bool point_reached = false;   // if point_reached is false this means the curren
 int point_reached_loop = -1; // keeps track of which loop the point is reached
 bool E_reached = false;        // if E_reached is false this means the last point has not been reached
 bool waypoints_published = false;        // if waypoints_published is false this means the NED poses have not yet been calculated and published 
-bool function = false;                           // if convert = false, this means according to the current task status, conversion shouldn't be done
+bool WF_Planner_active = false;                           // if WF_Planner_active = false, this means according to the current task status, conversion shouldn't be done
 bool TIMER_SET = false;                  	// used to tell if the next point timer has been set
 
 //..................................................................Functions.................................................................
@@ -131,7 +123,7 @@ void update_task(const vrx_gazebo::Task::ConstPtr& msg)
 {
 	if ((msg->name == "wayfinding") && (goal_recieved) && ((msg->state == "ready") || (msg->state == "running")))
 	{
-		function = true;
+		WF_Planner_active = true;
 		if (loop_ON == -1)
 		{
 			loop_ON = loop_count;
@@ -140,7 +132,7 @@ void update_task(const vrx_gazebo::Task::ConstPtr& msg)
 	}
 	else
 	{
-		function = false;
+		WF_Planner_active = false;
 		loop_ON = -1;
 		//ROS_INFO("WF PLANNER IS OFF");
 	}
@@ -154,7 +146,7 @@ int main(int argc, char **argv)
   
   ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
   
-  // set up NodeHandles
+  // NodeHandles
   ros::NodeHandle nh1;
   ros::NodeHandle nh2;  // subscriber to usv_ned which provides pose in NED
   ros::NodeHandle nh3;  // subscriber to waypoints_NED which provides goal waypoints in NED
@@ -162,16 +154,17 @@ int main(int argc, char **argv)
   ros::NodeHandle nh5;
   ros::NodeHandle nh6;  // publisher to mpp_goal
   
-  // start publishers and subscribers
+  // Subscribers
   ros::Subscriber task_status = nh1.subscribe("/vrx/task/info", 1, update_task);
   ros::Subscriber ned_sub = nh2.subscribe("usv_ned", 1, pose_update);                                                               // subscriber for current position converted to NED
   ros::Subscriber waypoints_ned_sub = nh3.subscribe("waypoints_NED", 1, goal_update);                                 // subscriber for goal waypoints converted to NED
   ros::Subscriber WF_Converter_sub = nh4.subscribe("WF_Converter_status", 1, goal_publish_check);           // subscriber for whether or not goal waypoints have been converted yet
   
+  // Publishers
   ros::Publisher WF_Planner_status_pub = nh5.advertise<std_msgs::Bool>("WF_Planner_status", 1);              // WF_Planner status publisher
   ros::Publisher mpp_goal_pub = nh6.advertise<nav_msgs::Odometry>("mpp_goal", 1);                                    // publisher for current goal for low level controller
   
-  // local variables //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Local variables
   nav_msgs::Odometry nav_odom; // mpp_goal position
   std_msgs::Bool publish_status;     // WF_Planner_status
   
@@ -202,7 +195,7 @@ int main(int argc, char **argv)
 	  }
 	  WF_Planner_status_pub.publish(publish_status);
 	  
-	  if ((goal_recieved) && (loop_count > loop_goal_recieved+1000) && (function))
+	  if ((goal_recieved) && (loop_count > loop_goal_recieved+1000) && (WF_Planner_active))
 	  {
 		  // determine error in x and y (position)
 		  e_x = x_goal[point] - x_usv_NED;                                       // calculate error in x position
@@ -292,7 +285,7 @@ int main(int argc, char **argv)
 		  nav_odom.twist.twist.angular.z = 0.0;
 		  nav_odom.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 		  mpp_goal_pub.publish(nav_odom); // publishes desired pose to mpp_goal node
-	  } // if ((goal_recieved) && (loop_count > loop_goal_recieved+1000) && (function))
+	  } // if ((goal_recieved) && (loop_count > loop_goal_recieved+1000) && (WF_Planner_active))
 	  
       // DEBUG INFO
 	  /* ROS_INFO("ON_OFF: %.1f", ON_OFF);

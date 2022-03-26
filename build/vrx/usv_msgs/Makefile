@@ -114,16 +114,6 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
@@ -134,6 +124,16 @@ test:
 test/fast: test
 
 .PHONY : test/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -196,6 +196,21 @@ usv_msgs_generate_messages_cpp: vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messag
 usv_msgs_generate_messages_cpp/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_cpp.dir/build.make vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_cpp.dir/build
 .PHONY : usv_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+vrx/usv_msgs/CMakeFiles/_catkin_empty_exported_target.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_msgs/CMakeFiles/_catkin_empty_exported_target.dir/rule
+.PHONY : vrx/usv_msgs/CMakeFiles/_catkin_empty_exported_target.dir/rule
+
+# Convenience name for target.
+_catkin_empty_exported_target: vrx/usv_msgs/CMakeFiles/_catkin_empty_exported_target.dir/rule
+
+.PHONY : _catkin_empty_exported_target
+
+# fast build rule for target.
+_catkin_empty_exported_target/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f vrx/usv_msgs/CMakeFiles/_catkin_empty_exported_target.dir/build.make vrx/usv_msgs/CMakeFiles/_catkin_empty_exported_target.dir/build
+.PHONY : _catkin_empty_exported_target/fast
 
 # Convenience name for target.
 vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_eus.dir/rule:
@@ -358,8 +373,10 @@ help:
 	@echo "... install"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... test"
 	@echo "... usv_msgs_generate_messages"
 	@echo "... usv_msgs_generate_messages_cpp"
+	@echo "... _catkin_empty_exported_target"
 	@echo "... usv_msgs_generate_messages_eus"
 	@echo "... usv_msgs_gencpp"
 	@echo "... usv_msgs_geneus"
@@ -371,7 +388,6 @@ help:
 	@echo "... usv_msgs_generate_messages_py"
 	@echo "... usv_msgs_generate_messages_lisp"
 	@echo "... usv_msgs_genlisp"
-	@echo "... test"
 .PHONY : help
 
 

@@ -13,32 +13,32 @@
 //				Inputs [subscribers]: goal pose in lat and long from VRX Task 1
 //				Outputs [publishers]: goal pose for SK controller to subscribe to
 
-// Includes all of the ROS libraries needed
+//................................................Included Libraries and Message Types..........................................
 #include "ros/ros.h"
-#include "tf/transform_broadcaster.h"
 #include "ros/console.h"
-#include "nav_msgs/Odometry.h"
-#include "sensor_msgs/NavSatFix.h"
-#include "sensor_msgs/Imu.h"
-#include "geometry_msgs/Vector3Stamped.h"
-#include "geographic_msgs/GeoPoseStamped.h"
+#include "time.h"
 #include <sstream>
 #include <iostream>
+#include "math.h"
 #include "stdio.h"
-#include "time.h"
-#include "vrx_gazebo/Task.h"
+
+#include "nav_msgs/Odometry.h"
+
+#include "geometry_msgs/Point.h"
+
+#include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
 
 // include necessary message libraries
-#include "std_msgs/Float32.h"
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int32.h"
+//#include "std_msgs/Float32.h"
 #include "std_msgs/Bool.h"
+//...........................................End of Included Libraries and Message Types....................................
 
-// DEFINING GLOBAL VARIABLES
+//.................................................................Constants....................................................................
 #define PI 3.14159265
+//............................................................End of Constants.............................................................
 
-// Global Variables ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int loop_count=0;            // used to keep track of loop, first 10 loops are used to just intitialize the subscribers
+//..............................................................Global Variables............................................................
+int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
 float x_goal;
 float y_goal;
 float psi_goal;
@@ -57,7 +57,7 @@ bool goal_recieved = false;  // if goal_recieved = false, goal position has not 
 int loop_goal_recieved;          // this is kept in order to ensure planner doesn't start until sytem is through initial startup
 bool point_reached = false;   // if point_reached is false this means the current point has not been reached
 bool E_reached = false;        // if E_reached is false this means the last point has not been reached
-bool function = false;                           // if convert = false, this means according to the current task status, conversion shouldn't be done
+bool function = false;                           // if function = false, this means according to the current task status, conversion shouldn't be done
 bool SK_Ready = false;        // if SK_Ready = false, this means the station keeping task is not in the ready stage
 
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
@@ -130,20 +130,21 @@ int main(int argc, char **argv)
   
   ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
   
-  // set up NodeHandles
+  // NodeHandles
   ros::NodeHandle nh1;
   ros::NodeHandle nh2;  // subscriber to usv_ned which provides pose in NED
   ros::NodeHandle nh5;  // publisher to SK_Planner_status
   ros::NodeHandle nh6;  // publisher to mpp_goal
   
-  // start publishers and subscribers
+  // Subscribers
   ros::Subscriber task_status = nh1.subscribe("/vrx/task/info", 1, update_task);
   ros::Subscriber ned_sub = nh2.subscribe("usv_ned", 1, pose_update);                                                               // subscriber for current position converted to NED
   
+  // Publishers
   ros::Publisher SK_Planner_status_pub = nh5.advertise<std_msgs::Bool>("SK_Planner_status", 1);                // SK_Planner status publisher
   ros::Publisher mpp_goal_pub = nh6.advertise<nav_msgs::Odometry>("mpp_goal", 1);                                     // publisher for current goal for low level controller
   
-  // local variables //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Local variables
   nav_msgs::Odometry nav_odom; // mpp_goal position
   std_msgs::Bool publish_status;     // SK_Planner_status
   
