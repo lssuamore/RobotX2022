@@ -1,5 +1,7 @@
 # Hashes of file build rules.
 8d94c46bccb3c9d78ee5f9cefe43f902 /home/brad/RobotX2022/devel/include/amore/NED_waypoints.h
+c750ccd715b2e6c5bef0b74151e4032c /home/brad/RobotX2022/devel/include/amore/state_msg.h
+7536d47468b9364e7578ae04c39b71ac /home/brad/RobotX2022/devel/include/amore/usv_pose_msg.h
 16355b0828468cfa0f9281a9572b7b90 /home/brad/RobotX2022/devel/include/usv_msgs/RangeBearing.h
 38497581f420f4ec27d2fd8c33f94d89 /home/brad/RobotX2022/devel/include/vrx_gazebo/BallShooter.h
 5d7ee656a459cca0830d08e838f37ef8 /home/brad/RobotX2022/devel/include/vrx_gazebo/ColorSequence.h
@@ -7,6 +9,8 @@
 1b68fa7edee8fe79e10ae8e3dbc92d25 /home/brad/RobotX2022/devel/include/vrx_gazebo/Task.h
 fa6cfd4278af0389ca19fcc33cbd7660 /home/brad/RobotX2022/devel/lib/python3/dist-packages/amore/msg/_NED_waypoints.py
 fc5ac2f27da1880de1c9f18ea5284f4c /home/brad/RobotX2022/devel/lib/python3/dist-packages/amore/msg/__init__.py
+96a7330c393a5047181f6e5dfa25c0c0 /home/brad/RobotX2022/devel/lib/python3/dist-packages/amore/msg/_state_msg.py
+237bb2997c92e9fb70d742e9273e461e /home/brad/RobotX2022/devel/lib/python3/dist-packages/amore/msg/_usv_pose_msg.py
 1327c2efeb1ac89d640c58587a1c1935 /home/brad/RobotX2022/devel/lib/python3/dist-packages/usv_msgs/msg/_RangeBearing.py
 436b4f20ed2fddd644c0aefe3ed11bcf /home/brad/RobotX2022/devel/lib/python3/dist-packages/usv_msgs/msg/__init__.py
 e4cbbf3a940c9f950922df9abf34f8b0 /home/brad/RobotX2022/devel/lib/python3/dist-packages/vrx_gazebo/msg/_Contact.py
@@ -16,12 +20,16 @@ a4e57275ceb23ab1688c0f2b6fceeaf8 /home/brad/RobotX2022/devel/lib/python3/dist-pa
 b2ef7e47d1f8792387822c1d14aa10e4 /home/brad/RobotX2022/devel/lib/python3/dist-packages/vrx_gazebo/srv/_ColorSequence.py
 be07e8072c6782462bf8f9123138f4ec /home/brad/RobotX2022/devel/lib/python3/dist-packages/vrx_gazebo/srv/__init__.py
 c0c0fb027c18ec85a4404f6ad2397c27 /home/brad/RobotX2022/devel/share/common-lisp/ros/amore/msg/NED_waypoints.lisp
+716471572564b2991c7da2531d28d19c /home/brad/RobotX2022/devel/share/common-lisp/ros/amore/msg/state_msg.lisp
+54340ae7ba738321130ccdb058cb444f /home/brad/RobotX2022/devel/share/common-lisp/ros/amore/msg/usv_pose_msg.lisp
 14fbe1de5ce9cc6345977ac44188647f /home/brad/RobotX2022/devel/share/common-lisp/ros/usv_msgs/msg/RangeBearing.lisp
 096cb708a6fed1803171b1ed72068a8e /home/brad/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/msg/Contact.lisp
 e1a9277aca259dab68b4d4c7fd651bfc /home/brad/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/msg/Task.lisp
 cb4dfab5fc8dd33311dea0618baee766 /home/brad/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/srv/BallShooter.lisp
 9f698a07a1c38407e7c4d7a9fa841aca /home/brad/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/srv/ColorSequence.lisp
 8ebfece08db518677f05e96ddc3a09d2 /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js
+1cf709c400f9f1b80c68fac4a6bb6ec9 /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/state_msg.js
+75d2d877a4bb630e1d85dd39ff3d2611 /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js
 dd70e17958b0fe308d3666dbac13ab46 /home/brad/RobotX2022/devel/share/gennodejs/ros/usv_msgs/msg/RangeBearing.js
 0ae5f68ac2c580c9f3a112c4e2ead44b /home/brad/RobotX2022/devel/share/gennodejs/ros/vrx_gazebo/msg/Contact.js
 088cb18a1f566c2489ee836bb2c86b5a /home/brad/RobotX2022/devel/share/gennodejs/ros/vrx_gazebo/msg/Task.js
@@ -29,6 +37,8 @@ dd70e17958b0fe308d3666dbac13ab46 /home/brad/RobotX2022/devel/share/gennodejs/ros
 570f8a6979e83eb3192d7c44049046af /home/brad/RobotX2022/devel/share/gennodejs/ros/vrx_gazebo/srv/ColorSequence.js
 98aeebad3cd930fe9d79ebf5eadf661c /home/brad/RobotX2022/devel/share/roseus/ros/amore/manifest.l
 0648c94871a0d084fb5122e04ddce11b /home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/NED_waypoints.l
+539d888ea0ba7ff8ae8ad0a1f9a5d9d5 /home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/state_msg.l
+f48b7441fa060fc67c0278cc33e1df26 /home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/usv_pose_msg.l
 e1e01fa650e66e212e303d9e0143c77b /home/brad/RobotX2022/devel/share/roseus/ros/usv_msgs/manifest.l
 ee04341bdf332f62459e9e281c765ca7 /home/brad/RobotX2022/devel/share/roseus/ros/usv_msgs/msg/RangeBearing.l
 3699d8b52811f2081c9d0e281b677629 /home/brad/RobotX2022/devel/share/roseus/ros/vrx_gazebo/manifest.l
@@ -82,6 +92,8 @@ eee4ac6c29d70efb0d64531eda998748 /home/brad/RobotX2022/src/vrx/vrx_gazebo/models
 080772c251f7cd920ed8bab5df5c8a3a /home/brad/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 5c6d420a15e83e5d01123cbedb403402 CMakeFiles/clean_test_results
 cd8e04dcad8682a29a11302329563756 amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints
+7be93130b1a231e78c69ea50ee5ef2db amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg
+318d6918b0c59b4a036f3ac1697c8710 amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg
 7c122f44b501bbf23aa3eb3775418257 amore/CMakeFiles/amore_generate_messages_cpp
 7c122f44b501bbf23aa3eb3775418257 amore/CMakeFiles/amore_generate_messages_eus
 7c122f44b501bbf23aa3eb3775418257 amore/CMakeFiles/amore_generate_messages_lisp

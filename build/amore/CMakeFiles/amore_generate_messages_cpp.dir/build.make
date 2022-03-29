@@ -54,6 +54,8 @@ CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
 include amore/CMakeFiles/amore_generate_messages_cpp.dir/progress.make
 
 amore/CMakeFiles/amore_generate_messages_cpp: /home/brad/RobotX2022/devel/include/amore/NED_waypoints.h
+amore/CMakeFiles/amore_generate_messages_cpp: /home/brad/RobotX2022/devel/include/amore/usv_pose_msg.h
+amore/CMakeFiles/amore_generate_messages_cpp: /home/brad/RobotX2022/devel/include/amore/state_msg.h
 
 
 /home/brad/RobotX2022/devel/include/amore/NED_waypoints.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
@@ -63,8 +65,27 @@ amore/CMakeFiles/amore_generate_messages_cpp: /home/brad/RobotX2022/devel/includ
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from amore/NED_waypoints.msg"
 	cd /home/brad/RobotX2022/src/amore && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/brad/RobotX2022/src/amore/msg/NED_waypoints.msg -Iamore:/home/brad/RobotX2022/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/RobotX2022/devel/include/amore -e /opt/ros/noetic/share/gencpp/cmake/..
 
+/home/brad/RobotX2022/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/brad/RobotX2022/devel/include/amore/usv_pose_msg.h: /home/brad/RobotX2022/src/amore/msg/usv_pose_msg.msg
+/home/brad/RobotX2022/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+/home/brad/RobotX2022/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/brad/RobotX2022/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/RobotX2022/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from amore/usv_pose_msg.msg"
+	cd /home/brad/RobotX2022/src/amore && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/brad/RobotX2022/src/amore/msg/usv_pose_msg.msg -Iamore:/home/brad/RobotX2022/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/RobotX2022/devel/include/amore -e /opt/ros/noetic/share/gencpp/cmake/..
+
+/home/brad/RobotX2022/devel/include/amore/state_msg.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/brad/RobotX2022/devel/include/amore/state_msg.h: /home/brad/RobotX2022/src/amore/msg/state_msg.msg
+/home/brad/RobotX2022/devel/include/amore/state_msg.h: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+/home/brad/RobotX2022/devel/include/amore/state_msg.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/RobotX2022/devel/include/amore/state_msg.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from amore/state_msg.msg"
+	cd /home/brad/RobotX2022/src/amore && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/brad/RobotX2022/src/amore/msg/state_msg.msg -Iamore:/home/brad/RobotX2022/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/RobotX2022/devel/include/amore -e /opt/ros/noetic/share/gencpp/cmake/..
+
 amore_generate_messages_cpp: amore/CMakeFiles/amore_generate_messages_cpp
 amore_generate_messages_cpp: /home/brad/RobotX2022/devel/include/amore/NED_waypoints.h
+amore_generate_messages_cpp: /home/brad/RobotX2022/devel/include/amore/usv_pose_msg.h
+amore_generate_messages_cpp: /home/brad/RobotX2022/devel/include/amore/state_msg.h
 amore_generate_messages_cpp: amore/CMakeFiles/amore_generate_messages_cpp.dir/build.make
 
 .PHONY : amore_generate_messages_cpp
