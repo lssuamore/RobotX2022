@@ -251,12 +251,12 @@ bool GeonavTransform::setDatum(double lat, double lon, double alt,
   double utm_y = 0;
   NavsatConversions::LLtoUTM(lat, lon, utm_y, utm_x, utm_zone_);
   
-  /* ROS_INFO_STREAM("Datum (latitude, longitude, altitude) is (" 
+  ROS_INFO_STREAM("Datum (latitude, longitude, altitude) is (" 
 		  << std::fixed << lat << ", "
 		  << lon << ", " << alt << ")");
   ROS_INFO_STREAM("Datum UTM Zone is: " << utm_zone_);
   ROS_INFO_STREAM("Datum UTM coordinate is (" 
-		  << std::fixed << utm_x << ", " << utm_y << ")"); */
+		  << std::fixed << utm_x << ", " << utm_y << ")");
 
   
   // Set the transform utm->odom
@@ -267,8 +267,8 @@ bool GeonavTransform::setDatum(double lat, double lon, double alt,
   tf2::Matrix3x3 mat(q);
   double roll, pitch, yaw;
   mat.getRPY(roll, pitch, yaw);
-  /* ROS_INFO_STREAM("Datum orientation roll, pitch, yaw is ("
-		  << roll << ", " << pitch << ", " << yaw << ")"); */
+  ROS_INFO_STREAM("Datum orientation roll, pitch, yaw is ("
+		  << roll << ", " << pitch << ", " << yaw << ")");
 
 
   //ROS_INFO_STREAM("Transform utm -> odom is: " << transform_utm2odom_);
@@ -356,17 +356,17 @@ void GeonavTransform::navOdomCallback(const nav_msgs::OdometryConstPtr& msg)
 
   /* ROS_DEBUG_STREAM_THROTTLE(2.0,"utm2nav X:" 
 			    << transform_utm2nav_.getOrigin()[0] 
-			    << "Y:" << transform_utm2nav_.getOrigin()[1] );
+			    << " Y:" << transform_utm2nav_.getOrigin()[1] );
   ROS_DEBUG_STREAM_THROTTLE(2.0,"utm2odom X:" 
 			    << transform_utm2odom_.getOrigin()[0] 
-			    << "Y:" << transform_utm2odom_.getOrigin()[1] );
+			    << " Y:" << transform_utm2odom_.getOrigin()[1] );
   ROS_DEBUG_STREAM_THROTTLE(2.0,"utm2odom_inverse X:" 
 			    << transform_utm2odom_inverse_.getOrigin()[0] 
-			    << "Y:" 
+			    << " Y:" 
 			    << transform_utm2odom_inverse_.getOrigin()[1] );
   ROS_DEBUG_STREAM_THROTTLE(2.0,"odom2base X:" 
 			    << transform_odom2base_.getOrigin()[0] 
-			    << "Y:" << transform_odom2base_.getOrigin()[1] ); */
+			    << " Y:" << transform_odom2base_.getOrigin()[1] ); */
 
 
   // Publish Nav odometry in odom frame - note frames are set in ::run()

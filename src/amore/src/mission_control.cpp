@@ -1,17 +1,21 @@
-//  Filename:						        High_Level_trajectory_processor.cpp
-//  Creation Date:						2/2/2022
-//  Last Revision Date:                2/18/2022
-//  Author(s) [email]:					Brad Hacker [bhacker@lssu.edu]
-//  Revisor(s) [Revision Date]:    
-//  Organization/Institution:			Lake Superior State University
+//  Filename:											mission_control.cpp
+//  Creation Date:									03/25/2022
+//  Last Revision Date:							03/28/2022
+//  Author(s) [email]:								Bradley Hacker [bhacker@lssu.edu]
+//  Revisor(s) [email] {Revision Date}:	Bradley Hacker [bhacker@lssu.edu] {03/28/2022}
+//  Organization/Institution:					Lake Superior State University - Team AMORE
 // 
-// ...........................About Task2_WF_Planner.cpp.......................
-//  This code subscribes to the waypoints printed by task 2 for VRX. This trajectory processor 
-//   uses mid level control such as acceptance radius to feed the trajectory to the low level controller. 
+// ...............................About mission_control.cpp......................................
+//  This code acts as the autonomous state machine of the WAM-V USV.
+//  It will subscribe to the vrx/task/info to control the state of the system.
+//  This code will subscribe to goal poses given from the gps_imu node.
+//  Dependent on the current task state and system state, mission_control
+//  will publish whether or not the low level controllers should be on, as well 
+//  as the goal of the low level controllers.
 //
-//  Inputs and Outputs of the Task2_WF_Planner.cpp file
-//				Inputs [subscribers]: waypoints in lat and long from VRX Task 1
-//				Outputs [publishers]: goal pose for SK controller to subscribe to
+//  Inputs and Outputs of the mission_control.cpp file
+//				Inputs [subscribers]: "waypoints_NED" (converted goal pose array), "usv_ned", "/vrx/task/info", 
+//				Outputs [publishers]: state and goal of low level controllers
 
 //................................................Included Libraries and Message Types..........................................
 #include "ros/ros.h"
@@ -21,15 +25,12 @@
 #include <iostream>
 #include "math.h"
 #include "stdio.h"
-
 #include "nav_msgs/Odometry.h"
-#include "amore/NED_waypoints.h"
-
-#include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
-
-// include necessary message libraries
-#include "std_msgs/Float32.h"
+#include "amore/state_msg.h"												// message type used to communicate state for rudimentary codes
 #include "std_msgs/Bool.h"
+#include "amore/usv_pose_msg.h"										// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
+#include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
+#include "amore/NED_waypoints.h"										// message that holds array of converted WF goal waypoints w/ headings and number of waypoints
 //...........................................End of Included Libraries and Message Types....................................
 
 //.................................................................Constants....................................................................
@@ -38,52 +39,158 @@
 
 //..............................................................Global Variables............................................................
 int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
-int loop_ON = -1;           		 								// loop controller's activated (WF_Planner_active)
-int consecutive_loops = 0;         						// consecutive loops of no improvement in heading or position errors
 int point = 0;                     		    						// number of points on trajectory reached 
 int goal_poses;              										// total number of poses to reach 
+int loop_goal_recieved;         								// this is kept in order to ensure planner doesn't start controller until the goal is published
 
-float x_goal[100], y_goal[100], psi_goal[100];	// arrays to hold the NED goal poses
-float x_usv_NED, y_usv_NED, psi_NED; 		// vehicle position and heading (pose) in NED
-
-float ON_OFF = 0.0;      									// 0.0 = controller OFF, 1.0 = controller ON
+float x_goal[100], y_goal[100], psi_goal[100];		// arrays to hold the NED goal poses
+float x_usv_NED, y_usv_NED, psi_NED; 				// vehicle position and heading (pose) in NED
 
 float e_x, e_y, e_xy, e_psi;								// current errors between goal pose and usv pose
-float e_xy_prev, e_psi_prev;								// previous errors
+
+bool NED_waypoints_published = false;				// NED_waypoints_published = false means the NED poses have not yet been calculated and published
+bool NED_waypoints_recieved = false;						// NED_waypoints_recieved = false means goal position has not been acquired from "waypoints_NED"
+bool E_reached = false;        								// E_reached = false means the last point has not been reached
+//float e_xy_prev, e_psi_prev;							// previous errors
 
 float e_xy_allowed = 0.4;       							// positional error tolerance threshold; NOTE: make as small as possible
-float e_psi_allowed = 0.4;      								// heading error tolerance threshold; NOTE: make as small as possible
+float e_psi_allowed = 0.4;      						// heading error tolerance threshold; NOTE: make as small as possible
 
-bool goal_recieved = false;   // if goal_recieved = false, goal position has not been acquired from "mpp_goal" yet
-int loop_goal_recieved;          // this is kept in order to ensure planner doesn't start until sytem is through initial startup
-bool point_reached = false;   // if point_reached is false this means the current point has not been reached
-int point_reached_loop = -1; // keeps track of which loop the point is reached
-bool E_reached = false;        // if E_reached is false this means the last point has not been reached
-bool waypoints_published = false;        // if waypoints_published is false this means the NED poses have not yet been calculated and published 
-bool WF_Planner_active = false;                           // if WF_Planner_active = false, this means according to the current task status, conversion shouldn't be done
-bool TIMER_SET = false;                  	// used to tell if the next point timer has been set
+bool Planner_active = false;							// Planner_active = false means according to the current task status, calculations shouldn't be done
+int MC_state = 0;							// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 4569 = HARD RESET (OR OTHER USE)
+
+// STATES CONCERNED WITH "navigation_array"
+int NA_state = 0;							// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
+// STATES CONCERNED WITH "propulsion_system"
+int PS_state = 0;      						// 0 = On Standby, 1 = LL controller ON
+// STATES CONCERNED WITH "perception_array"
+int PA_state = 0;      						// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
+
+// THE FOLLOWING FOUR BOOLS ARE USED TO DETERMINE IF THE SYSTEM HAS BEEN INITIALIZED
+bool navigation_array_initialized = false;		// navigation_array_initialized = false means navigation_array is not initialized
+bool propulsion_system_initialized = false;	// propulsion_system_initialized = false means propulsion_system is not initialized
+bool perception_array_initialized = true;			// perception_array_initialized = false means the perception_array is not initialized !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+bool mission_control_initialized = false;			// mission_control_initialized = false means the mission_control is not initialized
+
+//bool point_reached = false;   							// point_reached = false means the current point has not been reached
 
 //..................................................................Functions.................................................................
-// this function subscribes to the WF_Converter_status node to see when goal waypoints have been converted
-void goal_publish_check(const std_msgs::Bool published) 
+// SYSTEM INITIALIZATION CHECK FUNCTIONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// THIS FUNCTION SUBSCRIBES TO THE NAVIGATION_ARRAY TO CHECK INITIALIZATION
+void NAVIGATION_ARRAY_inspector(const std_msgs::Bool status)
 {
-	if (published.data)
+	if (status.data)
 	{
-		waypoints_published = true;
+		navigation_array_initialized = true;
+	}
+	else
+	{
+		navigation_array_initialized = false;
+	}	
+} // END OF NAVIGATION_ARRAY_inspector(const std_msgs::Bool status)
+
+// THIS FUNCTION SUBSCRIBES TO THE PROPULSION_SYSTEM TO CHECK INITIALIZATION
+void PROPULSION_SYSTEM_inspector(const std_msgs::Bool status)
+{
+	if (status.data)
+	{
+		propulsion_system_initialized = true;
+	}
+	else
+	{
+		propulsion_system_initialized = false;
+	}	
+} // END OF PROPULSION_SYSTEM_inspector(const std_msgs::Bool status)
+
+/* // THIS FUNCTION SUBSCRIBES TO THE PERCEPTION_ARRAY TO CHECK INITIALIZATION
+void PERCEPTION_ARRAY_inspector(const std_msgs::Bool status)
+{
+	if (status.data)
+	{
+		perception_array_initialized = true;
+	}
+	else
+	{
+		perception_array_initialized = false;
+	}	
+} // END OF PERCEPTION_ARRAY_inspector(const std_msgs::Bool status) */
+
+// THIS FUNCTION CHECKS INITIALIZATION OF ENTIRE SYSTEM
+void MISSION_CONTROL_inspector()
+{
+	if ((loop_count > 10) &&  (navigation_array_initialized) && (propulsion_system_initialized) && (perception_array_initialized))
+	{
+		mission_control_initialized = true;
+		//ROS_INFO("mission_control_initialized");
+	}
+	else
+	{
+		mission_control_initialized = false;
+		ROS_INFO("!mission_control_initialized");
+	}
+	// UPDATE USER OF INITIALIZATION STATUSES
+	/* if (navigation_array_initialized)
+	{
+		ROS_INFO("navigation_array_initialized");
+	}
+	if (propulsion_system_initialized)
+	{
+		ROS_INFO("propulsion_system_initialized");
+	}
+	if (perception_array_initialized)
+	{
+		ROS_INFO("perception_array_initialized");
+	} */
+} // END OF MISSION_CONTROL_inspector()
+// END OF SYSTEM INITIALIZATION CHECK FUNCTIONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// THIS FUNCTION SUBSCRIBES TO "goal_publish_state" TO KNOW WHEN
+// NED WAYPOINTS HAVE BEEN CONVERTED AND PUBLISHED TO "waypoints_NED"
+// THIS WAY WE DO NOT TRY TO SUBSCRIBE BEFORE THE TOPIC IS PUBLISHED 
+void goal_publish_state_update(const std_msgs::Bool status)
+{
+	if (status.data)
+	{
+		NED_waypoints_published = true;
 		//ROS_INFO("WF POINT CONVERTER FINISHED");
 	}
 	else
 	{
-		waypoints_published= false;
-		//ROS_INFO("WF POINT CONVERTER NOT COMPLETE");
-	}
-}
+		NED_waypoints_published = false;
+		//ROS_INFO("WF POINT CONVERTER NOT FINISHED");
+	} // if (status.data)
+} // END OF goal_publish_state_update(const std_msgs::Bool status)
 
+// THIS FUNCTION SUBSCRIBES TO "waypoints_NED" TO GET THE WF NED GOAL POSES
+void WF_NED_goal_update(const amore::NED_waypoints::ConstPtr& goal) 
+{
+	if ((mission_control_initialized) && (MC_state == 0))				// if the system is initialized and task 2: wayfinding
+	{
+		if ((NED_waypoints_published) && (!NED_waypoints_recieved))	// if the NED goal waypoints have been published but not recieved yet
+		{
+			goal_poses = goal->quantity;
+			for (int i = 0; i < goal_poses; i++)
+			{
+				x_goal[i] = goal->points[i].x;
+				y_goal[i] = goal->points[i].y;
+				psi_goal[i] = goal->points[i].z;
+			}
+			NED_waypoints_recieved = true;
+			loop_goal_recieved = loop_count;
+			
+			// UPDATES STATUSES TO USER ///////////////////////////////////////////////
+			ROS_INFO("GOAL POSITIONS HAVE BEEN ACQUIRED BY THE WF PLANNER.");
+			ROS_INFO("Size of x_goal array: %i", goal_poses);
+		} // if ((NED_waypoints_published) && (!NED_waypoints_recieved))
+	}
+} // END OF WF_NED_goal_update(const amore::NED_waypoints::ConstPtr& goal) 
+
+// THIS FUNCTION SUBSCRIBES TO "usv_ned" TO GET THE CURRENT USV NED POSE
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
 {
-	if (goal_recieved)
+	if (NA_state == 1) // if navigation_array is in standard USV Pose Conversion mode 
 	{
-		// Collect coordinates in NED
+		// Update NED USV pose 
 		x_usv_NED = odom->pose.pose.position.x;
 		y_usv_NED = odom->pose.pose.position.y;
 		psi_NED = odom->pose.pose.orientation.z;
@@ -97,146 +204,250 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 		{
 			psi_NED = psi_NED - 2.0*PI;
 		}
-	}
-}
+	} // if navigation_array is in standard USV Pose Conversion mode
+} // END OF pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 
-void goal_update(const amore::NED_waypoints::ConstPtr& goal) 
+// THIS FUNCTION SUBSCRIBES "vrx/task/info" TO SEE THE TASK STATE
+// IT ALSO TAKES INTO ACCOUNT CURRENT SYSTEM STATE
+// IN ORDER TO SET SUBSYSTEM STATES, AS WELL AS "mission_control" state
+void state_update(const vrx_gazebo::Task::ConstPtr& msg)
 {
-	goal_poses = goal->quantity;
-	if ((loop_count > 25) &&  (!goal_recieved) && (waypoints_published))
+	// MUST SET THE FOLLOWING
+	NA_state = 0;			// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
+	PS_state = 0;			// 0 = On Standby, 1 = LL controller ON
+	MC_state = 0;			// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 4569 = HARD RESET (OR OTHER USE)
+	PA_state = 0;      		// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
+	if (mission_control_initialized)
 	{
-		for (int i = 0; i < goal_poses; i++)
+		if (msg->name == "station_keeping")						// NOT DONE YET
 		{
-			x_goal[i] = goal->points[i].x;
-			y_goal[i] = goal->points[i].y;
-			psi_goal[i] = goal->points[i].z;
-		}
-		goal_recieved = true;
+			if ((msg->state == "ready") || (msg->state == "running"))
+			{
+				if (NED_waypoints_recieved)
+				{
+					NA_state = 1;				// navigation_array is in standard USV NED Pose Conversion mode
+					PS_state = 1;				// propulsion_system is turned ON
+					MC_state = 1;				// mission_control is in SK Planner mode
+				}
+				else
+				{
+					NA_state = 2;				// navigation_array is in SK NED Goal Pose Conversion mode
+					PS_state = 0;				// propulsion_system is turned OFF
+					MC_state = 0;				// mission_control is On Standby
+				}
+			}
+			else
+			{
+				NA_state = 0;
+				PS_state = 0;
+				MC_state = 0;
+			}
+		} // (msg->name == "station_keeping")
+		else if (msg->name == "wayfinding")
+		{
+			if ((msg->state == "ready") || (msg->state == "running"))
+			{
+				if (NED_waypoints_recieved)
+				{
+					NA_state = 1;				// navigation_array is in standard USV NED Pose Conversion mode
+					PS_state = 1;				// propulsion_system is turned ON
+					MC_state = 2;				// mission_control is in WF Planner mode
+				}
+				else
+				{
+					NA_state = 3;				// navigation_array is in WF NED Goal Pose Conversion mode
+					PS_state = 0;				// propulsion_system is turned OFF
+					MC_state = 0;				// mission_control is On Standby
+				}
+			}
+			else
+			{
+				NA_state = 0;
+				PS_state = 0;
+				MC_state = 0;
+			}
+		} // (msg->name == "wayfinding")
+		else if (msg->name == "perception")										// NOT DONE YET
+		{
+			NA_state = 1;				// navigation_array is in standard USV NED Pose Conversion mode
+			PA_state = 2;				// perception_array is in Task 3: Perception mode
+			/* if ((msg->state == "ready") || (msg->state == "running"))
+			{
+				NA_state = 0;
+				MC_state = 0;
+			}
+			else
+			{
+				NA_state = 0;
+				MC_state = 0;
+			} */
+		} // (msg->name == "perception")
 		
-		// UPDATES STATUSES TO USER ///////////////////////////////////////////////
-		ROS_INFO("GOAL POSITIONS HAVE BEEN ACQUIRED BY THE WF PLANNER.");
-		ROS_INFO("Size of x_goal array: %i", goal_poses);
-	}
-}
-
-void update_task(const vrx_gazebo::Task::ConstPtr& msg)
-{
-	if ((msg->name == "wayfinding") && (goal_recieved) && ((msg->state == "ready") || (msg->state == "running")))
-	{
-		WF_Planner_active = true;
-		if (loop_ON == -1)
+		// 	INTEGRATED TASK CODES FOLLOW
+		/* else if (msg->name == "wildlife")
 		{
-			loop_ON = loop_count;
+			if ()
+			{
+				NA_state = 0;
+				PS_state = 0;
+				MC_state = 0;
+			}
+			else
+			{
+				NA_state = 0;
+				PS_state = 0;
+				MC_state = 0;
+			}
+		} // (msg->name == "wildlife")
+		else if (msg->name == "gymkhana")
+		{
+			if ()
+			{
+				NA_state = 0;
+				PS_state = 0;
+				MC_state = 0;
+			}
+			else
+			{
+				NA_state = 0;
+				PS_state = 0;
+				MC_state = 0;
+			}
+		} // (msg->name == "gymkhana")
+		else if (msg->name == "scan_dock_deliver")
+		{
+			if ()
+			{
+				NA_state = 0;
+				PS_state = 0;
+				MC_state = 0;
+			}
+			else
+			{
+				NA_state = 0;
+				PS_state = 0;
+				MC_state = 0;
+			}
+		} // (msg->name == "scan_dock_deliver") */
+		
+		else
+		{
+			// ALL CODES ON STANDBY
+			NA_state = 0;
+			PS_state = 0;
+			MC_state = 0;
 		}
-		ROS_INFO("WF PLANNER ON");
-	}
-	else
-	{
-		WF_Planner_active = false;
-		loop_ON = -1;
-		//ROS_INFO("WF PLANNER IS OFF");
-	}
-}
+		
+		// UPDATE USER OF EACH CODES STATE
+		ROS_DEBUG("----------------- CURRENT STATES --------------------");
+		ROS_DEBUG("NA_state: %i", NA_state);
+		ROS_DEBUG("PS_state: %i", PS_state);
+		ROS_DEBUG("MC_state: %i", MC_state);
+		ROS_DEBUG("PA_state: %i", PA_state);
+	} // if (mission_control_initialized)
+} // END OF state_update(const vrx_gazebo::Task::ConstPtr& msg)
 //............................................................End of Functions............................................................
 
 int main(int argc, char **argv)
 {
   //names the program for visual purposes
-  ros::init(argc, argv, "SK Path Planner");
+  ros::init(argc, argv, "Path Planner");
   
-  ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
+  ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
   
   // NodeHandles
-  ros::NodeHandle nh1;
-  ros::NodeHandle nh2;  // subscriber to usv_ned which provides pose in NED
-  ros::NodeHandle nh3;  // subscriber to waypoints_NED which provides goal waypoints in NED
-  ros::NodeHandle nh4;
-  ros::NodeHandle nh5;
-  ros::NodeHandle nh6;  // publisher to mpp_goal
+  ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12;
   
   // Subscribers
-  ros::Subscriber task_status = nh1.subscribe("/vrx/task/info", 1, update_task);
-  ros::Subscriber ned_sub = nh2.subscribe("usv_ned", 1, pose_update);                                                               // subscriber for current position converted to NED
-  ros::Subscriber waypoints_ned_sub = nh3.subscribe("waypoints_NED", 1, goal_update);                                 // subscriber for goal waypoints converted to NED
-  ros::Subscriber WF_Converter_sub = nh4.subscribe("WF_Converter_status", 1, goal_publish_check);           // subscriber for whether or not goal waypoints have been converted yet
+  ros::Subscriber task_status = nh1.subscribe("/vrx/task/info", 1, state_update);															// subscriber to VRX task topic
+  // INITIALIZATION CHECK SUBSCRIBERS
+  ros::Subscriber NA_initialization_state_sub = nh2.subscribe("NA_initialization_state", 1, NAVIGATION_ARRAY_inspector);
+  ros::Subscriber PS_initialization_state_sub = nh3.subscribe("PS_initialization_state", 1, PROPULSION_SYSTEM_inspector);
+  //ros::Subscriber PA_initialization_state_sub = nh4.subscribe("PA_initialization_state", 1, PERCEPTION_ARRAY_inspector);
+  ros::Subscriber ned_sub = nh5.subscribe("usv_ned", 1, pose_update);																		// subscriber for current USV pose converted to NED
+  ros::Subscriber WF_waypoints_ned_sub = nh6.subscribe("waypoints_NED", 1, WF_NED_goal_update);					// subscriber for goal waypoints converted to NED
+  ros::Subscriber goal_publish_state_sub = nh7.subscribe("goal_publish_state", 1, goal_publish_state_update);			// subscriber for whether or not goal waypoints have been converted yet
   
   // Publishers
-  ros::Publisher WF_Planner_status_pub = nh5.advertise<std_msgs::Bool>("WF_Planner_status", 1);              // WF_Planner status publisher
-  ros::Publisher mpp_goal_pub = nh6.advertise<nav_msgs::Odometry>("mpp_goal", 1);                                    // publisher for current goal for low level controller
+  ros::Publisher WF_Planner_status_pub = nh8.advertise<std_msgs::Bool>("WF_Planner_status", 1);						// publisher for whether or not current goal has been attained
+  ros::Publisher mpp_goal_pub = nh9.advertise<amore::usv_pose_msg>("mpp_goal", 1);											// publisher for current goal for low level controller (propulsion_system)
+  ros::Publisher ps_state_pub = nh10.advertise<amore::state_msg>("ps_state", 1);													// publisher for current propulsion_system status
+  ros::Publisher na_state_pub = nh11.advertise<amore::state_msg>("na_state", 1);													// publisher for current navigation_array status
+  ros::Publisher pa_state_pub = nh12.advertise<amore::state_msg>("pa_state", 1);													// publisher for current perception_array status
   
   // Local variables
-  nav_msgs::Odometry nav_odom; // mpp_goal position
-  std_msgs::Bool publish_status;     // WF_Planner_status
+  std_msgs::Bool WF_Planner_recieved_goal;     	// "WF_Planner_status"
+  amore::usv_pose_msg usv_goal_pose;				// "mpp_goal"
+  amore::state_msg propulsion_system_state;		// "ps_state"
+  amore::state_msg navigation_array_state;			// "na_state"
+  amore::state_msg perception_array_state;			// "pa_state"
+  
+  // initialize header sequences
+  propulsion_system_state.header.seq = 0;
+  navigation_array_state.header.seq = 0;
+  perception_array_state.header.seq = 0;
   
   // Timers ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ros::Time current_time, last_time, next_timer;  // creates time variables
-  ros::Duration three_seconds(3.0);                      // create a three_seconds duration to compare to 
-  current_time = ros::Time::now();   					   // sets current time to the time it is now
-  last_time = current_time;     							   // sets last time to the time it is now
+  ros::Time current_time, last_time;	// creates time variables
+  current_time = ros::Time::now();						// sets current time to the time it is now
+  last_time = current_time;										// sets last time to the time it is now
   
   //sets the frequency for which the program sleeps at. 10=1/10 second
   ros::Rate loop_rate(100);
-  ros::spinOnce();                             // initialize position
-  loop_rate.sleep();  
 
   // ros::ok() will stop when the user inputs Ctrl+C
   while(ros::ok())
   {
-	  current_time = ros::Time::now(); // update time
+	  current_time = ros::Time::now();														// update current_time
 	  
-	  // publish whether or not the goal pose has been acquired
-	  if (!goal_recieved)
-	  {
-		  publish_status.data = false;
-	  }
-	  else
-	  {
-		  publish_status.data = true;
-	  }
-	  WF_Planner_status_pub.publish(publish_status);
+	  MISSION_CONTROL_inspector();													// check that entire system is initialized before starting calculations
 	  
-	  if ((goal_recieved) && (loop_count > loop_goal_recieved+1000) && (WF_Planner_active))
+	  WF_Planner_recieved_goal.data = NED_waypoints_recieved;
+	  WF_Planner_status_pub.publish(WF_Planner_recieved_goal);			// publish whether or not the WF goal pose has been acquired
+	  
+	  // SEND STATE TO PROPULSION_SYSTEM
+	  propulsion_system_state.header.seq +=1;										// sequence number
+	  propulsion_system_state.header.stamp = current_time;					// sets stamp to current time
+	  propulsion_system_state.header.frame_id = "mission_control";		// header frame
+	  propulsion_system_state.state.data = PS_state;								// sets propulsion system state; 0 = OFF; 1 = ON
+	  ps_state_pub.publish(propulsion_system_state);								// publishes propulsion_system_state to "ps_state"
+	  
+	  // SEND STATE TO NAVIGATION_ARRAY
+	  navigation_array_state.header.seq +=1;											// sequence number
+	  navigation_array_state.header.stamp = current_time;						// sets stamp to current time
+	  navigation_array_state.header.frame_id = "mission_control";			// header frame
+	  navigation_array_state.state.data = NA_state;									// sets navigation_array_state; 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
+	  na_state_pub.publish(navigation_array_state);									// publishes navigation_array_state to "na_state"
+	  
+	  // SEND STATE TO PERCEPTION_ARRAY
+	  perception_array_state.header.seq +=1;											// sequence number
+	  perception_array_state.header.stamp = current_time;						// sets stamp to current time
+	  perception_array_state.header.frame_id = "mission_control";			// header frame
+	  perception_array_state.state.data = PA_state;									// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
+	  pa_state_pub.publish(perception_array_state);								// publishes navigation_array_state to "pa_state"
+	  
+	  if ((loop_count > loop_goal_recieved) && (MC_state == 1))	// TASK 1: STATION_KEEPING
+	  {
+		  // PUBLISH THE CURRENT GOAL POSE
+		  usv_goal_pose.header.seq = 0;
+		  usv_goal_pose.header.seq +=1;										// sequence number
+		  usv_goal_pose.header.stamp = current_time;					// sets stamp to current time
+		  usv_goal_pose.header.frame_id = "mission_control";		// header frame
+		  usv_goal_pose.position.x = x_goal[point];						// sets x-location
+		  usv_goal_pose.position.y = y_goal[point];						// sets y-location
+		  usv_goal_pose.position.z = 0.0;										// sets z-location
+		  usv_goal_pose.psi.data = psi_goal[point];						// sets psi
+		  
+		  mpp_goal_pub.publish(usv_goal_pose);							// publishes goal usv pose to "mpp_goal"
+	  } // if ((loop_count > loop_goal_recieved) && (MC_state == 1))
+
+	  if ((loop_count > loop_goal_recieved) && (MC_state == 2))		// TASK 2: WAYFINDING
 	  {
 		  // determine error in x and y (position)
 		  e_x = x_goal[point] - x_usv_NED;                                       // calculate error in x position
 		  e_y = y_goal[point] - y_usv_NED;                                       // calculate error in y position
 		  e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
 		  e_psi = psi_goal[point] - psi_NED;
-		  
-		  /* // only check error derivative if the previous errors are attained
-		  if (loop_count > loop_ON)
-		  {
-			  // if neither errors are improving, increment counter
-			  if (((e_xy_prev - e_xy) <= 0.0) && ((e_psi_prev - e_psi) <= 0.0))
-			  {
-				  consecutive_loops += 1;
-			  }
-			  else
-			  {
-				  consecutive_loops = 0;
-			  }
-			  if ((consecutive_loops > 3) && (!TIMER_SET))
-			  {
-				  next_timer = ros::Time::now();
-				  TIMER_SET = true;
-			  }
-			  // 3 seconds after setting timer, feed next point 
-			  if (((current_time - next_timer) > three_seconds) && (!E_reached) && (TIMER_SET))
-			  {
-				  point += 1;
-				  ROS_INFO("Point %i reached.", point);
-				  if (point==goal_poses)
-				  {
-					  E_reached = true;
-					  ROS_INFO("End point has been reached.\n");
-				  }
-				  e_x = x_goal[point] - x_usv_NED;                                       // calculate error in x position
-				  e_y = y_goal[point] - y_usv_NED;                                       // calculate error in y position
-				  e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
-				  e_psi = psi_goal[point] - psi_NED;
-				  TIMER_SET = false;
-			  }
-		  } */
 		  
 		  if ((e_xy < e_xy_allowed) && (e_psi < e_psi_allowed) && (!E_reached))
 		  {
@@ -247,12 +458,11 @@ int main(int argc, char **argv)
 				  E_reached = true;
 				  ROS_INFO("End point has been reached.\n");
 			  }
-			  //TIMER_SET = false;
 		  }
 	
 		  if (E_reached)
 		  {
-			  ON_OFF = 0.0; // controller is OFF momentarily once exit point is reached
+			  PS_state = 0; // propulsion_system is OFF momentarily once exit point is reached
 			  // reset and go to points again with a smaller tolerance threshold
 			  e_xy_allowed /= 2;
 			  e_psi_allowed /= 2;
@@ -261,51 +471,30 @@ int main(int argc, char **argv)
 		  }
 		  else
 		  {
-			  ON_OFF = 1.0; // controller is switched back ON until exit point is reached
+			  PS_state = 1; // propulsion_system is switched back ON until exit point is reached
 		  }
 	
-		  // fill in message with values that are unnecesary
-		  nav_odom.header.seq +=1;                                          // sequence number
-		  nav_odom.header.stamp = current_time;                    // sets stamp to current time
-		  nav_odom.header.frame_id = "odom";                         // header frame
-		  nav_odom.child_frame_id = "base_link";                      // child frame
-		  nav_odom.pose.pose.position.x = x_goal[point];                    // sets x-location
-		  nav_odom.pose.pose.position.y = y_goal[point];                    // sets y-location
-		  nav_odom.pose.pose.position.z = ON_OFF; // use this to shut off low-level controller by sending a 0.0
-		  nav_odom.pose.pose.orientation.x = 0.0;
-		  nav_odom.pose.pose.orientation.y = 0.0;
-		  nav_odom.pose.pose.orientation.z = psi_goal[point];
-		  nav_odom.pose.pose.orientation.w = 0.0;
-		  nav_odom.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-		  nav_odom.twist.twist.linear.x = 0.0; //sets velocity values all to zero
-		  nav_odom.twist.twist.linear.y = 0.0;
-		  nav_odom.twist.twist.linear.z = 0.0;
-		  nav_odom.twist.twist.angular.x = 0.0;
-		  nav_odom.twist.twist.angular.y = 0.0;
-		  nav_odom.twist.twist.angular.z = 0.0;
-		  nav_odom.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-		  mpp_goal_pub.publish(nav_odom); // publishes desired pose to mpp_goal node
-	  } // if ((goal_recieved) && (loop_count > loop_goal_recieved+1000) && (WF_Planner_active))
+		  // PUBLISH THE CURRENT GOAL POSE
+		  usv_goal_pose.header.seq = 0;
+		  usv_goal_pose.header.seq +=1;										// sequence number
+		  usv_goal_pose.header.stamp = current_time;					// sets stamp to current time
+		  usv_goal_pose.header.frame_id = "mission_control";		// header frame
+		  usv_goal_pose.position.x = x_goal[point];						// sets x-location
+		  usv_goal_pose.position.y = y_goal[point];						// sets y-location
+		  usv_goal_pose.position.z = 0.0;										// sets z-location
+		  usv_goal_pose.psi.data = psi_goal[point];						// sets psi
+		  
+		  mpp_goal_pub.publish(usv_goal_pose);							// publishes goal usv pose to "mpp_goal"
+	  } // if ((loop_count > loop_goal_recieved) && (MC_state == 2))
 	  
-      // DEBUG INFO
-	  /* ROS_INFO("ON_OFF: %.1f", ON_OFF);
-	  if (goal_recieved)
-	  {
-		  ROS_INFO("goal recieved!");
-	  }
-	  else
-	  {
-		  ROS_INFO("goal NOT recieved!");
-	  } */
-	  
-  	  ros::spinOnce();
+	  ros::spinOnce();
 	  loop_rate.sleep();
 	  
 	  // update previous stats
-	  e_xy_prev = e_xy;
-	  e_psi_prev = e_psi;
+	  /* e_xy_prev = e_xy;
+	  e_psi_prev = e_psi; */
 	  last_time = current_time;
-	  loop_count = loop_count + 1;
+	  loop_count += 1;
   } // while(ros::ok())
 
   ros::spinOnce();

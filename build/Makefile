@@ -922,30 +922,30 @@ usv_msgs_genlisp/fast:
 .PHONY : usv_msgs_genlisp/fast
 
 #=============================================================================
-# Target rules for targets named Task2_WF_gps_imu
+# Target rules for targets named propulsion_system
 
 # Build rule for target.
-Task2_WF_gps_imu: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Task2_WF_gps_imu
-.PHONY : Task2_WF_gps_imu
+propulsion_system: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 propulsion_system
+.PHONY : propulsion_system
 
 # fast build rule for target.
-Task2_WF_gps_imu/fast:
-	$(MAKE) -f amore/CMakeFiles/Task2_WF_gps_imu.dir/build.make amore/CMakeFiles/Task2_WF_gps_imu.dir/build
-.PHONY : Task2_WF_gps_imu/fast
+propulsion_system/fast:
+	$(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/build
+.PHONY : propulsion_system/fast
 
 #=============================================================================
-# Target rules for targets named Task1_SK_Planner
+# Target rules for targets named PID_HS_controller
 
 # Build rule for target.
-Task1_SK_Planner: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Task1_SK_Planner
-.PHONY : Task1_SK_Planner
+PID_HS_controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PID_HS_controller
+.PHONY : PID_HS_controller
 
 # fast build rule for target.
-Task1_SK_Planner/fast:
-	$(MAKE) -f amore/CMakeFiles/Task1_SK_Planner.dir/build.make amore/CMakeFiles/Task1_SK_Planner.dir/build
-.PHONY : Task1_SK_Planner/fast
+PID_HS_controller/fast:
+	$(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/build
+.PHONY : PID_HS_controller/fast
 
 #=============================================================================
 # Target rules for targets named mission_control
@@ -959,110 +959,6 @@ mission_control: cmake_check_build_system
 mission_control/fast:
 	$(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/build
 .PHONY : mission_control/fast
-
-#=============================================================================
-# Target rules for targets named new_gps_imu
-
-# Build rule for target.
-new_gps_imu: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 new_gps_imu
-.PHONY : new_gps_imu
-
-# fast build rule for target.
-new_gps_imu/fast:
-	$(MAKE) -f amore/CMakeFiles/new_gps_imu.dir/build.make amore/CMakeFiles/new_gps_imu.dir/build
-.PHONY : new_gps_imu/fast
-
-#=============================================================================
-# Target rules for targets named stereo_vis
-
-# Build rule for target.
-stereo_vis: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 stereo_vis
-.PHONY : stereo_vis
-
-# fast build rule for target.
-stereo_vis/fast:
-	$(MAKE) -f amore/CMakeFiles/stereo_vis.dir/build.make amore/CMakeFiles/stereo_vis.dir/build
-.PHONY : stereo_vis/fast
-
-#=============================================================================
-# Target rules for targets named object_d
-
-# Build rule for target.
-object_d: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 object_d
-.PHONY : object_d
-
-# fast build rule for target.
-object_d/fast:
-	$(MAKE) -f amore/CMakeFiles/object_d.dir/build.make amore/CMakeFiles/object_d.dir/build
-.PHONY : object_d/fast
-
-#=============================================================================
-# Target rules for targets named traj_pub
-
-# Build rule for target.
-traj_pub: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 traj_pub
-.PHONY : traj_pub
-
-# fast build rule for target.
-traj_pub/fast:
-	$(MAKE) -f amore/CMakeFiles/traj_pub.dir/build.make amore/CMakeFiles/traj_pub.dir/build
-.PHONY : traj_pub/fast
-
-#=============================================================================
-# Target rules for targets named High_Level_trajectory_processor
-
-# Build rule for target.
-High_Level_trajectory_processor: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 High_Level_trajectory_processor
-.PHONY : High_Level_trajectory_processor
-
-# fast build rule for target.
-High_Level_trajectory_processor/fast:
-	$(MAKE) -f amore/CMakeFiles/High_Level_trajectory_processor.dir/build.make amore/CMakeFiles/High_Level_trajectory_processor.dir/build
-.PHONY : High_Level_trajectory_processor/fast
-
-#=============================================================================
-# Target rules for targets named camera_subscriber
-
-# Build rule for target.
-camera_subscriber: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 camera_subscriber
-.PHONY : camera_subscriber
-
-# fast build rule for target.
-camera_subscriber/fast:
-	$(MAKE) -f amore/CMakeFiles/camera_subscriber.dir/build.make amore/CMakeFiles/camera_subscriber.dir/build
-.PHONY : camera_subscriber/fast
-
-#=============================================================================
-# Target rules for targets named Visions_Path_Planner
-
-# Build rule for target.
-Visions_Path_Planner: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Visions_Path_Planner
-.PHONY : Visions_Path_Planner
-
-# fast build rule for target.
-Visions_Path_Planner/fast:
-	$(MAKE) -f amore/CMakeFiles/Visions_Path_Planner.dir/build.make amore/CMakeFiles/Visions_Path_Planner.dir/build
-.PHONY : Visions_Path_Planner/fast
-
-#=============================================================================
-# Target rules for targets named PID_sub
-
-# Build rule for target.
-PID_sub: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PID_sub
-.PHONY : PID_sub
-
-# fast build rule for target.
-PID_sub/fast:
-	$(MAKE) -f amore/CMakeFiles/PID_sub.dir/build.make amore/CMakeFiles/PID_sub.dir/build
-.PHONY : PID_sub/fast
 
 #=============================================================================
 # Target rules for targets named amore_genpy
@@ -1117,6 +1013,19 @@ amore_genlisp/fast:
 .PHONY : amore_genlisp/fast
 
 #=============================================================================
+# Target rules for targets named perception_array
+
+# Build rule for target.
+perception_array: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 perception_array
+.PHONY : perception_array
+
+# fast build rule for target.
+perception_array/fast:
+	$(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/build
+.PHONY : perception_array/fast
+
+#=============================================================================
 # Target rules for targets named amore_generate_messages_lisp
 
 # Build rule for target.
@@ -1156,6 +1065,32 @@ amore_generate_messages_eus/fast:
 .PHONY : amore_generate_messages_eus/fast
 
 #=============================================================================
+# Target rules for targets named _amore_generate_messages_check_deps_state_msg
+
+# Build rule for target.
+_amore_generate_messages_check_deps_state_msg: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _amore_generate_messages_check_deps_state_msg
+.PHONY : _amore_generate_messages_check_deps_state_msg
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_state_msg/fast:
+	$(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/build
+.PHONY : _amore_generate_messages_check_deps_state_msg/fast
+
+#=============================================================================
+# Target rules for targets named _amore_generate_messages_check_deps_usv_pose_msg
+
+# Build rule for target.
+_amore_generate_messages_check_deps_usv_pose_msg: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _amore_generate_messages_check_deps_usv_pose_msg
+.PHONY : _amore_generate_messages_check_deps_usv_pose_msg
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_usv_pose_msg/fast:
+	$(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/build
+.PHONY : _amore_generate_messages_check_deps_usv_pose_msg/fast
+
+#=============================================================================
 # Target rules for targets named _amore_generate_messages_check_deps_NED_waypoints
 
 # Build rule for target.
@@ -1167,19 +1102,6 @@ _amore_generate_messages_check_deps_NED_waypoints: cmake_check_build_system
 _amore_generate_messages_check_deps_NED_waypoints/fast:
 	$(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/build
 .PHONY : _amore_generate_messages_check_deps_NED_waypoints/fast
-
-#=============================================================================
-# Target rules for targets named camera_lidar
-
-# Build rule for target.
-camera_lidar: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 camera_lidar
-.PHONY : camera_lidar
-
-# fast build rule for target.
-camera_lidar/fast:
-	$(MAKE) -f amore/CMakeFiles/camera_lidar.dir/build.make amore/CMakeFiles/camera_lidar.dir/build
-.PHONY : camera_lidar/fast
 
 #=============================================================================
 # Target rules for targets named nodelet_topic_tools_gencfg
@@ -1260,6 +1182,19 @@ nodelet_generate_messages_lisp/fast:
 .PHONY : nodelet_generate_messages_lisp/fast
 
 #=============================================================================
+# Target rules for targets named PID_HP_controller
+
+# Build rule for target.
+PID_HP_controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PID_HP_controller
+.PHONY : PID_HP_controller
+
+# fast build rule for target.
+PID_HP_controller/fast:
+	$(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
+.PHONY : PID_HP_controller/fast
+
+#=============================================================================
 # Target rules for targets named nodelet_generate_messages_cpp
 
 # Build rule for target.
@@ -1284,19 +1219,6 @@ dynamic_reconfigure_generate_messages_eus: cmake_check_build_system
 dynamic_reconfigure_generate_messages_eus/fast:
 	$(MAKE) -f amore/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build.make amore/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build
 .PHONY : dynamic_reconfigure_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named gps_imu
-
-# Build rule for target.
-gps_imu: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gps_imu
-.PHONY : gps_imu
-
-# fast build rule for target.
-gps_imu/fast:
-	$(MAKE) -f amore/CMakeFiles/gps_imu.dir/build.make amore/CMakeFiles/gps_imu.dir/build
-.PHONY : gps_imu/fast
 
 #=============================================================================
 # Target rules for targets named amore_gencpp
@@ -1416,6 +1338,19 @@ geographic_msgs_generate_messages_nodejs/fast:
 .PHONY : geographic_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
+# Target rules for targets named navigation_array
+
+# Build rule for target.
+navigation_array: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 navigation_array
+.PHONY : navigation_array
+
+# fast build rule for target.
+navigation_array/fast:
+	$(MAKE) -f amore/CMakeFiles/navigation_array.dir/build.make amore/CMakeFiles/navigation_array.dir/build
+.PHONY : navigation_array/fast
+
+#=============================================================================
 # Target rules for targets named std_srvs_generate_messages_lisp
 
 # Build rule for target.
@@ -1494,19 +1429,6 @@ uuid_msgs_generate_messages_nodejs/fast:
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
-# Target rules for targets named Task2_WF_waypoints_converter
-
-# Build rule for target.
-Task2_WF_waypoints_converter: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Task2_WF_waypoints_converter
-.PHONY : Task2_WF_waypoints_converter
-
-# fast build rule for target.
-Task2_WF_waypoints_converter/fast:
-	$(MAKE) -f amore/CMakeFiles/Task2_WF_waypoints_converter.dir/build.make amore/CMakeFiles/Task2_WF_waypoints_converter.dir/build
-.PHONY : Task2_WF_waypoints_converter/fast
-
-#=============================================================================
 # Target rules for targets named pcl_ros_gencfg
 
 # Build rule for target.
@@ -1559,19 +1481,6 @@ uuid_msgs_generate_messages_lisp/fast:
 .PHONY : uuid_msgs_generate_messages_lisp/fast
 
 #=============================================================================
-# Target rules for targets named Station_keeping
-
-# Build rule for target.
-Station_keeping: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Station_keeping
-.PHONY : Station_keeping
-
-# fast build rule for target.
-Station_keeping/fast:
-	$(MAKE) -f amore/CMakeFiles/Station_keeping.dir/build.make amore/CMakeFiles/Station_keeping.dir/build
-.PHONY : Station_keeping/fast
-
-#=============================================================================
 # Target rules for targets named geographic_msgs_generate_messages_lisp
 
 # Build rule for target.
@@ -1598,19 +1507,6 @@ std_srvs_generate_messages_py/fast:
 .PHONY : std_srvs_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named gps_subscriber
-
-# Build rule for target.
-gps_subscriber: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gps_subscriber
-.PHONY : gps_subscriber
-
-# fast build rule for target.
-gps_subscriber/fast:
-	$(MAKE) -f amore/CMakeFiles/gps_subscriber.dir/build.make amore/CMakeFiles/gps_subscriber.dir/build
-.PHONY : gps_subscriber/fast
-
-#=============================================================================
 # Target rules for targets named dynamic_reconfigure_generate_messages_cpp
 
 # Build rule for target.
@@ -1622,19 +1518,6 @@ dynamic_reconfigure_generate_messages_cpp: cmake_check_build_system
 dynamic_reconfigure_generate_messages_cpp/fast:
 	$(MAKE) -f amore/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build.make amore/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build
 .PHONY : dynamic_reconfigure_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named lidar_subscriber
-
-# Build rule for target.
-lidar_subscriber: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 lidar_subscriber
-.PHONY : lidar_subscriber
-
-# fast build rule for target.
-lidar_subscriber/fast:
-	$(MAKE) -f amore/CMakeFiles/lidar_subscriber.dir/build.make amore/CMakeFiles/lidar_subscriber.dir/build
-.PHONY : lidar_subscriber/fast
 
 #=============================================================================
 # Target rules for targets named topic_tools_generate_messages_eus
@@ -1715,19 +1598,6 @@ pcl_msgs_generate_messages_nodejs/fast:
 .PHONY : pcl_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
-# Target rules for targets named color_test
-
-# Build rule for target.
-color_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 color_test
-.PHONY : color_test
-
-# fast build rule for target.
-color_test/fast:
-	$(MAKE) -f amore/CMakeFiles/color_test.dir/build.make amore/CMakeFiles/color_test.dir/build
-.PHONY : color_test/fast
-
-#=============================================================================
 # Target rules for targets named pcl_msgs_generate_messages_py
 
 # Build rule for target.
@@ -1741,19 +1611,6 @@ pcl_msgs_generate_messages_py/fast:
 .PHONY : pcl_msgs_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named Task1_SK_point_converter
-
-# Build rule for target.
-Task1_SK_point_converter: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Task1_SK_point_converter
-.PHONY : Task1_SK_point_converter
-
-# fast build rule for target.
-Task1_SK_point_converter/fast:
-	$(MAKE) -f amore/CMakeFiles/Task1_SK_point_converter.dir/build.make amore/CMakeFiles/Task1_SK_point_converter.dir/build
-.PHONY : Task1_SK_point_converter/fast
-
-#=============================================================================
 # Target rules for targets named std_srvs_generate_messages_cpp
 
 # Build rule for target.
@@ -1765,19 +1622,6 @@ std_srvs_generate_messages_cpp: cmake_check_build_system
 std_srvs_generate_messages_cpp/fast:
 	$(MAKE) -f amore/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make amore/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
 .PHONY : std_srvs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named PID_HP_control
-
-# Build rule for target.
-PID_HP_control: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PID_HP_control
-.PHONY : PID_HP_control
-
-# fast build rule for target.
-PID_HP_control/fast:
-	$(MAKE) -f amore/CMakeFiles/PID_HP_control.dir/build.make amore/CMakeFiles/PID_HP_control.dir/build
-.PHONY : PID_HP_control/fast
 
 #=============================================================================
 # Target rules for targets named tf_generate_messages_eus
@@ -1910,19 +1754,6 @@ tf2_msgs_generate_messages_eus/fast:
 .PHONY : tf2_msgs_generate_messages_eus/fast
 
 #=============================================================================
-# Target rules for targets named Task2_WF_Planner
-
-# Build rule for target.
-Task2_WF_Planner: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Task2_WF_Planner
-.PHONY : Task2_WF_Planner
-
-# fast build rule for target.
-Task2_WF_Planner/fast:
-	$(MAKE) -f amore/CMakeFiles/Task2_WF_Planner.dir/build.make amore/CMakeFiles/Task2_WF_Planner.dir/build
-.PHONY : Task2_WF_Planner/fast
-
-#=============================================================================
 # Target rules for targets named topic_tools_generate_messages_py
 
 # Build rule for target.
@@ -1973,19 +1804,6 @@ tf_generate_messages_nodejs: cmake_check_build_system
 tf_generate_messages_nodejs/fast:
 	$(MAKE) -f amore/CMakeFiles/tf_generate_messages_nodejs.dir/build.make amore/CMakeFiles/tf_generate_messages_nodejs.dir/build
 .PHONY : tf_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named SK_Controller
-
-# Build rule for target.
-SK_Controller: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 SK_Controller
-.PHONY : SK_Controller
-
-# fast build rule for target.
-SK_Controller/fast:
-	$(MAKE) -f amore/CMakeFiles/SK_Controller.dir/build.make amore/CMakeFiles/SK_Controller.dir/build
-.PHONY : SK_Controller/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_generate_messages_cpp
@@ -3709,35 +3527,29 @@ help:
 	@echo "... usv_msgs_generate_messages_py"
 	@echo "... usv_msgs_generate_messages_lisp"
 	@echo "... usv_msgs_genlisp"
-	@echo "... Task2_WF_gps_imu"
-	@echo "... Task1_SK_Planner"
+	@echo "... propulsion_system"
+	@echo "... PID_HS_controller"
 	@echo "... mission_control"
-	@echo "... new_gps_imu"
-	@echo "... stereo_vis"
-	@echo "... object_d"
-	@echo "... traj_pub"
-	@echo "... High_Level_trajectory_processor"
-	@echo "... camera_subscriber"
-	@echo "... Visions_Path_Planner"
-	@echo "... PID_sub"
 	@echo "... amore_genpy"
 	@echo "... amore_generate_messages_py"
 	@echo "... amore_generate_messages_nodejs"
 	@echo "... amore_genlisp"
+	@echo "... perception_array"
 	@echo "... amore_generate_messages_lisp"
 	@echo "... amore_geneus"
 	@echo "... amore_generate_messages_eus"
+	@echo "... _amore_generate_messages_check_deps_state_msg"
+	@echo "... _amore_generate_messages_check_deps_usv_pose_msg"
 	@echo "... _amore_generate_messages_check_deps_NED_waypoints"
-	@echo "... camera_lidar"
 	@echo "... nodelet_topic_tools_gencfg"
 	@echo "... pcl_msgs_generate_messages_cpp"
 	@echo "... bond_generate_messages_nodejs"
 	@echo "... nodelet_generate_messages_nodejs"
 	@echo "... bond_generate_messages_eus"
 	@echo "... nodelet_generate_messages_lisp"
+	@echo "... PID_HP_controller"
 	@echo "... nodelet_generate_messages_cpp"
 	@echo "... dynamic_reconfigure_generate_messages_eus"
-	@echo "... gps_imu"
 	@echo "... amore_gencpp"
 	@echo "... dynamic_reconfigure_gencfg"
 	@echo "... geographic_msgs_generate_messages_cpp"
@@ -3747,34 +3559,28 @@ help:
 	@echo "... dynamic_reconfigure_generate_messages_py"
 	@echo "... geographic_msgs_generate_messages_eus"
 	@echo "... geographic_msgs_generate_messages_nodejs"
+	@echo "... navigation_array"
 	@echo "... std_srvs_generate_messages_lisp"
 	@echo "... bond_generate_messages_py"
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... uuid_msgs_generate_messages_cpp"
 	@echo "... uuid_msgs_generate_messages_eus"
 	@echo "... uuid_msgs_generate_messages_nodejs"
-	@echo "... Task2_WF_waypoints_converter"
 	@echo "... pcl_ros_gencfg"
 	@echo "... nodelet_generate_messages_eus"
 	@echo "... actionlib_generate_messages_nodejs"
 	@echo "... uuid_msgs_generate_messages_lisp"
-	@echo "... Station_keeping"
 	@echo "... geographic_msgs_generate_messages_lisp"
 	@echo "... std_srvs_generate_messages_py"
-	@echo "... gps_subscriber"
 	@echo "... dynamic_reconfigure_generate_messages_cpp"
-	@echo "... lidar_subscriber"
 	@echo "... topic_tools_generate_messages_eus"
 	@echo "... tf_generate_messages_lisp"
 	@echo "... pcl_msgs_generate_messages_eus"
 	@echo "... topic_tools_generate_messages_cpp"
 	@echo "... pcl_msgs_generate_messages_lisp"
 	@echo "... pcl_msgs_generate_messages_nodejs"
-	@echo "... color_test"
 	@echo "... pcl_msgs_generate_messages_py"
-	@echo "... Task1_SK_point_converter"
 	@echo "... std_srvs_generate_messages_cpp"
-	@echo "... PID_HP_control"
 	@echo "... tf_generate_messages_eus"
 	@echo "... dynamic_reconfigure_generate_messages_lisp"
 	@echo "... tf2_msgs_generate_messages_cpp"
@@ -3785,12 +3591,10 @@ help:
 	@echo "... topic_tools_generate_messages_lisp"
 	@echo "... topic_tools_generate_messages_nodejs"
 	@echo "... tf2_msgs_generate_messages_eus"
-	@echo "... Task2_WF_Planner"
 	@echo "... topic_tools_generate_messages_py"
 	@echo "... tf_generate_messages_py"
 	@echo "... tf_generate_messages_cpp"
 	@echo "... tf_generate_messages_nodejs"
-	@echo "... SK_Controller"
 	@echo "... actionlib_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_eus"
 	@echo "... actionlib_generate_messages_lisp"
