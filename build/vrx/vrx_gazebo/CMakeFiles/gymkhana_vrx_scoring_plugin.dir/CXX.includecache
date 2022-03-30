@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/RobotX2022/build/vrx/vrx_gazebo/gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp
+/home/taylor/RobotX2022/build/vrx/vrx_gazebo/gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp
 
-/home/brad/RobotX2022/devel/include/vrx_gazebo/Contact.h
+/home/taylor/RobotX2022/devel/include/vrx_gazebo/Contact.h
 string
 -
 vector
@@ -26,7 +26,7 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 
-/home/brad/RobotX2022/devel/include/vrx_gazebo/Task.h
+/home/taylor/RobotX2022/devel/include/vrx_gazebo/Task.h
 string
 -
 vector
@@ -42,23 +42,19 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/gymkhana_scoring_plugin.hh
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/gymkhana_scoring_plugin.hh
 ros/ros.h
 -
 vrx_gazebo/Task.h
 -
 gazebo/common/Plugin.hh
 -
-gazebo/common/Time.hh
--
 gazebo/physics/World.hh
--
-ignition/math/Vector3.hh
 -
 vrx_gazebo/scoring_plugin.hh
 -
 
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
 ros/ros.h
 -
 gazebo/msgs/gz_string.pb.h
@@ -84,33 +80,15 @@ sdf/sdf.hh
 gazebo/transport/transport.hh
 -
 vrx_gazebo/Task.h
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Task.h
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Task.h
 vrx_gazebo/Contact.h
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Contact.h
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Contact.h
 
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/src/gymkhana_scoring_plugin.cc
-geometry_msgs/Vector3.h
--
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/src/gymkhana_scoring_plugin.cc
 limits
 -
 vrx_gazebo/gymkhana_scoring_plugin.hh
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/src/vrx_gazebo/gymkhana_scoring_plugin.hh
-
-/opt/ros/noetic/include/geometry_msgs/Vector3.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/src/vrx_gazebo/gymkhana_scoring_plugin.hh
 
 /opt/ros/noetic/include/ros/advertise_options.h
 ros/forwards.h
@@ -6331,8 +6309,6 @@ gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/Connection.hh
 tbb/task.h
 -
-tbb/version.h
--
 google/protobuf/message.h
 -
 boost/asio.hpp
@@ -6365,8 +6341,6 @@ gazebo/common/Exception.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/common/Exception.hh
 gazebo/common/WeakBind.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/common/WeakBind.hh
-gazebo/transport/TaskGroup.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/TaskGroup.hh
 gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/util/system.hh
 
@@ -6385,12 +6359,10 @@ gazebo/msgs/msgs.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/msgs/msgs.hh
 gazebo/common/SingletonT.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/common/SingletonT.hh
-gazebo/transport/Connection.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/Connection.hh
 gazebo/transport/Publisher.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/transport/Publisher.hh
-gazebo/transport/TaskGroup.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/TaskGroup.hh
+gazebo/transport/Connection.hh
+/usr/include/gazebo-11/gazebo/transport/gazebo/transport/Connection.hh
 gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/util/system.hh
 
@@ -6402,8 +6374,6 @@ gazebo/util/system.hh
 
 /usr/include/gazebo-11/gazebo/transport/Node.hh
 tbb/task.h
--
-tbb/version.h
 -
 boost/bind.hpp
 -
@@ -6417,8 +6387,6 @@ string
 -
 vector
 -
-gazebo/transport/TaskGroup.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/TaskGroup.hh
 gazebo/transport/TransportTypes.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/transport/TransportTypes.hh
 gazebo/transport/TopicManager.hh
@@ -6521,12 +6489,6 @@ CallbackHelper.hh
 /usr/include/gazebo-11/gazebo/transport/CallbackHelper.hh
 gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/util/system.hh
-
-/usr/include/gazebo-11/gazebo/transport/TaskGroup.hh
-utility
--
-tbb/tbb.h
--
 
 /usr/include/gazebo-11/gazebo/transport/TopicManager.hh
 boost/bind.hpp

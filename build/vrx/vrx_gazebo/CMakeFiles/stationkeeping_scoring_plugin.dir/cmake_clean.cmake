@@ -2,8 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/ParseCache.txt"
   "stationkeeping_scoring_plugin_autogen"
-  "/home/brad/RobotX2022/devel/lib/libstationkeeping_scoring_plugin.pdb"
-  "/home/brad/RobotX2022/devel/lib/libstationkeeping_scoring_plugin.so"
+  "/home/taylor/RobotX2022/devel/lib/libstationkeeping_scoring_plugin.pdb"
+  "/home/taylor/RobotX2022/devel/lib/libstationkeeping_scoring_plugin.so"
   "CMakeFiles/stationkeeping_scoring_plugin.dir/src/stationkeeping_scoring_plugin.cc.o"
   "CMakeFiles/stationkeeping_scoring_plugin.dir/stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.o"
 )

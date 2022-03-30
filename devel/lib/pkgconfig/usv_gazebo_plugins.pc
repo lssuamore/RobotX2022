@@ -1,8 +1,8 @@
-prefix=/home/brad/RobotX2022/devel
+prefix=/home/taylor/RobotX2022/devel
 
 Name: usv_gazebo_plugins
 Description: Description of usv_gazebo_plugins
 Version: 1.3.0
-Cflags: -I/home/brad/RobotX2022/src/vrx/usv_gazebo_plugins/include
+Cflags: -I/home/taylor/RobotX2022/src/vrx/usv_gazebo_plugins/include
 Libs: -L${prefix}/lib 
 Requires: message_runtime gazebo_dev roscpp wave_gazebo_plugins

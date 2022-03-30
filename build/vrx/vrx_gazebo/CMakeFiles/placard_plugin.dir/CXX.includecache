@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/RobotX2022/build/vrx/vrx_gazebo/placard_plugin_autogen/mocs_compilation.cpp
+/home/taylor/RobotX2022/build/vrx/vrx_gazebo/placard_plugin_autogen/mocs_compilation.cpp
 
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/placard_plugin.hh
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/placard_plugin.hh
 ros/ros.h
 -
 std_msgs/ColorRGBA.h
@@ -34,11 +34,11 @@ gazebo/gazebo.hh
 sdf/sdf.hh
 -
 
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/src/placard_plugin.cc
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/src/placard_plugin.cc
 gazebo/rendering/Scene.hh
 -
 vrx_gazebo/placard_plugin.hh
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/src/vrx_gazebo/placard_plugin.hh
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/src/vrx_gazebo/placard_plugin.hh
 
 /opt/ros/noetic/include/ros/advertise_options.h
 ros/forwards.h
@@ -6763,8 +6763,6 @@ gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/Connection.hh
 tbb/task.h
 -
-tbb/version.h
--
 google/protobuf/message.h
 -
 boost/asio.hpp
@@ -6797,8 +6795,6 @@ gazebo/common/Exception.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/common/Exception.hh
 gazebo/common/WeakBind.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/common/WeakBind.hh
-gazebo/transport/TaskGroup.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/TaskGroup.hh
 gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/util/system.hh
 
@@ -6817,12 +6813,10 @@ gazebo/msgs/msgs.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/msgs/msgs.hh
 gazebo/common/SingletonT.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/common/SingletonT.hh
-gazebo/transport/Connection.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/Connection.hh
 gazebo/transport/Publisher.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/transport/Publisher.hh
-gazebo/transport/TaskGroup.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/TaskGroup.hh
+gazebo/transport/Connection.hh
+/usr/include/gazebo-11/gazebo/transport/gazebo/transport/Connection.hh
 gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/util/system.hh
 
@@ -6834,8 +6828,6 @@ gazebo/util/system.hh
 
 /usr/include/gazebo-11/gazebo/transport/Node.hh
 tbb/task.h
--
-tbb/version.h
 -
 boost/bind.hpp
 -
@@ -6849,8 +6841,6 @@ string
 -
 vector
 -
-gazebo/transport/TaskGroup.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/TaskGroup.hh
 gazebo/transport/TransportTypes.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/transport/TransportTypes.hh
 gazebo/transport/TopicManager.hh
@@ -6953,12 +6943,6 @@ CallbackHelper.hh
 /usr/include/gazebo-11/gazebo/transport/CallbackHelper.hh
 gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/util/system.hh
-
-/usr/include/gazebo-11/gazebo/transport/TaskGroup.hh
-utility
--
-tbb/tbb.h
--
 
 /usr/include/gazebo-11/gazebo/transport/TopicManager.hh
 boost/bind.hpp
@@ -8086,8 +8070,6 @@ ignition/msgs/model.pb.h
 ignition/msgs/model_configuration.pb.h
 -
 ignition/msgs/model_v.pb.h
--
-ignition/msgs/navsat.pb.h
 -
 ignition/msgs/occupancy_grid.pb.h
 -
@@ -11723,42 +11705,6 @@ ignition/msgs/header.pb.h
 /usr/include/ignition/msgs5/ignition/msgs/ignition/msgs/header.pb.h
 ignition/msgs/model.pb.h
 /usr/include/ignition/msgs5/ignition/msgs/ignition/msgs/model.pb.h
-sys/sysmacros.h
--
-memory
--
-ignition/msgs/Export.hh
--
-
-/usr/include/ignition/msgs5/ignition/msgs/navsat.pb.h
-string
--
-google/protobuf/stubs/common.h
--
-google/protobuf/io/coded_stream.h
--
-google/protobuf/arena.h
--
-google/protobuf/arenastring.h
--
-google/protobuf/generated_message_table_driven.h
--
-google/protobuf/generated_message_util.h
--
-google/protobuf/inlined_string_field.h
--
-google/protobuf/metadata.h
--
-google/protobuf/message.h
--
-google/protobuf/repeated_field.h
--
-google/protobuf/extension_set.h
--
-google/protobuf/unknown_field_set.h
--
-ignition/msgs/header.pb.h
-/usr/include/ignition/msgs5/ignition/msgs/ignition/msgs/header.pb.h
 sys/sysmacros.h
 -
 memory

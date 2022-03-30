@@ -2,8 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/light_buoy_plugin_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/light_buoy_plugin_autogen.dir/ParseCache.txt"
   "light_buoy_plugin_autogen"
-  "/home/brad/RobotX2022/devel/lib/liblight_buoy_plugin.pdb"
-  "/home/brad/RobotX2022/devel/lib/liblight_buoy_plugin.so"
+  "/home/taylor/RobotX2022/devel/lib/liblight_buoy_plugin.pdb"
+  "/home/taylor/RobotX2022/devel/lib/liblight_buoy_plugin.so"
   "CMakeFiles/light_buoy_plugin.dir/light_buoy_plugin_autogen/mocs_compilation.cpp.o"
   "CMakeFiles/light_buoy_plugin.dir/src/light_buoy_plugin.cc.o"
 )

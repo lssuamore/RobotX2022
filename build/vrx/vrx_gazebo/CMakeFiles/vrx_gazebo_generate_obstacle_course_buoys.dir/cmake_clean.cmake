@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/brad/RobotX2022/src/vrx/vrx_gazebo/models/robotx_2018_qualifying_avoid_obstacles_buoys/model.sdf"
+  "/home/taylor/RobotX2022/src/vrx/vrx_gazebo/models/robotx_2018_qualifying_avoid_obstacles_buoys/model.sdf"
   "CMakeFiles/vrx_gazebo_generate_obstacle_course_buoys"
 )
 

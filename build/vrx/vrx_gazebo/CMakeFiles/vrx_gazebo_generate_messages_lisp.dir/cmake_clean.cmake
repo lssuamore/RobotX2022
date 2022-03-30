@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "/home/brad/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/msg/Contact.lisp"
-  "/home/brad/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/msg/Task.lisp"
-  "/home/brad/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/srv/BallShooter.lisp"
-  "/home/brad/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/srv/ColorSequence.lisp"
+  "/home/taylor/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/msg/Contact.lisp"
+  "/home/taylor/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/msg/Task.lisp"
+  "/home/taylor/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/srv/BallShooter.lisp"
+  "/home/taylor/RobotX2022/devel/share/common-lisp/ros/vrx_gazebo/srv/ColorSequence.lisp"
   "CMakeFiles/vrx_gazebo_generate_messages_lisp"
 )
 

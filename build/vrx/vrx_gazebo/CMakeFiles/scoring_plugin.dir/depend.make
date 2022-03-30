@@ -3,10 +3,10 @@
 
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/scoring_plugin_autogen/mocs_compilation.cpp.o: vrx/vrx_gazebo/scoring_plugin_autogen/mocs_compilation.cpp
 
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/brad/RobotX2022/devel/include/vrx_gazebo/Contact.h
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/brad/RobotX2022/devel/include/vrx_gazebo/Task.h
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/brad/RobotX2022/src/vrx/vrx_gazebo/src/scoring_plugin.cc
+vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/taylor/RobotX2022/devel/include/vrx_gazebo/Contact.h
+vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/taylor/RobotX2022/devel/include/vrx_gazebo/Task.h
+vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
+vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/src/scoring_plugin.cc
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /opt/ros/noetic/include/ros/advertise_options.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /opt/ros/noetic/include/ros/advertise_service_options.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /opt/ros/noetic/include/ros/assert.h
@@ -244,7 +244,6 @@ vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/inclu
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/SubscribeOptions.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/Subscriber.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/SubscriptionTransport.hh
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/TaskGroup.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/TopicManager.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/TransportIface.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/TransportTypes.hh
@@ -318,7 +317,6 @@ vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/inclu
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/Factory.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/Filesystem.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/MessageTypes.hh
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/PointCloudPackedUtils.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/SuppressWarning.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/Utility.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/actor.pb.h
@@ -351,7 +349,6 @@ vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/inclu
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/cylindergeom.pb.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/density.pb.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/detail/Export.hh
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/detail/PointCloudPackedUtils.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/detail/SuppressWarning.hh
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/diagnostics.pb.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/discovery.pb.h
@@ -415,7 +412,6 @@ vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/inclu
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/model.pb.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/model_configuration.pb.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/model_v.pb.h
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/navsat.pb.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/occupancy_grid.pb.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/odometry.pb.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /usr/include/ignition/msgs5/ignition/msgs/packet.pb.h

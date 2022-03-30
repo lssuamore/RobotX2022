@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/brad/RobotX2022/src/amore/src/PID_HS_controller.cpp" "/home/brad/RobotX2022/build/amore/CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.o"
+  "/home/taylor/RobotX2022/src/amore/src/PID_HS_controller.cpp" "/home/taylor/RobotX2022/build/amore/CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -23,7 +23,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/brad/RobotX2022/devel/include"
+  "/home/taylor/RobotX2022/devel/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/opencv4"
@@ -31,6 +31,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/pcl-1.10"
   "/usr/include/vtk-7.1"
   "/usr/include/freetype2"
+  "/usr/local/include/opencv4"
   "/usr/include/ni"
   "/usr/include/openni2"
   )

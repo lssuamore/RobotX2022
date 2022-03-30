@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/RobotX2022/build/vrx/vrx_gazebo/navigation_scoring_plugin_autogen/mocs_compilation.cpp
+/home/taylor/RobotX2022/build/vrx/vrx_gazebo/navigation_scoring_plugin_autogen/mocs_compilation.cpp
 
-/home/brad/RobotX2022/devel/include/vrx_gazebo/Contact.h
+/home/taylor/RobotX2022/devel/include/vrx_gazebo/Contact.h
 string
 -
 vector
@@ -26,7 +26,7 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 
-/home/brad/RobotX2022/devel/include/vrx_gazebo/Task.h
+/home/taylor/RobotX2022/devel/include/vrx_gazebo/Task.h
 string
 -
 vector
@@ -42,7 +42,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/navigation_scoring_plugin.hh
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/navigation_scoring_plugin.hh
 string
 -
 vector
@@ -58,9 +58,9 @@ ignition/math/Pose3.hh
 sdf/sdf.hh
 -
 vrx_gazebo/scoring_plugin.hh
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/scoring_plugin.hh
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/scoring_plugin.hh
 
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
 ros/ros.h
 -
 gazebo/msgs/gz_string.pb.h
@@ -86,11 +86,11 @@ sdf/sdf.hh
 gazebo/transport/transport.hh
 -
 vrx_gazebo/Task.h
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Task.h
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Task.h
 vrx_gazebo/Contact.h
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Contact.h
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Contact.h
 
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/src/navigation_scoring_plugin.cc
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/src/navigation_scoring_plugin.cc
 cmath
 -
 gazebo/common/Assert.hh
@@ -100,7 +100,7 @@ gazebo/common/Console.hh
 gazebo/physics/Link.hh
 -
 vrx_gazebo/navigation_scoring_plugin.hh
-/home/brad/RobotX2022/src/vrx/vrx_gazebo/src/vrx_gazebo/navigation_scoring_plugin.hh
+/home/taylor/RobotX2022/src/vrx/vrx_gazebo/src/vrx_gazebo/navigation_scoring_plugin.hh
 
 /opt/ros/noetic/include/ros/advertise_options.h
 ros/forwards.h
@@ -6455,8 +6455,6 @@ gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/Connection.hh
 tbb/task.h
 -
-tbb/version.h
--
 google/protobuf/message.h
 -
 boost/asio.hpp
@@ -6489,8 +6487,6 @@ gazebo/common/Exception.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/common/Exception.hh
 gazebo/common/WeakBind.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/common/WeakBind.hh
-gazebo/transport/TaskGroup.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/TaskGroup.hh
 gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/util/system.hh
 
@@ -6509,12 +6505,10 @@ gazebo/msgs/msgs.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/msgs/msgs.hh
 gazebo/common/SingletonT.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/common/SingletonT.hh
-gazebo/transport/Connection.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/Connection.hh
 gazebo/transport/Publisher.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/transport/Publisher.hh
-gazebo/transport/TaskGroup.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/TaskGroup.hh
+gazebo/transport/Connection.hh
+/usr/include/gazebo-11/gazebo/transport/gazebo/transport/Connection.hh
 gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/util/system.hh
 
@@ -6526,8 +6520,6 @@ gazebo/util/system.hh
 
 /usr/include/gazebo-11/gazebo/transport/Node.hh
 tbb/task.h
--
-tbb/version.h
 -
 boost/bind.hpp
 -
@@ -6541,8 +6533,6 @@ string
 -
 vector
 -
-gazebo/transport/TaskGroup.hh
-/usr/include/gazebo-11/gazebo/transport/gazebo/transport/TaskGroup.hh
 gazebo/transport/TransportTypes.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/transport/TransportTypes.hh
 gazebo/transport/TopicManager.hh
@@ -6645,12 +6635,6 @@ CallbackHelper.hh
 /usr/include/gazebo-11/gazebo/transport/CallbackHelper.hh
 gazebo/util/system.hh
 /usr/include/gazebo-11/gazebo/transport/gazebo/util/system.hh
-
-/usr/include/gazebo-11/gazebo/transport/TaskGroup.hh
-utility
--
-tbb/tbb.h
--
 
 /usr/include/gazebo-11/gazebo/transport/TopicManager.hh
 boost/bind.hpp
@@ -7537,15 +7521,11 @@ ignition/math/Helpers.hh
 /usr/include/ignition/msgs5/ignition/msgs.hh
 ignition/msgs/config.hh
 -
-ignition/msgs/detail/PointCloudPackedUtils.hh
--
 ignition/msgs/detail/SuppressWarning.hh
 -
 ignition/msgs/Factory.hh
 -
 ignition/msgs/Filesystem.hh
--
-ignition/msgs/PointCloudPackedUtils.hh
 -
 ignition/msgs/SuppressWarning.hh
 -
@@ -7765,8 +7745,6 @@ ignition/msgs/model_configuration.pb.h
 -
 ignition/msgs/model_v.pb.h
 -
-ignition/msgs/navsat.pb.h
--
 ignition/msgs/occupancy_grid.pb.h
 -
 ignition/msgs/odometry.pb.h
@@ -7931,22 +7909,6 @@ ignition/msgs/world_stats.pb.h
 -
 ignition/msgs/wrench.pb.h
 -
-
-/usr/include/ignition/msgs5/ignition/msgs/PointCloudPackedUtils.hh
-ignition/msgs/pointcloud_packed.pb.h
--
-cstdarg
--
-sstream
--
-string
--
-vector
--
-ignition/msgs/config.hh
-/usr/include/ignition/msgs5/ignition/msgs/ignition/msgs/config.hh
-ignition/msgs/detail/PointCloudPackedUtils.hh
-/usr/include/ignition/msgs5/ignition/msgs/ignition/msgs/detail/PointCloudPackedUtils.hh
 
 /usr/include/ignition/msgs5/ignition/msgs/SuppressWarning.hh
 ignition/msgs/detail/SuppressWarning.hh
@@ -9043,16 +9005,6 @@ ignition/msgs/Export.hh
 -
 
 /usr/include/ignition/msgs5/ignition/msgs/detail/Export.hh
-
-/usr/include/ignition/msgs5/ignition/msgs/detail/PointCloudPackedUtils.hh
-ignition/msgs/pointcloud_packed.pb.h
--
-iostream
--
-string
--
-ignition/msgs/config.hh
-/usr/include/ignition/msgs5/ignition/msgs/detail/ignition/msgs/config.hh
 
 /usr/include/ignition/msgs5/ignition/msgs/detail/SuppressWarning.hh
 
@@ -11461,42 +11413,6 @@ ignition/msgs/header.pb.h
 /usr/include/ignition/msgs5/ignition/msgs/ignition/msgs/header.pb.h
 ignition/msgs/model.pb.h
 /usr/include/ignition/msgs5/ignition/msgs/ignition/msgs/model.pb.h
-sys/sysmacros.h
--
-memory
--
-ignition/msgs/Export.hh
--
-
-/usr/include/ignition/msgs5/ignition/msgs/navsat.pb.h
-string
--
-google/protobuf/stubs/common.h
--
-google/protobuf/io/coded_stream.h
--
-google/protobuf/arena.h
--
-google/protobuf/arenastring.h
--
-google/protobuf/generated_message_table_driven.h
--
-google/protobuf/generated_message_util.h
--
-google/protobuf/inlined_string_field.h
--
-google/protobuf/metadata.h
--
-google/protobuf/message.h
--
-google/protobuf/repeated_field.h
--
-google/protobuf/extension_set.h
--
-google/protobuf/unknown_field_set.h
--
-ignition/msgs/header.pb.h
-/usr/include/ignition/msgs5/ignition/msgs/ignition/msgs/header.pb.h
 sys/sysmacros.h
 -
 memory

@@ -3,12 +3,11 @@
 
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.o: vrx/vrx_gazebo/gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp
 
-vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /home/brad/RobotX2022/devel/include/vrx_gazebo/Contact.h
-vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /home/brad/RobotX2022/devel/include/vrx_gazebo/Task.h
-vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/gymkhana_scoring_plugin.hh
-vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /home/brad/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
-vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /home/brad/RobotX2022/src/vrx/vrx_gazebo/src/gymkhana_scoring_plugin.cc
-vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /opt/ros/noetic/include/geometry_msgs/Vector3.h
+vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /home/taylor/RobotX2022/devel/include/vrx_gazebo/Contact.h
+vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /home/taylor/RobotX2022/devel/include/vrx_gazebo/Task.h
+vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/gymkhana_scoring_plugin.hh
+vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
+vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/src/gymkhana_scoring_plugin.cc
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /opt/ros/noetic/include/ros/advertise_options.h
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /opt/ros/noetic/include/ros/advertise_service_options.h
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /opt/ros/noetic/include/ros/assert.h
@@ -242,7 +241,6 @@ vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_p
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/SubscribeOptions.hh
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/Subscriber.hh
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/SubscriptionTransport.hh
-vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/TaskGroup.hh
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/TopicManager.hh
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/TransportIface.hh
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o: /usr/include/gazebo-11/gazebo/transport/TransportTypes.hh
