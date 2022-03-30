@@ -148,6 +148,7 @@ int color_black = 0;
 int color_white = 0;
 
 string color_type_buoy = " ";
+string color_type_buoy1 = " ";
 
 // Distances in x and y for each color
 float x_red, y_red;
@@ -162,6 +163,7 @@ int size_orange = 0;
 int size_black = 0;
 int size_white = 0;
 int size_mask_t = 0;
+int size_mask_t1 = 0;
 
 // Two vectors to hold the centroids of the BLOBs
 vector<Point2f> MC(100); // For left image
@@ -181,7 +183,7 @@ float lat_scale_LUT[10][9] = {												  // 7m	8m	9m	10m	11m	12m	13m	14m	15m
 	{1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1, 0.101, 0.097}  // 9m
 };
 
-//amore::state_msg state_pa;													// The state command from mission_control
+amore::state_msg state_pa;													// The state command from mission_control
 int PA_state = 0;      						// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
 amore::usv_pose_msg boat_pose;											// The USV pose from mission_control
 float u_x[100], u_x1[100];														// The x-coordinates of the BLOBs [pixels]
@@ -206,13 +208,13 @@ void StateFunc(const amore::state_msg::ConstPtr& msg)
 	ROS_DEBUG("PA_state: %i --PA", PA_state);
 }
 
-/* void StateFunc(amore::state_msg stater)
+void StateFunc(amore::state_msg stater)
 {
 	state_pa.header.seq = stater.header.seq;
 	state_pa.header.stamp = stater.header.stamp;
 	state_pa.header.frame_id = stater.header.frame_id;
 	state_pa.state.data = stater.state.data;
-} // end of StateFunc() */
+} // end of StateFunc()
 
 // THIS FUNCTION: Obtains the USV NED pose
 // ACCEPTS: The USV pose
@@ -220,8 +222,8 @@ void StateFunc(const amore::state_msg::ConstPtr& msg)
 // =============================================================================
 void PoseFunc(const nav_msgs::Odometry::ConstPtr& odom)
 {
-	if (PA_state == 2) // if navigation_array is in standard USV Pose Conversion mode 
-	{
+//	if (PA_state == 2) // if navigation_array is in standard USV Pose Conversion mode 
+//	{
 		// Update NED USV pose 
 		N_USV = odom->pose.pose.position.x;
 		E_USV = odom->pose.pose.position.y;
@@ -237,7 +239,7 @@ void PoseFunc(const nav_msgs::Odometry::ConstPtr& odom)
 		{
 			PSI_USV = PSI_USV - 2.0*PI;
 		}
-	} // if navigation_array is in standard USV Pose Conversion mode
+//	} // if navigation_array is in standard USV Pose Conversion mode
 } // end of PoseFunc()
 
 /* void PoseFunc(amore::usv_pose_msg usv_pos)
@@ -387,12 +389,12 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 				c_key = "green";
 				break;
 			case 3:
-				size_orange = contours.size();
-				c_key = "orange";
-				break;
-			case 4:
 				size_white = contours.size();
 				c_key = "white";
+				break;
+			case 4:
+				size_orange = contours.size();
+				c_key = "orange";
 				break;
 			case 5:
 				size_black = contours.size();
@@ -406,8 +408,22 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 		{
 			cv::Rect boundRect = cv::boundingRect(contours[i]);																				// Finds and saves locations of bounding rectangles
 			if ((boundRect.area() > 100) && (boundRect.width < 1000))																		// Filter out small noise
-			{			
-				cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 255), 3);									// Draws the bounding rectangles on the image			
+			{	
+				if (c_key == "red") {
+					cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 255), 3);									// Draws the bounding rectangles on the image	
+				}
+				if (c_key == "green") {
+					cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 255, 0), 3);									// Draws the bounding rectangles on the image	
+				}		
+				if (c_key == "white") {
+					cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(255, 255, 255), 3);								// Draws the bounding rectangles on the image	
+				}		
+				if (c_key == "orange") {
+					cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 179, 255), 3);							// Draws the bounding rectangles on the image	
+				}		
+				if (c_key =="black") {
+					cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 0), 3); 								// Draws the bounding rectangles on the image	
+				}						
 				vector<Moments> mu(contours.size());																								// Holds the moments of the blob
 				std::vector<cv::Point> pts;																													// Used in finding the extreme points
 				vector<Point2f> mc(contours.size());																									// Holds the mass centroid
@@ -429,26 +445,25 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 				y1 = mc[i].y - (val.first -> y);
 				//	Buoy classification based on extreme point ratio, Ry
 				Ry = y1 / y2;
-				// Classify the buoys			
+				// Classify the buoys	
 				area = cv::contourArea(contours[i]);																									// Area of the given BLOB. [pixels]
 				perimeter = cv::arcLength(contours[i], true);																						// Perimeter of the given BLOB. [pixels]
 				compactness = (area) / (pow(perimeter, 2));																							// Compactness of given BLOB
 				if ((compactness >= MbCMIN & compactness <= MbCMAX) && (Ry >= MbRMIN & Ry <= MbRMAX))	// Finds marker/regular buoys
 				{
 					reg_buoy = reg_buoy + 1;
-					if (reg_buoy >=5)
+					if (reg_buoy >=3)
 					{
-						buoy_total += 1;
 						typers[cunter] = 'm';
 						color_type_buoy = c_key;
 						color_type_buoy.insert(0, MbHead);						// Append MbHead to the front of color_type_buoy
-						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						//printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
 						current_time = ros::Time::now(); //time
 						task3_message.header.seq +=1;								// sequence number
 						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
-						task3_message.pose.position.latitude = x_red;
-						task3_message.pose.position.longitude = y_red;
+						task3_message.pose.position.latitude = new_lat[cunter];
+						task3_message.pose.position.longitude = new_long[cunter];
 						task3_pub.publish(task3_message); 
 						reg_buoy = 0;
 						color_type_buoy = " ";
@@ -458,22 +473,21 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 				if ((compactness >= RbCMIN & compactness <= RbCMAX)  && (Ry >= RbRMIN & Ry <= RbRMAX))	// Finds the round buoys
 				{
 					circle_buoy = circle_buoy + 1;
-					if (circle_buoy >=5)
+					if (circle_buoy >=3)
 					{
-						buoy_total += 1;
 						typers[cunter] = 'r';
-						color_type_buoy = c_key;
-						color_type_buoy.insert(0, RbHead);
-						printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
+						color_type_buoy1 = c_key;
+						color_type_buoy1.insert(0, RbHead);
+						//printf("the buoy identification string is: %s\n", color_type_buoy1.c_str());
 						current_time = ros::Time::now(); //time
 						task3_message.header.seq +=1;								// sequence number
 						task3_message.header.stamp = current_time;				// sets stamp to current time
 						task3_message.header.frame_id = color_type_buoy.c_str(); //header frame
-						task3_message.pose.position.latitude = x_red;
-						task3_message.pose.position.longitude = y_red;
+						task3_message.pose.position.latitude = new_lat[cunter];
+						task3_message.pose.position.longitude = new_long[cunter];
 						task3_pub.publish(task3_message); 
 						circle_buoy = 0;
-						color_type_buoy = " ";
+						color_type_buoy1 = " ";
 						break;
 					}
 				}	
@@ -488,19 +502,13 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 			cv::Rect boundRect = cv::boundingRect(contours1[i]);																				// Finds and saves locations of bounding rectangles
 			if ((boundRect.area() > 100) && (boundRect.width < 1000))																		// Filter out small noise
 			{			
-				cv::rectangle(background1, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 255), 3);									// Draws the bounding rectangles on the image			
-				vector<Moments> mu(contours1.size());																								// Holds the moments of the blob
-				std::vector<cv::Point> pts;																													// Used in finding the extreme points
-				vector<Point2f> mc(contours1.size());																									// Holds the mass centroid
-				for( int i = 0; i<contours1.size(); i++ )
-				{
-					mu[i] = cv::moments(contours1[i], false);																							// This calculates the moments of the red contours, but these change depeding on scaling
-					pts = contours1[i];
-					mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);															// Finds the centroid of each BLOB [pixels]
-					u_x1[cunter] = mc[i].x;																														// x-bar of centroid [pixels]
-					v_y1[cunter] = mc[i].y;																														// y-bar of centroid [pixels]
-					cunter += 1;																																	// Counter for the number of BLOBs
-				}
+				vector<Moments> mu1(contours1.size());																								// Holds the moments of the blob
+				vector<Point2f> mc1(contours1.size());																									// Holds the mass centroid
+				mu1[i] = cv::moments(contours1[i], false);																							// This calculates the moments of the red contours, but these change depeding on scaling
+				mc1[i] = Point2f(mu1[i].m10/mu1[i].m00 , mu1[i].m01/mu1[i].m00);															// Finds the centroid of each BLOB [pixels]
+				u_x1[cunter] = mc1[i].x;																														// x-bar of centroid [pixels]
+				v_y1[cunter] = mc1[i].y;																														// y-bar of centroid [pixels]
+				cunter += 1;			
 			}
 		}
 	}
@@ -696,18 +704,17 @@ void DisparityFunc()
 // =============================================================================
 void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 {
-	// Variables
-	int counter = 0;																					// Used for placement in arrays
 	Mat imgHSV;																					// Holds the HSV copy of the original image
 	
 	try 
 	{
+		int counter = 0; 
 		// Convert original image to bgr8-type and make a copy in HSV color space
 		org_img = cv_bridge::toCvShare(camera_msg, "bgr8") -> image;		// Converts message camera_msg into bgr8 type image
 		org_img.copyTo(background);															// Copies the original image to background image
 		cv::cvtColor(org_img, imgHSV, cv::COLOR_BGR2HSV);					// Copies original image into HSV color space
 		HSVFunc(imgHSV);																		// Sets new color limits and finds blobs of imgHSV (contours)
-		buoy_total = 0;																				// Reset the buoy count
+//		buoy_total = 0;																				// Reset the buoy count
 		// Find the red BLOBs
 		cv::inRange(imgHSV, red_low, red_high, red_mask); 
 		cv::inRange(imgHSV, red_low1, red_high1, red_mask1); 
@@ -729,14 +736,14 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 		
 		// ASK TAYLOR ABOUT THIS SHIT
 		// Applies each mask to the original image using bitwise_and and outputs it to a new mat file which isn't useful rn
-		/*cv::bitwise_and(org_img, org_img, mask=red_mask, red_res);
+/* 		cv::bitwise_and(org_img, org_img, mask=red_mask, red_res);
 		cv::bitwise_and(org_img, org_img, mask=white_mask, white_res); 
 		cv::bitwise_and(org_img, org_img, mask=orange_mask, orange_res);
 		cv::bitwise_and(org_img, org_img, mask=green_mask, green_res);
-		cv::bitwise_and(org_img, org_img, mask=black_mask, black_res);*/
-	
+		cv::bitwise_and(org_img, org_img, mask=black_mask, black_res); */
+		
 		cv::findContours(red_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);				// Finds the contours of the "red" image
-		counter = ClassLocFunc(counter, 1, 1);																							// Classifies the buoy and marks its centroid
+		counter = ClassLocFunc(counter, 1, 1);			// Classifies the buoy and marks its centroid
  		cv::findContours(green_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "green" image
 		counter = ClassLocFunc(counter, 2, 1);																						// Classifies the buoy and marks its centroid
 		cv::findContours(white_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "white" image
@@ -746,20 +753,28 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 	 	cv::findContours(black_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "black" image
 		counter = ClassLocFunc(counter, 5, 1);																						// Classifies the buoy and marks its centroid
 		// Perform the disparity calculations if BLOBs were detected
+		
+		buoy_total = counter;
+		size_mask_t = size_red + size_green + size_white + size_orange + size_black;
+		
+		// Perform the disparity calculations if BLOBs were detected
 		if (buoy_total == 0) // Nothing was found
 		{
 			ROS_INFO("No Object Detected by Left Camera. {perception_array}");
 		}
-		else 
+	else 
 		{
-			for (int i = 0; i < contours.size(); i++)
+			for (int i = 0; i < size_mask_t; i++)
 			{
 				MC[i].x = u_x[i];
 				MC[i].y = v_y[i];
-				DisparityFunc();
 			}
 		}
-		cv::imshow("Left Camera Updated", background);
+		DisparityFunc();
+		if (PA_state == 2)		// IF TASK 3: PERCEPTION
+		{
+			cv::imshow("Left Camera Updated", background);
+		}
 		cv::waitKey(30);
 	}
 	catch (cv_bridge::Exception& e) //looks for errors 
@@ -774,11 +789,11 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 // =============================================================================
 void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 {
-	int counter1 = 0;																								// Used for placement in arrays
 	Mat imgHSV1;																									// Holds the HSV copy of the original image
 	
 	try 
 	{		
+		int counter1 = 0;																								// Used for placement in arrays
 		// Convert original image to bgr8-type and make a copy in HSV color space
 		org_img1 = cv_bridge::toCvShare(camera_msg1, "bgr8") -> image;					// Converts message camera_msg into bgr8 type image
 		org_img1.copyTo(background1);																		// Copies the original image to background image
@@ -805,13 +820,6 @@ void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 		cv::medianBlur(red_mask_r, red_mask_r, 3);
 		cv::medianBlur(green_mask_r, green_mask_r, 3);
 		
-		//applies each mask to the original image using bitwise_and and outputs it to a new mat file which isn't useful rn
-		/*cv::bitwise_and(org_img1, org_img1, mask=red_mask_r, red_res_r);
-		cv::bitwise_and(org_img1, org_img1, mask=white_mask_r, white_res_r); 
-		cv::bitwise_and(org_img1, org_img1, mask=orange_mask_r, orange_res_r);
-		cv::bitwise_and(org_img1, org_img1, mask=green_mask_r, green_res_r);
-		cv::bitwise_and(org_img1, org_img1, mask=black_mask_r, black_res_r);*/
-		
 		cv::findContours(red_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);				// Finds the contours of the "red" image
 		counter1 = ClassLocFunc(counter1, 1, 0);																							// Classifies the buoy and marks its centroid
  		cv::findContours(green_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "green" image
@@ -823,14 +831,15 @@ void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 	 	cv::findContours(black_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "black" image
 		counter1 = ClassLocFunc(counter1, 5, 0);																						// Classifies the buoy and marks its centroid
 		
-		// Perform the disparity calculations if BLOBs were detected
+		size_mask_t1 = size_red + size_green + size_white + size_orange + size_black;
+		
 		if (counter1 == 0) // Nothing was found
 		{
 			ROS_INFO("No Object Detected by Right Camera. {perception_array}");
 		}
 		else 
 		{
-			for (int i=0; i <contours1.size(); i++)
+			for (int i = 0; i < size_mask_t1; i++)
 			{
 				MC1[i].x = u_x1[i];
 				MC1[i].y = v_y1[i];
@@ -898,11 +907,8 @@ int main(int argc, char **argv)
 	
 	while(ros::ok())
 	{
-		if (PA_state == 2)		// IF TASK 3: PERCEPTION
-		{
 			ros::spinOnce();
 			loop_rate.sleep();
-		}
 	}
 } // end of main()
 //............................................................End of Main Program...........................................................
