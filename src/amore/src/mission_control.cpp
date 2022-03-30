@@ -46,19 +46,18 @@ int loop_goal_recieved;         								// this is kept in order to ensure plann
 float x_goal[100], y_goal[100], psi_goal[100];		// arrays to hold the NED goal poses
 float x_usv_NED, y_usv_NED, psi_NED; 				// vehicle position and heading (pose) in NED
 
-float e_x, e_y, e_xy, e_psi;								// current errors between goal pose and usv pose
+float e_x, e_y, e_xy, e_psi;									// current errors between goal pose and usv pose
 
 bool NED_waypoints_published = false;				// NED_waypoints_published = false means the NED poses have not yet been calculated and published
-bool NED_waypoints_recieved = false;						// NED_waypoints_recieved = false means goal position has not been acquired from "waypoints_NED"
+bool NED_waypoints_recieved = false;					// NED_waypoints_recieved = false means goal position has not been acquired from "waypoints_NED"
 bool E_reached = false;        								// E_reached = false means the last point has not been reached
-//float e_xy_prev, e_psi_prev;							// previous errors
+//float e_xy_prev, e_psi_prev;								// previous errors
 
-float e_xy_allowed = 0.4;       							// positional error tolerance threshold; NOTE: make as small as possible
-float e_psi_allowed = 0.4;      						// heading error tolerance threshold; NOTE: make as small as possible
+float e_xy_allowed = 0.4;       								// positional error tolerance threshold; NOTE: make as small as possible
+float e_psi_allowed = 0.4;      								// heading error tolerance threshold; NOTE: make as small as possible
 
-bool Planner_active = false;							// Planner_active = false means according to the current task status, calculations shouldn't be done
+// STATES CONCERNED WITH "mission_control"
 int MC_state = 0;							// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 4569 = HARD RESET (OR OTHER USE)
-
 // STATES CONCERNED WITH "navigation_array"
 int NA_state = 0;							// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
 // STATES CONCERNED WITH "propulsion_system"
@@ -69,11 +68,8 @@ int PA_state = 0;      						// 0 = On Standby, 1 = General State, 2 = Task 3: P
 // THE FOLLOWING FOUR BOOLS ARE USED TO DETERMINE IF THE SYSTEM HAS BEEN INITIALIZED
 bool navigation_array_initialized = false;		// navigation_array_initialized = false means navigation_array is not initialized
 bool propulsion_system_initialized = false;	// propulsion_system_initialized = false means propulsion_system is not initialized
-bool perception_array_initialized = true;			// perception_array_initialized = false means the perception_array is not initialized !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+bool perception_array_initialized = true;		// perception_array_initialized = false means the perception_array is not initialized !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 bool mission_control_initialized = false;			// mission_control_initialized = false means the mission_control is not initialized
-
-//bool point_reached = false;   							// point_reached = false means the current point has not been reached
-
 //..................................................................Functions.................................................................
 // SYSTEM INITIALIZATION CHECK FUNCTIONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // THIS FUNCTION SUBSCRIBES TO THE NAVIGATION_ARRAY TO CHECK INITIALIZATION
@@ -241,6 +237,9 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)
 				NA_state = 0;
 				PS_state = 0;
 				MC_state = 0;
+				// reset task statuses as long as task is in "initial" or "finished"
+				NED_waypoints_published = false;
+				NED_waypoints_recieved = false;
 			}
 		} // (msg->name == "station_keeping")
 		else if (msg->name == "wayfinding")
@@ -265,6 +264,9 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)
 				NA_state = 0;
 				PS_state = 0;
 				MC_state = 0;
+				// reset task statuses as long as task is in "initial" or "finished"
+				NED_waypoints_published = false;
+				NED_waypoints_recieved = false;
 			}
 		} // (msg->name == "wayfinding")
 		else if (msg->name == "perception")										// NOT DONE YET
