@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "/home/brad/RobotX2022/devel/share/common-lisp/ros/amore/msg/NED_waypoints.lisp"
+  "/home/brad/RobotX2022/devel/share/common-lisp/ros/amore/msg/state_msg.lisp"
+  "/home/brad/RobotX2022/devel/share/common-lisp/ros/amore/msg/usv_pose_msg.lisp"
   "CMakeFiles/amore_generate_messages_lisp"
 )
 

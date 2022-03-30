@@ -23,14 +23,14 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_conversions
   )
 
-find_package(OpenCV REQUIRED)
-find_package(PCL REQUIRED)
 include_directories(${catkin_INCLUDE_DIRS})
+
+find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
+
+find_package(PCL REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
-
 link_directories(${PCL_LIBRARY_DIRS})
-
 add_definitions(${PCL_DEFINITIONS})
 
 
@@ -71,6 +71,8 @@ add_definitions(${PCL_DEFINITIONS})
 add_message_files(
   FILES
   NED_waypoints.msg
+  usv_pose_msg.msg
+  state_msg.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -154,31 +156,12 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(PID_sub src/PID_sub.cpp)
-add_executable(PID_HP_control src/PID_HP_control.cpp)
-add_executable(Station_keeping src/Station_keeping.cpp)
-add_executable(gps_subscriber src/gps_subscriber.cpp)
-add_executable(Visions_Path_Planner src/Visions_Path_Planner.cpp)
-add_executable(camera_subscriber src/camera_subscriber.cpp)
-add_executable(High_Level_trajectory_processor src/High_Level_trajectory_processor.cpp)
-add_executable(traj_pub src/traj_pub.cpp)
-
-add_executable(color_test src/color_test.cpp)
-add_executable(object_d src/object_d.cpp)
-add_executable(stereo_vis src/stereo_vis.cpp)
-add_executable(gps_imu src/gps_imu.cpp)
-add_executable(camera_lidar src/camera_lidar.cpp)
-add_executable(lidar_subscriber src/lidar_subscriber.cpp)
-add_executable(SK_Controller src/SK_Controller.cpp)
-
-# TASK 1: STATION-KEEPING
-add_executable(Task1_SK_point_converter src/Task1_SK_point_converter.cpp)
-add_executable(Task1_SK_Planner src/Task1_SK_Planner.cpp)
-
-# TASK 2: WAYFINDING
-add_executable(Task2_WF_gps_imu src/Task2_WF_gps_imu.cpp)
-add_executable(Task2_WF_waypoints_converter src/Task2_WF_waypoints_converter.cpp)
-add_executable(Task2_WF_Planner src/Task2_WF_Planner.cpp)
+add_executable(mission_control src/mission_control.cpp)	# COMMENT THIS 1ST CMAKE
+add_executable(navigation_array src/navigation_array.cpp)	# COMMENT THIS 1ST CMAKE
+add_executable(perception_array src/perception_array.cpp)	# COMMENT THIS 1ST CMAKE
+add_executable(PID_HP_controller src/PID_HP_controller.cpp)
+add_executable(PID_HS_controller src/PID_HS_controller.cpp)
+add_executable(propulsion_system src/propulsion_system.cpp)	# COMMENT THIS 1ST CMAKE
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -192,32 +175,12 @@ add_executable(Task2_WF_Planner src/Task2_WF_Planner.cpp)
 #add_dependencies(PID_pub ${PID_pub_EXPORTED_TARGETS} {catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(PID_sub ${catkin_LIBRARIES})
-target_link_libraries(PID_HP_control ${catkin_LIBRARIES})
-target_link_libraries(Station_keeping ${catkin_LIBRARIES})
-target_link_libraries(gps_subscriber ${catkin_LIBRARIES})
-target_link_libraries(Visions_Path_Planner ${catkin_LIBRARIES})
-target_link_libraries(camera_subscriber ${catkin_LIBRARIES} ${OpenCV_LIBS})
-target_link_libraries(High_Level_trajectory_processor ${catkin_LIBRARIES})
-target_link_libraries(traj_pub ${catkin_LIBRARIES})
-
-target_link_libraries(color_test ${catkin_LIBRARIES} ${OpenCV_LIBS})
-target_link_libraries(object_d ${catkin_LIBRARIES} ${OpenCV_LIBS})
-target_link_libraries(stereo_vis ${catkin_LIBRARIES})
-target_link_libraries(gps_imu ${catkin_LIBRARIES})
-target_link_libraries(camera_lidar ${catkin_LIBRARIES} ${OpenCV_LIBS} ${PCL_LIBS})
-target_link_libraries(lidar_subscriber ${catkin_LIBRARIES} ${PCL_LIBS})
-target_link_libraries(SK_Controller ${catkin_LIBRARIES})
-
-# TASK 1: STATION-KEEPING
-target_link_libraries(Task1_SK_point_converter ${catkin_LIBRARIES})
-target_link_libraries(Task1_SK_Planner ${catkin_LIBRARIES})
-
-# TASK 2: WAYFINDING
-target_link_libraries(Task2_WF_gps_imu ${catkin_LIBRARIES})
-target_link_libraries(Task2_WF_waypoints_converter ${catkin_LIBRARIES})
-target_link_libraries(Task2_WF_Planner ${catkin_LIBRARIES})
-
+target_link_libraries(mission_control ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+target_link_libraries(navigation_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+target_link_libraries(perception_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+target_link_libraries(PID_HP_controller ${catkin_LIBRARIES})
+target_link_libraries(PID_HS_controller ${catkin_LIBRARIES})
+target_link_libraries(propulsion_system ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 #############
 ## Install ##
 #############
@@ -254,11 +217,6 @@ target_link_libraries(Task2_WF_Planner ${catkin_LIBRARIES})
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-install(FILES launch/Visions_SSP_BH.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
-install(FILES launch/SK.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
-install(FILES launch/Task2_WF.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
-install(FILES launch/traj_track.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
-install(FILES launch/Task3.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 install(FILES launch/VRX_AMORE.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 # install(FILES
 #   # myfile1

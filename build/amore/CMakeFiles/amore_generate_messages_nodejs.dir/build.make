@@ -54,6 +54,8 @@ CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
 include amore/CMakeFiles/amore_generate_messages_nodejs.dir/progress.make
 
 amore/CMakeFiles/amore_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js
+amore/CMakeFiles/amore_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js
+amore/CMakeFiles/amore_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/state_msg.js
 
 
 /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
@@ -62,8 +64,25 @@ amore/CMakeFiles/amore_generate_messages_nodejs: /home/brad/RobotX2022/devel/sha
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from amore/NED_waypoints.msg"
 	cd /home/brad/RobotX2022/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/amore/msg/NED_waypoints.msg -Iamore:/home/brad/RobotX2022/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg
 
+/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js: /home/brad/RobotX2022/src/amore/msg/usv_pose_msg.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from amore/usv_pose_msg.msg"
+	cd /home/brad/RobotX2022/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/amore/msg/usv_pose_msg.msg -Iamore:/home/brad/RobotX2022/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg
+
+/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/state_msg.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/state_msg.js: /home/brad/RobotX2022/src/amore/msg/state_msg.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/state_msg.js: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/state_msg.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from amore/state_msg.msg"
+	cd /home/brad/RobotX2022/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/amore/msg/state_msg.msg -Iamore:/home/brad/RobotX2022/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg
+
 amore_generate_messages_nodejs: amore/CMakeFiles/amore_generate_messages_nodejs
 amore_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js
+amore_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js
+amore_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/state_msg.js
 amore_generate_messages_nodejs: amore/CMakeFiles/amore_generate_messages_nodejs.dir/build.make
 
 .PHONY : amore_generate_messages_nodejs

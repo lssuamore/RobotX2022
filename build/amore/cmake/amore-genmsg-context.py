@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/brad/RobotX2022/src/amore/msg/NED_waypoints.msg"
+messages_str = "/home/brad/RobotX2022/src/amore/msg/NED_waypoints.msg;/home/brad/RobotX2022/src/amore/msg/usv_pose_msg.msg;/home/brad/RobotX2022/src/amore/msg/state_msg.msg"
 services_str = ""
 pkg_name = "amore"
 dependencies_str = "geometry_msgs;std_msgs"

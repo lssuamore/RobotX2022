@@ -5,5 +5,5 @@
 	path = opencv
 	url = https://github.com/opencv/opencv.git
 [submodule "geonav_transform"]
-	path = geonav_transform
+	path = src/geonav_transform
 	url = https://github.com/bsb808/geonav_transform.git

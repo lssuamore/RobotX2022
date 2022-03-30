@@ -168,139 +168,49 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-amore/CMakeFiles/Task2_WF_gps_imu.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/Task2_WF_gps_imu.dir/rule
-.PHONY : amore/CMakeFiles/Task2_WF_gps_imu.dir/rule
+amore/CMakeFiles/propulsion_system.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/propulsion_system.dir/rule
+.PHONY : amore/CMakeFiles/propulsion_system.dir/rule
 
 # Convenience name for target.
-Task2_WF_gps_imu: amore/CMakeFiles/Task2_WF_gps_imu.dir/rule
+propulsion_system: amore/CMakeFiles/propulsion_system.dir/rule
 
-.PHONY : Task2_WF_gps_imu
+.PHONY : propulsion_system
 
 # fast build rule for target.
-Task2_WF_gps_imu/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_gps_imu.dir/build.make amore/CMakeFiles/Task2_WF_gps_imu.dir/build
-.PHONY : Task2_WF_gps_imu/fast
+propulsion_system/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/build
+.PHONY : propulsion_system/fast
 
 # Convenience name for target.
-amore/CMakeFiles/Task1_SK_Planner.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/Task1_SK_Planner.dir/rule
-.PHONY : amore/CMakeFiles/Task1_SK_Planner.dir/rule
+amore/CMakeFiles/PID_HS_controller.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HS_controller.dir/rule
+.PHONY : amore/CMakeFiles/PID_HS_controller.dir/rule
 
 # Convenience name for target.
-Task1_SK_Planner: amore/CMakeFiles/Task1_SK_Planner.dir/rule
+PID_HS_controller: amore/CMakeFiles/PID_HS_controller.dir/rule
 
-.PHONY : Task1_SK_Planner
+.PHONY : PID_HS_controller
 
 # fast build rule for target.
-Task1_SK_Planner/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task1_SK_Planner.dir/build.make amore/CMakeFiles/Task1_SK_Planner.dir/build
-.PHONY : Task1_SK_Planner/fast
+PID_HS_controller/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/build
+.PHONY : PID_HS_controller/fast
 
 # Convenience name for target.
-amore/CMakeFiles/stereo_vis.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/stereo_vis.dir/rule
-.PHONY : amore/CMakeFiles/stereo_vis.dir/rule
+amore/CMakeFiles/mission_control.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/mission_control.dir/rule
+.PHONY : amore/CMakeFiles/mission_control.dir/rule
 
 # Convenience name for target.
-stereo_vis: amore/CMakeFiles/stereo_vis.dir/rule
+mission_control: amore/CMakeFiles/mission_control.dir/rule
 
-.PHONY : stereo_vis
+.PHONY : mission_control
 
 # fast build rule for target.
-stereo_vis/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/stereo_vis.dir/build.make amore/CMakeFiles/stereo_vis.dir/build
-.PHONY : stereo_vis/fast
-
-# Convenience name for target.
-amore/CMakeFiles/object_d.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/object_d.dir/rule
-.PHONY : amore/CMakeFiles/object_d.dir/rule
-
-# Convenience name for target.
-object_d: amore/CMakeFiles/object_d.dir/rule
-
-.PHONY : object_d
-
-# fast build rule for target.
-object_d/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/object_d.dir/build.make amore/CMakeFiles/object_d.dir/build
-.PHONY : object_d/fast
-
-# Convenience name for target.
-amore/CMakeFiles/traj_pub.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/traj_pub.dir/rule
-.PHONY : amore/CMakeFiles/traj_pub.dir/rule
-
-# Convenience name for target.
-traj_pub: amore/CMakeFiles/traj_pub.dir/rule
-
-.PHONY : traj_pub
-
-# fast build rule for target.
-traj_pub/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/traj_pub.dir/build.make amore/CMakeFiles/traj_pub.dir/build
-.PHONY : traj_pub/fast
-
-# Convenience name for target.
-amore/CMakeFiles/High_Level_trajectory_processor.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/High_Level_trajectory_processor.dir/rule
-.PHONY : amore/CMakeFiles/High_Level_trajectory_processor.dir/rule
-
-# Convenience name for target.
-High_Level_trajectory_processor: amore/CMakeFiles/High_Level_trajectory_processor.dir/rule
-
-.PHONY : High_Level_trajectory_processor
-
-# fast build rule for target.
-High_Level_trajectory_processor/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/High_Level_trajectory_processor.dir/build.make amore/CMakeFiles/High_Level_trajectory_processor.dir/build
-.PHONY : High_Level_trajectory_processor/fast
-
-# Convenience name for target.
-amore/CMakeFiles/camera_subscriber.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/camera_subscriber.dir/rule
-.PHONY : amore/CMakeFiles/camera_subscriber.dir/rule
-
-# Convenience name for target.
-camera_subscriber: amore/CMakeFiles/camera_subscriber.dir/rule
-
-.PHONY : camera_subscriber
-
-# fast build rule for target.
-camera_subscriber/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_subscriber.dir/build.make amore/CMakeFiles/camera_subscriber.dir/build
-.PHONY : camera_subscriber/fast
-
-# Convenience name for target.
-amore/CMakeFiles/Visions_Path_Planner.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/Visions_Path_Planner.dir/rule
-.PHONY : amore/CMakeFiles/Visions_Path_Planner.dir/rule
-
-# Convenience name for target.
-Visions_Path_Planner: amore/CMakeFiles/Visions_Path_Planner.dir/rule
-
-.PHONY : Visions_Path_Planner
-
-# fast build rule for target.
-Visions_Path_Planner/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Visions_Path_Planner.dir/build.make amore/CMakeFiles/Visions_Path_Planner.dir/build
-.PHONY : Visions_Path_Planner/fast
-
-# Convenience name for target.
-amore/CMakeFiles/PID_sub.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_sub.dir/rule
-.PHONY : amore/CMakeFiles/PID_sub.dir/rule
-
-# Convenience name for target.
-PID_sub: amore/CMakeFiles/PID_sub.dir/rule
-
-.PHONY : PID_sub
-
-# fast build rule for target.
-PID_sub/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_sub.dir/build.make amore/CMakeFiles/PID_sub.dir/build
-.PHONY : PID_sub/fast
+mission_control/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/build
+.PHONY : mission_control/fast
 
 # Convenience name for target.
 amore/CMakeFiles/amore_genpy.dir/rule:
@@ -363,6 +273,21 @@ amore_genlisp/fast:
 .PHONY : amore_genlisp/fast
 
 # Convenience name for target.
+amore/CMakeFiles/perception_array.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/perception_array.dir/rule
+.PHONY : amore/CMakeFiles/perception_array.dir/rule
+
+# Convenience name for target.
+perception_array: amore/CMakeFiles/perception_array.dir/rule
+
+.PHONY : perception_array
+
+# fast build rule for target.
+perception_array/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/build
+.PHONY : perception_array/fast
+
+# Convenience name for target.
 amore/CMakeFiles/amore_generate_messages_lisp.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/amore_generate_messages_lisp.dir/rule
 .PHONY : amore/CMakeFiles/amore_generate_messages_lisp.dir/rule
@@ -408,6 +333,36 @@ amore_generate_messages_eus/fast:
 .PHONY : amore_generate_messages_eus/fast
 
 # Convenience name for target.
+amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/rule
+.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/rule
+
+# Convenience name for target.
+_amore_generate_messages_check_deps_state_msg: amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/rule
+
+.PHONY : _amore_generate_messages_check_deps_state_msg
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_state_msg/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/build
+.PHONY : _amore_generate_messages_check_deps_state_msg/fast
+
+# Convenience name for target.
+amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/rule
+.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/rule
+
+# Convenience name for target.
+_amore_generate_messages_check_deps_usv_pose_msg: amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/rule
+
+.PHONY : _amore_generate_messages_check_deps_usv_pose_msg
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_usv_pose_msg/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/build
+.PHONY : _amore_generate_messages_check_deps_usv_pose_msg/fast
+
+# Convenience name for target.
 amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/rule
 .PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/rule
@@ -421,21 +376,6 @@ _amore_generate_messages_check_deps_NED_waypoints: amore/CMakeFiles/_amore_gener
 _amore_generate_messages_check_deps_NED_waypoints/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/build
 .PHONY : _amore_generate_messages_check_deps_NED_waypoints/fast
-
-# Convenience name for target.
-amore/CMakeFiles/camera_lidar.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/camera_lidar.dir/rule
-.PHONY : amore/CMakeFiles/camera_lidar.dir/rule
-
-# Convenience name for target.
-camera_lidar: amore/CMakeFiles/camera_lidar.dir/rule
-
-.PHONY : camera_lidar
-
-# fast build rule for target.
-camera_lidar/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_lidar.dir/build.make amore/CMakeFiles/camera_lidar.dir/build
-.PHONY : camera_lidar/fast
 
 # Convenience name for target.
 amore/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule:
@@ -528,6 +468,21 @@ nodelet_generate_messages_lisp/fast:
 .PHONY : nodelet_generate_messages_lisp/fast
 
 # Convenience name for target.
+amore/CMakeFiles/PID_HP_controller.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HP_controller.dir/rule
+.PHONY : amore/CMakeFiles/PID_HP_controller.dir/rule
+
+# Convenience name for target.
+PID_HP_controller: amore/CMakeFiles/PID_HP_controller.dir/rule
+
+.PHONY : PID_HP_controller
+
+# fast build rule for target.
+PID_HP_controller/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
+.PHONY : PID_HP_controller/fast
+
+# Convenience name for target.
 amore/CMakeFiles/nodelet_generate_messages_cpp.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
 .PHONY : amore/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
@@ -556,21 +511,6 @@ dynamic_reconfigure_generate_messages_eus: amore/CMakeFiles/dynamic_reconfigure_
 dynamic_reconfigure_generate_messages_eus/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build.make amore/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build
 .PHONY : dynamic_reconfigure_generate_messages_eus/fast
-
-# Convenience name for target.
-amore/CMakeFiles/gps_imu.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/gps_imu.dir/rule
-.PHONY : amore/CMakeFiles/gps_imu.dir/rule
-
-# Convenience name for target.
-gps_imu: amore/CMakeFiles/gps_imu.dir/rule
-
-.PHONY : gps_imu
-
-# fast build rule for target.
-gps_imu/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/gps_imu.dir/build.make amore/CMakeFiles/gps_imu.dir/build
-.PHONY : gps_imu/fast
 
 # Convenience name for target.
 amore/CMakeFiles/amore_gencpp.dir/rule:
@@ -708,6 +648,21 @@ geographic_msgs_generate_messages_nodejs/fast:
 .PHONY : geographic_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
+amore/CMakeFiles/navigation_array.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/navigation_array.dir/rule
+.PHONY : amore/CMakeFiles/navigation_array.dir/rule
+
+# Convenience name for target.
+navigation_array: amore/CMakeFiles/navigation_array.dir/rule
+
+.PHONY : navigation_array
+
+# fast build rule for target.
+navigation_array/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/navigation_array.dir/build.make amore/CMakeFiles/navigation_array.dir/build
+.PHONY : navigation_array/fast
+
+# Convenience name for target.
 amore/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
 .PHONY : amore/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
@@ -798,21 +753,6 @@ uuid_msgs_generate_messages_nodejs/fast:
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-amore/CMakeFiles/Task2_WF_waypoints_converter.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/Task2_WF_waypoints_converter.dir/rule
-.PHONY : amore/CMakeFiles/Task2_WF_waypoints_converter.dir/rule
-
-# Convenience name for target.
-Task2_WF_waypoints_converter: amore/CMakeFiles/Task2_WF_waypoints_converter.dir/rule
-
-.PHONY : Task2_WF_waypoints_converter
-
-# fast build rule for target.
-Task2_WF_waypoints_converter/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_waypoints_converter.dir/build.make amore/CMakeFiles/Task2_WF_waypoints_converter.dir/build
-.PHONY : Task2_WF_waypoints_converter/fast
-
-# Convenience name for target.
 amore/CMakeFiles/pcl_ros_gencfg.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/pcl_ros_gencfg.dir/rule
 .PHONY : amore/CMakeFiles/pcl_ros_gencfg.dir/rule
@@ -873,21 +813,6 @@ uuid_msgs_generate_messages_lisp/fast:
 .PHONY : uuid_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
-amore/CMakeFiles/Station_keeping.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/Station_keeping.dir/rule
-.PHONY : amore/CMakeFiles/Station_keeping.dir/rule
-
-# Convenience name for target.
-Station_keeping: amore/CMakeFiles/Station_keeping.dir/rule
-
-.PHONY : Station_keeping
-
-# fast build rule for target.
-Station_keeping/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Station_keeping.dir/build.make amore/CMakeFiles/Station_keeping.dir/build
-.PHONY : Station_keeping/fast
-
-# Convenience name for target.
 amore/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/rule
 .PHONY : amore/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/rule
@@ -918,21 +843,6 @@ std_srvs_generate_messages_py/fast:
 .PHONY : std_srvs_generate_messages_py/fast
 
 # Convenience name for target.
-amore/CMakeFiles/gps_subscriber.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/gps_subscriber.dir/rule
-.PHONY : amore/CMakeFiles/gps_subscriber.dir/rule
-
-# Convenience name for target.
-gps_subscriber: amore/CMakeFiles/gps_subscriber.dir/rule
-
-.PHONY : gps_subscriber
-
-# fast build rule for target.
-gps_subscriber/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/gps_subscriber.dir/build.make amore/CMakeFiles/gps_subscriber.dir/build
-.PHONY : gps_subscriber/fast
-
-# Convenience name for target.
 amore/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
 .PHONY : amore/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
@@ -946,21 +856,6 @@ dynamic_reconfigure_generate_messages_cpp: amore/CMakeFiles/dynamic_reconfigure_
 dynamic_reconfigure_generate_messages_cpp/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build.make amore/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build
 .PHONY : dynamic_reconfigure_generate_messages_cpp/fast
-
-# Convenience name for target.
-amore/CMakeFiles/lidar_subscriber.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/lidar_subscriber.dir/rule
-.PHONY : amore/CMakeFiles/lidar_subscriber.dir/rule
-
-# Convenience name for target.
-lidar_subscriber: amore/CMakeFiles/lidar_subscriber.dir/rule
-
-.PHONY : lidar_subscriber
-
-# fast build rule for target.
-lidar_subscriber/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/lidar_subscriber.dir/build.make amore/CMakeFiles/lidar_subscriber.dir/build
-.PHONY : lidar_subscriber/fast
 
 # Convenience name for target.
 amore/CMakeFiles/topic_tools_generate_messages_eus.dir/rule:
@@ -1053,21 +948,6 @@ pcl_msgs_generate_messages_nodejs/fast:
 .PHONY : pcl_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-amore/CMakeFiles/color_test.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/color_test.dir/rule
-.PHONY : amore/CMakeFiles/color_test.dir/rule
-
-# Convenience name for target.
-color_test: amore/CMakeFiles/color_test.dir/rule
-
-.PHONY : color_test
-
-# fast build rule for target.
-color_test/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/color_test.dir/build.make amore/CMakeFiles/color_test.dir/build
-.PHONY : color_test/fast
-
-# Convenience name for target.
 amore/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
 .PHONY : amore/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
@@ -1083,21 +963,6 @@ pcl_msgs_generate_messages_py/fast:
 .PHONY : pcl_msgs_generate_messages_py/fast
 
 # Convenience name for target.
-amore/CMakeFiles/Task1_SK_point_converter.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/Task1_SK_point_converter.dir/rule
-.PHONY : amore/CMakeFiles/Task1_SK_point_converter.dir/rule
-
-# Convenience name for target.
-Task1_SK_point_converter: amore/CMakeFiles/Task1_SK_point_converter.dir/rule
-
-.PHONY : Task1_SK_point_converter
-
-# fast build rule for target.
-Task1_SK_point_converter/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task1_SK_point_converter.dir/build.make amore/CMakeFiles/Task1_SK_point_converter.dir/build
-.PHONY : Task1_SK_point_converter/fast
-
-# Convenience name for target.
 amore/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
 .PHONY : amore/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
@@ -1111,21 +976,6 @@ std_srvs_generate_messages_cpp: amore/CMakeFiles/std_srvs_generate_messages_cpp.
 std_srvs_generate_messages_cpp/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make amore/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
 .PHONY : std_srvs_generate_messages_cpp/fast
-
-# Convenience name for target.
-amore/CMakeFiles/PID_HP_control.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HP_control.dir/rule
-.PHONY : amore/CMakeFiles/PID_HP_control.dir/rule
-
-# Convenience name for target.
-PID_HP_control: amore/CMakeFiles/PID_HP_control.dir/rule
-
-.PHONY : PID_HP_control
-
-# fast build rule for target.
-PID_HP_control/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HP_control.dir/build.make amore/CMakeFiles/PID_HP_control.dir/build
-.PHONY : PID_HP_control/fast
 
 # Convenience name for target.
 amore/CMakeFiles/tf_generate_messages_eus.dir/rule:
@@ -1278,21 +1128,6 @@ tf2_msgs_generate_messages_eus/fast:
 .PHONY : tf2_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
-amore/CMakeFiles/Task2_WF_Planner.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/Task2_WF_Planner.dir/rule
-.PHONY : amore/CMakeFiles/Task2_WF_Planner.dir/rule
-
-# Convenience name for target.
-Task2_WF_Planner: amore/CMakeFiles/Task2_WF_Planner.dir/rule
-
-.PHONY : Task2_WF_Planner
-
-# fast build rule for target.
-Task2_WF_Planner/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_Planner.dir/build.make amore/CMakeFiles/Task2_WF_Planner.dir/build
-.PHONY : Task2_WF_Planner/fast
-
-# Convenience name for target.
 amore/CMakeFiles/topic_tools_generate_messages_py.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/topic_tools_generate_messages_py.dir/rule
 .PHONY : amore/CMakeFiles/topic_tools_generate_messages_py.dir/rule
@@ -1351,21 +1186,6 @@ tf_generate_messages_nodejs: amore/CMakeFiles/tf_generate_messages_nodejs.dir/ru
 tf_generate_messages_nodejs/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/tf_generate_messages_nodejs.dir/build.make amore/CMakeFiles/tf_generate_messages_nodejs.dir/build
 .PHONY : tf_generate_messages_nodejs/fast
-
-# Convenience name for target.
-amore/CMakeFiles/SK_Controller.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/SK_Controller.dir/rule
-.PHONY : amore/CMakeFiles/SK_Controller.dir/rule
-
-# Convenience name for target.
-SK_Controller: amore/CMakeFiles/SK_Controller.dir/rule
-
-.PHONY : SK_Controller
-
-# fast build rule for target.
-SK_Controller/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/SK_Controller.dir/build.make amore/CMakeFiles/SK_Controller.dir/build
-.PHONY : SK_Controller/fast
 
 # Convenience name for target.
 amore/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
@@ -1517,545 +1337,167 @@ amore_generate_messages/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/amore_generate_messages.dir/build.make amore/CMakeFiles/amore_generate_messages.dir/build
 .PHONY : amore_generate_messages/fast
 
-src/High_Level_trajectory_processor.o: src/High_Level_trajectory_processor.cpp.o
+src/PID_HP_controller.o: src/PID_HP_controller.cpp.o
 
-.PHONY : src/High_Level_trajectory_processor.o
-
-# target to build an object file
-src/High_Level_trajectory_processor.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/High_Level_trajectory_processor.dir/build.make amore/CMakeFiles/High_Level_trajectory_processor.dir/src/High_Level_trajectory_processor.cpp.o
-.PHONY : src/High_Level_trajectory_processor.cpp.o
-
-src/High_Level_trajectory_processor.i: src/High_Level_trajectory_processor.cpp.i
-
-.PHONY : src/High_Level_trajectory_processor.i
-
-# target to preprocess a source file
-src/High_Level_trajectory_processor.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/High_Level_trajectory_processor.dir/build.make amore/CMakeFiles/High_Level_trajectory_processor.dir/src/High_Level_trajectory_processor.cpp.i
-.PHONY : src/High_Level_trajectory_processor.cpp.i
-
-src/High_Level_trajectory_processor.s: src/High_Level_trajectory_processor.cpp.s
-
-.PHONY : src/High_Level_trajectory_processor.s
-
-# target to generate assembly for a file
-src/High_Level_trajectory_processor.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/High_Level_trajectory_processor.dir/build.make amore/CMakeFiles/High_Level_trajectory_processor.dir/src/High_Level_trajectory_processor.cpp.s
-.PHONY : src/High_Level_trajectory_processor.cpp.s
-
-src/PID_HP_control.o: src/PID_HP_control.cpp.o
-
-.PHONY : src/PID_HP_control.o
+.PHONY : src/PID_HP_controller.o
 
 # target to build an object file
-src/PID_HP_control.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HP_control.dir/build.make amore/CMakeFiles/PID_HP_control.dir/src/PID_HP_control.cpp.o
-.PHONY : src/PID_HP_control.cpp.o
+src/PID_HP_controller.cpp.o:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/src/PID_HP_controller.cpp.o
+.PHONY : src/PID_HP_controller.cpp.o
 
-src/PID_HP_control.i: src/PID_HP_control.cpp.i
+src/PID_HP_controller.i: src/PID_HP_controller.cpp.i
 
-.PHONY : src/PID_HP_control.i
+.PHONY : src/PID_HP_controller.i
 
 # target to preprocess a source file
-src/PID_HP_control.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HP_control.dir/build.make amore/CMakeFiles/PID_HP_control.dir/src/PID_HP_control.cpp.i
-.PHONY : src/PID_HP_control.cpp.i
+src/PID_HP_controller.cpp.i:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/src/PID_HP_controller.cpp.i
+.PHONY : src/PID_HP_controller.cpp.i
 
-src/PID_HP_control.s: src/PID_HP_control.cpp.s
+src/PID_HP_controller.s: src/PID_HP_controller.cpp.s
 
-.PHONY : src/PID_HP_control.s
+.PHONY : src/PID_HP_controller.s
 
 # target to generate assembly for a file
-src/PID_HP_control.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HP_control.dir/build.make amore/CMakeFiles/PID_HP_control.dir/src/PID_HP_control.cpp.s
-.PHONY : src/PID_HP_control.cpp.s
+src/PID_HP_controller.cpp.s:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/src/PID_HP_controller.cpp.s
+.PHONY : src/PID_HP_controller.cpp.s
 
-src/PID_sub.o: src/PID_sub.cpp.o
+src/PID_HS_controller.o: src/PID_HS_controller.cpp.o
 
-.PHONY : src/PID_sub.o
+.PHONY : src/PID_HS_controller.o
 
 # target to build an object file
-src/PID_sub.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_sub.dir/build.make amore/CMakeFiles/PID_sub.dir/src/PID_sub.cpp.o
-.PHONY : src/PID_sub.cpp.o
+src/PID_HS_controller.cpp.o:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.o
+.PHONY : src/PID_HS_controller.cpp.o
 
-src/PID_sub.i: src/PID_sub.cpp.i
+src/PID_HS_controller.i: src/PID_HS_controller.cpp.i
 
-.PHONY : src/PID_sub.i
+.PHONY : src/PID_HS_controller.i
 
 # target to preprocess a source file
-src/PID_sub.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_sub.dir/build.make amore/CMakeFiles/PID_sub.dir/src/PID_sub.cpp.i
-.PHONY : src/PID_sub.cpp.i
+src/PID_HS_controller.cpp.i:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.i
+.PHONY : src/PID_HS_controller.cpp.i
 
-src/PID_sub.s: src/PID_sub.cpp.s
+src/PID_HS_controller.s: src/PID_HS_controller.cpp.s
 
-.PHONY : src/PID_sub.s
+.PHONY : src/PID_HS_controller.s
 
 # target to generate assembly for a file
-src/PID_sub.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_sub.dir/build.make amore/CMakeFiles/PID_sub.dir/src/PID_sub.cpp.s
-.PHONY : src/PID_sub.cpp.s
+src/PID_HS_controller.cpp.s:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.s
+.PHONY : src/PID_HS_controller.cpp.s
 
-src/SK_Controller.o: src/SK_Controller.cpp.o
+src/mission_control.o: src/mission_control.cpp.o
 
-.PHONY : src/SK_Controller.o
+.PHONY : src/mission_control.o
 
 # target to build an object file
-src/SK_Controller.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/SK_Controller.dir/build.make amore/CMakeFiles/SK_Controller.dir/src/SK_Controller.cpp.o
-.PHONY : src/SK_Controller.cpp.o
+src/mission_control.cpp.o:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/src/mission_control.cpp.o
+.PHONY : src/mission_control.cpp.o
 
-src/SK_Controller.i: src/SK_Controller.cpp.i
+src/mission_control.i: src/mission_control.cpp.i
 
-.PHONY : src/SK_Controller.i
+.PHONY : src/mission_control.i
 
 # target to preprocess a source file
-src/SK_Controller.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/SK_Controller.dir/build.make amore/CMakeFiles/SK_Controller.dir/src/SK_Controller.cpp.i
-.PHONY : src/SK_Controller.cpp.i
+src/mission_control.cpp.i:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/src/mission_control.cpp.i
+.PHONY : src/mission_control.cpp.i
 
-src/SK_Controller.s: src/SK_Controller.cpp.s
+src/mission_control.s: src/mission_control.cpp.s
 
-.PHONY : src/SK_Controller.s
+.PHONY : src/mission_control.s
 
 # target to generate assembly for a file
-src/SK_Controller.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/SK_Controller.dir/build.make amore/CMakeFiles/SK_Controller.dir/src/SK_Controller.cpp.s
-.PHONY : src/SK_Controller.cpp.s
+src/mission_control.cpp.s:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/src/mission_control.cpp.s
+.PHONY : src/mission_control.cpp.s
 
-src/Station_keeping.o: src/Station_keeping.cpp.o
+src/navigation_array.o: src/navigation_array.cpp.o
 
-.PHONY : src/Station_keeping.o
+.PHONY : src/navigation_array.o
 
 # target to build an object file
-src/Station_keeping.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Station_keeping.dir/build.make amore/CMakeFiles/Station_keeping.dir/src/Station_keeping.cpp.o
-.PHONY : src/Station_keeping.cpp.o
+src/navigation_array.cpp.o:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/navigation_array.dir/build.make amore/CMakeFiles/navigation_array.dir/src/navigation_array.cpp.o
+.PHONY : src/navigation_array.cpp.o
 
-src/Station_keeping.i: src/Station_keeping.cpp.i
+src/navigation_array.i: src/navigation_array.cpp.i
 
-.PHONY : src/Station_keeping.i
+.PHONY : src/navigation_array.i
 
 # target to preprocess a source file
-src/Station_keeping.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Station_keeping.dir/build.make amore/CMakeFiles/Station_keeping.dir/src/Station_keeping.cpp.i
-.PHONY : src/Station_keeping.cpp.i
+src/navigation_array.cpp.i:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/navigation_array.dir/build.make amore/CMakeFiles/navigation_array.dir/src/navigation_array.cpp.i
+.PHONY : src/navigation_array.cpp.i
 
-src/Station_keeping.s: src/Station_keeping.cpp.s
+src/navigation_array.s: src/navigation_array.cpp.s
 
-.PHONY : src/Station_keeping.s
+.PHONY : src/navigation_array.s
 
 # target to generate assembly for a file
-src/Station_keeping.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Station_keeping.dir/build.make amore/CMakeFiles/Station_keeping.dir/src/Station_keeping.cpp.s
-.PHONY : src/Station_keeping.cpp.s
+src/navigation_array.cpp.s:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/navigation_array.dir/build.make amore/CMakeFiles/navigation_array.dir/src/navigation_array.cpp.s
+.PHONY : src/navigation_array.cpp.s
 
-src/Task1_SK_Planner.o: src/Task1_SK_Planner.cpp.o
+src/perception_array.o: src/perception_array.cpp.o
 
-.PHONY : src/Task1_SK_Planner.o
+.PHONY : src/perception_array.o
 
 # target to build an object file
-src/Task1_SK_Planner.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task1_SK_Planner.dir/build.make amore/CMakeFiles/Task1_SK_Planner.dir/src/Task1_SK_Planner.cpp.o
-.PHONY : src/Task1_SK_Planner.cpp.o
+src/perception_array.cpp.o:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.o
+.PHONY : src/perception_array.cpp.o
 
-src/Task1_SK_Planner.i: src/Task1_SK_Planner.cpp.i
+src/perception_array.i: src/perception_array.cpp.i
 
-.PHONY : src/Task1_SK_Planner.i
+.PHONY : src/perception_array.i
 
 # target to preprocess a source file
-src/Task1_SK_Planner.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task1_SK_Planner.dir/build.make amore/CMakeFiles/Task1_SK_Planner.dir/src/Task1_SK_Planner.cpp.i
-.PHONY : src/Task1_SK_Planner.cpp.i
+src/perception_array.cpp.i:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.i
+.PHONY : src/perception_array.cpp.i
 
-src/Task1_SK_Planner.s: src/Task1_SK_Planner.cpp.s
+src/perception_array.s: src/perception_array.cpp.s
 
-.PHONY : src/Task1_SK_Planner.s
+.PHONY : src/perception_array.s
 
 # target to generate assembly for a file
-src/Task1_SK_Planner.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task1_SK_Planner.dir/build.make amore/CMakeFiles/Task1_SK_Planner.dir/src/Task1_SK_Planner.cpp.s
-.PHONY : src/Task1_SK_Planner.cpp.s
+src/perception_array.cpp.s:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.s
+.PHONY : src/perception_array.cpp.s
 
-src/Task1_SK_point_converter.o: src/Task1_SK_point_converter.cpp.o
+src/propulsion_system.o: src/propulsion_system.cpp.o
 
-.PHONY : src/Task1_SK_point_converter.o
+.PHONY : src/propulsion_system.o
 
 # target to build an object file
-src/Task1_SK_point_converter.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task1_SK_point_converter.dir/build.make amore/CMakeFiles/Task1_SK_point_converter.dir/src/Task1_SK_point_converter.cpp.o
-.PHONY : src/Task1_SK_point_converter.cpp.o
+src/propulsion_system.cpp.o:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/src/propulsion_system.cpp.o
+.PHONY : src/propulsion_system.cpp.o
 
-src/Task1_SK_point_converter.i: src/Task1_SK_point_converter.cpp.i
+src/propulsion_system.i: src/propulsion_system.cpp.i
 
-.PHONY : src/Task1_SK_point_converter.i
-
-# target to preprocess a source file
-src/Task1_SK_point_converter.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task1_SK_point_converter.dir/build.make amore/CMakeFiles/Task1_SK_point_converter.dir/src/Task1_SK_point_converter.cpp.i
-.PHONY : src/Task1_SK_point_converter.cpp.i
-
-src/Task1_SK_point_converter.s: src/Task1_SK_point_converter.cpp.s
-
-.PHONY : src/Task1_SK_point_converter.s
-
-# target to generate assembly for a file
-src/Task1_SK_point_converter.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task1_SK_point_converter.dir/build.make amore/CMakeFiles/Task1_SK_point_converter.dir/src/Task1_SK_point_converter.cpp.s
-.PHONY : src/Task1_SK_point_converter.cpp.s
-
-src/Task2_WF_Planner.o: src/Task2_WF_Planner.cpp.o
-
-.PHONY : src/Task2_WF_Planner.o
-
-# target to build an object file
-src/Task2_WF_Planner.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_Planner.dir/build.make amore/CMakeFiles/Task2_WF_Planner.dir/src/Task2_WF_Planner.cpp.o
-.PHONY : src/Task2_WF_Planner.cpp.o
-
-src/Task2_WF_Planner.i: src/Task2_WF_Planner.cpp.i
-
-.PHONY : src/Task2_WF_Planner.i
+.PHONY : src/propulsion_system.i
 
 # target to preprocess a source file
-src/Task2_WF_Planner.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_Planner.dir/build.make amore/CMakeFiles/Task2_WF_Planner.dir/src/Task2_WF_Planner.cpp.i
-.PHONY : src/Task2_WF_Planner.cpp.i
+src/propulsion_system.cpp.i:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/src/propulsion_system.cpp.i
+.PHONY : src/propulsion_system.cpp.i
 
-src/Task2_WF_Planner.s: src/Task2_WF_Planner.cpp.s
+src/propulsion_system.s: src/propulsion_system.cpp.s
 
-.PHONY : src/Task2_WF_Planner.s
-
-# target to generate assembly for a file
-src/Task2_WF_Planner.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_Planner.dir/build.make amore/CMakeFiles/Task2_WF_Planner.dir/src/Task2_WF_Planner.cpp.s
-.PHONY : src/Task2_WF_Planner.cpp.s
-
-src/Task2_WF_gps_imu.o: src/Task2_WF_gps_imu.cpp.o
-
-.PHONY : src/Task2_WF_gps_imu.o
-
-# target to build an object file
-src/Task2_WF_gps_imu.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_gps_imu.dir/build.make amore/CMakeFiles/Task2_WF_gps_imu.dir/src/Task2_WF_gps_imu.cpp.o
-.PHONY : src/Task2_WF_gps_imu.cpp.o
-
-src/Task2_WF_gps_imu.i: src/Task2_WF_gps_imu.cpp.i
-
-.PHONY : src/Task2_WF_gps_imu.i
-
-# target to preprocess a source file
-src/Task2_WF_gps_imu.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_gps_imu.dir/build.make amore/CMakeFiles/Task2_WF_gps_imu.dir/src/Task2_WF_gps_imu.cpp.i
-.PHONY : src/Task2_WF_gps_imu.cpp.i
-
-src/Task2_WF_gps_imu.s: src/Task2_WF_gps_imu.cpp.s
-
-.PHONY : src/Task2_WF_gps_imu.s
+.PHONY : src/propulsion_system.s
 
 # target to generate assembly for a file
-src/Task2_WF_gps_imu.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_gps_imu.dir/build.make amore/CMakeFiles/Task2_WF_gps_imu.dir/src/Task2_WF_gps_imu.cpp.s
-.PHONY : src/Task2_WF_gps_imu.cpp.s
-
-src/Task2_WF_waypoints_converter.o: src/Task2_WF_waypoints_converter.cpp.o
-
-.PHONY : src/Task2_WF_waypoints_converter.o
-
-# target to build an object file
-src/Task2_WF_waypoints_converter.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_waypoints_converter.dir/build.make amore/CMakeFiles/Task2_WF_waypoints_converter.dir/src/Task2_WF_waypoints_converter.cpp.o
-.PHONY : src/Task2_WF_waypoints_converter.cpp.o
-
-src/Task2_WF_waypoints_converter.i: src/Task2_WF_waypoints_converter.cpp.i
-
-.PHONY : src/Task2_WF_waypoints_converter.i
-
-# target to preprocess a source file
-src/Task2_WF_waypoints_converter.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_waypoints_converter.dir/build.make amore/CMakeFiles/Task2_WF_waypoints_converter.dir/src/Task2_WF_waypoints_converter.cpp.i
-.PHONY : src/Task2_WF_waypoints_converter.cpp.i
-
-src/Task2_WF_waypoints_converter.s: src/Task2_WF_waypoints_converter.cpp.s
-
-.PHONY : src/Task2_WF_waypoints_converter.s
-
-# target to generate assembly for a file
-src/Task2_WF_waypoints_converter.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Task2_WF_waypoints_converter.dir/build.make amore/CMakeFiles/Task2_WF_waypoints_converter.dir/src/Task2_WF_waypoints_converter.cpp.s
-.PHONY : src/Task2_WF_waypoints_converter.cpp.s
-
-src/Visions_Path_Planner.o: src/Visions_Path_Planner.cpp.o
-
-.PHONY : src/Visions_Path_Planner.o
-
-# target to build an object file
-src/Visions_Path_Planner.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Visions_Path_Planner.dir/build.make amore/CMakeFiles/Visions_Path_Planner.dir/src/Visions_Path_Planner.cpp.o
-.PHONY : src/Visions_Path_Planner.cpp.o
-
-src/Visions_Path_Planner.i: src/Visions_Path_Planner.cpp.i
-
-.PHONY : src/Visions_Path_Planner.i
-
-# target to preprocess a source file
-src/Visions_Path_Planner.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Visions_Path_Planner.dir/build.make amore/CMakeFiles/Visions_Path_Planner.dir/src/Visions_Path_Planner.cpp.i
-.PHONY : src/Visions_Path_Planner.cpp.i
-
-src/Visions_Path_Planner.s: src/Visions_Path_Planner.cpp.s
-
-.PHONY : src/Visions_Path_Planner.s
-
-# target to generate assembly for a file
-src/Visions_Path_Planner.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/Visions_Path_Planner.dir/build.make amore/CMakeFiles/Visions_Path_Planner.dir/src/Visions_Path_Planner.cpp.s
-.PHONY : src/Visions_Path_Planner.cpp.s
-
-src/camera_lidar.o: src/camera_lidar.cpp.o
-
-.PHONY : src/camera_lidar.o
-
-# target to build an object file
-src/camera_lidar.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_lidar.dir/build.make amore/CMakeFiles/camera_lidar.dir/src/camera_lidar.cpp.o
-.PHONY : src/camera_lidar.cpp.o
-
-src/camera_lidar.i: src/camera_lidar.cpp.i
-
-.PHONY : src/camera_lidar.i
-
-# target to preprocess a source file
-src/camera_lidar.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_lidar.dir/build.make amore/CMakeFiles/camera_lidar.dir/src/camera_lidar.cpp.i
-.PHONY : src/camera_lidar.cpp.i
-
-src/camera_lidar.s: src/camera_lidar.cpp.s
-
-.PHONY : src/camera_lidar.s
-
-# target to generate assembly for a file
-src/camera_lidar.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_lidar.dir/build.make amore/CMakeFiles/camera_lidar.dir/src/camera_lidar.cpp.s
-.PHONY : src/camera_lidar.cpp.s
-
-src/camera_subscriber.o: src/camera_subscriber.cpp.o
-
-.PHONY : src/camera_subscriber.o
-
-# target to build an object file
-src/camera_subscriber.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_subscriber.dir/build.make amore/CMakeFiles/camera_subscriber.dir/src/camera_subscriber.cpp.o
-.PHONY : src/camera_subscriber.cpp.o
-
-src/camera_subscriber.i: src/camera_subscriber.cpp.i
-
-.PHONY : src/camera_subscriber.i
-
-# target to preprocess a source file
-src/camera_subscriber.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_subscriber.dir/build.make amore/CMakeFiles/camera_subscriber.dir/src/camera_subscriber.cpp.i
-.PHONY : src/camera_subscriber.cpp.i
-
-src/camera_subscriber.s: src/camera_subscriber.cpp.s
-
-.PHONY : src/camera_subscriber.s
-
-# target to generate assembly for a file
-src/camera_subscriber.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/camera_subscriber.dir/build.make amore/CMakeFiles/camera_subscriber.dir/src/camera_subscriber.cpp.s
-.PHONY : src/camera_subscriber.cpp.s
-
-src/color_test.o: src/color_test.cpp.o
-
-.PHONY : src/color_test.o
-
-# target to build an object file
-src/color_test.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/color_test.dir/build.make amore/CMakeFiles/color_test.dir/src/color_test.cpp.o
-.PHONY : src/color_test.cpp.o
-
-src/color_test.i: src/color_test.cpp.i
-
-.PHONY : src/color_test.i
-
-# target to preprocess a source file
-src/color_test.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/color_test.dir/build.make amore/CMakeFiles/color_test.dir/src/color_test.cpp.i
-.PHONY : src/color_test.cpp.i
-
-src/color_test.s: src/color_test.cpp.s
-
-.PHONY : src/color_test.s
-
-# target to generate assembly for a file
-src/color_test.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/color_test.dir/build.make amore/CMakeFiles/color_test.dir/src/color_test.cpp.s
-.PHONY : src/color_test.cpp.s
-
-src/gps_imu.o: src/gps_imu.cpp.o
-
-.PHONY : src/gps_imu.o
-
-# target to build an object file
-src/gps_imu.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/gps_imu.dir/build.make amore/CMakeFiles/gps_imu.dir/src/gps_imu.cpp.o
-.PHONY : src/gps_imu.cpp.o
-
-src/gps_imu.i: src/gps_imu.cpp.i
-
-.PHONY : src/gps_imu.i
-
-# target to preprocess a source file
-src/gps_imu.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/gps_imu.dir/build.make amore/CMakeFiles/gps_imu.dir/src/gps_imu.cpp.i
-.PHONY : src/gps_imu.cpp.i
-
-src/gps_imu.s: src/gps_imu.cpp.s
-
-.PHONY : src/gps_imu.s
-
-# target to generate assembly for a file
-src/gps_imu.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/gps_imu.dir/build.make amore/CMakeFiles/gps_imu.dir/src/gps_imu.cpp.s
-.PHONY : src/gps_imu.cpp.s
-
-src/gps_subscriber.o: src/gps_subscriber.cpp.o
-
-.PHONY : src/gps_subscriber.o
-
-# target to build an object file
-src/gps_subscriber.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/gps_subscriber.dir/build.make amore/CMakeFiles/gps_subscriber.dir/src/gps_subscriber.cpp.o
-.PHONY : src/gps_subscriber.cpp.o
-
-src/gps_subscriber.i: src/gps_subscriber.cpp.i
-
-.PHONY : src/gps_subscriber.i
-
-# target to preprocess a source file
-src/gps_subscriber.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/gps_subscriber.dir/build.make amore/CMakeFiles/gps_subscriber.dir/src/gps_subscriber.cpp.i
-.PHONY : src/gps_subscriber.cpp.i
-
-src/gps_subscriber.s: src/gps_subscriber.cpp.s
-
-.PHONY : src/gps_subscriber.s
-
-# target to generate assembly for a file
-src/gps_subscriber.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/gps_subscriber.dir/build.make amore/CMakeFiles/gps_subscriber.dir/src/gps_subscriber.cpp.s
-.PHONY : src/gps_subscriber.cpp.s
-
-src/lidar_subscriber.o: src/lidar_subscriber.cpp.o
-
-.PHONY : src/lidar_subscriber.o
-
-# target to build an object file
-src/lidar_subscriber.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/lidar_subscriber.dir/build.make amore/CMakeFiles/lidar_subscriber.dir/src/lidar_subscriber.cpp.o
-.PHONY : src/lidar_subscriber.cpp.o
-
-src/lidar_subscriber.i: src/lidar_subscriber.cpp.i
-
-.PHONY : src/lidar_subscriber.i
-
-# target to preprocess a source file
-src/lidar_subscriber.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/lidar_subscriber.dir/build.make amore/CMakeFiles/lidar_subscriber.dir/src/lidar_subscriber.cpp.i
-.PHONY : src/lidar_subscriber.cpp.i
-
-src/lidar_subscriber.s: src/lidar_subscriber.cpp.s
-
-.PHONY : src/lidar_subscriber.s
-
-# target to generate assembly for a file
-src/lidar_subscriber.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/lidar_subscriber.dir/build.make amore/CMakeFiles/lidar_subscriber.dir/src/lidar_subscriber.cpp.s
-.PHONY : src/lidar_subscriber.cpp.s
-
-src/object_d.o: src/object_d.cpp.o
-
-.PHONY : src/object_d.o
-
-# target to build an object file
-src/object_d.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/object_d.dir/build.make amore/CMakeFiles/object_d.dir/src/object_d.cpp.o
-.PHONY : src/object_d.cpp.o
-
-src/object_d.i: src/object_d.cpp.i
-
-.PHONY : src/object_d.i
-
-# target to preprocess a source file
-src/object_d.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/object_d.dir/build.make amore/CMakeFiles/object_d.dir/src/object_d.cpp.i
-.PHONY : src/object_d.cpp.i
-
-src/object_d.s: src/object_d.cpp.s
-
-.PHONY : src/object_d.s
-
-# target to generate assembly for a file
-src/object_d.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/object_d.dir/build.make amore/CMakeFiles/object_d.dir/src/object_d.cpp.s
-.PHONY : src/object_d.cpp.s
-
-src/stereo_vis.o: src/stereo_vis.cpp.o
-
-.PHONY : src/stereo_vis.o
-
-# target to build an object file
-src/stereo_vis.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/stereo_vis.dir/build.make amore/CMakeFiles/stereo_vis.dir/src/stereo_vis.cpp.o
-.PHONY : src/stereo_vis.cpp.o
-
-src/stereo_vis.i: src/stereo_vis.cpp.i
-
-.PHONY : src/stereo_vis.i
-
-# target to preprocess a source file
-src/stereo_vis.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/stereo_vis.dir/build.make amore/CMakeFiles/stereo_vis.dir/src/stereo_vis.cpp.i
-.PHONY : src/stereo_vis.cpp.i
-
-src/stereo_vis.s: src/stereo_vis.cpp.s
-
-.PHONY : src/stereo_vis.s
-
-# target to generate assembly for a file
-src/stereo_vis.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/stereo_vis.dir/build.make amore/CMakeFiles/stereo_vis.dir/src/stereo_vis.cpp.s
-.PHONY : src/stereo_vis.cpp.s
-
-src/traj_pub.o: src/traj_pub.cpp.o
-
-.PHONY : src/traj_pub.o
-
-# target to build an object file
-src/traj_pub.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/traj_pub.dir/build.make amore/CMakeFiles/traj_pub.dir/src/traj_pub.cpp.o
-.PHONY : src/traj_pub.cpp.o
-
-src/traj_pub.i: src/traj_pub.cpp.i
-
-.PHONY : src/traj_pub.i
-
-# target to preprocess a source file
-src/traj_pub.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/traj_pub.dir/build.make amore/CMakeFiles/traj_pub.dir/src/traj_pub.cpp.i
-.PHONY : src/traj_pub.cpp.i
-
-src/traj_pub.s: src/traj_pub.cpp.s
-
-.PHONY : src/traj_pub.s
-
-# target to generate assembly for a file
-src/traj_pub.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/traj_pub.dir/build.make amore/CMakeFiles/traj_pub.dir/src/traj_pub.cpp.s
-.PHONY : src/traj_pub.cpp.s
+src/propulsion_system.cpp.s:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/src/propulsion_system.cpp.s
+.PHONY : src/propulsion_system.cpp.s
 
 # Help Target
 help:
@@ -2068,34 +1510,30 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... propulsion_system"
+	@echo "... PID_HS_controller"
 	@echo "... edit_cache"
-	@echo "... Task2_WF_gps_imu"
-	@echo "... Task1_SK_Planner"
-	@echo "... stereo_vis"
-	@echo "... object_d"
-	@echo "... traj_pub"
-	@echo "... High_Level_trajectory_processor"
-	@echo "... camera_subscriber"
-	@echo "... Visions_Path_Planner"
-	@echo "... PID_sub"
+	@echo "... mission_control"
 	@echo "... amore_genpy"
 	@echo "... amore_generate_messages_py"
 	@echo "... amore_generate_messages_nodejs"
 	@echo "... amore_genlisp"
+	@echo "... perception_array"
 	@echo "... amore_generate_messages_lisp"
 	@echo "... amore_geneus"
 	@echo "... amore_generate_messages_eus"
+	@echo "... _amore_generate_messages_check_deps_state_msg"
+	@echo "... _amore_generate_messages_check_deps_usv_pose_msg"
 	@echo "... _amore_generate_messages_check_deps_NED_waypoints"
-	@echo "... camera_lidar"
 	@echo "... nodelet_topic_tools_gencfg"
 	@echo "... pcl_msgs_generate_messages_cpp"
 	@echo "... bond_generate_messages_nodejs"
 	@echo "... nodelet_generate_messages_nodejs"
 	@echo "... bond_generate_messages_eus"
 	@echo "... nodelet_generate_messages_lisp"
+	@echo "... PID_HP_controller"
 	@echo "... nodelet_generate_messages_cpp"
 	@echo "... dynamic_reconfigure_generate_messages_eus"
-	@echo "... gps_imu"
 	@echo "... amore_gencpp"
 	@echo "... dynamic_reconfigure_gencfg"
 	@echo "... geographic_msgs_generate_messages_cpp"
@@ -2105,23 +1543,20 @@ help:
 	@echo "... dynamic_reconfigure_generate_messages_py"
 	@echo "... geographic_msgs_generate_messages_eus"
 	@echo "... geographic_msgs_generate_messages_nodejs"
+	@echo "... navigation_array"
 	@echo "... std_srvs_generate_messages_lisp"
 	@echo "... bond_generate_messages_py"
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... uuid_msgs_generate_messages_cpp"
 	@echo "... uuid_msgs_generate_messages_eus"
 	@echo "... uuid_msgs_generate_messages_nodejs"
-	@echo "... Task2_WF_waypoints_converter"
 	@echo "... pcl_ros_gencfg"
 	@echo "... nodelet_generate_messages_eus"
 	@echo "... actionlib_generate_messages_nodejs"
 	@echo "... uuid_msgs_generate_messages_lisp"
-	@echo "... Station_keeping"
 	@echo "... geographic_msgs_generate_messages_lisp"
 	@echo "... std_srvs_generate_messages_py"
-	@echo "... gps_subscriber"
 	@echo "... dynamic_reconfigure_generate_messages_cpp"
-	@echo "... lidar_subscriber"
 	@echo "... topic_tools_generate_messages_eus"
 	@echo "... tf_generate_messages_lisp"
 	@echo "... pcl_msgs_generate_messages_eus"
@@ -2129,11 +1564,8 @@ help:
 	@echo "... pcl_msgs_generate_messages_lisp"
 	@echo "... pcl_msgs_generate_messages_nodejs"
 	@echo "... test"
-	@echo "... color_test"
 	@echo "... pcl_msgs_generate_messages_py"
-	@echo "... Task1_SK_point_converter"
 	@echo "... std_srvs_generate_messages_cpp"
-	@echo "... PID_HP_control"
 	@echo "... tf_generate_messages_eus"
 	@echo "... dynamic_reconfigure_generate_messages_lisp"
 	@echo "... tf2_msgs_generate_messages_cpp"
@@ -2144,12 +1576,10 @@ help:
 	@echo "... topic_tools_generate_messages_lisp"
 	@echo "... topic_tools_generate_messages_nodejs"
 	@echo "... tf2_msgs_generate_messages_eus"
-	@echo "... Task2_WF_Planner"
 	@echo "... topic_tools_generate_messages_py"
 	@echo "... tf_generate_messages_py"
 	@echo "... tf_generate_messages_cpp"
 	@echo "... tf_generate_messages_nodejs"
-	@echo "... SK_Controller"
 	@echo "... actionlib_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_eus"
 	@echo "... actionlib_generate_messages_lisp"
@@ -2160,66 +1590,24 @@ help:
 	@echo "... bond_generate_messages_cpp"
 	@echo "... tf2_msgs_generate_messages_py"
 	@echo "... amore_generate_messages"
-	@echo "... src/High_Level_trajectory_processor.o"
-	@echo "... src/High_Level_trajectory_processor.i"
-	@echo "... src/High_Level_trajectory_processor.s"
-	@echo "... src/PID_HP_control.o"
-	@echo "... src/PID_HP_control.i"
-	@echo "... src/PID_HP_control.s"
-	@echo "... src/PID_sub.o"
-	@echo "... src/PID_sub.i"
-	@echo "... src/PID_sub.s"
-	@echo "... src/SK_Controller.o"
-	@echo "... src/SK_Controller.i"
-	@echo "... src/SK_Controller.s"
-	@echo "... src/Station_keeping.o"
-	@echo "... src/Station_keeping.i"
-	@echo "... src/Station_keeping.s"
-	@echo "... src/Task1_SK_Planner.o"
-	@echo "... src/Task1_SK_Planner.i"
-	@echo "... src/Task1_SK_Planner.s"
-	@echo "... src/Task1_SK_point_converter.o"
-	@echo "... src/Task1_SK_point_converter.i"
-	@echo "... src/Task1_SK_point_converter.s"
-	@echo "... src/Task2_WF_Planner.o"
-	@echo "... src/Task2_WF_Planner.i"
-	@echo "... src/Task2_WF_Planner.s"
-	@echo "... src/Task2_WF_gps_imu.o"
-	@echo "... src/Task2_WF_gps_imu.i"
-	@echo "... src/Task2_WF_gps_imu.s"
-	@echo "... src/Task2_WF_waypoints_converter.o"
-	@echo "... src/Task2_WF_waypoints_converter.i"
-	@echo "... src/Task2_WF_waypoints_converter.s"
-	@echo "... src/Visions_Path_Planner.o"
-	@echo "... src/Visions_Path_Planner.i"
-	@echo "... src/Visions_Path_Planner.s"
-	@echo "... src/camera_lidar.o"
-	@echo "... src/camera_lidar.i"
-	@echo "... src/camera_lidar.s"
-	@echo "... src/camera_subscriber.o"
-	@echo "... src/camera_subscriber.i"
-	@echo "... src/camera_subscriber.s"
-	@echo "... src/color_test.o"
-	@echo "... src/color_test.i"
-	@echo "... src/color_test.s"
-	@echo "... src/gps_imu.o"
-	@echo "... src/gps_imu.i"
-	@echo "... src/gps_imu.s"
-	@echo "... src/gps_subscriber.o"
-	@echo "... src/gps_subscriber.i"
-	@echo "... src/gps_subscriber.s"
-	@echo "... src/lidar_subscriber.o"
-	@echo "... src/lidar_subscriber.i"
-	@echo "... src/lidar_subscriber.s"
-	@echo "... src/object_d.o"
-	@echo "... src/object_d.i"
-	@echo "... src/object_d.s"
-	@echo "... src/stereo_vis.o"
-	@echo "... src/stereo_vis.i"
-	@echo "... src/stereo_vis.s"
-	@echo "... src/traj_pub.o"
-	@echo "... src/traj_pub.i"
-	@echo "... src/traj_pub.s"
+	@echo "... src/PID_HP_controller.o"
+	@echo "... src/PID_HP_controller.i"
+	@echo "... src/PID_HP_controller.s"
+	@echo "... src/PID_HS_controller.o"
+	@echo "... src/PID_HS_controller.i"
+	@echo "... src/PID_HS_controller.s"
+	@echo "... src/mission_control.o"
+	@echo "... src/mission_control.i"
+	@echo "... src/mission_control.s"
+	@echo "... src/navigation_array.o"
+	@echo "... src/navigation_array.i"
+	@echo "... src/navigation_array.s"
+	@echo "... src/perception_array.o"
+	@echo "... src/perception_array.i"
+	@echo "... src/perception_array.s"
+	@echo "... src/propulsion_system.o"
+	@echo "... src/propulsion_system.i"
+	@echo "... src/propulsion_system.s"
 .PHONY : help
 
 
