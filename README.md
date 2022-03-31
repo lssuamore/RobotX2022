@@ -13,6 +13,14 @@ username:lssuamore
 password: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
 
 cd RobotX2022
+sudo apt-get install ros-noetic-xacro
+sudo apt-get install ros-noetic-gazebo_ros
+sudo apt-get install ros-noetic-geographic-msgs
+sudo apt-get install ros-noetic-cv-bridge
+sudo apt-get install ros-noetic-image-transport
+sudo apt-get install ros-noetic-pcl-ros
+sudo apt-get install ros-noetic-tf2-geometry-msgs
+
 #git submodule update --init --recursive
 git submodule init
 git submodule update
