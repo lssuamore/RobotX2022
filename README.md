@@ -13,6 +13,7 @@ username:lssuamore
 password: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
 
 cd RobotX2022
+# download the following libraries if necessary
 sudo apt-get install ros-noetic-xacro
 sudo apt-get install ros-noetic-gazebo_ros
 sudo apt-get install ros-noetic-geographic-msgs
