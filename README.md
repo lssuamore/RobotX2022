@@ -13,20 +13,12 @@ username:lssuamore
 password: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
 
 cd RobotX2022
-# download the following libraries if necessary
-sudo apt-get install ros-noetic-xacro
-sudo apt-get install ros-noetic-gazebo_ros
-sudo apt-get install ros-noetic-geographic-msgs
-sudo apt-get install ros-noetic-cv-bridge
-sudo apt-get install ros-noetic-image-transport
-sudo apt-get install ros-noetic-pcl-ros
-sudo apt-get install ros-noetic-tf2-geometry-msgs
 
 #git submodule update --init --recursive
 git submodule init
 git submodule update
 delete devel and build folders
-#note the submodule commands shuld install opencv and geonav_transform. Might also need to git clone PCL: https://github.com/ros-perception/perception_pcl.git
+#note the submodule commands should install opencv and geonav_transform. Might also need to git clone PCL: https://github.com/ros-perception/perception_pcl.git
 #if submodule commands dont work delete empty folders and in there place install the correct packages from github
 catkin_make
 #after catkin_make update amore folder CMakelist(add_dependicies and target_link_libraries) by uncommenting the commented out programs
@@ -40,7 +32,14 @@ CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:75 (find_pa
 #download the appropriate packages by finding the download on google 
 usually in the form sudo apt install ros-noetic-""
 
-
+# download the following libraries if necessary
+sudo apt-get install ros-noetic-xacro
+sudo apt-get install ros-noetic-gazebo_ros
+sudo apt-get install ros-noetic-geographic-msgs
+sudo apt-get install ros-noetic-cv-bridge
+sudo apt-get install ros-noetic-image-transport
+sudo apt-get install ros-noetic-pcl-ros
+sudo apt-get install ros-noetic-tf2-geometry-msgs
 
 Git Commands
 
