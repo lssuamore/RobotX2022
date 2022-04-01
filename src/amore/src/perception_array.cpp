@@ -183,7 +183,7 @@ float lat_scale_LUT[10][9] = {												  // 7m	8m	9m	10m	11m	12m	13m	14m	15m
 	{1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1, 0.101, 0.097}  // 9m
 };
 
-amore::state_msg state_pa;													// The state command from mission_control
+//amore::state_msg state_pa;													// The state command from mission_control
 int PA_state = 0;      						// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
 amore::usv_pose_msg boat_pose;											// The USV pose from mission_control
 float u_x[100], u_x1[100];														// The x-coordinates of the BLOBs [pixels]
@@ -208,13 +208,13 @@ void StateFunc(const amore::state_msg::ConstPtr& msg)
 	ROS_DEBUG("PA_state: %i --PA", PA_state);
 }
 
-void StateFunc(amore::state_msg stater)
+/* void StateFunc(amore::state_msg stater)
 {
 	state_pa.header.seq = stater.header.seq;
 	state_pa.header.stamp = stater.header.stamp;
 	state_pa.header.frame_id = stater.header.frame_id;
 	state_pa.state.data = stater.state.data;
-} // end of StateFunc()
+} // end of StateFunc() */
 
 // THIS FUNCTION: Obtains the USV NED pose
 // ACCEPTS: The USV pose
