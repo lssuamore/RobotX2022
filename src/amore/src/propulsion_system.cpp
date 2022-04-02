@@ -215,16 +215,7 @@ int main(int argc, char **argv)
   ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
   
   // NodeHandles
-	ros::NodeHandle nh1;
-	ros::NodeHandle nh2;
-	ros::NodeHandle nh3;
-	ros::NodeHandle nh4;
-	ros::NodeHandle nh5;
-	ros::NodeHandle nh6;
-	ros::NodeHandle nh7;
-	ros::NodeHandle nh8;
-	ros::NodeHandle nh9;
-	ros::NodeHandle nh10;
+  ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10;
   
   // Subscribers
   ros::Subscriber propulsion_system_state_sub = nh1.subscribe("ps_state", 1, state_update);							// subscriber for current position converted to NED

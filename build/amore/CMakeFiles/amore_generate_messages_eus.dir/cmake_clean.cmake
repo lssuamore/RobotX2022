@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "/home/taylor/RobotX2022/devel/share/roseus/ros/amore/manifest.l"
-  "/home/taylor/RobotX2022/devel/share/roseus/ros/amore/msg/NED_waypoints.l"
-  "/home/taylor/RobotX2022/devel/share/roseus/ros/amore/msg/state_msg.l"
-  "/home/taylor/RobotX2022/devel/share/roseus/ros/amore/msg/usv_pose_msg.l"
+  "/home/brad/RobotX2022/devel/share/roseus/ros/amore/manifest.l"
+  "/home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/NED_waypoints.l"
+  "/home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/state_msg.l"
+  "/home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/usv_pose_msg.l"
   "CMakeFiles/amore_generate_messages_eus"
 )
 

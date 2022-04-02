@@ -1,10 +1,10 @@
 
 "use strict";
 
-let Contact = require('./Contact.js');
 let Task = require('./Task.js');
+let Contact = require('./Contact.js');
 
 module.exports = {
-  Contact: Contact,
   Task: Task,
+  Contact: Contact,
 };
