@@ -235,7 +235,6 @@ void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
 	if ((!lat_lon_goal_recieved) && (NA_state == 3))
 	{
-		ROS_INFO("ENTERING IF.");
 		for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
 		{
 			goal_lat[i] = goal->poses[i].pose.position.latitude;
@@ -250,10 +249,6 @@ void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 		ROS_INFO("GOAL POSITIONS HAVE BEEN ACQUIRED FROM THE VRX TASK 2 WAYPOINTS NODE.");
 		ROS_INFO("Size of array: %i", (int)sizeof(goal->poses)/8);
 		goal_poses_quantity = (int)sizeof(goal->poses)/8;
-	}
-	else
-	{
-		ROS_INFO("NOT ENTERING IF.");
 	}
 } // END OF VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 //............................................................End of goal pose conversion functions............................................................
@@ -282,7 +277,7 @@ int main(int argc, char **argv)
 	// Publishers
 	ros::Publisher NA_initializer_pub = nh8.advertise<std_msgs::Bool>("NA_initialization_state", 1);							// publishes state of initialization
 	ros::Publisher nedstate_pub = nh10.advertise<nav_msgs::Odometry>("usv_ned", 100); 										// USV NED state publisher
-	ros::Publisher usvstate_pub = nh11.advertise<nav_msgs::Odometry>("nav_odom", 100); 									// USV state publisher, this sends the current state to nav_odom, so geonav_transform package can publish the ENU conversion to geonav_odom
+	ros::Publisher usvstate_pub = nh11.advertise<nav_msgs::Odometry>("nav_odom", 100); 										// USV state publisher, this sends the current state to nav_odom, so geonav_transform package can publish the ENU conversion to geonav_odom
 	ros::Publisher waypoints_NED_pub = nh12.advertise<amore::NED_waypoints>("waypoints_NED", 100); 				// goal poses converted to NED publisher
 	ros::Publisher goal_publish_state_pub = nh13.advertise<std_msgs::Bool>("goal_publish_state", 1);						// goal_publish_state publisher
 	
@@ -378,6 +373,7 @@ int main(int argc, char **argv)
 		
 			// publish the NED USV state
 			nedstate_pub.publish(nav_NED);
+			NED_waypoints_published = false;								// I THINK
 		} // if USV Pose Conversion mode
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF STANDARD USV POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
@@ -482,6 +478,9 @@ int main(int argc, char **argv)
 		if (NED_waypoints_published)
 		{
 			waypoints_NED_pub.publish(NED_waypoints);
+			// reset for next times conversion
+			lat_lon_goal_recieved = false;
+			NED_waypoints_converted = false;
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF WF GOAL POSES CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
