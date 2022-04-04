@@ -2,7 +2,7 @@
 ## General Information
 This is LSSU/UniBz WAMV Codebase for VRX and RobotX. Brad loves ☕.  
 
-## Update repository with vrx_amore master
+## Update repository with master
 ```
 cd RobotX2022/
 ```
