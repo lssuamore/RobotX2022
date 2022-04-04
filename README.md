@@ -2,6 +2,26 @@
 ## General Information
 This is LSSU/UniBz WAMV Codebase for VRX and RobotX. Brad loves ☕.  
 
+## Update repository with vrx_amore master
+```
+cd RobotX2022/
+```
+Make sure you are on the master branch with the following:
+```
+git checkout master
+```
+Pull the repository to your computer with the following:
+```
+git pull
+```
+username:
+```
+lssuamore
+```
+password:
+```
+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
+```
 ## Installation Process:
 
 ```
