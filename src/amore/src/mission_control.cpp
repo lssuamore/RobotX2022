@@ -1,6 +1,6 @@
 //  Filename:											mission_control.cpp
 //  Creation Date:									03/25/2022
-//  Last Revision Date:							03/28/2022
+//  Last Revision Date:							04/04/2022
 //  Author(s) [email]:								Bradley Hacker [bhacker@lssu.edu]
 //  Revisor(s) [email] {Revision Date}:	Bradley Hacker [bhacker@lssu.edu] {03/28/2022}
 //  Organization/Institution:					Lake Superior State University - Team AMORE
@@ -16,6 +16,7 @@
 //  Inputs and Outputs of the mission_control.cpp file
 //				Inputs [subscribers]: "waypoints_NED" (converted goal pose array), "usv_ned", "/vrx/task/info", 
 //				Outputs [publishers]: state and goal of low level controllers
+
 
 //................................................Included Libraries and Message Types..........................................
 #include "ros/ros.h"
@@ -33,28 +34,30 @@
 #include "amore/NED_waypoints.h"										// message that holds array of converted WF goal waypoints w/ headings and number of waypoints
 //...........................................End of Included Libraries and Message Types....................................
 
+
 //.................................................................Constants....................................................................
 #define PI 3.14159265
 //............................................................End of Constants.............................................................
 
+
 //..............................................................Global Variables............................................................
-int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
-int point = 0;                     		    						// number of points on trajectory reached 
-int goal_poses;              										// total number of poses to reach 
-int loop_goal_recieved;         								// this is kept in order to ensure planner doesn't start controller until the goal is published
+int loop_count = 0;                                    				// loop counter, first 10 loops used to intitialize subscribers
+int point = 0;                     		    								// number of points on trajectory reached 
+int goal_poses;              											// total number of poses to reach 
+int loop_goal_recieved;         									// this is kept in order to ensure planner doesn't start controller until the goal is published
 
 float x_goal[100], y_goal[100], psi_goal[100];		// arrays to hold the NED goal poses
 float x_usv_NED, y_usv_NED, psi_NED; 				// vehicle position and heading (pose) in NED
 
-float e_x, e_y, e_xy, e_psi;									// current errors between goal pose and usv pose
+float e_x, e_y, e_xy, e_psi;										// current errors between goal pose and usv pose
 
 bool NED_waypoints_published = false;				// NED_waypoints_published = false means the NED poses have not yet been calculated and published
 bool NED_waypoints_recieved = false;					// NED_waypoints_recieved = false means goal position has not been acquired from "waypoints_NED"
-bool E_reached = false;        								// E_reached = false means the last point has not been reached
-//float e_xy_prev, e_psi_prev;								// previous errors
+bool E_reached = false;        									// E_reached = false means the last point has not been reached
+//float e_xy_prev, e_psi_prev;									// previous errors
 
-float e_xy_allowed = 0.4;       								// positional error tolerance threshold; NOTE: make as small as possible
-float e_psi_allowed = 0.4;      								// heading error tolerance threshold; NOTE: make as small as possible
+float e_xy_allowed = 0.4;       									// positional error tolerance threshold; NOTE: make as small as possible
+float e_psi_allowed = 0.4;      									// heading error tolerance threshold; NOTE: make as small as possible
 
 // STATES CONCERNED WITH "mission_control"
 int MC_state = 0;							// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 4569 = HARD RESET (OR OTHER USE)
@@ -66,32 +69,32 @@ int PS_state = 0;      						// 0 = On Standby, 1 = LL controller ON
 int PA_state = 0;      						// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
 
 // THE FOLLOWING FOUR BOOLS ARE USED TO DETERMINE IF THE SYSTEM HAS BEEN INITIALIZED
-bool navigation_array_initialized = false;		// navigation_array_initialized = false means navigation_array is not initialized
-bool propulsion_system_initialized = false;	// propulsion_system_initialized = false means propulsion_system is not initialized
-bool perception_array_initialized = true;		// perception_array_initialized = false means the perception_array is not initialized !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-bool mission_control_initialized = false;			// mission_control_initialized = false means the mission_control is not initialized
+bool navigation_array_initialized = false;							// navigation_array_initialized = false means navigation_array is not initialized
+bool propulsion_system_initialized = false;						// propulsion_system_initialized = false means propulsion_system is not initialized
+bool perception_array_initialized = false;							// perception_array_initialized = false means the perception_array is not initialized
+bool mission_control_initialized = false;							// mission_control_initialized = false means the mission_control is not initialized
 
 amore::usv_pose_msg current_goal_pose_msg;			// "current_goal_pose" message
-ros::Publisher current_goal_pose_pub;			// "current_goal_pose" publisher
+ros::Publisher current_goal_pose_pub;							// "current_goal_pose" publisher
 
-amore::state_msg propulsion_system_state;		// "ps_state" message
-ros::Publisher ps_state_pub;								// "ps_state" publisher
+amore::state_msg propulsion_system_state;					// "ps_state" message
+ros::Publisher ps_state_pub;												// "ps_state" publisher
 
-amore::state_msg navigation_array_state;		// "na_state" message
-ros::Publisher na_state_pub;								// "na_state" publisher
+amore::state_msg navigation_array_state;						// "na_state" message
+ros::Publisher na_state_pub;												// "na_state" publisher
 
-amore::state_msg perception_array_state;		// "pa_state" message
-ros::Publisher pa_state_pub;								// "pa_state" publisher
+amore::state_msg perception_array_state;						// "pa_state" message
+ros::Publisher pa_state_pub;												// "pa_state" publisher
 
-ros::Time current_time, last_time;					// creates time variables
+ros::Time current_time, last_time;									// creates time variables
 //..............................................................End of Global Variables..........................................................
 
-//..................................................................Functions...........................................................................
 
+//..................................................................Functions...........................................................................
 // SYSTEM INITIALIZATION CHECK FUNCTIONS /////////////////////////////////////////////////////////////////////////////////
 // THIS FUNCTION: Subscribes to the navigation_array to check initialization status
-// ACCEPTS: Initialization status from "NA_initialization_state"
-// RETURNS: Nothing. Updates global variables
+// ACCEPTS: Initialization status from "na_initialization_state"
+// RETURNS: (VOID)
 // =============================================================================
 void NAVIGATION_ARRAY_inspector(const std_msgs::Bool status)
 {
@@ -106,8 +109,8 @@ void NAVIGATION_ARRAY_inspector(const std_msgs::Bool status)
 } // END OF NAVIGATION_ARRAY_inspector()
 
 // THIS FUNCTION: Subscribes to the propulsion_system to check initialization status
-// ACCEPTS: Initialization status from "PS_initialization_state"
-// RETURNS: Nothing. Updates global variables
+// ACCEPTS: Initialization status from "ps_initialization_state"
+// RETURNS: (VOID)
 // =============================================================================
 void PROPULSION_SYSTEM_inspector(const std_msgs::Bool status)
 {
@@ -122,8 +125,8 @@ void PROPULSION_SYSTEM_inspector(const std_msgs::Bool status)
 } // END OF PROPULSION_SYSTEM_inspector()
 
 // THIS FUNCTION: Subscribes to the perception_array to check initialization status
-// ACCEPTS: Initialization status from "PA_initialization_state"
-// RETURNS: Nothing. Updates global variables
+// ACCEPTS: Initialization status from "pa_initialization_state"
+// RETURNS: (VOID)
 // =============================================================================
 void PERCEPTION_ARRAY_inspector(const std_msgs::Bool status)
 {
@@ -137,9 +140,9 @@ void PERCEPTION_ARRAY_inspector(const std_msgs::Bool status)
 	}	
 } // END OF PERCEPTION_ARRAY_inspector()
 
-// THIS FUNCTION: Checks initialization status of entire system
-// ACCEPTS: Nothing. Uses global variable initialization statuses
-// RETURNS: Nothing. Updates global variables
+// THIS FUNCTION: Checks initialization status of entire system using global variable initialization statuses
+// ACCEPTS: (VOID) 
+// RETURNS: (VOID) 
 // =============================================================================
 void MISSION_CONTROL_inspector()
 {
@@ -151,7 +154,7 @@ void MISSION_CONTROL_inspector()
 	else
 	{
 		mission_control_initialized = false;
-		ROS_INFO("!mission_control_initialized");
+		ROS_INFO("!mission_control_initialized --MC");
 	}
 	// UPDATE USER OF INITIALIZATION STATUSES
 	/* if (navigation_array_initialized)
@@ -171,7 +174,7 @@ void MISSION_CONTROL_inspector()
 
 // THIS FUNCTION: Updates when NED waypoints have been converted and published to "waypoints_ned" to know when to subscribe
 // ACCEPTS: Goal publish status from "goal_publish_state"
-// RETURNS: Nothing. Updates global variable
+// RETURNS: (VOID)
 // =============================================================================
 void goal_publish_state_update(const std_msgs::Bool status)
 {
@@ -189,11 +192,11 @@ void goal_publish_state_update(const std_msgs::Bool status)
 
 // THIS FUNCTION: Updates the goal NED waypoints converted through the navigation_array
 // ACCEPTS: Goal NED waypoints from "waypoints_NED"
-// RETURNS: Nothing. Updates global variables
+// RETURNS: (VOID)
 // =============================================================================
 void goal_NED_waypoints_update(const amore::NED_waypoints::ConstPtr& goal) 
 {
-	if ((mission_control_initialized) && (MC_state == 0))				// if the system is initialized and task 2: wayfinding
+	if ((mission_control_initialized) && (MC_state == 0))							// if the system is initialized and task 2: wayfinding
 	{
 		if ((NED_waypoints_published) && (!NED_waypoints_recieved))	// if the NED goal waypoints have been published but not recieved yet
 		{
@@ -215,8 +218,8 @@ void goal_NED_waypoints_update(const amore::NED_waypoints::ConstPtr& goal)
 } // END OF goal_NED_waypoints_update() 
 
 // THIS FUNCTION: Updates the current NED USV pose converted through the navigation_array
-// ACCEPTS: Current NED USV pose and velocities from "nav_NED"
-// RETURNS: Nothing. Updates global variables
+// ACCEPTS: Current NED USV pose and velocities from "nav_ned"
+// RETURNS: (VOID)
 // =============================================================================
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
 {
@@ -254,13 +257,13 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 
 // THIS FUNCTION: Updates and publishes all subsytem states, as well as mission_control state dependent on current system statuses
 // ACCEPTS: Current vrx task info from "vrx/task/info"
-// RETURNS: Nothing. Updates global variables and publishes subsytem states
+// RETURNS: (VOID)
 // =============================================================================
 void state_update(const vrx_gazebo::Task::ConstPtr& msg)
 {
 	// MUST SET THE FOLLOWING
 	NA_state = 0;			// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
-	PS_state = 0;			// 0 = On Standby, 1 = LL controller ON
+	PS_state = 0;				// 0 = On Standby, 1 = LL controller ON
 	MC_state = 0;			// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 4569 = HARD RESET (OR OTHER USE)
 	PA_state = 0;      		// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
 	if (mission_control_initialized)
@@ -275,17 +278,17 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)
 					MC_state = 1;					// mission_control is in SK Planner mode
 					if (loop_count > (loop_goal_recieved + 1000))
 					{
-						PS_state = 1;				// propulsion_system is turned ON
+						PS_state = 1;					// propulsion_system is turned ON
 					}
 					else
 					{
-						PS_state = 0;				// propulsion_system is turned OFF
+						PS_state = 0;					// propulsion_system is turned OFF
 					}
 				}
 				else
 				{
 					NA_state = 2;					// navigation_array is in SK NED Goal Pose Conversion mode
-					PS_state = 0;					// propulsion_system is turned OFF
+					PS_state = 0;						// propulsion_system is turned OFF
 					MC_state = 0;					// mission_control is On Standby
 				}
 			}
@@ -310,17 +313,17 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)
 					MC_state = 2;					// mission_control is in WF Planner mode
 					if (loop_count > (loop_goal_recieved + 1000))
 					{
-						PS_state = 1;				// propulsion_system is turned ON
+						PS_state = 1;					// propulsion_system is turned ON
 					}
 					else
 					{
-						PS_state = 0;				// propulsion_system is turned OFF
+						PS_state = 0;					// propulsion_system is turned OFF
 					}
 				}
 				else
 				{
 					NA_state = 3;					// navigation_array is in WF NED Goal Pose Conversion mode
-					PS_state = 0;					// propulsion_system is turned OFF
+					PS_state = 0;						// propulsion_system is turned OFF
 					MC_state = 0;					// mission_control is On Standby
 				}
 			}
@@ -340,7 +343,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)
 		else if (msg->name == "perception")										// NOT DONE YET
 		{
 			NA_state = 1;				// navigation_array is in standard USV NED Pose Conversion mode
-			PA_state = 2;				// perception_array is in Task 3: Perception mode
+			PA_state = 2;					// perception_array is in Task 3: Perception mode
 			/* if ((msg->state == "ready") || (msg->state == "running"))
 			{
 				NA_state = 0;
@@ -412,22 +415,22 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)
 		// SEND STATE TO PROPULSION_SYSTEM
 		propulsion_system_state.header.seq +=1;										// sequence number
 		propulsion_system_state.header.stamp = current_time;					// set stamp to current time
-		propulsion_system_state.header.frame_id = "mission_control";		// header frame
-		propulsion_system_state.state.data = PS_state;							// set propulsion system state; 0 = OFF; 1 = ON
+		propulsion_system_state.header.frame_id = "mission_control";	// header frame
+		propulsion_system_state.state.data = PS_state;								// set propulsion system state; 0 = OFF; 1 = ON
 		ps_state_pub.publish(propulsion_system_state);							// publish propulsion_system_state to "ps_state"
 
 		// SEND STATE TO NAVIGATION_ARRAY
-		navigation_array_state.header.seq +=1;										// sequence number
+		navigation_array_state.header.seq +=1;											// sequence number
 		navigation_array_state.header.stamp = current_time;						// set stamp to current time
-		navigation_array_state.header.frame_id = "mission_control";			// header frame
-		navigation_array_state.state.data = NA_state;								// set navigation_array_state; 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
+		navigation_array_state.header.frame_id = "mission_control";		// header frame
+		navigation_array_state.state.data = NA_state;									// set navigation_array_state; 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
 		na_state_pub.publish(navigation_array_state);								// publish navigation_array_state to "na_state"
 
 		// SEND STATE TO PERCEPTION_ARRAY
-		perception_array_state.header.seq +=1;										// sequence number
-		perception_array_state.header.stamp = current_time;					// set stamp to current time
-		perception_array_state.header.frame_id = "mission_control";			// header frame
-		perception_array_state.state.data = PA_state;								// set perception_array_state; 0 = On Standby, 1 = General State, 2 = Task 3: Perception
+		perception_array_state.header.seq +=1;											// sequence number
+		perception_array_state.header.stamp = current_time;						// set stamp to current time
+		perception_array_state.header.frame_id = "mission_control";		// header frame
+		perception_array_state.state.data = PA_state;									// set perception_array_state; 0 = On Standby, 1 = General State, 2 = Task 3: Perception
 		pa_state_pub.publish(perception_array_state);								// publish perception_array_state to "pa_state"
 		
 		// UPDATE USER OF EACH CODES STATE
@@ -439,23 +442,23 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)
 	} // if (mission_control_initialized)
 } // END OF state_update()
 
-// THIS FUNCTION: Fills out current_goal_pose_msg and publishes to "current_goal_pose" for the propulsion_system to get to
+// THIS FUNCTION: Fills out current_goal_pose_msg and publishes to "current_goal_pose" for the propulsion_system
 // ACCEPTS: Nothing. Uses global variable pose arrays
-// RETURNS: Nothing. Publishes current goal pose
+// RETURNS: (VOID)
 // =============================================================================
 void current_goal_pose_publish()
 {
 	// PUBLISH THE CURRENT GOAL POSE
 	current_goal_pose_msg.header.seq = 0;
 	current_goal_pose_msg.header.seq +=1;										// sequence number
-	current_goal_pose_msg.header.stamp = current_time;					// sets stamp to current time
-	current_goal_pose_msg.header.frame_id = "mission_control";		// header frame
+	current_goal_pose_msg.header.stamp = current_time;				// sets stamp to current time
+	current_goal_pose_msg.header.frame_id = "mission_control";	// header frame
 	current_goal_pose_msg.position.x = x_goal[point];						// sets x-location
 	current_goal_pose_msg.position.y = y_goal[point];						// sets y-location
 	current_goal_pose_msg.position.z = 0.0;										// sets z-location
 	current_goal_pose_msg.psi.data = psi_goal[point];						// sets psi
 
-	current_goal_pose_pub.publish(current_goal_pose_msg);				// publish goal usv pose to "current_goal_pose"
+	current_goal_pose_pub.publish(current_goal_pose_msg);		// publish goal usv pose to "current_goal_pose"
 } // END OF current_goal_pose_publish()
 
 //............................................................End of Functions............................................................
@@ -463,7 +466,7 @@ void current_goal_pose_publish()
 int main(int argc, char **argv)
 {
   // names the program for visual purposes
-  ros::init(argc, argv, "Path Planner");
+  ros::init(argc, argv, "mission_control");
   
   ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
   
@@ -471,16 +474,16 @@ int main(int argc, char **argv)
   ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12;
   
   // Subscribers
-  ros::Subscriber task_status_sub = nh1.subscribe("/vrx/task/info", 1, state_update);																	// VRX task topic
-  ros::Subscriber NA_initialization_state_sub = nh2.subscribe("NA_initialization_state", 1, NAVIGATION_ARRAY_inspector);		// initialization status of navigation_array
-  ros::Subscriber PS_initialization_state_sub = nh3.subscribe("PS_initialization_state", 1, PROPULSION_SYSTEM_inspector);	// initialization status of propulsion_system
-  //ros::Subscriber PA_initialization_state_sub = nh4.subscribe("PA_initialization_state", 1, PERCEPTION_ARRAY_inspector);	// initialization status of perception_array
-  ros::Subscriber nav_NED_sub = nh5.subscribe("nav_NED", 1, pose_update);																			// current USV pose converted to NED
-  ros::Subscriber waypoints_NED_sub = nh6.subscribe("waypoints_NED", 1, goal_NED_waypoints_update);								// goal waypoints converted to NED
-  ros::Subscriber goal_publish_state_sub = nh7.subscribe("goal_publish_state", 1, goal_publish_state_update);							// whether or not goal waypoints have been converted yet
+  ros::Subscriber task_status_sub = nh1.subscribe("/vrx/task/info", 1, state_update);																				// VRX task topic
+  ros::Subscriber NA_initialization_state_sub = nh2.subscribe("na_initialization_state", 1, NAVIGATION_ARRAY_inspector);		// initialization status of navigation_array
+  ros::Subscriber PS_initialization_state_sub = nh3.subscribe("ps_initialization_state", 1, PROPULSION_SYSTEM_inspector);		// initialization status of propulsion_system
+  ros::Subscriber pa_initialization_state_sub = nh4.subscribe("pa_initialization_state", 1, PERCEPTION_ARRAY_inspector);		// initialization status of perception_array
+  ros::Subscriber nav_NED_sub = nh5.subscribe("nav_ned", 1, pose_update);																						// current USV pose converted to NED
+  ros::Subscriber waypoints_NED_sub = nh6.subscribe("waypoints_ned", 1, goal_NED_waypoints_update);									// goal waypoints converted to NED
+  ros::Subscriber goal_publish_state_sub = nh7.subscribe("goal_publish_state", 1, goal_publish_state_update);								// whether or not goal waypoints have been converted yet
   
   // Publishers
-  current_goal_pose_pub = nh9.advertise<amore::usv_pose_msg>("current_goal_pose", 1);									// current goal for low level controller (propulsion_system)
+  current_goal_pose_pub = nh9.advertise<amore::usv_pose_msg>("current_goal_pose", 1);								// current goal for low level controller (propulsion_system)
   ps_state_pub = nh10.advertise<amore::state_msg>("ps_state", 1);																		// current propulsion_system state
   na_state_pub = nh11.advertise<amore::state_msg>("na_state", 1);																		// current navigation_array state
   pa_state_pub = nh12.advertise<amore::state_msg>("pa_state", 1);																		// current perception_array state
@@ -494,6 +497,7 @@ int main(int argc, char **argv)
   // Initialize simulation time
   ros::Time::init();
   
+  // Initialize global variables
   current_time = ros::Time::now();						// sets current time to the time it is now
   last_time = current_time;								// sets last time to the time it is now
   

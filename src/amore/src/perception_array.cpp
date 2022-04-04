@@ -47,15 +47,18 @@
 #include <vector>
 #include <string>
 #include "std_msgs/Float32.h"
+#include "std_msgs/Bool.h"
 #include "vrx_gazebo/Task.h"
 #include "amore/state_msg.h"
 #include "amore/usv_pose_msg.h"
 //...........................................End of Included Libraries and Message Types....................................
 
+
 //..............................................................Namespaces................................................................
 using namespace cv;
 using namespace std;
 //........................................................End of Namespaces...........................................................
+
 
 //.................................................................Constants..................................................................
 #define BASELINE 0.2							// baseline between camera sensors [m]
@@ -85,6 +88,7 @@ using namespace std;
 #define RbHead "mb_round_buoy_"			// Round buoy ID header
 //............................................................End of Constants.............................................................
 
+
 //..............................................................Global Variables............................................................
 int loop_count = 0;                                    					// loop counter, first 10 loops used to intitialize subscribers
 
@@ -92,7 +96,6 @@ int loop_count = 0;                                    					// loop counter, fir
 
 geographic_msgs::GeoPoseStamped task3_message; //publisher message type
 ros::Publisher task3_pub; //publisher for judges topic
-ros::Time current_time, last_time;  // creates time variables
 
 // Color limits used in blob detection
 cv::Scalar green_low, green_high; 
@@ -186,59 +189,63 @@ float lat_scale_LUT[10][9] = {												  // 7m	8m	9m	10m	11m	12m	13m	14m	15m
 };
 
 amore::state_msg state_pa;													// The state command from mission_control
-bool perception_array_initialized = false;								// perception_array_initialized = false means perception_array is not initialized
+
 int PA_state = 0;      																// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
-amore::usv_pose_msg boat_pose;										// The USV pose from mission_control
+
 float u_x[100], u_x1[100];														// The x-coordinates of the BLOBs [pixels]
 float v_y[100], v_y1[100];														// The y-coordinates of the BLOBs [pixels]
 float x_offset[100], y_offset[100];											// Arrays for the centroids of detected objects [m]
 char colors[100], typers[100];												// Arrays for buoy IDs
-float N_USV, E_USV, D_USV, PSI_USV;								// USV position and heading in NED
+float N_USV, E_USV, D_USV, PSI_USV;							// USV position and heading in NED
 float O_N[100], O_E[100], O_D[100];									// Object global NED position
 float new_lat[100], new_long[100];										// Determined lat and long
-int right_blob_cnt = 0;															// Holds the count of BLOBs from left camera
+int right_blob_cnt = 0;																// Holds the count of BLOBs from left camera
 bool my_key = true;                           									// If my_key = false, this means according to the current task status, conversion shouldn't be done
+
+std_msgs::Bool pa_initialization_status;																		// "pa_initialization_state" message
+ros::Publisher pa_initialization_state_pub;																	// "pa_initialization_state" publisher
+
+ros::Time current_time, last_time;																				// creates time variables
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
-// THIS FUNCTION SUBSCRIBES TO THE NAVIGATION_ARRAY TO CHECK INITIALIZATION
+// THIS FUNCTION: Updates and publishes initialization status to "pa_initialization_state"
+// ACCEPTS: (VOID)
+// RETURNS: (VOID)
+// =============================================================================
 void PERCEPTION_ARRAY_inspector()
 {
 	if (loop_count > 10)
 	{
-		perception_array_initialized = true;
+		pa_initialization_status.data = true;
 		//ROS_INFO("navigation_array_initialized -- NA");
 	}
 	else
 	{
-		perception_array_initialized = false;
+		pa_initialization_status.data = false;
 		ROS_INFO("!navigation_array_initialized -- NA");
-	}	
+	}
+	pa_initialization_state_pub.publish(pa_initialization_status);						// publish the initialization status of the perception_array to "pa_initialization_state"
 } // END OF PERCEPTION_ARRAY_inspector()
 
-// THIS FUNCTION: Obtains the state command from "mission_control"
-// ACCEPTS: The state command.
-// RETURNS: Nothing. Updates the global variable state_pa
+// THIS FUNCTION: Updates the state of perception_array given by mission_control
+// ACCEPTS: state_msg from "pa_state"
+// RETURNS: (VOID) Updates global variable
 // =============================================================================
-void StateFunc(const amore::state_msg::ConstPtr& msg) 
+void state_update(const amore::state_msg::ConstPtr& msg) 
 {
-	PA_state = msg->state.data;
-	ROS_DEBUG("PA_state: %i --PA", PA_state);
-}
-
-void StateFunc(amore::state_msg stater)
-{
-	state_pa.header.seq = stater.header.seq;
-	state_pa.header.stamp = stater.header.stamp;
-	state_pa.header.frame_id = stater.header.frame_id;
-	state_pa.state.data = stater.state.data;
-} // end of StateFunc()
+	// do not start anything until subscribers to sensor data are initialized
+	if (pa_initialization_status.data)
+	{
+		PA_state = msg->state.data;
+	}
+} // END OF state_update()
 
 // THIS FUNCTION: Obtains the USV NED pose
 // ACCEPTS: The USV pose
-// RETURNS: Nothing. Updates the global variables boat_pose, N_USV, E_USV, D_USV, PSI_USV
+// RETURNS: Nothing. Updates the global variables N_USV, E_USV, D_USV, PSI_USV
 // =============================================================================
-void PoseFunc(const nav_msgs::Odometry::ConstPtr& odom)
+void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 {
 //	if (PA_state == 2) // if navigation_array is in standard USV Pose Conversion mode 
 //	{
@@ -258,26 +265,7 @@ void PoseFunc(const nav_msgs::Odometry::ConstPtr& odom)
 			PSI_USV = PSI_USV - 2.0*PI;
 		}
 //	} // if navigation_array is in standard USV Pose Conversion mode
-} // end of PoseFunc()
-
-/* void PoseFunc(amore::usv_pose_msg usv_pos)
-{
-	// Store for safekeeping
-	boat_pose.header.seq = usv_pos.header.seq;
-	boat_pose.header.stamp = usv_pos.header.stamp;
-	boat_pose.header.frame_id = usv_pos.header.frame_id;
-	boat_pose.position.x = usv_pos.position.x;
-	boat_pose.position.y = usv_pos.position.y;
-	boat_pose.position.z = usv_pos.position.z;
-	boat_pose.psi.data = usv_pos.psi.data;
-	boat_pose.latitude.data = usv_pos.latitude.data;
-	boat_pose.longitude.data = usv_pos.longitude.data;
-	// Populate "ease-of-use" variables
-	N_USV = boat_pose.position.x;
-	E_USV = boat_pose.position.y;
-	D_USV = boat_pose.position.z;
-	PSI_USV = boat_pose.psi.data;
-} // end of PoseFunc() */
+} // end of pose_update()
 
 // THIS FUNCTION: Converts from the relative USV frame to spherical ECEF
 // ACCEPTS: The centroid of an object and the pose of the USV
@@ -887,30 +875,29 @@ int main(int argc, char **argv)
 	//cv::namedWindow("Right Camera Features", cv::WINDOW_AUTOSIZE);
   
 	// Subscriber Node Handles
-	ros::NodeHandle nh;
-	ros::NodeHandle nh1;
-	ros::NodeHandle nh2;
-	ros::NodeHandle nh3;
+	ros::NodeHandle nh, nh1, nh2, nh3;
 	
 	// Subscribers
 	image_transport::ImageTransport it(nh); //transports the images from published node to subscriber
 	image_transport::ImageTransport it1(nh1);
 	image_transport::Subscriber camera_sub = it.subscribe("/wamv/sensors/cameras/front_left_camera/image_raw", 1, LeftCamFunc); // Analyzes left camera image
 	image_transport::Subscriber camera_sub1 = it1.subscribe("/wamv/sensors/cameras/front_right_camera/image_raw", 1, RightCamFunc); // Analyzes right camera image
-	ros::Subscriber pa_state_sub = nh2.subscribe("pa_state", 1, StateFunc);// Obtains the state command from mission_control
-	ros::Subscriber nav_NED_sub = nh3.subscribe("nav_NED", 100, PoseFunc);// Obtains the USV pose in global NED from mission_control
+	ros::Subscriber pa_state_sub = nh2.subscribe("pa_state", 1, state_update);// Obtains the state command from mission_control
+	ros::Subscriber nav_ned_sub = nh3.subscribe("nav_ned", 100, pose_update);// Obtains the USV pose in global NED from mission_control
 	
 	// Publisher Node Handles
-	ros::NodeHandle nh4;
-	ros::NodeHandle nh5;
-	ros::NodeHandle nh6;
-	ros::NodeHandle nh7;
+	ros::NodeHandle nh4, nh5, nh6, nh7;
 	
 	// Publishers
 	task3_pub = nh4.advertise<geographic_msgs::GeoPoseStamped>("/vrx/perception/landmark", 100);
 	ros::Publisher objects_pub = nh5.advertise<std_msgs::Float32>("/objects", 10);// For publishing object information to mission_control
 	ros::Publisher target_pub = nh6.advertise<std_msgs::Float32>("/target", 10);// For publishing a target to the weapon_system
-	ros::Publisher report_pub = nh7.advertise<std_msgs::Float32>("/pa_report", 10);// For publishing a report to mission_control
+	pa_initialization_state_pub = nh7.advertise<std_msgs::Bool>("pa_initialization_state", 1);// state of initialization
+	
+	// Initialize global variables
+	pa_initialization_status.data = false;
+	current_time = ros::Time::now();   											// sets current time to the time it is now
+	last_time = ros::Time::now();        											// sets last time to the time it is now
   
 	// Set the loop sleep rate
 	ros::Rate loop_rate(200);
@@ -925,9 +912,10 @@ int main(int argc, char **argv)
 	
 	while(ros::ok())
 	{
-			ros::spinOnce();
-			loop_rate.sleep();
-			loop_count += 1;
+		PERCEPTION_ARRAY_inspector();
+		ros::spinOnce();
+		loop_rate.sleep();
+		loop_count += 1;
 	}
 } // end of main()
 //............................................................End of Main Program...........................................................

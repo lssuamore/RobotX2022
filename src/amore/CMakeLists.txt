@@ -8,17 +8,17 @@ project(amore)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  cv_bridge
+  geographic_msgs
+  geometry_msgs
+  image_transport
   message_generation
   message_runtime
+  nav_msgs
   roscpp
-  std_msgs
-  geometry_msgs
-  geographic_msgs
-  cv_bridge
   rospy
-  nav_msgs 
   sensor_msgs
-  image_transport
+  std_msgs
   pcl_ros
   pcl_conversions
   )
