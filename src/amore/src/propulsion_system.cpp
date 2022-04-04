@@ -17,6 +17,7 @@
 //				Inputs: Position (x,y) to reach in global NED frame
 //				Outputs: Thruster outputs and angles for left and right thrusters
 
+
 //................................................Included Libraries and Message Types..........................................
 #include "ros/ros.h"
 #include "ros/console.h"
@@ -32,20 +33,22 @@
 #include "std_msgs/Float32.h"												// thruster commands
 //...........................................End of Included Libraries and Message Types....................................
 
+
 //.................................................................Constants....................................................................
 #define PI 3.14159265
 //............................................................End of Constants.............................................................
 
+
 //..............................................................Global Variables............................................................
 int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
-float duration = 1000;      // amount of time to finish the path 
-float dt = 0.25;                 // [s] used for differential term
+//float duration = 1000;										// amount of time to finish the path 
+float dt = 0.25;														// [s] used for differential term
 
-float x_usv_NED, y_usv_NED, psi_NED; 				// vehicle position and heading (pose) in NED
+float x_usv_NED, y_usv_NED, psi_NED; 		// vehicle position and heading (pose) in NED
 
-int PS_state = 0;      						// 0 = On Standby, 1 = LL controller ON
+int PS_state = 0;      											// 0 = On Standby, 1 = LL controller ON
 
-float x_goal, y_goal, psi_goal;       // [m, m, radians] desired position and heading
+float x_goal, y_goal, psi_goal;							// [m, m, radians] desired position and heading
 
 float e_x, e_y, e_xy, e_psi;								// current errors between goal pose and usv pose
 
@@ -59,31 +62,31 @@ float e_y_prev = 0;
 float e_xy_prev = 0;
 float e_psi_prev = 0;
 
-float T_x;              // thrust to set in x-direction in earth-fixed frame
-float T_y;              // thrust to set in y-direction in earth-fixed frame
-float T_x_bf;         // thrust in x-direction in body-fixed frame
-float T_y_bf;         // thrust in y-direction in body-fixed frame
-float M_z;             // desired moment around the z-axis
+float T_x;																// thrust to set in x-direction in earth-fixed frame
+float T_y;																// thrust to set in y-direction in earth-fixed frame
+float T_x_bf;														// thrust in x-direction in body-fixed frame
+float T_y_bf;														// thrust in y-direction in body-fixed frame
+float M_z;															// desired moment around the z-axis
 
 // matrix to hold outputs of controlller
 float tau[3][1];
 
-float T_p;         // used to set the port (left) thruster output
-float T_s;         // used to set the starboard (right) thruster output
-float A_p;         // used to set the port (left) thruster angle
-float A_s;         // used to set the starboard (right) thruster angle
+float T_p;																// used to set the port (left) thruster output
+float T_s;																// used to set the starboard (right) thruster output
+float A_p;															// used to set the port (left) thruster angle
+float A_s;															// used to set the starboard (right) thruster angle
 
 // Used for correction of saturated thrust values 
-float T_p_C;         // Corrected port (left) thrust output
-float T_s_C;         // Corrected starboard (right) thrust output
+float T_p_C;														// Corrected port (left) thrust output
+float T_s_C;														// Corrected starboard (right) thrust output
 
-float Kp_x, Kp_y, Kp_psi;			// Proportional gains
-float Kd_x, Kd_y, Kd_psi;			// Differential gains
-float Ki_x, Ki_y, Ki_psi;				// Integration gains
+float Kp_x, Kp_y, Kp_psi;									// Proportional gains
+float Kd_x, Kd_y, Kd_psi;									// Differential gains
+float Ki_x, Ki_y, Ki_psi;										// Integration gains
 
 /* 
-float B = 2.0;                  // [m] beam of USV, 8 ft or 2.44 m
-float L = 4.6;                  // [m] length of USV, 16 ft or 4.88 m
+float B = 2.0;														// [m] beam of USV, 8 ft or 2.44 m
+float L = 4.6;														// [m] length of USV, 16 ft or 4.88 m
 
 // Transformation Matrix to convert from external dynamics to internal dynamics
 float Transform[3][4] = {
@@ -111,39 +114,56 @@ float Transform_pseudoinverse[4][3] = {
 };
 
 // Control Allocation output
-float F_xp; // force in the x-direction on the port side
-float F_yp; // force in the y-direction on the port side
-float F_xs; // force in the x-direction on the starboard side
-float F_ys; // force in the y-direction on the starboard side
+float F_xp;																			// force in the x-direction on the port side
+float F_yp;																			// force in the y-direction on the port side
+float F_xs;																			// force in the x-direction on the starboard side
+float F_ys;																			// force in the y-direction on the starboard side
 
-std_msgs::Bool PS_initialization_status;                            // "PS_initialization_state" message
-ros::Publisher PS_initialization_state_pub;						// "PS_initialization_state" publisher
+std_msgs::Bool ps_initialization_status;							// "ps_initialization_state" message
+ros::Publisher ps_initialization_state_pub;						// "ps_initialization_state" publisher
+
+ros::Time current_time, last_time;									// creates time variables
 //..............................................................End of Global Variables............................................................
 
+
 //..................................................................Functions.................................................................
-// THIS FUNCTION CHECKS INITIALIZATION OF PROPULSION SYSTEM
+// THIS FUNCTION: Updates and publishes initialization status to "ps_initialization_state"
+// ACCEPTS: (VOID)
+// RETURNS: (VOID)
+// =============================================================================
 void PROPULSION_SYSTEM_inspector()
 {
 	if (loop_count > 10)
 	{
-		PS_initialization_status.data = true;
+		ps_initialization_status.data = true;
 		//ROS_INFO("propulsion_system_initialized -- PS");
 	}
 	else
 	{
-		PS_initialization_status.data = false;
+		ps_initialization_status.data = false;
 		ROS_INFO("!propulsion_system_initialized -- PS");
 	}
 	
-	PS_initialization_state_pub.publish(PS_initialization_status);						// publish the initialization status of the propulsion_system to "PS_initialization_state"
+	ps_initialization_state_pub.publish(ps_initialization_status);						// publish the initialization status of the propulsion_system to "ps_initialization_state"
 } // END OF PROPULSION_SYSTEM_inspector()
 
+// THIS FUNCTION: Updates the state of propulsion_system given by mission_control
+// ACCEPTS: state_msg from "ps_state"
+// RETURNS: (VOID)
+// =============================================================================
 void state_update(const amore::state_msg::ConstPtr& msg) 
 {
-	PS_state = msg->state.data;
-}
+	// do not start anything until subscribers to sensor data are initialized
+	if (ps_initialization_status.data)
+	{
+		PS_state = msg->state.data;
+	}
+} // END OF state_update()
 
-// THIS FUNCTION SUBSCRIBES TO "mpp_goal", PUBLISHED BY "mission_control"
+// THIS FUNCTION: Updates the goal pose for the propulsion_system given by mission_control
+// ACCEPTS: usv_pose_msg from "current_goal_pose"
+// RETURNS: (VOID)
+// =============================================================================
 void goal_pose_update(const amore::usv_pose_msg::ConstPtr& goal) 
 {
 	if (PS_state == 1)						// if the propulsion_system is ON
@@ -152,33 +172,26 @@ void goal_pose_update(const amore::usv_pose_msg::ConstPtr& goal)
 		y_goal = goal->position.y;
 		psi_goal = goal->psi.data;
 	}
-}
+} // END OF goal_pose_update()
 
-// THIS FUNCTION SUBSCRIBES TO "usv_ned" TO GET THE CURRENT USV NED POSE
+// THIS FUNCTION: Updates the current NED USV pose converted through the navigation_array
+// ACCEPTS: Current NED USV pose and velocities from "nav_ned"
+// RETURNS: (VOID)
+// =============================================================================
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
 {
-	if ((PS_state == 1) && (PS_initialization_status.data)) // if the controller is ON and initialized
+	if (PS_state == 1) // if the propulsion_system is ON
 	{
 		// Update NED USV pose 
 		x_usv_NED = odom->pose.pose.position.x;
 		y_usv_NED = odom->pose.pose.position.y;
 		psi_NED = odom->pose.pose.orientation.z;
-	
-		// adjust current heading back within -PI and PI
-		if (psi_NED < -PI)
-		{
-			psi_NED = psi_NED + 2.0*PI;
-		}
-		if (psi_NED > PI)
-		{
-			psi_NED = psi_NED - 2.0*PI;
-		}
-	} // if (WF_goal_recieved)
-} // END OF pose_update(const nav_msgs::Odometry::ConstPtr& odom)
+	} // if (PS_state == 1)
+} // END OF pose_update()
 
-// THIS FUNCTION UPDATES THE GAINS -------
-// ACCEPTS NOTHING (VOID) ------------------------------------------------------
-// RETURNS NOTHING (VOID) ------------------------------------------------------
+// THIS FUNCTION UPDATES THE GAINS
+// ACCEPTS NOTHING (VOID) 
+// RETURNS NOTHING (VOID) 
 // =====================================================
 void parameters_function()
 {
@@ -192,11 +205,11 @@ void parameters_function()
 	ros::param::get("/Ki_xy_G", Ki_x);
 	Ki_y = Ki_x; //::param::get("/Ki_y_G", Ki_y);
 	ros::param::get("/Ki_psi_G", Ki_psi);
-}
+} // END OF parameters_function()
 
-// THIS FUNCTION DISPLAYS THE UPDATED GAINS -------
-// ACCEPTS NOTHING (VOID) ------------------------------------------------------
-// RETURNS NOTHING (VOID) ------------------------------------------------------
+// THIS FUNCTION DISPLAYS THE UPDATED GAINS
+// ACCEPTS NOTHING (VOID) 
+// RETURNS NOTHING (VOID) 
 // =====================================================
 void display_gains()
 {
@@ -209,7 +222,7 @@ void display_gains()
 	// INTEGRAL GAINS
 	ROS_INFO("Ki_xy is: %.2f --PS", Ki_x);
 	ROS_INFO("Ki_psi is: %.2f --PS\n", Ki_psi);
-}
+} // END OF display_gains()
 //............................................................End of Functions............................................................
 
 int main(int argc, char **argv)
@@ -222,23 +235,24 @@ int main(int argc, char **argv)
   ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10;
   
   // Subscribers
-  ros::Subscriber ps_state_sub = nh1.subscribe("ps_state", 1, state_update);							// subscriber for current position converted to NED
-  ros::Subscriber nav_NED_sub = nh2.subscribe("nav_NED", 1, pose_update);															// subscriber for current pose converted to NED
-  ros::Subscriber current_goal_pose_sub = nh3.subscribe("current_goal_pose", 1, goal_pose_update);				// subscriber for goal pose given by path planners
+  ros::Subscriber ps_state_sub = nh1.subscribe("ps_state", 1, state_update);																// current position converted to NED
+  ros::Subscriber nav_NED_sub = nh2.subscribe("nav_ned", 1, pose_update);															// current pose converted to NED
+  ros::Subscriber current_goal_pose_sub = nh3.subscribe("current_goal_pose", 1, goal_pose_update);				// goal pose given by path planners
   
   // Publishers
-  PS_initialization_state_pub = nh6.advertise<std_msgs::Bool>("PS_initialization_state", 1);								// publishes state of initialization
-  ros::Publisher stbd_T_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_cmd", 10);		// publishes float value between -1.0 and 1.0, speed to right thruster
-  ros::Publisher port_T_pub = nh8.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_cmd", 10);			// publishes float value between -1.0 and 1.0, speed to left thruster
-  ros::Publisher stbd_A_pub = nh9.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_angle", 10);		// publishes float value between -PI to PI, angle to right thruster
-  ros::Publisher port_A_pub = nh10.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_angle", 10);		// publishes float value between -PI to PI, angle to left thruster
+  ps_initialization_state_pub = nh6.advertise<std_msgs::Bool>("ps_initialization_state", 1);										// state of initialization
+  ros::Publisher stbd_T_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_cmd", 10);			// float value between -1.0 and 1.0, speed to right thruster
+  ros::Publisher port_T_pub = nh8.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_cmd", 10);				// float value between -1.0 and 1.0, speed to left thruster
+  ros::Publisher stbd_A_pub = nh9.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_angle", 10);		// float value between -PI to PI, angle to right thruster
+  ros::Publisher port_A_pub = nh10.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_angle", 10);			// float value between -PI to PI, angle to left thruster
   
   // Local variables
   std_msgs::Float32 LT, RT, LA, RA;									// LT is left thrust, RT is right thrust, LA is left thruster angle, RA is right thruster angle
   
-  ros::Time current_time, last_time, next_timer;					// creates time variables
+  // Initialize global variables
+  ps_initialization_status.data = false;
   current_time = ros::Time::now();										// sets current time to the time it is now
-  last_time = current_time;														// sets last time to the time it is now
+  last_time = current_time;												// sets last time to the time it is now
   
   //sets the frequency for which the program sleeps at. 10=1/10 second
   ros::Rate loop_rate(3);
@@ -248,7 +262,7 @@ int main(int argc, char **argv)
   {
 	  current_time = ros::Time::now();													// update current_time
 	  
-	  PROPULSION_SYSTEM_inspector();											// check initialization status and update PS_initialization_status
+	  PROPULSION_SYSTEM_inspector();											// check initialization status and update ps_initialization_status
 	  
 	  if (PS_state == 1)
 	  {
