@@ -134,9 +134,9 @@ vrx/vrx/vrx_2019/worlds/example_course.world: /home/brad/RobotX2022/src/vrx/vrx/
 	cd /home/brad/RobotX2022/src/vrx/vrx/vrx_2019 && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/brad/RobotX2022/build/vrx/vrx/vrx_2019/worlds/example_course.world worlds/example_course.world.xacro
 
 vrx/vrx/vrx_2019/worlds/navigation_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/navigation_task.world.xacro
-vrx/vrx/vrx_2019/worlds/navigation_task.world: /home/brad/RobotX2022/src/vrx/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx/vrx_2019/worlds/navigation_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx/vrx_2019/worlds/navigation_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.xacro
+vrx/vrx/vrx_2019/worlds/navigation_task.world: /home/brad/RobotX2022/src/vrx/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "xacro: generating worlds/navigation_task.world from worlds/navigation_task.world.xacro"
 	cd /home/brad/RobotX2022/src/vrx/vrx/vrx_2019 && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/brad/RobotX2022/build/vrx/vrx/vrx_2019/worlds/navigation_task.world worlds/navigation_task.world.xacro
 
@@ -146,42 +146,42 @@ vrx/vrx/vrx_2019/worlds/ocean.world: /home/brad/RobotX2022/src/vrx/vrx/wave_gaze
 	cd /home/brad/RobotX2022/src/vrx/vrx/vrx_2019 && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/brad/RobotX2022/build/vrx/vrx/vrx_2019/worlds/ocean.world worlds/ocean.world.xacro
 
 vrx/vrx/vrx_2019/worlds/perception_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/perception_task.world.xacro
-vrx/vrx/vrx_2019/worlds/perception_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.xacro
 vrx/vrx/vrx_2019/worlds/perception_task.world: /home/brad/RobotX2022/src/vrx/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/vrx/vrx_2019/worlds/perception_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "xacro: generating worlds/perception_task.world from worlds/perception_task.world.xacro"
 	cd /home/brad/RobotX2022/src/vrx/vrx/vrx_2019 && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/brad/RobotX2022/build/vrx/vrx/vrx_2019/worlds/perception_task.world worlds/perception_task.world.xacro
 
 vrx/vrx/vrx_2019/worlds/sandisland.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.world.xacro
-vrx/vrx/vrx_2019/worlds/sandisland.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.xacro
 vrx/vrx/vrx_2019/worlds/sandisland.world: /home/brad/RobotX2022/src/vrx/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx/vrx_2019/worlds/sandisland.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
+vrx/vrx/vrx_2019/worlds/sandisland.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "xacro: generating worlds/sandisland.world from worlds/sandisland.world.xacro"
 	cd /home/brad/RobotX2022/src/vrx/vrx/vrx_2019 && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/brad/RobotX2022/build/vrx/vrx/vrx_2019/worlds/sandisland.world worlds/sandisland.world.xacro
 
 vrx/vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/scan_and_dock.world.xacro
-vrx/vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/RobotX2022/src/vrx/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
-vrx/vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.xacro
+vrx/vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
+vrx/vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/RobotX2022/src/vrx/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "xacro: generating worlds/scan_and_dock.world from worlds/scan_and_dock.world.xacro"
 	cd /home/brad/RobotX2022/src/vrx/vrx/vrx_2019 && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/brad/RobotX2022/build/vrx/vrx/vrx_2019/worlds/scan_and_dock.world worlds/scan_and_dock.world.xacro
 
 vrx/vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/stationkeeping_task.world.xacro
-vrx/vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.xacro
 vrx/vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/RobotX2022/src/vrx/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "xacro: generating worlds/stationkeeping_task.world from worlds/stationkeeping_task.world.xacro"
 	cd /home/brad/RobotX2022/src/vrx/vrx/vrx_2019 && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/brad/RobotX2022/build/vrx/vrx/vrx_2019/worlds/stationkeeping_task.world worlds/stationkeeping_task.world.xacro
 
 vrx/vrx/vrx_2019/worlds/wayfinding_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/wayfinding_task.world.xacro
 vrx/vrx/vrx_2019/worlds/wayfinding_task.world: /home/brad/RobotX2022/src/vrx/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
-vrx/vrx/vrx_2019/worlds/wayfinding_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx/vrx_2019/worlds/wayfinding_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.xacro
+vrx/vrx/vrx_2019/worlds/wayfinding_task.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "xacro: generating worlds/wayfinding_task.world from worlds/wayfinding_task.world.xacro"
 	cd /home/brad/RobotX2022/src/vrx/vrx/vrx_2019 && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/brad/RobotX2022/build/vrx/vrx/vrx_2019/worlds/wayfinding_task.world worlds/wayfinding_task.world.xacro
 
 vrx/vrx/vrx_2019/worlds/wind_test.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/wind_test.world.xacro
-vrx/vrx/vrx_2019/worlds/wind_test.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx/vrx_2019/worlds/wind_test.world: /home/brad/RobotX2022/src/vrx/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/vrx/vrx_2019/worlds/wind_test.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx/vrx_2019/worlds/wind_test.world: /home/brad/RobotX2022/src/vrx/vrx/vrx_2019/worlds/sandisland.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "xacro: generating worlds/wind_test.world from worlds/wind_test.world.xacro"
 	cd /home/brad/RobotX2022/src/vrx/vrx/vrx_2019 && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/brad/RobotX2022/build/vrx/vrx/vrx_2019/worlds/wind_test.world worlds/wind_test.world.xacro
