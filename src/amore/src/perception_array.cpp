@@ -86,6 +86,8 @@ using namespace std;
 //............................................................End of Constants.............................................................
 
 //..............................................................Global Variables............................................................
+int loop_count = 0;                                    					// loop counter, first 10 loops used to intitialize subscribers
+
 //below is the hsv ranges for each color default lighting
 
 geographic_msgs::GeoPoseStamped task3_message; //publisher message type
@@ -184,20 +186,36 @@ float lat_scale_LUT[10][9] = {												  // 7m	8m	9m	10m	11m	12m	13m	14m	15m
 };
 
 amore::state_msg state_pa;													// The state command from mission_control
-int PA_state = 0;      						// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
-amore::usv_pose_msg boat_pose;											// The USV pose from mission_control
+bool perception_array_initialized = false;								// perception_array_initialized = false means perception_array is not initialized
+int PA_state = 0;      																// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
+amore::usv_pose_msg boat_pose;										// The USV pose from mission_control
 float u_x[100], u_x1[100];														// The x-coordinates of the BLOBs [pixels]
 float v_y[100], v_y1[100];														// The y-coordinates of the BLOBs [pixels]
 float x_offset[100], y_offset[100];											// Arrays for the centroids of detected objects [m]
-char colors[100], typers[100];													// Arrays for buoy IDs
+char colors[100], typers[100];												// Arrays for buoy IDs
 float N_USV, E_USV, D_USV, PSI_USV;								// USV position and heading in NED
-float O_N[100], O_E[100], O_D[100];										// Object global NED position
-float new_lat[100], new_long[100];											// Determined lat and long
+float O_N[100], O_E[100], O_D[100];									// Object global NED position
+float new_lat[100], new_long[100];										// Determined lat and long
 int right_blob_cnt = 0;															// Holds the count of BLOBs from left camera
 bool my_key = true;                           									// If my_key = false, this means according to the current task status, conversion shouldn't be done
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
+// THIS FUNCTION SUBSCRIBES TO THE NAVIGATION_ARRAY TO CHECK INITIALIZATION
+void PERCEPTION_ARRAY_inspector()
+{
+	if (loop_count > 10)
+	{
+		perception_array_initialized = true;
+		//ROS_INFO("navigation_array_initialized -- NA");
+	}
+	else
+	{
+		perception_array_initialized = false;
+		ROS_INFO("!navigation_array_initialized -- NA");
+	}	
+} // END OF PERCEPTION_ARRAY_inspector()
+
 // THIS FUNCTION: Obtains the state command from "mission_control"
 // ACCEPTS: The state command.
 // RETURNS: Nothing. Updates the global variable state_pa
@@ -760,7 +778,7 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 		// Perform the disparity calculations if BLOBs were detected
 		if (buoy_total == 0) // Nothing was found
 		{
-			ROS_INFO("No Object Detected by Left Camera. {perception_array}");
+			//ROS_INFO("No Object Detected by Left Camera. {perception_array}");
 		}
 	else 
 		{
@@ -835,7 +853,7 @@ void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 		
 		if (counter1 == 0) // Nothing was found
 		{
-			ROS_INFO("No Object Detected by Right Camera. {perception_array}");
+			//ROS_INFO("No Object Detected by Right Camera. {perception_array}");
 		}
 		else 
 		{
@@ -879,8 +897,8 @@ int main(int argc, char **argv)
 	image_transport::ImageTransport it1(nh1);
 	image_transport::Subscriber camera_sub = it.subscribe("/wamv/sensors/cameras/front_left_camera/image_raw", 1, LeftCamFunc); // Analyzes left camera image
 	image_transport::Subscriber camera_sub1 = it1.subscribe("/wamv/sensors/cameras/front_right_camera/image_raw", 1, RightCamFunc); // Analyzes right camera image
-	ros::Subscriber state_sub = nh2.subscribe("pa_state", 1, StateFunc);// Obtains the state command from mission_control
-	ros::Subscriber ned_sub = nh3.subscribe("usv_ned", 100, PoseFunc);// Obtains the USV pose in global NED from mission_control
+	ros::Subscriber pa_state_sub = nh2.subscribe("pa_state", 1, StateFunc);// Obtains the state command from mission_control
+	ros::Subscriber nav_NED_sub = nh3.subscribe("nav_NED", 100, PoseFunc);// Obtains the USV pose in global NED from mission_control
 	
 	// Publisher Node Handles
 	ros::NodeHandle nh4;
@@ -909,6 +927,7 @@ int main(int argc, char **argv)
 	{
 			ros::spinOnce();
 			loop_rate.sleep();
+			loop_count += 1;
 	}
 } // end of main()
 //............................................................End of Main Program...........................................................
