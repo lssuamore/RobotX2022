@@ -3,21 +3,25 @@
 This is LSSU/UniBz WAMV Codebase for VRX and RobotX. Brad loves ☕.  
 
 ## Installation Process:
-Run the following.
+
 ```
-
-#codebase download and install
 cd ~
+```
+```
 git clone https://github.com/lssuamore/RobotX2022.git
-username:lssuamore
-password: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
-
+```
+username:lssuamore    password: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
+```
 cd RobotX2022
-
-#git submodule update --init --recursive
+```
+Initialize and update submodules.
+```
 git submodule init
+```
+```
 git submodule update
-delete devel and build folders
+```
+Delete the devel and build folders
 #note the submodule commands should install opencv and geonav_transform. Might also need to git clone PCL: https://github.com/ros-perception/perception_pcl.git
 #if submodule commands dont work delete empty folders and in there place install the correct packages from github
 catkin_make
