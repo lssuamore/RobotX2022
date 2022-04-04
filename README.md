@@ -1,6 +1,6 @@
 # LSSU/UniBz WAMV Codebase
 ## General Information
-This is LSSU/UniBz WAMV Codebase for VRX and RobotX.  
+This is LSSU/UniBz WAMV Codebase for VRX and RobotX. Brad loves ☕.  
 
 ## Installation Process:
 Run the following.
