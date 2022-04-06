@@ -1,8 +1,8 @@
-prefix=/home/brad/RobotX2022/devel
+prefix=/home/amore/RobotX2022/devel
 
 Name: usv_msgs
 Description: Description of usv_msgs
 Version: 0.0.1
-Cflags: -I/home/brad/RobotX2022/devel/include
+Cflags: -I/home/amore/RobotX2022/devel/include
 Libs: -L${prefix}/lib 
 Requires: message_generation message_runtime std_msgs

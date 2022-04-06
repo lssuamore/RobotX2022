@@ -94,16 +94,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsMessage< ::amore::NED_waypoints_<ContainerAllocator> >
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsMessage< ::amore::NED_waypoints_<ContainerAllocator> const>
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
 struct IsFixedSize< ::amore::NED_waypoints_<ContainerAllocator> >
   : FalseType
   { };
@@ -111,6 +101,16 @@ struct IsFixedSize< ::amore::NED_waypoints_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsFixedSize< ::amore::NED_waypoints_<ContainerAllocator> const>
   : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsMessage< ::amore::NED_waypoints_<ContainerAllocator> >
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsMessage< ::amore::NED_waypoints_<ContainerAllocator> const>
+  : TrueType
   { };
 
 template <class ContainerAllocator>

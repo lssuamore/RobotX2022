@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "/home/brad/RobotX2022/devel/lib/amore/PID_HS_controller"
-  "/home/brad/RobotX2022/devel/lib/amore/PID_HS_controller.pdb"
   "CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.o"
+  "/home/amore/RobotX2022/devel/lib/amore/PID_HS_controller.pdb"
+  "/home/amore/RobotX2022/devel/lib/amore/PID_HS_controller"
 )
 
 # Per-language clean rules from dependency scanning.

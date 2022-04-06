@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/amore/RobotX2022/src/sensors/ublox/ublox_gps/include/ublox_gps/mkgmtime.h
+time.h
+-
+
+/home/amore/RobotX2022/src/sensors/ublox/ublox_gps/src/mkgmtime.c
+ublox_gps/mkgmtime.h
+/home/amore/RobotX2022/src/sensors/ublox/ublox_gps/src/ublox_gps/mkgmtime.h
+

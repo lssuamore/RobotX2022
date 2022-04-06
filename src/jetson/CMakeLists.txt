@@ -7,7 +7,7 @@ project(jetson)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs nav_msgs sensor_msgs geometry_msgs message_generation message_runtime)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs nav_msgs sensor_msgs geometry_msgs geographic_msgs message_generation message_runtime)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -44,11 +44,12 @@ include_directories(${catkin_INCLUDE_DIRS})
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  NED_waypoints.msg
+  usv_pose_msg.msg
+  state_msg.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -65,10 +66,11 @@ include_directories(${catkin_INCLUDE_DIRS})
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  geometry_msgs
+  std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -102,7 +104,7 @@ include_directories(${catkin_INCLUDE_DIRS})
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES jetson
-#  CATKIN_DEPENDS other_catkin_pkg
+   CATKIN_DEPENDS message_generation message_runtime roscpp std_msgs geometry_msgs
 #  DEPENDS system_lib
 )
 
@@ -114,7 +116,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-# ${catkin_INCLUDE_DIRS}
+ ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -130,7 +132,13 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
- add_executable(gps_ublox src/gps_ublox.cpp)
+add_executable(mission_control_indoor src/mission_control_indoor.cpp)	# COMMENT THIS 1ST CMAKE
+add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)	# COMMENT THIS 1ST CMAKE
+add_executable(propulsion_system_indoor src/propulsion_system_indoor.cpp)	# COMMENT THIS 1ST CMAKE
+
+add_executable(mission_control_outdoor src/mission_control_outdoor.cpp)	# COMMENT THIS 1ST CMAKE
+add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)	# COMMENT THIS 1ST CMAKE
+add_executable(propulsion_system_outdoor src/propulsion_system_outdoor.cpp)	# COMMENT THIS 1ST CMAKE
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -140,13 +148,15 @@ include_directories(
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
- add_dependencies(gps_ublox ${gps_ublox_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(gps_ublox
-   ${catkin_LIBRARIES}
- )
+target_link_libraries(mission_control_indoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+target_link_libraries(propulsion_system_indoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 
+target_link_libraries(mission_control_outdoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+target_link_libraries(propulsion_system_outdoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 #############
 ## Install ##
 #############

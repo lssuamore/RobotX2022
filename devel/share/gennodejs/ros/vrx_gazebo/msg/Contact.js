@@ -72,8 +72,8 @@ class Contact {
   static getMessageSize(object) {
     let length = 0;
     length += std_msgs.msg.Header.getMessageSize(object.header);
-    length += _getByteLength(object.collision1);
-    length += _getByteLength(object.collision2);
+    length += object.collision1.length;
+    length += object.collision2.length;
     return length + 8;
   }
 
