@@ -27,11 +27,11 @@
 #include "math.h"
 #include "stdio.h"
 #include "nav_msgs/Odometry.h"
-#include "amore/state_msg.h"												// message type used to communicate state for rudimentary codes
+#include "amore/state_msg.h"						// message type used to communicate state for rudimentary codes
 #include "std_msgs/Bool.h"
-#include "amore/usv_pose_msg.h"										// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
-#include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
-#include "amore/NED_waypoints.h"										// message that holds array of converted WF goal waypoints w/ headings and number of waypoints
+#include "amore/usv_pose_msg.h"				// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
+#include "vrx_gazebo/Task.h"						// message published by VRX detailing current task and state
+#include "amore/NED_waypoints.h"				// message that holds array of converted WF goal waypoints w/ headings and number of waypoints
 //...........................................End of Included Libraries and Message Types....................................
 
 
@@ -41,23 +41,23 @@
 
 
 //..............................................................Global Variables............................................................
-int loop_count = 0;                                    				// loop counter, first 10 loops used to intitialize subscribers
-int point = 0;                     		    								// number of points on trajectory reached 
-int goal_poses;              											// total number of poses to reach 
-int loop_goal_recieved;         									// this is kept in order to ensure planner doesn't start controller until the goal is published
+int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
+int point = 0;                     		    						// number of points on trajectory reached 
+int goal_poses;              										// total number of poses to reach 
+int loop_goal_recieved;         								// this is kept in order to ensure planner doesn't start controller until the goal is published
 
-float x_goal[100], y_goal[100], psi_goal[100];		// arrays to hold the NED goal poses
-float x_usv_NED, y_usv_NED, psi_NED; 				// vehicle position and heading (pose) in NED
+float x_goal[100], y_goal[100], psi_goal[100];	// arrays to hold the NED goal poses
+float x_usv_NED, y_usv_NED, psi_NED; 		// vehicle position and heading (pose) in NED
 
-float e_x, e_y, e_xy, e_psi;										// current errors between goal pose and usv pose
+float e_x, e_y, e_xy, e_psi;								// current errors between goal pose and usv pose
 
-bool NED_waypoints_published = false;				// NED_waypoints_published = false means the NED poses have not yet been calculated and published
-bool NED_waypoints_recieved = false;					// NED_waypoints_recieved = false means goal position has not been acquired from "waypoints_NED"
-bool E_reached = false;        									// E_reached = false means the last point has not been reached
-//float e_xy_prev, e_psi_prev;									// previous errors
+bool NED_waypoints_published = false;			// NED_waypoints_published = false means the NED poses have not yet been calculated and published
+bool NED_waypoints_recieved = false;			// NED_waypoints_recieved = false means goal position has not been acquired from "waypoints_NED"
+bool E_reached = false;        								// E_reached = false means the last point has not been reached
+//float e_xy_prev, e_psi_prev;							// previous errors
 
-float e_xy_allowed = 0.4;       									// positional error tolerance threshold; NOTE: make as small as possible
-float e_psi_allowed = 0.4;      									// heading error tolerance threshold; NOTE: make as small as possible
+float e_xy_allowed = 0.4;       							// positional error tolerance threshold; NOTE: make as small as possible
+float e_psi_allowed = 0.4;      								// heading error tolerance threshold; NOTE: make as small as possible
 
 // STATES CONCERNED WITH "mission_control"
 int MC_state = 0;							// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 4569 = HARD RESET (OR OTHER USE)

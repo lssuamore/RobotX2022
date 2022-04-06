@@ -57,23 +57,23 @@ vrx/vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate: vrx/vrx/wamv_ga
 
 
 vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/dynamics/wamv_gazebo_dynamics_plugin.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_gps.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_3d_lidar.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/thruster_layouts/wamv_aft_thrusters.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_imu.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_pinger.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_camera.xacro
 vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_planar_lidar.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/lidar.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_description/urdf/battery.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/dynamics/wamv_gazebo_dynamics_plugin.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/thruster_layouts/wamv_gazebo_thruster_config.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_pinger.xacro
 vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_description/urdf/wamv_base.urdf.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_description/urdf/thrusters/engine.xacro
 vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_p3d.xacro
 vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/ball_shooter.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/thruster_layouts/wamv_gazebo_thruster_config.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_description/urdf/thrusters/engine.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_gps.xacro
 vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/macros.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_description/urdf/battery.xacro
-vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/lidar.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_imu.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/thruster_layouts/wamv_aft_thrusters.xacro
 vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_3d_lidar.xacro
+vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo/urdf/components/wamv_camera.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "xacro: generating urdf/wamv_gazebo.urdf from urdf/wamv_gazebo.urdf.xacro"
 	cd /home/brad/RobotX2022/src/vrx/vrx/wamv_gazebo && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/brad/RobotX2022/build/vrx/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf urdf/wamv_gazebo.urdf.xacro
 

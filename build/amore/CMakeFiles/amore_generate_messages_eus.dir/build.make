@@ -75,8 +75,8 @@ amore/CMakeFiles/amore_generate_messages_eus: /home/brad/RobotX2022/devel/share/
 
 /home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/state_msg.l: /opt/ros/noetic/lib/geneus/gen_eus.py
 /home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/state_msg.l: /home/brad/RobotX2022/src/amore/msg/state_msg.msg
-/home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/state_msg.l: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
 /home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/state_msg.l: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/RobotX2022/devel/share/roseus/ros/amore/msg/state_msg.l: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from amore/state_msg.msg"
 	cd /home/brad/RobotX2022/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/RobotX2022/src/amore/msg/state_msg.msg -Iamore:/home/brad/RobotX2022/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/RobotX2022/devel/share/roseus/ros/amore/msg
 
