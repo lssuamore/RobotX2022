@@ -31,8 +31,8 @@
    (setq _shoot __shoot)
    self)
   (:shoot
-   (&optional (__shoot :null))
-   (if (not (eq __shoot :null)) (setq _shoot __shoot)) _shoot)
+   (&optional __shoot)
+   (if __shoot (setq _shoot __shoot)) _shoot)
   (:serialization-length
    ()
    (+
@@ -68,8 +68,8 @@
    (setq _success __success)
    self)
   (:success
-   (&optional (__success :null))
-   (if (not (eq __success :null)) (setq _success __success)) _success)
+   (&optional __success)
+   (if __success (setq _success __success)) _success)
   (:serialization-length
    ()
    (+

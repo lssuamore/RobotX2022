@@ -99,16 +99,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsMessage< ::vrx_gazebo::ColorSequenceRequest_<ContainerAllocator> >
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsMessage< ::vrx_gazebo::ColorSequenceRequest_<ContainerAllocator> const>
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
 struct IsFixedSize< ::vrx_gazebo::ColorSequenceRequest_<ContainerAllocator> >
   : FalseType
   { };
@@ -116,6 +106,16 @@ struct IsFixedSize< ::vrx_gazebo::ColorSequenceRequest_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsFixedSize< ::vrx_gazebo::ColorSequenceRequest_<ContainerAllocator> const>
   : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsMessage< ::vrx_gazebo::ColorSequenceRequest_<ContainerAllocator> >
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsMessage< ::vrx_gazebo::ColorSequenceRequest_<ContainerAllocator> const>
+  : TrueType
   { };
 
 template <class ContainerAllocator>

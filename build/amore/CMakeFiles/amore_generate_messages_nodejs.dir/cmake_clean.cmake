@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js"
-  "/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/state_msg.js"
-  "/home/brad/RobotX2022/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js"
   "CMakeFiles/amore_generate_messages_nodejs"
+  "/home/amore/RobotX2022/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js"
+  "/home/amore/RobotX2022/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js"
+  "/home/amore/RobotX2022/devel/share/gennodejs/ros/amore/msg/state_msg.js"
 )
 
 # Per-language clean rules from dependency scanning.

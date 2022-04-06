@@ -106,16 +106,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsMessage< ::usv_msgs::RangeBearing_<ContainerAllocator> >
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsMessage< ::usv_msgs::RangeBearing_<ContainerAllocator> const>
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
 struct IsFixedSize< ::usv_msgs::RangeBearing_<ContainerAllocator> >
   : FalseType
   { };
@@ -123,6 +113,16 @@ struct IsFixedSize< ::usv_msgs::RangeBearing_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsFixedSize< ::usv_msgs::RangeBearing_<ContainerAllocator> const>
   : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsMessage< ::usv_msgs::RangeBearing_<ContainerAllocator> >
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsMessage< ::usv_msgs::RangeBearing_<ContainerAllocator> const>
+  : TrueType
   { };
 
 template <class ContainerAllocator>
