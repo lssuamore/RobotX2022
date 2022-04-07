@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::MONVER"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::MONVER"))
 (defconstant ublox_msgs::MonVER::*MESSAGE_ID* 4)
+
+(defun ublox_msgs::MonVER-to-symbol (const)
+  (cond
+        ((= const 10) 'ublox_msgs::MonVER::*CLASS_ID*)
+        ((= const 4) 'ublox_msgs::MonVER::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::MonVER
   :super ros::object
   :slots (_swVersion _hwVersion _extension ))
@@ -27,7 +34,7 @@
    (&key
     ((:swVersion __swVersion) (make-array 30 :initial-element 0 :element-type :integer))
     ((:hwVersion __hwVersion) (make-array 10 :initial-element 0 :element-type :integer))
-    ((:extension __extension) (let (r) (dotimes (i 0) (push (instance ublox_msgs::MonVER_Extension :init) r)) r))
+    ((:extension __extension) ())
     )
    (send-super :init)
    (setq _swVersion __swVersion)

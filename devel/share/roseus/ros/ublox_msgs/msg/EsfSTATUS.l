@@ -30,6 +30,17 @@
 (intern "*FUSION_MODE_DISABLED*" (find-package "UBLOX_MSGS::ESFSTATUS"))
 (shadow '*FUSION_MODE_DISABLED* (find-package "UBLOX_MSGS::ESFSTATUS"))
 (defconstant ublox_msgs::EsfSTATUS::*FUSION_MODE_DISABLED* 3)
+
+(defun ublox_msgs::EsfSTATUS-to-symbol (const)
+  (cond
+        ((= const 16) 'ublox_msgs::EsfSTATUS::*CLASS_ID*)
+        ((= const 16) 'ublox_msgs::EsfSTATUS::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::EsfSTATUS::*FUSION_MODE_INIT*)
+        ((= const 1) 'ublox_msgs::EsfSTATUS::*FUSION_MODE_FUSION*)
+        ((= const 2) 'ublox_msgs::EsfSTATUS::*FUSION_MODE_SUSPENDED*)
+        ((= const 3) 'ublox_msgs::EsfSTATUS::*FUSION_MODE_DISABLED*)
+        (t nil)))
+
 (defclass ublox_msgs::EsfSTATUS
   :super ros::object
   :slots (_iTOW _version _reserved1 _fusionMode _reserved2 _numSens _sens ))
@@ -43,7 +54,7 @@
     ((:fusionMode __fusionMode) 0)
     ((:reserved2 __reserved2) (make-array 2 :initial-element 0 :element-type :char))
     ((:numSens __numSens) 0)
-    ((:sens __sens) (let (r) (dotimes (i 0) (push (instance ublox_msgs::EsfSTATUS_Sens :init) r)) r))
+    ((:sens __sens) ())
     )
    (send-super :init)
    (setq _iTOW (round __iTOW))

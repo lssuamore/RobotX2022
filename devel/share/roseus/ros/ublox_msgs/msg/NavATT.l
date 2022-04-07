@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::NAVATT"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::NAVATT"))
 (defconstant ublox_msgs::NavATT::*MESSAGE_ID* 5)
+
+(defun ublox_msgs::NavATT-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavATT::*CLASS_ID*)
+        ((= const 5) 'ublox_msgs::NavATT::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::NavATT
   :super ros::object
   :slots (_iTOW _version _reserved0 _roll _pitch _heading _accRoll _accPitch _accHeading ))

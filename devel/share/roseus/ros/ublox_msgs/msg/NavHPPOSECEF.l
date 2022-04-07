@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::NAVHPPOSECEF"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::NAVHPPOSECEF"))
 (defconstant ublox_msgs::NavHPPOSECEF::*MESSAGE_ID* 19)
+
+(defun ublox_msgs::NavHPPOSECEF-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavHPPOSECEF::*CLASS_ID*)
+        ((= const 19) 'ublox_msgs::NavHPPOSECEF::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::NavHPPOSECEF
   :super ros::object
   :slots (_version _reserved0 _iTOW _ecefX _ecefY _ecefZ _ecefXHp _ecefYHp _ecefZHp _flags _pAcc ))

@@ -21,7 +21,7 @@ class NavRELPOSNED {
       this.version = null;
       this.reserved0 = null;
       this.refStationId = null;
-      this.iTow = null;
+      this.iTOW = null;
       this.relPosN = null;
       this.relPosE = null;
       this.relPosD = null;
@@ -53,11 +53,11 @@ class NavRELPOSNED {
       else {
         this.refStationId = 0;
       }
-      if (initObj.hasOwnProperty('iTow')) {
-        this.iTow = initObj.iTow
+      if (initObj.hasOwnProperty('iTOW')) {
+        this.iTOW = initObj.iTOW
       }
       else {
-        this.iTow = 0;
+        this.iTOW = 0;
       }
       if (initObj.hasOwnProperty('relPosN')) {
         this.relPosN = initObj.relPosN
@@ -136,8 +136,8 @@ class NavRELPOSNED {
     bufferOffset = _serializer.uint8(obj.reserved0, buffer, bufferOffset);
     // Serialize message field [refStationId]
     bufferOffset = _serializer.uint16(obj.refStationId, buffer, bufferOffset);
-    // Serialize message field [iTow]
-    bufferOffset = _serializer.uint32(obj.iTow, buffer, bufferOffset);
+    // Serialize message field [iTOW]
+    bufferOffset = _serializer.uint32(obj.iTOW, buffer, bufferOffset);
     // Serialize message field [relPosN]
     bufferOffset = _serializer.int32(obj.relPosN, buffer, bufferOffset);
     // Serialize message field [relPosE]
@@ -173,8 +173,8 @@ class NavRELPOSNED {
     data.reserved0 = _deserializer.uint8(buffer, bufferOffset);
     // Deserialize message field [refStationId]
     data.refStationId = _deserializer.uint16(buffer, bufferOffset);
-    // Deserialize message field [iTow]
-    data.iTow = _deserializer.uint32(buffer, bufferOffset);
+    // Deserialize message field [iTOW]
+    data.iTOW = _deserializer.uint32(buffer, bufferOffset);
     // Deserialize message field [relPosN]
     data.relPosN = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [relPosE]
@@ -211,7 +211,7 @@ class NavRELPOSNED {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'fea74cb440387f9a8bcf826c15649585';
+    return '1b22df5b18240fc796963c10b1dfc88d';
   }
 
   static messageDefinition() {
@@ -239,7 +239,7 @@ class NavRELPOSNED {
     uint8 reserved0                   # Reserved
     uint16 refStationId               # Reference Station ID. Must be in the range 
                                       # 0..4095
-    uint32 iTow                       # GPS time of week of the navigation epoch 
+    uint32 iTOW                       # GPS time of week of the navigation epoch 
                                       # [ms]
     
     int32 relPosN                     # North component of relative position vector 
@@ -332,11 +332,11 @@ class NavRELPOSNED {
       resolved.refStationId = 0
     }
 
-    if (msg.iTow !== undefined) {
-      resolved.iTow = msg.iTow;
+    if (msg.iTOW !== undefined) {
+      resolved.iTOW = msg.iTOW;
     }
     else {
-      resolved.iTow = 0
+      resolved.iTOW = 0
     }
 
     if (msg.relPosN !== undefined) {

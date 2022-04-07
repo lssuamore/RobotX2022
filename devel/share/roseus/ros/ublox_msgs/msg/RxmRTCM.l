@@ -21,6 +21,14 @@
 (intern "*FLAGS_CRC_FAILED*" (find-package "UBLOX_MSGS::RXMRTCM"))
 (shadow '*FLAGS_CRC_FAILED* (find-package "UBLOX_MSGS::RXMRTCM"))
 (defconstant ublox_msgs::RxmRTCM::*FLAGS_CRC_FAILED* 1)
+
+(defun ublox_msgs::RxmRTCM-to-symbol (const)
+  (cond
+        ((= const 2) 'ublox_msgs::RxmRTCM::*CLASS_ID*)
+        ((= const 50) 'ublox_msgs::RxmRTCM::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::RxmRTCM::*FLAGS_CRC_FAILED*)
+        (t nil)))
+
 (defclass ublox_msgs::RxmRTCM
   :super ros::object
   :slots (_version _flags _reserved0 _refStation _msgType ))

@@ -27,6 +27,16 @@
 (intern "*VALID_LEAP_S*" (find-package "UBLOX_MSGS::NAVTIMEGPS"))
 (shadow '*VALID_LEAP_S* (find-package "UBLOX_MSGS::NAVTIMEGPS"))
 (defconstant ublox_msgs::NavTIMEGPS::*VALID_LEAP_S* 4)
+
+(defun ublox_msgs::NavTIMEGPS-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavTIMEGPS::*CLASS_ID*)
+        ((= const 32) 'ublox_msgs::NavTIMEGPS::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::NavTIMEGPS::*VALID_TOW*)
+        ((= const 2) 'ublox_msgs::NavTIMEGPS::*VALID_WEEK*)
+        ((= const 4) 'ublox_msgs::NavTIMEGPS::*VALID_LEAP_S*)
+        (t nil)))
+
 (defclass ublox_msgs::NavTIMEGPS
   :super ros::object
   :slots (_iTOW _fTOW _week _leapS _valid _tAcc ))

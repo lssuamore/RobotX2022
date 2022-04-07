@@ -75,6 +75,32 @@
 (intern "*RESET_MODE_GNSS_START*" (find-package "UBLOX_MSGS::CFGRST"))
 (shadow '*RESET_MODE_GNSS_START* (find-package "UBLOX_MSGS::CFGRST"))
 (defconstant ublox_msgs::CfgRST::*RESET_MODE_GNSS_START* 9)
+
+(defun ublox_msgs::CfgRST-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgRST::*CLASS_ID*)
+        ((= const 4) 'ublox_msgs::CfgRST::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::CfgRST::*NAV_BBR_HOT_START*)
+        ((= const 1) 'ublox_msgs::CfgRST::*NAV_BBR_WARM_START*)
+        ((= const 65535) 'ublox_msgs::CfgRST::*NAV_BBR_COLD_START*)
+        ((= const 1) 'ublox_msgs::CfgRST::*NAV_BBR_EPH*)
+        ((= const 2) 'ublox_msgs::CfgRST::*NAV_BBR_ALM*)
+        ((= const 4) 'ublox_msgs::CfgRST::*NAV_BBR_HEALTH*)
+        ((= const 8) 'ublox_msgs::CfgRST::*NAV_BBR_KLOB*)
+        ((= const 16) 'ublox_msgs::CfgRST::*NAV_BBR_POS*)
+        ((= const 32) 'ublox_msgs::CfgRST::*NAV_BBR_CLKD*)
+        ((= const 64) 'ublox_msgs::CfgRST::*NAV_BBR_OSC*)
+        ((= const 128) 'ublox_msgs::CfgRST::*NAV_BBR_UTC*)
+        ((= const 256) 'ublox_msgs::CfgRST::*NAV_BBR_RTC*)
+        ((= const 32768) 'ublox_msgs::CfgRST::*NAV_BBR_AOP*)
+        ((= const 0) 'ublox_msgs::CfgRST::*RESET_MODE_HW_IMMEDIATE*)
+        ((= const 1) 'ublox_msgs::CfgRST::*RESET_MODE_SW*)
+        ((= const 2) 'ublox_msgs::CfgRST::*RESET_MODE_GNSS*)
+        ((= const 4) 'ublox_msgs::CfgRST::*RESET_MODE_HW_AFTER_SHUTDOWN*)
+        ((= const 8) 'ublox_msgs::CfgRST::*RESET_MODE_GNSS_STOP*)
+        ((= const 9) 'ublox_msgs::CfgRST::*RESET_MODE_GNSS_START*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgRST
   :super ros::object
   :slots (_navBbrMask _resetMode _reserved1 ))

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  "/home/taylor/RobotX2022/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST"
+  "/home/taylor/RobotX2022/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST.pdb"
   "CMakeFiles/UNIT_Wavefield_TEST.dir/src/Wavefield_TEST.cc.o"
-  "/home/amore/RobotX2022/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST.pdb"
-  "/home/amore/RobotX2022/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST"
 )
 
 # Per-language clean rules from dependency scanning.

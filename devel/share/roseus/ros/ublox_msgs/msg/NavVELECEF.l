@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::NAVVELECEF"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::NAVVELECEF"))
 (defconstant ublox_msgs::NavVELECEF::*MESSAGE_ID* 17)
+
+(defun ublox_msgs::NavVELECEF-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavVELECEF::*CLASS_ID*)
+        ((= const 17) 'ublox_msgs::NavVELECEF::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::NavVELECEF
   :super ros::object
   :slots (_iTOW _ecefVX _ecefVY _ecefVZ _sAcc ))

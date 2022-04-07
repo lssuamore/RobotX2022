@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::NAVDOP"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::NAVDOP"))
 (defconstant ublox_msgs::NavDOP::*MESSAGE_ID* 4)
+
+(defun ublox_msgs::NavDOP-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavDOP::*CLASS_ID*)
+        ((= const 4) 'ublox_msgs::NavDOP::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::NavDOP
   :super ros::object
   :slots (_iTOW _gDOP _pDOP _tDOP _vDOP _hDOP _nDOP _eDOP ))

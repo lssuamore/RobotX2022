@@ -73,9 +73,9 @@ class ColorSequenceRequest {
 
   static getMessageSize(object) {
     let length = 0;
-    length += object.color1.length;
-    length += object.color2.length;
-    length += object.color3.length;
+    length += _getByteLength(object.color1);
+    length += _getByteLength(object.color2);
+    length += _getByteLength(object.color3);
     return length + 12;
   }
 

@@ -33,6 +33,18 @@
 (intern "*USAGE_INTEGRITY*" (find-package "UBLOX_MSGS::CFGSBAS"))
 (shadow '*USAGE_INTEGRITY* (find-package "UBLOX_MSGS::CFGSBAS"))
 (defconstant ublox_msgs::CfgSBAS::*USAGE_INTEGRITY* 4)
+
+(defun ublox_msgs::CfgSBAS-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgSBAS::*CLASS_ID*)
+        ((= const 22) 'ublox_msgs::CfgSBAS::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::CfgSBAS::*MODE_ENABLED*)
+        ((= const 2) 'ublox_msgs::CfgSBAS::*MODE_TEST*)
+        ((= const 1) 'ublox_msgs::CfgSBAS::*USAGE_RANGE*)
+        ((= const 2) 'ublox_msgs::CfgSBAS::*USAGE_DIFF_CORR*)
+        ((= const 4) 'ublox_msgs::CfgSBAS::*USAGE_INTEGRITY*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgSBAS
   :super ros::object
   :slots (_mode _usage _maxSBAS _scanmode2 _scanmode1 ))

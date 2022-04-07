@@ -18,6 +18,13 @@
 (intern "*FLAGS_DGPS*" (find-package "UBLOX_MSGS::NAVDGPS_SV"))
 (shadow '*FLAGS_DGPS* (find-package "UBLOX_MSGS::NAVDGPS_SV"))
 (defconstant ublox_msgs::NavDGPS_SV::*FLAGS_DGPS* 16)
+
+(defun ublox_msgs::NavDGPS_SV-to-symbol (const)
+  (cond
+        ((= const 15) 'ublox_msgs::NavDGPS_SV::*FLAGS_CHANNEL_MASK*)
+        ((= const 16) 'ublox_msgs::NavDGPS_SV::*FLAGS_DGPS*)
+        (t nil)))
+
 (defclass ublox_msgs::NavDGPS_SV
   :super ros::object
   :slots (_svid _flags _ageC _prc _prrc ))

@@ -57,6 +57,26 @@
 (intern "*SERVICE_TESTMODE*" (find-package "UBLOX_MSGS::NAVSBAS"))
 (shadow '*SERVICE_TESTMODE* (find-package "UBLOX_MSGS::NAVSBAS"))
 (defconstant ublox_msgs::NavSBAS::*SERVICE_TESTMODE* 8)
+
+(defun ublox_msgs::NavSBAS-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavSBAS::*CLASS_ID*)
+        ((= const 50) 'ublox_msgs::NavSBAS::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::NavSBAS::*MODE_DISABLED*)
+        ((= const 1) 'ublox_msgs::NavSBAS::*MODE_ENABLED_INTEGRITY*)
+        ((= const 3) 'ublox_msgs::NavSBAS::*MODE_ENABLED_TESTMODE*)
+        ((= const -1) 'ublox_msgs::NavSBAS::*SYS_UNKNOWN*)
+        ((= const 0) 'ublox_msgs::NavSBAS::*SYS_WAAS*)
+        ((= const 1) 'ublox_msgs::NavSBAS::*SYS_EGNOS*)
+        ((= const 2) 'ublox_msgs::NavSBAS::*SYS_MSAS*)
+        ((= const 3) 'ublox_msgs::NavSBAS::*SYS_GAGAN*)
+        ((= const 16) 'ublox_msgs::NavSBAS::*SYS_GPS*)
+        ((= const 1) 'ublox_msgs::NavSBAS::*SERVICE_RANGING*)
+        ((= const 2) 'ublox_msgs::NavSBAS::*SERVICE_CORRECTIONS*)
+        ((= const 4) 'ublox_msgs::NavSBAS::*SERVICE_INTEGRITY*)
+        ((= const 8) 'ublox_msgs::NavSBAS::*SERVICE_TESTMODE*)
+        (t nil)))
+
 (defclass ublox_msgs::NavSBAS
   :super ros::object
   :slots (_iTOW _geo _mode _sys _service _cnt _reserved0 _sv ))
@@ -71,7 +91,7 @@
     ((:service __service) 0)
     ((:cnt __cnt) 0)
     ((:reserved0 __reserved0) (make-array 3 :initial-element 0 :element-type :char))
-    ((:sv __sv) (let (r) (dotimes (i 0) (push (instance ublox_msgs::NavSBAS_SV :init) r)) r))
+    ((:sv __sv) ())
     )
    (send-super :init)
    (setq _iTOW (round __iTOW))

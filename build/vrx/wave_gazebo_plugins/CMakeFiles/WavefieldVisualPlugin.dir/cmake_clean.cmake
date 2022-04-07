@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  "/home/taylor/RobotX2022/devel/lib/libWavefieldVisualPlugin.pdb"
+  "/home/taylor/RobotX2022/devel/lib/libWavefieldVisualPlugin.so"
   "CMakeFiles/WavefieldVisualPlugin.dir/src/WavefieldVisualPlugin.cc.o"
-  "/home/amore/RobotX2022/devel/lib/libWavefieldVisualPlugin.pdb"
-  "/home/amore/RobotX2022/devel/lib/libWavefieldVisualPlugin.so"
 )
 
 # Per-language clean rules from dependency scanning.

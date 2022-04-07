@@ -1,8 +1,8 @@
-prefix=/home/amore/RobotX2022/devel
+prefix=/home/taylor/RobotX2022/devel
 
 Name: amore
 Description: Description of amore
 Version: 0.0.0
-Cflags: -I/home/amore/RobotX2022/devel/include
+Cflags: -I/home/taylor/RobotX2022/devel/include
 Libs: -L${prefix}/lib 
 Requires: message_generation message_runtime roscpp std_msgs geometry_msgs

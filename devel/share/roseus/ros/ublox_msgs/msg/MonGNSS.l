@@ -30,6 +30,17 @@
 (intern "*BIT_MASK_GALILEO*" (find-package "UBLOX_MSGS::MONGNSS"))
 (shadow '*BIT_MASK_GALILEO* (find-package "UBLOX_MSGS::MONGNSS"))
 (defconstant ublox_msgs::MonGNSS::*BIT_MASK_GALILEO* 8)
+
+(defun ublox_msgs::MonGNSS-to-symbol (const)
+  (cond
+        ((= const 10) 'ublox_msgs::MonGNSS::*CLASS_ID*)
+        ((= const 40) 'ublox_msgs::MonGNSS::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::MonGNSS::*BIT_MASK_GPS*)
+        ((= const 2) 'ublox_msgs::MonGNSS::*BIT_MASK_GLONASS*)
+        ((= const 4) 'ublox_msgs::MonGNSS::*BIT_MASK_BEIDOU*)
+        ((= const 8) 'ublox_msgs::MonGNSS::*BIT_MASK_GALILEO*)
+        (t nil)))
+
 (defclass ublox_msgs::MonGNSS
   :super ros::object
   :slots (_version _supported _defaultGnss _enabled _simultaneous _reserved1 ))

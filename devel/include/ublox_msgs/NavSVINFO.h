@@ -158,16 +158,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsFixedSize< ::ublox_msgs::NavSVINFO_<ContainerAllocator> >
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::ublox_msgs::NavSVINFO_<ContainerAllocator> const>
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
 struct IsMessage< ::ublox_msgs::NavSVINFO_<ContainerAllocator> >
   : TrueType
   { };
@@ -175,6 +165,16 @@ struct IsMessage< ::ublox_msgs::NavSVINFO_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsMessage< ::ublox_msgs::NavSVINFO_<ContainerAllocator> const>
   : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::ublox_msgs::NavSVINFO_<ContainerAllocator> >
+  : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::ublox_msgs::NavSVINFO_<ContainerAllocator> const>
+  : FalseType
   { };
 
 template <class ContainerAllocator>

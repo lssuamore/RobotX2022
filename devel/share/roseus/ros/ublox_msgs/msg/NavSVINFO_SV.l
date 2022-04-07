@@ -60,6 +60,27 @@
 (intern "*QUALITY_CODE_AND_CARRIER_LOCKED3*" (find-package "UBLOX_MSGS::NAVSVINFO_SV"))
 (shadow '*QUALITY_CODE_AND_CARRIER_LOCKED3* (find-package "UBLOX_MSGS::NAVSVINFO_SV"))
 (defconstant ublox_msgs::NavSVINFO_SV::*QUALITY_CODE_AND_CARRIER_LOCKED3* 7)
+
+(defun ublox_msgs::NavSVINFO_SV-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavSVINFO_SV::*FLAGS_SV_USED*)
+        ((= const 2) 'ublox_msgs::NavSVINFO_SV::*FLAGS_DIFF_CORR*)
+        ((= const 4) 'ublox_msgs::NavSVINFO_SV::*FLAGS_ORBIT_AVAIL*)
+        ((= const 8) 'ublox_msgs::NavSVINFO_SV::*FLAGS_ORBIT_EPH*)
+        ((= const 16) 'ublox_msgs::NavSVINFO_SV::*FLAGS_UNHEALTHY*)
+        ((= const 32) 'ublox_msgs::NavSVINFO_SV::*FLAGS_ORBIT_ALM*)
+        ((= const 64) 'ublox_msgs::NavSVINFO_SV::*FLAGS_ORBIT_AOP*)
+        ((= const 128) 'ublox_msgs::NavSVINFO_SV::*FLAGS_SMOOTHED*)
+        ((= const 0) 'ublox_msgs::NavSVINFO_SV::*QUALITY_IDLE*)
+        ((= const 1) 'ublox_msgs::NavSVINFO_SV::*QUALITY_SEARCHING*)
+        ((= const 2) 'ublox_msgs::NavSVINFO_SV::*QUALITY_ACQUIRED*)
+        ((= const 3) 'ublox_msgs::NavSVINFO_SV::*QUALITY_DETECTED*)
+        ((= const 4) 'ublox_msgs::NavSVINFO_SV::*QUALITY_CODE_LOCK*)
+        ((= const 5) 'ublox_msgs::NavSVINFO_SV::*QUALITY_CODE_AND_CARRIER_LOCKED1*)
+        ((= const 6) 'ublox_msgs::NavSVINFO_SV::*QUALITY_CODE_AND_CARRIER_LOCKED2*)
+        ((= const 7) 'ublox_msgs::NavSVINFO_SV::*QUALITY_CODE_AND_CARRIER_LOCKED3*)
+        (t nil)))
+
 (defclass ublox_msgs::NavSVINFO_SV
   :super ros::object
   :slots (_chn _svid _flags _quality _cno _elev _azim _prRes ))

@@ -1,14 +1,13 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/dock_placard_msgs_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/dock_placard_msgs_autogen.dir/ParseCache.txt"
   "dock_placard_msgs_autogen"
-  "CMakeFiles/dock_placard_msgs_autogen.dir/AutogenOldSettings.cmake"
-  "light_buoy_colors_msgs_autogen"
-  "CMakeFiles/light_buoy_colors_msgs_autogen.dir/AutogenOldSettings.cmake"
-  "dock_placard.pb.cc"
-  "dock_placard.pb.h"
+  "/home/taylor/RobotX2022/devel/lib/libdock_placard_msgs.pdb"
+  "/home/taylor/RobotX2022/devel/lib/libdock_placard_msgs.so"
   "CMakeFiles/dock_placard_msgs.dir/dock_placard.pb.cc.o"
   "CMakeFiles/dock_placard_msgs.dir/dock_placard_msgs_autogen/mocs_compilation.cpp.o"
-  "/home/amore/RobotX2022/devel/lib/libdock_placard_msgs.pdb"
-  "/home/amore/RobotX2022/devel/lib/libdock_placard_msgs.so"
+  "dock_placard.pb.cc"
+  "dock_placard.pb.h"
 )
 
 # Per-language clean rules from dependency scanning.

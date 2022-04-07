@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::ESFRAW"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::ESFRAW"))
 (defconstant ublox_msgs::EsfRAW::*MESSAGE_ID* 3)
+
+(defun ublox_msgs::EsfRAW-to-symbol (const)
+  (cond
+        ((= const 16) 'ublox_msgs::EsfRAW::*CLASS_ID*)
+        ((= const 3) 'ublox_msgs::EsfRAW::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::EsfRAW
   :super ros::object
   :slots (_reserved0 _blocks ))
@@ -26,7 +33,7 @@
   (:init
    (&key
     ((:reserved0 __reserved0) (make-array 4 :initial-element 0 :element-type :char))
-    ((:blocks __blocks) (let (r) (dotimes (i 0) (push (instance ublox_msgs::EsfRAW_Block :init) r)) r))
+    ((:blocks __blocks) ())
     )
    (send-super :init)
    (setq _reserved0 __reserved0)

@@ -21,7 +21,7 @@
 (defmethod amore::NED_waypoints
   (:init
    (&key
-    ((:points __points) (let (r) (dotimes (i 0) (push (instance geometry_msgs::Point :init) r)) r))
+    ((:points __points) ())
     ((:quantity __quantity) 0)
     )
    (send-super :init)

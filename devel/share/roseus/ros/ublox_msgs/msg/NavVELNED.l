@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::NAVVELNED"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::NAVVELNED"))
 (defconstant ublox_msgs::NavVELNED::*MESSAGE_ID* 18)
+
+(defun ublox_msgs::NavVELNED-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavVELNED::*CLASS_ID*)
+        ((= const 18) 'ublox_msgs::NavVELNED::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::NavVELNED
   :super ros::object
   :slots (_iTOW _velN _velE _velD _speed _gSpeed _heading _sAcc _cAcc ))

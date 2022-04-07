@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  "/home/taylor/RobotX2022/devel/lib/jetson/mission_control_indoor"
+  "/home/taylor/RobotX2022/devel/lib/jetson/mission_control_indoor.pdb"
   "CMakeFiles/mission_control_indoor.dir/src/mission_control_indoor.cpp.o"
-  "/home/amore/RobotX2022/devel/lib/jetson/mission_control_indoor.pdb"
-  "/home/amore/RobotX2022/devel/lib/jetson/mission_control_indoor"
 )
 
 # Per-language clean rules from dependency scanning.

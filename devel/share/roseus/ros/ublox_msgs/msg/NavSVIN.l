@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::NAVSVIN"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::NAVSVIN"))
 (defconstant ublox_msgs::NavSVIN::*MESSAGE_ID* 59)
+
+(defun ublox_msgs::NavSVIN-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavSVIN::*CLASS_ID*)
+        ((= const 59) 'ublox_msgs::NavSVIN::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::NavSVIN
   :super ros::object
   :slots (_version _reserved0 _iTOW _dur _meanX _meanY _meanZ _meanXHP _meanYHP _meanZHP _reserved1 _meanAcc _obs _valid _active _reserved3 ))

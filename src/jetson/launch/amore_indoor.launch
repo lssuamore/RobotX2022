@@ -1,0 +1,26 @@
+<launch>
+
+  <!-- This is the format for a comment in HTML --> 
+
+
+  <!-- Launches the geonav_transform file --> 
+  <include file="$(find geonav_transform)/launch/geonav_transform.launch" >
+  </include>
+
+  <!-- creates all the parameters --> 
+  <param name="/Kp_xy_G" value="0.7" />
+  <param name="/Kp_psi_G" value="1.0" />
+  <param name="/Kd_xy_G" value="2.0" />
+  <param name="/Kd_psi_G" value="1.0" />
+  <param name="/Ki_xy_G" value="0.0" />
+  <param name="/Ki_psi_G" value="0.0" />
+
+  <!-- Launches codes -->
+  <node pkg="amore" type="navigation_array_indoor" name="navigation_array_indoor" output="screen">
+  </node>
+  <node pkg="amore" type="propulsion_system_indoor" name="propulsion_system_indoor" output="screen">
+  </node>
+  <node pkg="amore" type="mission_control_indoor" name="mission_control_indoor" output="screen">
+  </node>
+  
+</launch>

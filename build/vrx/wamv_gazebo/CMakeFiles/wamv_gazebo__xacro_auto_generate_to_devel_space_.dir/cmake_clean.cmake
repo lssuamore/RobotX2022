@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  "/home/taylor/RobotX2022/devel/share/wamv_gazebo/urdf"
+  "/home/taylor/RobotX2022/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf"
   "CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_"
-  "/home/amore/RobotX2022/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf"
-  "/home/amore/RobotX2022/devel/share/wamv_gazebo/urdf"
   "urdf/wamv_gazebo.urdf"
 )
 

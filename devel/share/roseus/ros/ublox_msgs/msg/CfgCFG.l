@@ -60,6 +60,27 @@
 (intern "*DEV_SPI_FLASH*" (find-package "UBLOX_MSGS::CFGCFG"))
 (shadow '*DEV_SPI_FLASH* (find-package "UBLOX_MSGS::CFGCFG"))
 (defconstant ublox_msgs::CfgCFG::*DEV_SPI_FLASH* 16)
+
+(defun ublox_msgs::CfgCFG-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgCFG::*CLASS_ID*)
+        ((= const 9) 'ublox_msgs::CfgCFG::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::CfgCFG::*MASK_IO_PORT*)
+        ((= const 2) 'ublox_msgs::CfgCFG::*MASK_MSG_CONF*)
+        ((= const 4) 'ublox_msgs::CfgCFG::*MASK_INF_MSG*)
+        ((= const 8) 'ublox_msgs::CfgCFG::*MASK_NAV_CONF*)
+        ((= const 16) 'ublox_msgs::CfgCFG::*MASK_RXM_CONF*)
+        ((= const 256) 'ublox_msgs::CfgCFG::*MASK_SEN_CONF*)
+        ((= const 512) 'ublox_msgs::CfgCFG::*MASK_RINV_CONF*)
+        ((= const 1024) 'ublox_msgs::CfgCFG::*MASK_ANT_CONF*)
+        ((= const 2048) 'ublox_msgs::CfgCFG::*MASK_LOG_CONF*)
+        ((= const 4096) 'ublox_msgs::CfgCFG::*MASK_FTS_CONF*)
+        ((= const 1) 'ublox_msgs::CfgCFG::*DEV_BBR*)
+        ((= const 2) 'ublox_msgs::CfgCFG::*DEV_FLASH*)
+        ((= const 4) 'ublox_msgs::CfgCFG::*DEV_EEPROM*)
+        ((= const 16) 'ublox_msgs::CfgCFG::*DEV_SPI_FLASH*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgCFG
   :super ros::object
   :slots (_clearMask _saveMask _loadMask _deviceMask ))

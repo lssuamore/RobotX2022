@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  "/home/taylor/RobotX2022/devel/lib/jetson/propulsion_system_outdoor"
+  "/home/taylor/RobotX2022/devel/lib/jetson/propulsion_system_outdoor.pdb"
   "CMakeFiles/propulsion_system_outdoor.dir/src/propulsion_system_outdoor.cpp.o"
-  "/home/amore/RobotX2022/devel/lib/jetson/propulsion_system_outdoor.pdb"
-  "/home/amore/RobotX2022/devel/lib/jetson/propulsion_system_outdoor"
 )
 
 # Per-language clean rules from dependency scanning.

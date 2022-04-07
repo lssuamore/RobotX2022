@@ -33,6 +33,18 @@
 (intern "*CHIPGEN_UBLOX8*" (find-package "UBLOX_MSGS::NAVSVINFO"))
 (shadow '*CHIPGEN_UBLOX8* (find-package "UBLOX_MSGS::NAVSVINFO"))
 (defconstant ublox_msgs::NavSVINFO::*CHIPGEN_UBLOX8* 4)
+
+(defun ublox_msgs::NavSVINFO-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavSVINFO::*CLASS_ID*)
+        ((= const 48) 'ublox_msgs::NavSVINFO::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::NavSVINFO::*CHIPGEN_ANTARIS*)
+        ((= const 1) 'ublox_msgs::NavSVINFO::*CHIPGEN_UBLOX5*)
+        ((= const 2) 'ublox_msgs::NavSVINFO::*CHIPGEN_UBLOX6*)
+        ((= const 3) 'ublox_msgs::NavSVINFO::*CHIPGEN_UBLOX7*)
+        ((= const 4) 'ublox_msgs::NavSVINFO::*CHIPGEN_UBLOX8*)
+        (t nil)))
+
 (defclass ublox_msgs::NavSVINFO
   :super ros::object
   :slots (_iTOW _numCh _globalFlags _reserved2 _sv ))
@@ -44,7 +56,7 @@
     ((:numCh __numCh) 0)
     ((:globalFlags __globalFlags) 0)
     ((:reserved2 __reserved2) 0)
-    ((:sv __sv) (let (r) (dotimes (i 0) (push (instance ublox_msgs::NavSVINFO_SV :init) r)) r))
+    ((:sv __sv) ())
     )
    (send-super :init)
    (setq _iTOW (round __iTOW))

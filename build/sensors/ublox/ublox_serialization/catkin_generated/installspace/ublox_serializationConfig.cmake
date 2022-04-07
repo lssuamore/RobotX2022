@@ -67,14 +67,14 @@ set(ublox_serialization_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(ublox_serialization_SOURCE_PREFIX /home/amore/RobotX2022/src/sensors/ublox/ublox_serialization)
-  set(ublox_serialization_DEVEL_PREFIX /home/amore/RobotX2022/devel)
+  set(ublox_serialization_SOURCE_PREFIX /home/taylor/RobotX2022/src/sensors/ublox/ublox_serialization)
+  set(ublox_serialization_DEVEL_PREFIX /home/taylor/RobotX2022/devel)
   set(ublox_serialization_INSTALL_PREFIX "")
   set(ublox_serialization_PREFIX ${ublox_serialization_DEVEL_PREFIX})
 else()
   set(ublox_serialization_SOURCE_PREFIX "")
   set(ublox_serialization_DEVEL_PREFIX "")
-  set(ublox_serialization_INSTALL_PREFIX /home/amore/RobotX2022/install)
+  set(ublox_serialization_INSTALL_PREFIX /home/taylor/RobotX2022/install)
   set(ublox_serialization_PREFIX ${ublox_serialization_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/amore/RobotX2022/install/lib;/home/amore/RobotX2022/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/taylor/RobotX2022/install/lib;/home/taylor/RobotX2022/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(ublox_serialization_LIBRARIES ${ublox_serialization_LIBRARIES})
 
   _list_append_unique(ublox_serialization_LIBRARY_DIRS ${${ublox_serialization_dep}_LIBRARY_DIRS})
-  list(APPEND ublox_serialization_EXPORTED_TARGETS ${${ublox_serialization_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(ublox_serialization_EXPORTED_TARGETS ${${ublox_serialization_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "")

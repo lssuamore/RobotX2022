@@ -67,14 +67,14 @@ set(sparton_ahrs8_driver_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(sparton_ahrs8_driver_SOURCE_PREFIX /home/amore/RobotX2022/src/sensors/sparton_ahrs8_driver)
-  set(sparton_ahrs8_driver_DEVEL_PREFIX /home/amore/RobotX2022/devel)
+  set(sparton_ahrs8_driver_SOURCE_PREFIX /home/taylor/RobotX2022/src/sensors/sparton_ahrs8_driver)
+  set(sparton_ahrs8_driver_DEVEL_PREFIX /home/taylor/RobotX2022/devel)
   set(sparton_ahrs8_driver_INSTALL_PREFIX "")
   set(sparton_ahrs8_driver_PREFIX ${sparton_ahrs8_driver_DEVEL_PREFIX})
 else()
   set(sparton_ahrs8_driver_SOURCE_PREFIX "")
   set(sparton_ahrs8_driver_DEVEL_PREFIX "")
-  set(sparton_ahrs8_driver_INSTALL_PREFIX /home/amore/RobotX2022/install)
+  set(sparton_ahrs8_driver_INSTALL_PREFIX /home/taylor/RobotX2022/install)
   set(sparton_ahrs8_driver_PREFIX ${sparton_ahrs8_driver_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/amore/RobotX2022/install/lib;/home/amore/RobotX2022/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/taylor/RobotX2022/install/lib;/home/taylor/RobotX2022/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(sparton_ahrs8_driver_LIBRARIES ${sparton_ahrs8_driver_LIBRARIES})
 
   _list_append_unique(sparton_ahrs8_driver_LIBRARY_DIRS ${${sparton_ahrs8_driver_dep}_LIBRARY_DIRS})
-  list(APPEND sparton_ahrs8_driver_EXPORTED_TARGETS ${${sparton_ahrs8_driver_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(sparton_ahrs8_driver_EXPORTED_TARGETS ${${sparton_ahrs8_driver_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "")

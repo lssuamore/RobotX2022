@@ -45,6 +45,22 @@
 (intern "*MASK2_SIG_ATTEN_COMP_MODE*" (find-package "UBLOX_MSGS::CFGNAVX5"))
 (shadow '*MASK2_SIG_ATTEN_COMP_MODE* (find-package "UBLOX_MSGS::CFGNAVX5"))
 (defconstant ublox_msgs::CfgNAVX5::*MASK2_SIG_ATTEN_COMP_MODE* 128)
+
+(defun ublox_msgs::CfgNAVX5-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgNAVX5::*CLASS_ID*)
+        ((= const 35) 'ublox_msgs::CfgNAVX5::*MESSAGE_ID*)
+        ((= const 4) 'ublox_msgs::CfgNAVX5::*MASK1_MIN_MAX*)
+        ((= const 8) 'ublox_msgs::CfgNAVX5::*MASK1_MIN_CNO*)
+        ((= const 64) 'ublox_msgs::CfgNAVX5::*MASK1_INITIAL_FIX_3D*)
+        ((= const 512) 'ublox_msgs::CfgNAVX5::*MASK1_WKN_ROLL*)
+        ((= const 1024) 'ublox_msgs::CfgNAVX5::*MASK1_ACK_AID*)
+        ((= const 8192) 'ublox_msgs::CfgNAVX5::*MASK1_PPP*)
+        ((= const 16384) 'ublox_msgs::CfgNAVX5::*MASK1_AOP*)
+        ((= const 64) 'ublox_msgs::CfgNAVX5::*MASK2_ADR*)
+        ((= const 128) 'ublox_msgs::CfgNAVX5::*MASK2_SIG_ATTEN_COMP_MODE*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgNAVX5
   :super ros::object
   :slots (_version _mask1 _mask2 _reserved1 _minSVs _maxSVs _minCNO _reserved2 _iniFix3D _reserved3 _ackAiding _wknRollover _sigAttenCompMode _reserved4 _usePPP _aopCfg _reserved5 _aopOrbMaxErr _reserved6 _useAdr ))

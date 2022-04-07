@@ -241,10 +241,10 @@ int main(int argc, char **argv)
   
   // Publishers
   ps_initialization_state_pub = nh6.advertise<std_msgs::Bool>("ps_initialization_state", 1);										// state of initialization
-  ros::Publisher stbd_T_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_cmd", 10);			// float value between -1.0 and 1.0, speed to right thruster
-  ros::Publisher port_T_pub = nh8.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_cmd", 10);				// float value between -1.0 and 1.0, speed to left thruster
-  ros::Publisher stbd_A_pub = nh9.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_angle", 10);		// float value between -PI to PI, angle to right thruster
-  ros::Publisher port_A_pub = nh10.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_angle", 10);			// float value between -PI to PI, angle to left thruster
+  ros::Publisher stbd_T_pub = nh7.advertise<std_msgs::Int32>("thruster_int_right", 10);			// float value between -1.0 and 1.0, speed to right thruster
+  ros::Publisher port_T_pub = nh8.advertise<std_msgs::Int32>("thruster_int_left", 10);				// float value between -1.0 and 1.0, speed to left thruster
+  ros::Publisher stbd_A_pub = nh9.advertise<std_msgs::Int32>("angle_int_right", 10);		// float value between -PI to PI, angle to right thruster
+  ros::Publisher port_A_pub = nh10.advertise<std_msgs::Int32>("angle_int_left", 10);			// float value between -PI to PI, angle to left thruster
   
   // Local variables
   std_msgs::Float32 LT, RT, LA, RA;									// LT is left thrust, RT is right thrust, LA is left thruster angle, RA is right thruster angle

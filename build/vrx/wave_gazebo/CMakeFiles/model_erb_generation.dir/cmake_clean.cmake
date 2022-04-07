@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
+  "/home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro"
   "CMakeFiles/model_erb_generation"
-  "/home/amore/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro"
 )
 
 # Per-language clean rules from dependency scanning.

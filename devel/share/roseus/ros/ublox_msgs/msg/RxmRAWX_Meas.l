@@ -24,6 +24,15 @@
 (intern "*TRK_STAT_SUB_HALF_CYC*" (find-package "UBLOX_MSGS::RXMRAWX_MEAS"))
 (shadow '*TRK_STAT_SUB_HALF_CYC* (find-package "UBLOX_MSGS::RXMRAWX_MEAS"))
 (defconstant ublox_msgs::RxmRAWX_Meas::*TRK_STAT_SUB_HALF_CYC* 8)
+
+(defun ublox_msgs::RxmRAWX_Meas-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::RxmRAWX_Meas::*TRK_STAT_PR_VALID*)
+        ((= const 2) 'ublox_msgs::RxmRAWX_Meas::*TRK_STAT_CP_VALID*)
+        ((= const 4) 'ublox_msgs::RxmRAWX_Meas::*TRK_STAT_HALF_CYC*)
+        ((= const 8) 'ublox_msgs::RxmRAWX_Meas::*TRK_STAT_SUB_HALF_CYC*)
+        (t nil)))
+
 (defclass ublox_msgs::RxmRAWX_Meas
   :super ros::object
   :slots (_prMes _cpMes _doMes _gnssId _svId _reserved0 _freqId _locktime _cno _prStdev _cpStdev _doStdev _trkStat _reserved1 ))

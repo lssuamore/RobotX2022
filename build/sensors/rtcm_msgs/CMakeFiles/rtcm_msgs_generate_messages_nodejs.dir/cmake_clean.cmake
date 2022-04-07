@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
+  "/home/taylor/RobotX2022/devel/share/gennodejs/ros/rtcm_msgs/msg/Message.js"
   "CMakeFiles/rtcm_msgs_generate_messages_nodejs"
-  "/home/amore/RobotX2022/devel/share/gennodejs/ros/rtcm_msgs/msg/Message.js"
 )
 
 # Per-language clean rules from dependency scanning.

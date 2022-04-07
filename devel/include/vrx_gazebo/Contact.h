@@ -100,16 +100,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsFixedSize< ::vrx_gazebo::Contact_<ContainerAllocator> >
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::vrx_gazebo::Contact_<ContainerAllocator> const>
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
 struct IsMessage< ::vrx_gazebo::Contact_<ContainerAllocator> >
   : TrueType
   { };
@@ -117,6 +107,16 @@ struct IsMessage< ::vrx_gazebo::Contact_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsMessage< ::vrx_gazebo::Contact_<ContainerAllocator> const>
   : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::vrx_gazebo::Contact_<ContainerAllocator> >
+  : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::vrx_gazebo::Contact_<ContainerAllocator> const>
+  : FalseType
   { };
 
 template <class ContainerAllocator>

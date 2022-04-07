@@ -1,4 +1,4 @@
-prefix=/home/amore/RobotX2022/devel
+prefix=/home/taylor/RobotX2022/devel
 
 Name: wamv_gazebo
 Description: Description of wamv_gazebo

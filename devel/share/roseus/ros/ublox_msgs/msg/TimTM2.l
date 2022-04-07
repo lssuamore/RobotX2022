@@ -42,6 +42,21 @@
 (intern "*FLAGS_NEWRISINGEDGE*" (find-package "UBLOX_MSGS::TIMTM2"))
 (shadow '*FLAGS_NEWRISINGEDGE* (find-package "UBLOX_MSGS::TIMTM2"))
 (defconstant ublox_msgs::TimTM2::*FLAGS_NEWRISINGEDGE* 128)
+
+(defun ublox_msgs::TimTM2-to-symbol (const)
+  (cond
+        ((= const 13) 'ublox_msgs::TimTM2::*CLASS_ID*)
+        ((= const 3) 'ublox_msgs::TimTM2::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::TimTM2::*FLAGS_MODE_RUNNING*)
+        ((= const 2) 'ublox_msgs::TimTM2::*FLAGS_RUN*)
+        ((= const 4) 'ublox_msgs::TimTM2::*FLAGS_NEWFALLINGEDGE*)
+        ((= const 8) 'ublox_msgs::TimTM2::*FLAGS_TIMEBASE_GNSS*)
+        ((= const 16) 'ublox_msgs::TimTM2::*FLAGS_TIMEBASE_UTC*)
+        ((= const 32) 'ublox_msgs::TimTM2::*FLAGS_UTC_AVAIL*)
+        ((= const 64) 'ublox_msgs::TimTM2::*FLAGS_TIME_VALID*)
+        ((= const 128) 'ublox_msgs::TimTM2::*FLAGS_NEWRISINGEDGE*)
+        (t nil)))
+
 (defclass ublox_msgs::TimTM2
   :super ros::object
   :slots (_ch _flags _risingEdgeCount _wnR _wnF _towMsR _towSubMsR _towMsF _towSubMsF _accEst ))

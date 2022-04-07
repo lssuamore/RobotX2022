@@ -67,14 +67,14 @@ set(xsens_mti_driver_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(xsens_mti_driver_SOURCE_PREFIX /home/amore/RobotX2022/src/sensors/xsens_ros_mti_driver)
-  set(xsens_mti_driver_DEVEL_PREFIX /home/amore/RobotX2022/devel)
+  set(xsens_mti_driver_SOURCE_PREFIX /home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver)
+  set(xsens_mti_driver_DEVEL_PREFIX /home/taylor/RobotX2022/devel)
   set(xsens_mti_driver_INSTALL_PREFIX "")
   set(xsens_mti_driver_PREFIX ${xsens_mti_driver_DEVEL_PREFIX})
 else()
   set(xsens_mti_driver_SOURCE_PREFIX "")
   set(xsens_mti_driver_DEVEL_PREFIX "")
-  set(xsens_mti_driver_INSTALL_PREFIX /home/amore/RobotX2022/install)
+  set(xsens_mti_driver_INSTALL_PREFIX /home/taylor/RobotX2022/install)
   set(xsens_mti_driver_PREFIX ${xsens_mti_driver_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/amore/RobotX2022/install/lib;/home/amore/RobotX2022/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/taylor/RobotX2022/install/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(xsens_mti_driver_LIBRARIES ${xsens_mti_driver_LIBRARIES})
 
   _list_append_unique(xsens_mti_driver_LIBRARY_DIRS ${${xsens_mti_driver_dep}_LIBRARY_DIRS})
-  list(APPEND xsens_mti_driver_EXPORTED_TARGETS ${${xsens_mti_driver_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(xsens_mti_driver_EXPORTED_TARGETS ${${xsens_mti_driver_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "")

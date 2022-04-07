@@ -48,6 +48,23 @@
 (intern "*FLAGS_TOWSET*" (find-package "UBLOX_MSGS::NAVSOL"))
 (shadow '*FLAGS_TOWSET* (find-package "UBLOX_MSGS::NAVSOL"))
 (defconstant ublox_msgs::NavSOL::*FLAGS_TOWSET* 8)
+
+(defun ublox_msgs::NavSOL-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavSOL::*CLASS_ID*)
+        ((= const 6) 'ublox_msgs::NavSOL::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::NavSOL::*GPS_NO_FIX*)
+        ((= const 1) 'ublox_msgs::NavSOL::*GPS_DEAD_RECKONING_ONLY*)
+        ((= const 2) 'ublox_msgs::NavSOL::*GPS_2D_FIX*)
+        ((= const 3) 'ublox_msgs::NavSOL::*GPS_3D_FIX*)
+        ((= const 4) 'ublox_msgs::NavSOL::*GPS_GPS_DEAD_RECKONING_COMBINED*)
+        ((= const 5) 'ublox_msgs::NavSOL::*GPS_TIME_ONLY_FIX*)
+        ((= const 1) 'ublox_msgs::NavSOL::*FLAGS_GPS_FIX_OK*)
+        ((= const 2) 'ublox_msgs::NavSOL::*FLAGS_DIFF_SOLN*)
+        ((= const 4) 'ublox_msgs::NavSOL::*FLAGS_WKNSET*)
+        ((= const 8) 'ublox_msgs::NavSOL::*FLAGS_TOWSET*)
+        (t nil)))
+
 (defclass ublox_msgs::NavSOL
   :super ros::object
   :slots (_iTOW _fTOW _week _gpsFix _flags _ecefX _ecefY _ecefZ _pAcc _ecefVX _ecefVY _ecefVZ _sAcc _pDOP _reserved1 _numSV _reserved2 ))
