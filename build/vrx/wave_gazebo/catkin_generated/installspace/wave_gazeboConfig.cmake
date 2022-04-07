@@ -67,14 +67,14 @@ set(wave_gazebo_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(wave_gazebo_SOURCE_PREFIX /home/amore/RobotX2022/src/vrx/wave_gazebo)
-  set(wave_gazebo_DEVEL_PREFIX /home/amore/RobotX2022/devel)
+  set(wave_gazebo_SOURCE_PREFIX /home/taylor/RobotX2022/src/vrx/wave_gazebo)
+  set(wave_gazebo_DEVEL_PREFIX /home/taylor/RobotX2022/devel)
   set(wave_gazebo_INSTALL_PREFIX "")
   set(wave_gazebo_PREFIX ${wave_gazebo_DEVEL_PREFIX})
 else()
   set(wave_gazebo_SOURCE_PREFIX "")
   set(wave_gazebo_DEVEL_PREFIX "")
-  set(wave_gazebo_INSTALL_PREFIX /home/amore/RobotX2022/install)
+  set(wave_gazebo_INSTALL_PREFIX /home/taylor/RobotX2022/install)
   set(wave_gazebo_PREFIX ${wave_gazebo_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/amore/RobotX2022/install/lib;/home/amore/RobotX2022/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/taylor/RobotX2022/install/lib;/home/taylor/RobotX2022/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(wave_gazebo_LIBRARIES ${wave_gazebo_LIBRARIES})
 
   _list_append_unique(wave_gazebo_LIBRARY_DIRS ${${wave_gazebo_dep}_LIBRARY_DIRS})
-  list(APPEND wave_gazebo_EXPORTED_TARGETS ${${wave_gazebo_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(wave_gazebo_EXPORTED_TARGETS ${${wave_gazebo_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "")

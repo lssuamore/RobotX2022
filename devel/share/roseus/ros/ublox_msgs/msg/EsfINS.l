@@ -39,6 +39,20 @@
 (intern "*BITFIELD0_Z_ACCEL_VALID*" (find-package "UBLOX_MSGS::ESFINS"))
 (shadow '*BITFIELD0_Z_ACCEL_VALID* (find-package "UBLOX_MSGS::ESFINS"))
 (defconstant ublox_msgs::EsfINS::*BITFIELD0_Z_ACCEL_VALID* 8192)
+
+(defun ublox_msgs::EsfINS-to-symbol (const)
+  (cond
+        ((= const 16) 'ublox_msgs::EsfINS::*CLASS_ID*)
+        ((= const 21) 'ublox_msgs::EsfINS::*MESSAGE_ID*)
+        ((= const 255) 'ublox_msgs::EsfINS::*BITFIELD0_VERSION*)
+        ((= const 256) 'ublox_msgs::EsfINS::*BITFIELD0_X_ANG_RATE_VALID*)
+        ((= const 512) 'ublox_msgs::EsfINS::*BITFIELD0_Y_ANG_RATE_VALID*)
+        ((= const 1024) 'ublox_msgs::EsfINS::*BITFIELD0_Z_ANG_RATE_VALID*)
+        ((= const 2048) 'ublox_msgs::EsfINS::*BITFIELD0_X_ACCEL_VALID*)
+        ((= const 4096) 'ublox_msgs::EsfINS::*BITFIELD0_Y_ACCEL_VALID*)
+        ((= const 8192) 'ublox_msgs::EsfINS::*BITFIELD0_Z_ACCEL_VALID*)
+        (t nil)))
+
 (defclass ublox_msgs::EsfINS
   :super ros::object
   :slots (_bitfield0 _reserved1 _iTOW _xAngRate _yAngRate _zAngRate _xAccel _yAccel _zAccel ))

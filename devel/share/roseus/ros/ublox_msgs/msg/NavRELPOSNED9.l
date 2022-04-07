@@ -54,9 +54,28 @@
 (intern "*FLAGS_REL_POS_NORM*" (find-package "UBLOX_MSGS::NAVRELPOSNED9"))
 (shadow '*FLAGS_REL_POS_NORM* (find-package "UBLOX_MSGS::NAVRELPOSNED9"))
 (defconstant ublox_msgs::NavRELPOSNED9::*FLAGS_REL_POS_NORM* 512)
+
+(defun ublox_msgs::NavRELPOSNED9-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavRELPOSNED9::*CLASS_ID*)
+        ((= const 60) 'ublox_msgs::NavRELPOSNED9::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::NavRELPOSNED9::*FLAGS_GNSS_FIX_OK*)
+        ((= const 2) 'ublox_msgs::NavRELPOSNED9::*FLAGS_DIFF_SOLN*)
+        ((= const 4) 'ublox_msgs::NavRELPOSNED9::*FLAGS_REL_POS_VALID*)
+        ((= const 24) 'ublox_msgs::NavRELPOSNED9::*FLAGS_CARR_SOLN_MASK*)
+        ((= const 0) 'ublox_msgs::NavRELPOSNED9::*FLAGS_CARR_SOLN_NONE*)
+        ((= const 8) 'ublox_msgs::NavRELPOSNED9::*FLAGS_CARR_SOLN_FLOAT*)
+        ((= const 16) 'ublox_msgs::NavRELPOSNED9::*FLAGS_CARR_SOLN_FIXED*)
+        ((= const 32) 'ublox_msgs::NavRELPOSNED9::*FLAGS_IS_MOVING*)
+        ((= const 64) 'ublox_msgs::NavRELPOSNED9::*FLAGS_REF_POS_MISS*)
+        ((= const 128) 'ublox_msgs::NavRELPOSNED9::*FLAGS_REF_OBS_MISS*)
+        ((= const 256) 'ublox_msgs::NavRELPOSNED9::*FLAGS_REL_POS_HEAD_VALID*)
+        ((= const 512) 'ublox_msgs::NavRELPOSNED9::*FLAGS_REL_POS_NORM*)
+        (t nil)))
+
 (defclass ublox_msgs::NavRELPOSNED9
   :super ros::object
-  :slots (_version _reserved1 _refStationId _iTow _relPosN _relPosE _relPosD _relPosLength _relPosHeading _reserved2 _relPosHPN _relPosHPE _relPosHPD _relPosHPLength _accN _accE _accD _accLength _accHeading _reserved3 _flags ))
+  :slots (_version _reserved1 _refStationId _iTOW _relPosN _relPosE _relPosD _relPosLength _relPosHeading _reserved2 _relPosHPN _relPosHPE _relPosHPD _relPosHPLength _accN _accE _accD _accLength _accHeading _reserved3 _flags ))
 
 (defmethod ublox_msgs::NavRELPOSNED9
   (:init
@@ -64,7 +83,7 @@
     ((:version __version) 0)
     ((:reserved1 __reserved1) 0)
     ((:refStationId __refStationId) 0)
-    ((:iTow __iTow) 0)
+    ((:iTOW __iTOW) 0)
     ((:relPosN __relPosN) 0)
     ((:relPosE __relPosE) 0)
     ((:relPosD __relPosD) 0)
@@ -87,7 +106,7 @@
    (setq _version (round __version))
    (setq _reserved1 (round __reserved1))
    (setq _refStationId (round __refStationId))
-   (setq _iTow (round __iTow))
+   (setq _iTOW (round __iTOW))
    (setq _relPosN (round __relPosN))
    (setq _relPosE (round __relPosE))
    (setq _relPosD (round __relPosD))
@@ -115,9 +134,9 @@
   (:refStationId
    (&optional __refStationId)
    (if __refStationId (setq _refStationId __refStationId)) _refStationId)
-  (:iTow
-   (&optional __iTow)
-   (if __iTow (setq _iTow __iTow)) _iTow)
+  (:iTOW
+   (&optional __iTOW)
+   (if __iTOW (setq _iTOW __iTOW)) _iTOW)
   (:relPosN
    (&optional __relPosN)
    (if __relPosN (setq _relPosN __relPosN)) _relPosN)
@@ -178,7 +197,7 @@
     1
     ;; uint16 _refStationId
     2
-    ;; uint32 _iTow
+    ;; uint32 _iTOW
     4
     ;; int32 _relPosN
     4
@@ -225,8 +244,8 @@
        (write-byte _reserved1 s)
      ;; uint16 _refStationId
        (write-word _refStationId s)
-     ;; uint32 _iTow
-       (write-long _iTow s)
+     ;; uint32 _iTOW
+       (write-long _iTOW s)
      ;; int32 _relPosN
        (write-long _relPosN s)
      ;; int32 _relPosE
@@ -271,8 +290,8 @@
      (setq _reserved1 (sys::peek buf ptr- :char)) (incf ptr- 1)
    ;; uint16 _refStationId
      (setq _refStationId (sys::peek buf ptr- :short)) (incf ptr- 2)
-   ;; uint32 _iTow
-     (setq _iTow (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;; uint32 _iTOW
+     (setq _iTOW (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;; int32 _relPosN
      (setq _relPosN (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;; int32 _relPosE
@@ -317,7 +336,7 @@
    self)
   )
 
-(setf (get ublox_msgs::NavRELPOSNED9 :md5sum-) "6dedd6e7018b83e2b0ae65fb6873207e")
+(setf (get ublox_msgs::NavRELPOSNED9 :md5sum-) "5acd7899c1f1094e1680da583d0ff1f9")
 (setf (get ublox_msgs::NavRELPOSNED9 :datatype-) "ublox_msgs/NavRELPOSNED9")
 (setf (get ublox_msgs::NavRELPOSNED9 :definition-)
       "# NAV-RELPOSNED (0x01 0x3C)
@@ -341,7 +360,7 @@ uint8 version                     # Message version (0x00 for this version)
 uint8 reserved1                   # Reserved
 uint16 refStationId               # Reference Station ID. Must be in the range
                                   # 0..4095
-uint32 iTow                       # GPS time of week of the navigation epoch
+uint32 iTOW                       # GPS time of week of the navigation epoch
                                   # [ms]
 
 int32 relPosN                     # North component of relative position vector
@@ -430,6 +449,6 @@ uint32 FLAGS_REL_POS_NORM = 512   # Set if extrapolated reference observations
 
 
 
-(provide :ublox_msgs/NavRELPOSNED9 "6dedd6e7018b83e2b0ae65fb6873207e")
+(provide :ublox_msgs/NavRELPOSNED9 "5acd7899c1f1094e1680da583d0ff1f9")
 
 

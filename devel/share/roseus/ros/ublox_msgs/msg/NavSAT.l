@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::NAVSAT"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::NAVSAT"))
 (defconstant ublox_msgs::NavSAT::*MESSAGE_ID* 53)
+
+(defun ublox_msgs::NavSAT-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavSAT::*CLASS_ID*)
+        ((= const 53) 'ublox_msgs::NavSAT::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::NavSAT
   :super ros::object
   :slots (_iTOW _version _numSvs _reserved0 _sv ))
@@ -29,7 +36,7 @@
     ((:version __version) 0)
     ((:numSvs __numSvs) 0)
     ((:reserved0 __reserved0) (make-array 2 :initial-element 0 :element-type :char))
-    ((:sv __sv) (let (r) (dotimes (i 0) (push (instance ublox_msgs::NavSAT_SV :init) r)) r))
+    ((:sv __sv) ())
     )
    (send-super :init)
    (setq _iTOW (round __iTOW))

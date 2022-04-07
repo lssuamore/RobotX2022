@@ -27,6 +27,16 @@
 (intern "*FLAGS_KLOB*" (find-package "UBLOX_MSGS::AIDHUI"))
 (shadow '*FLAGS_KLOB* (find-package "UBLOX_MSGS::AIDHUI"))
 (defconstant ublox_msgs::AidHUI::*FLAGS_KLOB* 4)
+
+(defun ublox_msgs::AidHUI-to-symbol (const)
+  (cond
+        ((= const 11) 'ublox_msgs::AidHUI::*CLASS_ID*)
+        ((= const 2) 'ublox_msgs::AidHUI::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::AidHUI::*FLAGS_HEALTH*)
+        ((= const 2) 'ublox_msgs::AidHUI::*FLAGS_UTC*)
+        ((= const 4) 'ublox_msgs::AidHUI::*FLAGS_KLOB*)
+        (t nil)))
+
 (defclass ublox_msgs::AidHUI
   :super ros::object
   :slots (_health _utcA0 _utcA1 _utcTOW _utcWNT _utcLS _utcWNF _utcDN _utcLSF _utcSpare _klobA0 _klobA1 _klobA2 _klobA3 _klobB0 _klobB1 _klobB2 _klobB3 _flags ))

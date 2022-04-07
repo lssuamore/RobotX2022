@@ -127,16 +127,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsFixedSize< ::ublox_msgs::RxmEPH_<ContainerAllocator> >
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::ublox_msgs::RxmEPH_<ContainerAllocator> const>
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
 struct IsMessage< ::ublox_msgs::RxmEPH_<ContainerAllocator> >
   : TrueType
   { };
@@ -144,6 +134,16 @@ struct IsMessage< ::ublox_msgs::RxmEPH_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsMessage< ::ublox_msgs::RxmEPH_<ContainerAllocator> const>
   : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::ublox_msgs::RxmEPH_<ContainerAllocator> >
+  : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::ublox_msgs::RxmEPH_<ContainerAllocator> const>
+  : FalseType
   { };
 
 template <class ContainerAllocator>

@@ -72,6 +72,31 @@
 (intern "*JAM_IND_STRONG*" (find-package "UBLOX_MSGS::MONHW"))
 (shadow '*JAM_IND_STRONG* (find-package "UBLOX_MSGS::MONHW"))
 (defconstant ublox_msgs::MonHW::*JAM_IND_STRONG* 255)
+
+(defun ublox_msgs::MonHW-to-symbol (const)
+  (cond
+        ((= const 10) 'ublox_msgs::MonHW::*CLASS_ID*)
+        ((= const 9) 'ublox_msgs::MonHW::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::MonHW::*A_STATUS_INIT*)
+        ((= const 1) 'ublox_msgs::MonHW::*A_STATUS_UNKNOWN*)
+        ((= const 2) 'ublox_msgs::MonHW::*A_STATUS_OK*)
+        ((= const 3) 'ublox_msgs::MonHW::*A_STATUS_SHORT*)
+        ((= const 4) 'ublox_msgs::MonHW::*A_STATUS_OPEN*)
+        ((= const 0) 'ublox_msgs::MonHW::*A_POWER_OFF*)
+        ((= const 1) 'ublox_msgs::MonHW::*A_POWER_ON*)
+        ((= const 2) 'ublox_msgs::MonHW::*A_POWER_UNKNOWN*)
+        ((= const 1) 'ublox_msgs::MonHW::*FLAGS_RTC_CALIB*)
+        ((= const 2) 'ublox_msgs::MonHW::*FLAGS_SAFE_BOOT*)
+        ((= const 12) 'ublox_msgs::MonHW::*FLAGS_JAMMING_STATE_MASK*)
+        ((= const 0) 'ublox_msgs::MonHW::*JAMMING_STATE_UNKNOWN_OR_DISABLED*)
+        ((= const 4) 'ublox_msgs::MonHW::*JAMMING_STATE_OK*)
+        ((= const 8) 'ublox_msgs::MonHW::*JAMMING_STATE_WARNING*)
+        ((= const 12) 'ublox_msgs::MonHW::*JAMMING_STATE_CRITICAL*)
+        ((= const 16) 'ublox_msgs::MonHW::*FLAGS_XTAL_ABSENT*)
+        ((= const 0) 'ublox_msgs::MonHW::*JAM_IND_NONE*)
+        ((= const 255) 'ublox_msgs::MonHW::*JAM_IND_STRONG*)
+        (t nil)))
+
 (defclass ublox_msgs::MonHW
   :super ros::object
   :slots (_pinSel _pinBank _pinDir _pinVal _noisePerMS _agcCnt _aStatus _aPower _flags _reserved0 _usedMask _VP _jamInd _reserved1 _pinIrq _pullH _pullL ))

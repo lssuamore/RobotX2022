@@ -27,7 +27,7 @@ struct NavRELPOSNED9_
     : version(0)
     , reserved1(0)
     , refStationId(0)
-    , iTow(0)
+    , iTOW(0)
     , relPosN(0)
     , relPosE(0)
     , relPosD(0)
@@ -53,7 +53,7 @@ struct NavRELPOSNED9_
     : version(0)
     , reserved1(0)
     , refStationId(0)
-    , iTow(0)
+    , iTOW(0)
     , relPosN(0)
     , relPosE(0)
     , relPosD(0)
@@ -88,8 +88,8 @@ struct NavRELPOSNED9_
    typedef uint16_t _refStationId_type;
   _refStationId_type refStationId;
 
-   typedef uint32_t _iTow_type;
-  _iTow_type iTow;
+   typedef uint32_t _iTOW_type;
+  _iTOW_type iTOW;
 
    typedef int32_t _relPosN_type;
   _relPosN_type relPosN;
@@ -262,7 +262,7 @@ bool operator==(const ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator1> & lhs, c
   return lhs.version == rhs.version &&
     lhs.reserved1 == rhs.reserved1 &&
     lhs.refStationId == rhs.refStationId &&
-    lhs.iTow == rhs.iTow &&
+    lhs.iTOW == rhs.iTOW &&
     lhs.relPosN == rhs.relPosN &&
     lhs.relPosE == rhs.relPosE &&
     lhs.relPosD == rhs.relPosD &&
@@ -301,22 +301,22 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsFixedSize< ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator> >
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator> const>
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
 struct IsMessage< ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator> >
   : TrueType
   { };
 
 template <class ContainerAllocator>
 struct IsMessage< ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator> const>
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator> >
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator> const>
   : TrueType
   { };
 
@@ -336,12 +336,12 @@ struct MD5Sum< ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "6dedd6e7018b83e2b0ae65fb6873207e";
+    return "5acd7899c1f1094e1680da583d0ff1f9";
   }
 
   static const char* value(const ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x6dedd6e7018b83e2ULL;
-  static const uint64_t static_value2 = 0xb0ae65fb6873207eULL;
+  static const uint64_t static_value1 = 0x5acd7899c1f1094eULL;
+  static const uint64_t static_value2 = 0x1680da583d0ff1f9ULL;
 };
 
 template<class ContainerAllocator>
@@ -381,7 +381,7 @@ struct Definition< ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator> >
 "uint8 reserved1                   # Reserved\n"
 "uint16 refStationId               # Reference Station ID. Must be in the range\n"
 "                                  # 0..4095\n"
-"uint32 iTow                       # GPS time of week of the navigation epoch\n"
+"uint32 iTOW                       # GPS time of week of the navigation epoch\n"
 "                                  # [ms]\n"
 "\n"
 "int32 relPosN                     # North component of relative position vector\n"
@@ -487,7 +487,7 @@ namespace serialization
       stream.next(m.version);
       stream.next(m.reserved1);
       stream.next(m.refStationId);
-      stream.next(m.iTow);
+      stream.next(m.iTOW);
       stream.next(m.relPosN);
       stream.next(m.relPosE);
       stream.next(m.relPosD);
@@ -529,8 +529,8 @@ struct Printer< ::ublox_msgs::NavRELPOSNED9_<ContainerAllocator> >
     Printer<uint8_t>::stream(s, indent + "  ", v.reserved1);
     s << indent << "refStationId: ";
     Printer<uint16_t>::stream(s, indent + "  ", v.refStationId);
-    s << indent << "iTow: ";
-    Printer<uint32_t>::stream(s, indent + "  ", v.iTow);
+    s << indent << "iTOW: ";
+    Printer<uint32_t>::stream(s, indent + "  ", v.iTOW);
     s << indent << "relPosN: ";
     Printer<int32_t>::stream(s, indent + "  ", v.relPosN);
     s << indent << "relPosE: ";

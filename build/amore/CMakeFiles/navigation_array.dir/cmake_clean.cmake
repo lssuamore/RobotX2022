@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  "/home/taylor/RobotX2022/devel/lib/amore/navigation_array"
+  "/home/taylor/RobotX2022/devel/lib/amore/navigation_array.pdb"
   "CMakeFiles/navigation_array.dir/src/navigation_array.cpp.o"
-  "/home/amore/RobotX2022/devel/lib/amore/navigation_array.pdb"
-  "/home/amore/RobotX2022/devel/lib/amore/navigation_array"
 )
 
 # Per-language clean rules from dependency scanning.

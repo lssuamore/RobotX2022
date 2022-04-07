@@ -1,8 +1,8 @@
-# Install script for directory: /home/amore/RobotX2022/src/vrx/wamv_description
+# Install script for directory: /home/taylor/RobotX2022/src/vrx/wamv_description
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/amore/RobotX2022/install")
+  set(CMAKE_INSTALL_PREFIX "/home/taylor/RobotX2022/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,29 +38,29 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/amore/RobotX2022/build/vrx/wamv_description/catkin_generated/installspace/wamv_description.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/taylor/RobotX2022/build/vrx/wamv_description/catkin_generated/installspace/wamv_description.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_description/cmake" TYPE FILE FILES
-    "/home/amore/RobotX2022/build/vrx/wamv_description/catkin_generated/installspace/wamv_descriptionConfig.cmake"
-    "/home/amore/RobotX2022/build/vrx/wamv_description/catkin_generated/installspace/wamv_descriptionConfig-version.cmake"
+    "/home/taylor/RobotX2022/build/vrx/wamv_description/catkin_generated/installspace/wamv_descriptionConfig.cmake"
+    "/home/taylor/RobotX2022/build/vrx/wamv_description/catkin_generated/installspace/wamv_descriptionConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_description" TYPE FILE FILES "/home/amore/RobotX2022/src/vrx/wamv_description/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_description" TYPE FILE FILES "/home/taylor/RobotX2022/src/vrx/wamv_description/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_description/urdf" TYPE FILE FILES "/home/amore/RobotX2022/build/vrx/wamv_description/urdf/wamv_base.urdf")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_description/urdf" TYPE FILE FILES "/home/taylor/RobotX2022/build/vrx/wamv_description/urdf/wamv_base.urdf")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_description/models" TYPE DIRECTORY FILES "/home/amore/RobotX2022/src/vrx/wamv_description/models/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_description/models" TYPE DIRECTORY FILES "/home/taylor/RobotX2022/src/vrx/wamv_description/models/")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_description/urdf" TYPE DIRECTORY FILES "/home/amore/RobotX2022/src/vrx/wamv_description/urdf/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_description/urdf" TYPE DIRECTORY FILES "/home/taylor/RobotX2022/src/vrx/wamv_description/urdf/")
 endif()
 

@@ -18,6 +18,13 @@
 (intern "*DATA_TYPE_MASK*" (find-package "UBLOX_MSGS::ESFRAW_BLOCK"))
 (shadow '*DATA_TYPE_MASK* (find-package "UBLOX_MSGS::ESFRAW_BLOCK"))
 (defconstant ublox_msgs::EsfRAW_Block::*DATA_TYPE_MASK* 4278190080)
+
+(defun ublox_msgs::EsfRAW_Block-to-symbol (const)
+  (cond
+        ((= const 16777215) 'ublox_msgs::EsfRAW_Block::*DATA_FIELD_MASK*)
+        ((= const 4278190080) 'ublox_msgs::EsfRAW_Block::*DATA_TYPE_MASK*)
+        (t nil)))
+
 (defclass ublox_msgs::EsfRAW_Block
   :super ros::object
   :slots (_data _sTtag ))

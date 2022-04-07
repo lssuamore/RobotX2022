@@ -67,14 +67,14 @@ set(vrx_gazebo_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(vrx_gazebo_SOURCE_PREFIX /home/amore/RobotX2022/src/vrx/vrx_gazebo)
-  set(vrx_gazebo_DEVEL_PREFIX /home/amore/RobotX2022/devel)
+  set(vrx_gazebo_SOURCE_PREFIX /home/taylor/RobotX2022/src/vrx/vrx_gazebo)
+  set(vrx_gazebo_DEVEL_PREFIX /home/taylor/RobotX2022/devel)
   set(vrx_gazebo_INSTALL_PREFIX "")
   set(vrx_gazebo_PREFIX ${vrx_gazebo_DEVEL_PREFIX})
 else()
   set(vrx_gazebo_SOURCE_PREFIX "")
   set(vrx_gazebo_DEVEL_PREFIX "")
-  set(vrx_gazebo_INSTALL_PREFIX /home/amore/RobotX2022/install)
+  set(vrx_gazebo_INSTALL_PREFIX /home/taylor/RobotX2022/install)
   set(vrx_gazebo_PREFIX ${vrx_gazebo_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(vrx_gazebo_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/amore/RobotX2022/devel/include;/home/amore/RobotX2022/src/vrx/vrx_gazebo/include " STREQUAL " ")
+if(NOT "/home/taylor/RobotX2022/devel/include;/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include " STREQUAL " ")
   set(vrx_gazebo_INCLUDE_DIRS "")
-  set(_include_dirs "/home/amore/RobotX2022/devel/include;/home/amore/RobotX2022/src/vrx/vrx_gazebo/include")
+  set(_include_dirs "/home/taylor/RobotX2022/devel/include;/home/taylor/RobotX2022/src/vrx/vrx_gazebo/include")
   if(NOT "http://github.com/osrf/vrx/issues " STREQUAL " ")
     set(_report "Check the issue tracker 'http://github.com/osrf/vrx/issues' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT "http://wiki.ros.org/vrx_gazebo " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/amore/RobotX2022/devel/include;/home/amore/RobotX2022/src/vrx/vrx_
         message(FATAL_ERROR "Project 'vrx_gazebo' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'vrx_gazebo' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/amore/RobotX2022/src/vrx/vrx_gazebo/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'vrx_gazebo' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/taylor/RobotX2022/src/vrx/vrx_gazebo/${idir}'.  ${_report}")
     endif()
     _list_append_unique(vrx_gazebo_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/amore/RobotX2022/devel/lib;/home/amore/RobotX2022/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/taylor/RobotX2022/devel/lib;/home/taylor/RobotX2022/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(vrx_gazebo_LIBRARIES ${vrx_gazebo_LIBRARIES})
 
   _list_append_unique(vrx_gazebo_LIBRARY_DIRS ${${vrx_gazebo_dep}_LIBRARY_DIRS})
-  list(APPEND vrx_gazebo_EXPORTED_TARGETS ${${vrx_gazebo_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(vrx_gazebo_EXPORTED_TARGETS ${${vrx_gazebo_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "vrx_gazebo-msg-extras.cmake")

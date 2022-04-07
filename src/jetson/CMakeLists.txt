@@ -49,6 +49,7 @@ add_message_files(
   NED_waypoints.msg
   usv_pose_msg.msg
   state_msg.msg
+  task_info.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -136,9 +137,9 @@ add_executable(mission_control_indoor src/mission_control_indoor.cpp)	# COMMENT 
 add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)	# COMMENT THIS 1ST CMAKE
 add_executable(propulsion_system_indoor src/propulsion_system_indoor.cpp)	# COMMENT THIS 1ST CMAKE
 
-add_executable(mission_control_outdoor src/mission_control_outdoor.cpp)	# COMMENT THIS 1ST CMAKE
-add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)	# COMMENT THIS 1ST CMAKE
-add_executable(propulsion_system_outdoor src/propulsion_system_outdoor.cpp)	# COMMENT THIS 1ST CMAKE
+#add_executable(mission_control_outdoor src/mission_control_outdoor.cpp)	# COMMENT THIS 1ST CMAKE
+#add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)	# COMMENT THIS 1ST CMAKE
+#add_executable(propulsion_system_outdoor src/propulsion_system_outdoor.cpp)	# COMMENT THIS 1ST CMAKE
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -154,9 +155,9 @@ target_link_libraries(mission_control_indoor ${catkin_LIBRARIES})	# COMMENT THIS
 target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 target_link_libraries(propulsion_system_indoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 
-target_link_libraries(mission_control_outdoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
-target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
-target_link_libraries(propulsion_system_outdoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+#target_link_libraries(mission_control_outdoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+#target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+#target_link_libraries(propulsion_system_outdoor ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 #############
 ## Install ##
 #############
@@ -193,6 +194,8 @@ target_link_libraries(propulsion_system_outdoor ${catkin_LIBRARIES})	# COMMENT T
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
+install(FILES launch/amore_indoor.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(FILES launch/amore_outdoor.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 # install(FILES
 #   # myfile1
 #   # myfile2

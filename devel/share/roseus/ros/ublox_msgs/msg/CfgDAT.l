@@ -24,6 +24,15 @@
 (intern "*DATUM_NUM_USER*" (find-package "UBLOX_MSGS::CFGDAT"))
 (shadow '*DATUM_NUM_USER* (find-package "UBLOX_MSGS::CFGDAT"))
 (defconstant ublox_msgs::CfgDAT::*DATUM_NUM_USER* 65535)
+
+(defun ublox_msgs::CfgDAT-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgDAT::*CLASS_ID*)
+        ((= const 6) 'ublox_msgs::CfgDAT::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::CfgDAT::*DATUM_NUM_WGS84*)
+        ((= const 65535) 'ublox_msgs::CfgDAT::*DATUM_NUM_USER*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgDAT
   :super ros::object
   :slots (_datumNum _datumName _majA _flat _dX _dY _dZ _rotX _rotY _rotZ _scale ))

@@ -67,14 +67,14 @@ set(rtcm_msgs_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(rtcm_msgs_SOURCE_PREFIX /home/amore/RobotX2022/src/sensors/rtcm_msgs)
-  set(rtcm_msgs_DEVEL_PREFIX /home/amore/RobotX2022/devel)
+  set(rtcm_msgs_SOURCE_PREFIX /home/taylor/RobotX2022/src/sensors/rtcm_msgs)
+  set(rtcm_msgs_DEVEL_PREFIX /home/taylor/RobotX2022/devel)
   set(rtcm_msgs_INSTALL_PREFIX "")
   set(rtcm_msgs_PREFIX ${rtcm_msgs_DEVEL_PREFIX})
 else()
   set(rtcm_msgs_SOURCE_PREFIX "")
   set(rtcm_msgs_DEVEL_PREFIX "")
-  set(rtcm_msgs_INSTALL_PREFIX /home/amore/RobotX2022/install)
+  set(rtcm_msgs_INSTALL_PREFIX /home/taylor/RobotX2022/install)
   set(rtcm_msgs_PREFIX ${rtcm_msgs_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/amore/RobotX2022/install/lib;/home/amore/RobotX2022/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/taylor/RobotX2022/install/lib;/home/taylor/RobotX2022/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(rtcm_msgs_LIBRARIES ${rtcm_msgs_LIBRARIES})
 
   _list_append_unique(rtcm_msgs_LIBRARY_DIRS ${${rtcm_msgs_dep}_LIBRARY_DIRS})
-  list(APPEND rtcm_msgs_EXPORTED_TARGETS ${${rtcm_msgs_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(rtcm_msgs_EXPORTED_TARGETS ${${rtcm_msgs_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "rtcm_msgs-msg-extras.cmake")

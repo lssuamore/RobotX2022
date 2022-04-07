@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::AIDALM"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::AIDALM"))
 (defconstant ublox_msgs::AidALM::*MESSAGE_ID* 48)
+
+(defun ublox_msgs::AidALM-to-symbol (const)
+  (cond
+        ((= const 11) 'ublox_msgs::AidALM::*CLASS_ID*)
+        ((= const 48) 'ublox_msgs::AidALM::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::AidALM
   :super ros::object
   :slots (_svid _week _dwrd ))

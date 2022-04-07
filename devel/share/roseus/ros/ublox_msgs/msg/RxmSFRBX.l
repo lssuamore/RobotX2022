@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::RXMSFRBX"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::RXMSFRBX"))
 (defconstant ublox_msgs::RxmSFRBX::*MESSAGE_ID* 19)
+
+(defun ublox_msgs::RxmSFRBX-to-symbol (const)
+  (cond
+        ((= const 2) 'ublox_msgs::RxmSFRBX::*CLASS_ID*)
+        ((= const 19) 'ublox_msgs::RxmSFRBX::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::RxmSFRBX
   :super ros::object
   :slots (_gnssId _svId _reserved0 _freqId _numWords _chn _version _reserved1 _dwrd ))

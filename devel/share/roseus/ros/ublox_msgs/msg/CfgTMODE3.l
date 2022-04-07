@@ -33,6 +33,18 @@
 (intern "*FLAGS_LLA*" (find-package "UBLOX_MSGS::CFGTMODE3"))
 (shadow '*FLAGS_LLA* (find-package "UBLOX_MSGS::CFGTMODE3"))
 (defconstant ublox_msgs::CfgTMODE3::*FLAGS_LLA* 256)
+
+(defun ublox_msgs::CfgTMODE3-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgTMODE3::*CLASS_ID*)
+        ((= const 113) 'ublox_msgs::CfgTMODE3::*MESSAGE_ID*)
+        ((= const 255) 'ublox_msgs::CfgTMODE3::*FLAGS_MODE_MASK*)
+        ((= const 0) 'ublox_msgs::CfgTMODE3::*FLAGS_MODE_DISABLED*)
+        ((= const 1) 'ublox_msgs::CfgTMODE3::*FLAGS_MODE_SURVEY_IN*)
+        ((= const 2) 'ublox_msgs::CfgTMODE3::*FLAGS_MODE_FIXED*)
+        ((= const 256) 'ublox_msgs::CfgTMODE3::*FLAGS_LLA*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgTMODE3
   :super ros::object
   :slots (_version _reserved1 _flags _ecefXOrLat _ecefYOrLon _ecefZOrAlt _ecefXOrLatHP _ecefYOrLonHP _ecefZOrAltHP _reserved2 _fixedPosAcc _svinMinDur _svinAccLimit _reserved3 ))

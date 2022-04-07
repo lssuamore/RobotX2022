@@ -45,6 +45,22 @@
 (intern "*PIN_RECONFIG*" (find-package "UBLOX_MSGS::CFGANT"))
 (shadow '*PIN_RECONFIG* (find-package "UBLOX_MSGS::CFGANT"))
 (defconstant ublox_msgs::CfgANT::*PIN_RECONFIG* 32768)
+
+(defun ublox_msgs::CfgANT-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgANT::*CLASS_ID*)
+        ((= const 19) 'ublox_msgs::CfgANT::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::CfgANT::*FLAGS_SVCS*)
+        ((= const 2) 'ublox_msgs::CfgANT::*FLAGS_SCD*)
+        ((= const 4) 'ublox_msgs::CfgANT::*FLAGS_OCD*)
+        ((= const 8) 'ublox_msgs::CfgANT::*FLAGS_PDWN_ON_SCD*)
+        ((= const 16) 'ublox_msgs::CfgANT::*FLAGS_RECOVERY*)
+        ((= const 31) 'ublox_msgs::CfgANT::*PIN_SWITCH_MASK*)
+        ((= const 992) 'ublox_msgs::CfgANT::*PIN_SCD_MASK*)
+        ((= const 31744) 'ublox_msgs::CfgANT::*PIN_OCD_MASK*)
+        ((= const 32768) 'ublox_msgs::CfgANT::*PIN_RECONFIG*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgANT
   :super ros::object
   :slots (_flags _pins ))

@@ -48,6 +48,23 @@
 (intern "*FLAGS_CONSIDER*" (find-package "UBLOX_MSGS::CFGNMEA6"))
 (shadow '*FLAGS_CONSIDER* (find-package "UBLOX_MSGS::CFGNMEA6"))
 (defconstant ublox_msgs::CfgNMEA6::*FLAGS_CONSIDER* 2)
+
+(defun ublox_msgs::CfgNMEA6-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgNMEA6::*CLASS_ID*)
+        ((= const 23) 'ublox_msgs::CfgNMEA6::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::CfgNMEA6::*FILTER_POS*)
+        ((= const 2) 'ublox_msgs::CfgNMEA6::*FILTER_MSK_POS*)
+        ((= const 4) 'ublox_msgs::CfgNMEA6::*FILTER_TIME*)
+        ((= const 8) 'ublox_msgs::CfgNMEA6::*FILTER_DATE*)
+        ((= const 16) 'ublox_msgs::CfgNMEA6::*FILTER_SBAS_FILT*)
+        ((= const 32) 'ublox_msgs::CfgNMEA6::*FILTER_TRACK*)
+        ((= const 35) 'ublox_msgs::CfgNMEA6::*NMEA_VERSION_2_3*)
+        ((= const 33) 'ublox_msgs::CfgNMEA6::*NMEA_VERSION_2_1*)
+        ((= const 1) 'ublox_msgs::CfgNMEA6::*FLAGS_COMPAT*)
+        ((= const 2) 'ublox_msgs::CfgNMEA6::*FLAGS_CONSIDER*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgNMEA6
   :super ros::object
   :slots (_filter _version _numSV _flags ))

@@ -1,8 +1,8 @@
-# Install script for directory: /home/amore/RobotX2022/src/sensors/xsens_ros_mti_driver
+# Install script for directory: /home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/amore/RobotX2022/install")
+  set(CMAKE_INSTALL_PREFIX "/home/taylor/RobotX2022/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/amore/RobotX2022/build/sensors/xsens_ros_mti_driver/catkin_generated/installspace/xsens_mti_driver.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/taylor/RobotX2022/build/sensors/xsens_ros_mti_driver/catkin_generated/installspace/xsens_mti_driver.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/xsens_mti_driver/cmake" TYPE FILE FILES
-    "/home/amore/RobotX2022/build/sensors/xsens_ros_mti_driver/catkin_generated/installspace/xsens_mti_driverConfig.cmake"
-    "/home/amore/RobotX2022/build/sensors/xsens_ros_mti_driver/catkin_generated/installspace/xsens_mti_driverConfig-version.cmake"
+    "/home/taylor/RobotX2022/build/sensors/xsens_ros_mti_driver/catkin_generated/installspace/xsens_mti_driverConfig.cmake"
+    "/home/taylor/RobotX2022/build/sensors/xsens_ros_mti_driver/catkin_generated/installspace/xsens_mti_driverConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/xsens_mti_driver" TYPE FILE FILES "/home/amore/RobotX2022/src/sensors/xsens_ros_mti_driver/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/xsens_mti_driver" TYPE FILE FILES "/home/taylor/RobotX2022/src/sensors/xsens_ros_mti_driver/package.xml")
 endif()
 

@@ -33,6 +33,18 @@
 (intern "*INF_MSG_DEBUG*" (find-package "UBLOX_MSGS::CFGINF_BLOCK"))
 (shadow '*INF_MSG_DEBUG* (find-package "UBLOX_MSGS::CFGINF_BLOCK"))
 (defconstant ublox_msgs::CfgINF_Block::*INF_MSG_DEBUG* 16)
+
+(defun ublox_msgs::CfgINF_Block-to-symbol (const)
+  (cond
+        ((= const 0) 'ublox_msgs::CfgINF_Block::*PROTOCOL_ID_UBX*)
+        ((= const 1) 'ublox_msgs::CfgINF_Block::*PROTOCOL_ID_NMEA*)
+        ((= const 1) 'ublox_msgs::CfgINF_Block::*INF_MSG_ERROR*)
+        ((= const 2) 'ublox_msgs::CfgINF_Block::*INF_MSG_WARNING*)
+        ((= const 4) 'ublox_msgs::CfgINF_Block::*INF_MSG_NOTICE*)
+        ((= const 8) 'ublox_msgs::CfgINF_Block::*INF_MSG_TEST*)
+        ((= const 16) 'ublox_msgs::CfgINF_Block::*INF_MSG_DEBUG*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgINF_Block
   :super ros::object
   :slots (_protocolID _reserved1 _infMsgMask ))

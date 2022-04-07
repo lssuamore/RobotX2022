@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::CFGMSG"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::CFGMSG"))
 (defconstant ublox_msgs::CfgMSG::*MESSAGE_ID* 1)
+
+(defun ublox_msgs::CfgMSG-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgMSG::*CLASS_ID*)
+        ((= const 1) 'ublox_msgs::CfgMSG::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgMSG
   :super ros::object
   :slots (_msgClass _msgID _rate ))

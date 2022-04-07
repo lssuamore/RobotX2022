@@ -24,6 +24,15 @@
 (intern "*DGPS_CORRECTION_PR_PRR*" (find-package "UBLOX_MSGS::NAVDGPS"))
 (shadow '*DGPS_CORRECTION_PR_PRR* (find-package "UBLOX_MSGS::NAVDGPS"))
 (defconstant ublox_msgs::NavDGPS::*DGPS_CORRECTION_PR_PRR* 1)
+
+(defun ublox_msgs::NavDGPS-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavDGPS::*CLASS_ID*)
+        ((= const 49) 'ublox_msgs::NavDGPS::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::NavDGPS::*DGPS_CORRECTION_NONE*)
+        ((= const 1) 'ublox_msgs::NavDGPS::*DGPS_CORRECTION_PR_PRR*)
+        (t nil)))
+
 (defclass ublox_msgs::NavDGPS
   :super ros::object
   :slots (_iTOW _age _baseId _baseHealth _numCh _status _reserved1 _sv ))
@@ -38,7 +47,7 @@
     ((:numCh __numCh) 0)
     ((:status __status) 0)
     ((:reserved1 __reserved1) 0)
-    ((:sv __sv) (let (r) (dotimes (i 0) (push (instance ublox_msgs::NavDGPS_SV :init) r)) r))
+    ((:sv __sv) ())
     )
    (send-super :init)
    (setq _iTOW (round __iTOW))

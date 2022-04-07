@@ -116,16 +116,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsFixedSize< ::amore::usv_pose_msg_<ContainerAllocator> >
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::amore::usv_pose_msg_<ContainerAllocator> const>
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
 struct IsMessage< ::amore::usv_pose_msg_<ContainerAllocator> >
   : TrueType
   { };
@@ -133,6 +123,16 @@ struct IsMessage< ::amore::usv_pose_msg_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsMessage< ::amore::usv_pose_msg_<ContainerAllocator> const>
   : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::amore::usv_pose_msg_<ContainerAllocator> >
+  : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::amore::usv_pose_msg_<ContainerAllocator> const>
+  : FalseType
   { };
 
 template <class ContainerAllocator>

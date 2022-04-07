@@ -94,16 +94,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsFixedSize< ::rtcm_msgs::Message_<ContainerAllocator> >
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::rtcm_msgs::Message_<ContainerAllocator> const>
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
 struct IsMessage< ::rtcm_msgs::Message_<ContainerAllocator> >
   : TrueType
   { };
@@ -111,6 +101,16 @@ struct IsMessage< ::rtcm_msgs::Message_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsMessage< ::rtcm_msgs::Message_<ContainerAllocator> const>
   : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::rtcm_msgs::Message_<ContainerAllocator> >
+  : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::rtcm_msgs::Message_<ContainerAllocator> const>
+  : FalseType
   { };
 
 template <class ContainerAllocator>

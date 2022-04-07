@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::CFGINF"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::CFGINF"))
 (defconstant ublox_msgs::CfgINF::*MESSAGE_ID* 2)
+
+(defun ublox_msgs::CfgINF-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgINF::*CLASS_ID*)
+        ((= const 2) 'ublox_msgs::CfgINF::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgINF
   :super ros::object
   :slots (_blocks ))
@@ -25,7 +32,7 @@
 (defmethod ublox_msgs::CfgINF
   (:init
    (&key
-    ((:blocks __blocks) (let (r) (dotimes (i 0) (push (instance ublox_msgs::CfgINF_Block :init) r)) r))
+    ((:blocks __blocks) ())
     )
    (send-super :init)
    (setq _blocks __blocks)

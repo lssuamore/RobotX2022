@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::RXMSVSI"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::RXMSVSI"))
 (defconstant ublox_msgs::RxmSVSI::*MESSAGE_ID* 32)
+
+(defun ublox_msgs::RxmSVSI-to-symbol (const)
+  (cond
+        ((= const 2) 'ublox_msgs::RxmSVSI::*CLASS_ID*)
+        ((= const 32) 'ublox_msgs::RxmSVSI::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::RxmSVSI
   :super ros::object
   :slots (_iTOW _week _numVis _numSV _sv ))
@@ -29,7 +36,7 @@
     ((:week __week) 0)
     ((:numVis __numVis) 0)
     ((:numSV __numSV) 0)
-    ((:sv __sv) (let (r) (dotimes (i 0) (push (instance ublox_msgs::RxmSVSI_SV :init) r)) r))
+    ((:sv __sv) ())
     )
    (send-super :init)
    (setq _iTOW (round __iTOW))

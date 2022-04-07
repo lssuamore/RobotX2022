@@ -33,6 +33,18 @@
 (intern "*TIME_REF_GALILEO*" (find-package "UBLOX_MSGS::CFGRATE"))
 (shadow '*TIME_REF_GALILEO* (find-package "UBLOX_MSGS::CFGRATE"))
 (defconstant ublox_msgs::CfgRATE::*TIME_REF_GALILEO* 4)
+
+(defun ublox_msgs::CfgRATE-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgRATE::*CLASS_ID*)
+        ((= const 8) 'ublox_msgs::CfgRATE::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::CfgRATE::*TIME_REF_UTC*)
+        ((= const 1) 'ublox_msgs::CfgRATE::*TIME_REF_GPS*)
+        ((= const 2) 'ublox_msgs::CfgRATE::*TIME_REF_GLONASS*)
+        ((= const 3) 'ublox_msgs::CfgRATE::*TIME_REF_BEIDOU*)
+        ((= const 4) 'ublox_msgs::CfgRATE::*TIME_REF_GALILEO*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgRATE
   :super ros::object
   :slots (_measRate _navRate _timeRef ))

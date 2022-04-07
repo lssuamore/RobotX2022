@@ -15,6 +15,12 @@
 (intern "*CLASS_ID*" (find-package "UBLOX_MSGS::INF"))
 (shadow '*CLASS_ID* (find-package "UBLOX_MSGS::INF"))
 (defconstant ublox_msgs::Inf::*CLASS_ID* 4)
+
+(defun ublox_msgs::Inf-to-symbol (const)
+  (cond
+        ((= const 4) 'ublox_msgs::Inf::*CLASS_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::Inf
   :super ros::object
   :slots (_str ))

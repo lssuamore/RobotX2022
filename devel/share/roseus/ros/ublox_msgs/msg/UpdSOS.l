@@ -24,6 +24,15 @@
 (intern "*CMD_FLASH_BACKUP_CLEAR*" (find-package "UBLOX_MSGS::UPDSOS"))
 (shadow '*CMD_FLASH_BACKUP_CLEAR* (find-package "UBLOX_MSGS::UPDSOS"))
 (defconstant ublox_msgs::UpdSOS::*CMD_FLASH_BACKUP_CLEAR* 1)
+
+(defun ublox_msgs::UpdSOS-to-symbol (const)
+  (cond
+        ((= const 9) 'ublox_msgs::UpdSOS::*CLASS_ID*)
+        ((= const 20) 'ublox_msgs::UpdSOS::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::UpdSOS::*CMD_FLASH_BACKUP_CREATE*)
+        ((= const 1) 'ublox_msgs::UpdSOS::*CMD_FLASH_BACKUP_CLEAR*)
+        (t nil)))
+
 (defclass ublox_msgs::UpdSOS
   :super ros::object
   :slots (_cmd _reserved1 ))

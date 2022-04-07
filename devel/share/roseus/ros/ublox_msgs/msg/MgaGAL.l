@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::MGAGAL"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::MGAGAL"))
 (defconstant ublox_msgs::MgaGAL::*MESSAGE_ID* 2)
+
+(defun ublox_msgs::MgaGAL-to-symbol (const)
+  (cond
+        ((= const 19) 'ublox_msgs::MgaGAL::*CLASS_ID*)
+        ((= const 2) 'ublox_msgs::MgaGAL::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::MgaGAL
   :super ros::object
   :slots (_type _version _svid _reserved0 _iodNav _deltaN _m0 _e _sqrtA _omega0 _i0 _omega _omegaDot _iDot _cuc _cus _crc _crs _cic _cis _toe _af0 _af1 _af2 _sisaindexE1E5b _toc _bgdE1E5b _reserved1 _healthE1B _dataValidityE1B _healthE5b _dataValidityE5b _reserved2 ))

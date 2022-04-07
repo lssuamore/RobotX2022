@@ -42,6 +42,21 @@
 (intern "*SYSTEM_RESTORED_RESPONSE_NOT_RESTORED*" (find-package "UBLOX_MSGS::UPDSOS_ACK"))
 (shadow '*SYSTEM_RESTORED_RESPONSE_NOT_RESTORED* (find-package "UBLOX_MSGS::UPDSOS_ACK"))
 (defconstant ublox_msgs::UpdSOS_Ack::*SYSTEM_RESTORED_RESPONSE_NOT_RESTORED* 3)
+
+(defun ublox_msgs::UpdSOS_Ack-to-symbol (const)
+  (cond
+        ((= const 9) 'ublox_msgs::UpdSOS_Ack::*CLASS_ID*)
+        ((= const 20) 'ublox_msgs::UpdSOS_Ack::*MESSAGE_ID*)
+        ((= const 2) 'ublox_msgs::UpdSOS_Ack::*CMD_BACKUP_CREATE_ACK*)
+        ((= const 3) 'ublox_msgs::UpdSOS_Ack::*CMD_SYSTEM_RESTORED*)
+        ((= const 0) 'ublox_msgs::UpdSOS_Ack::*BACKUP_CREATE_NACK*)
+        ((= const 1) 'ublox_msgs::UpdSOS_Ack::*BACKUP_CREATE_ACK*)
+        ((= const 0) 'ublox_msgs::UpdSOS_Ack::*SYSTEM_RESTORED_RESPONSE_UNKNOWN*)
+        ((= const 1) 'ublox_msgs::UpdSOS_Ack::*SYSTEM_RESTORED_RESPONSE_FAILED*)
+        ((= const 2) 'ublox_msgs::UpdSOS_Ack::*SYSTEM_RESTORED_RESPONSE_RESTORED*)
+        ((= const 3) 'ublox_msgs::UpdSOS_Ack::*SYSTEM_RESTORED_RESPONSE_NOT_RESTORED*)
+        (t nil)))
+
 (defclass ublox_msgs::UpdSOS_Ack
   :super ros::object
   :slots (_cmd _reserved0 _response _reserved1 ))

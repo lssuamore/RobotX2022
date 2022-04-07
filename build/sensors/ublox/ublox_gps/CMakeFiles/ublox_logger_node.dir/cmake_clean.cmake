@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
+  "/home/taylor/RobotX2022/devel/lib/ublox_gps/ublox_logger"
+  "/home/taylor/RobotX2022/devel/lib/ublox_gps/ublox_logger.pdb"
   "CMakeFiles/ublox_logger_node.dir/src/logger_node_pa.cpp.o"
   "CMakeFiles/ublox_logger_node.dir/src/raw_data_pa.cpp.o"
-  "/home/amore/RobotX2022/devel/lib/ublox_gps/ublox_logger.pdb"
-  "/home/amore/RobotX2022/devel/lib/ublox_gps/ublox_logger"
 )
 
 # Per-language clean rules from dependency scanning.

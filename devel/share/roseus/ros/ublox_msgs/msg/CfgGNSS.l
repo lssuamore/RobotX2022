@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::CFGGNSS"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::CFGGNSS"))
 (defconstant ublox_msgs::CfgGNSS::*MESSAGE_ID* 62)
+
+(defun ublox_msgs::CfgGNSS-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgGNSS::*CLASS_ID*)
+        ((= const 62) 'ublox_msgs::CfgGNSS::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgGNSS
   :super ros::object
   :slots (_msgVer _numTrkChHw _numTrkChUse _numConfigBlocks _blocks ))
@@ -29,7 +36,7 @@
     ((:numTrkChHw __numTrkChHw) 0)
     ((:numTrkChUse __numTrkChUse) 0)
     ((:numConfigBlocks __numConfigBlocks) 0)
-    ((:blocks __blocks) (let (r) (dotimes (i 0) (push (instance ublox_msgs::CfgGNSS_Block :init) r)) r))
+    ((:blocks __blocks) ())
     )
    (send-super :init)
    (setq _msgVer (round __msgVer))

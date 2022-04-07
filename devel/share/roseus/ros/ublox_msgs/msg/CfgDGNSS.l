@@ -24,6 +24,15 @@
 (intern "*DGNSS_MODE_RTK_FIXED*" (find-package "UBLOX_MSGS::CFGDGNSS"))
 (shadow '*DGNSS_MODE_RTK_FIXED* (find-package "UBLOX_MSGS::CFGDGNSS"))
 (defconstant ublox_msgs::CfgDGNSS::*DGNSS_MODE_RTK_FIXED* 3)
+
+(defun ublox_msgs::CfgDGNSS-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgDGNSS::*CLASS_ID*)
+        ((= const 112) 'ublox_msgs::CfgDGNSS::*MESSAGE_ID*)
+        ((= const 2) 'ublox_msgs::CfgDGNSS::*DGNSS_MODE_RTK_FLOAT*)
+        ((= const 3) 'ublox_msgs::CfgDGNSS::*DGNSS_MODE_RTK_FIXED*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgDGNSS
   :super ros::object
   :slots (_dgnssMode _reserved0 ))

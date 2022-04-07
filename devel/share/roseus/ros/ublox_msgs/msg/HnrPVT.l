@@ -63,6 +63,28 @@
 (intern "*FLAGS_HEAD_VEH_VALID*" (find-package "UBLOX_MSGS::HNRPVT"))
 (shadow '*FLAGS_HEAD_VEH_VALID* (find-package "UBLOX_MSGS::HNRPVT"))
 (defconstant ublox_msgs::HnrPVT::*FLAGS_HEAD_VEH_VALID* 32)
+
+(defun ublox_msgs::HnrPVT-to-symbol (const)
+  (cond
+        ((= const 40) 'ublox_msgs::HnrPVT::*CLASS_ID*)
+        ((= const 0) 'ublox_msgs::HnrPVT::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::HnrPVT::*VALID_DATE*)
+        ((= const 2) 'ublox_msgs::HnrPVT::*VALID_TIME*)
+        ((= const 4) 'ublox_msgs::HnrPVT::*VALID_FULLY_RESOLVED*)
+        ((= const 8) 'ublox_msgs::HnrPVT::*VALID_MAG*)
+        ((= const 0) 'ublox_msgs::HnrPVT::*FIX_TYPE_NO_FIX*)
+        ((= const 1) 'ublox_msgs::HnrPVT::*FIX_TYPE_DEAD_RECKONING_ONLY*)
+        ((= const 2) 'ublox_msgs::HnrPVT::*FIX_TYPE_2D*)
+        ((= const 3) 'ublox_msgs::HnrPVT::*FIX_TYPE_3D*)
+        ((= const 4) 'ublox_msgs::HnrPVT::*FIX_TYPE_GPS_DEAD_RECKONING_COMBINED*)
+        ((= const 5) 'ublox_msgs::HnrPVT::*FIX_TYPE_TIME_ONLY*)
+        ((= const 1) 'ublox_msgs::HnrPVT::*FLAGS_GNSS_FIX_OK*)
+        ((= const 2) 'ublox_msgs::HnrPVT::*FLAGS_DIFF_SOLN*)
+        ((= const 4) 'ublox_msgs::HnrPVT::*FLAGS_WKN_SET*)
+        ((= const 8) 'ublox_msgs::HnrPVT::*FLAGS_TOW_SET*)
+        ((= const 32) 'ublox_msgs::HnrPVT::*FLAGS_HEAD_VEH_VALID*)
+        (t nil)))
+
 (defclass ublox_msgs::HnrPVT
   :super ros::object
   :slots (_iTOW _year _month _day _hour _min _sec _valid _nano _gpsFix _flags _reserved0 _lon _lat _height _hMSL _gSpeed _speed _headMot _headVeh _hAcc _vAcc _sAcc _headAcc _reserved1 ))

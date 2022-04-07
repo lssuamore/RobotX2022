@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::NAVHPPOSLLH"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::NAVHPPOSLLH"))
 (defconstant ublox_msgs::NavHPPOSLLH::*MESSAGE_ID* 20)
+
+(defun ublox_msgs::NavHPPOSLLH-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavHPPOSLLH::*CLASS_ID*)
+        ((= const 20) 'ublox_msgs::NavHPPOSLLH::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::NavHPPOSLLH
   :super ros::object
   :slots (_version _reserved1 _invalid_llh _iTOW _lon _lat _height _hMSL _lonHp _latHp _heightHp _hMSLHp _hAcc _vAcc ))

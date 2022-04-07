@@ -21,6 +21,14 @@
 (intern "*ACK_MESSAGE_ID*" (find-package "UBLOX_MSGS::ACK"))
 (shadow '*ACK_MESSAGE_ID* (find-package "UBLOX_MSGS::ACK"))
 (defconstant ublox_msgs::Ack::*ACK_MESSAGE_ID* 1)
+
+(defun ublox_msgs::Ack-to-symbol (const)
+  (cond
+        ((= const 5) 'ublox_msgs::Ack::*CLASS_ID*)
+        ((= const 0) 'ublox_msgs::Ack::*NACK_MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::Ack::*ACK_MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::Ack
   :super ros::object
   :slots (_clsID _msgID ))

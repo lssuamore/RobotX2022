@@ -59,8 +59,8 @@
    (&optional __remaining_time)
    (if __remaining_time (setq _remaining_time __remaining_time)) _remaining_time)
   (:timed_out
-   (&optional __timed_out)
-   (if __timed_out (setq _timed_out __timed_out)) _timed_out)
+   (&optional (__timed_out :null))
+   (if (not (eq __timed_out :null)) (setq _timed_out __timed_out)) _timed_out)
   (:num_collisions
    (&optional __num_collisions)
    (if __num_collisions (setq _num_collisions __num_collisions)) _num_collisions)

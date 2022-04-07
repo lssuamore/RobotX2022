@@ -57,6 +57,26 @@
 (intern "*UTC_STANDARD_UNKNOWN*" (find-package "UBLOX_MSGS::NAVTIMEUTC"))
 (shadow '*UTC_STANDARD_UNKNOWN* (find-package "UBLOX_MSGS::NAVTIMEUTC"))
 (defconstant ublox_msgs::NavTIMEUTC::*UTC_STANDARD_UNKNOWN* 240)
+
+(defun ublox_msgs::NavTIMEUTC-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavTIMEUTC::*CLASS_ID*)
+        ((= const 33) 'ublox_msgs::NavTIMEUTC::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::NavTIMEUTC::*VALID_TOW*)
+        ((= const 2) 'ublox_msgs::NavTIMEUTC::*VALID_WKN*)
+        ((= const 4) 'ublox_msgs::NavTIMEUTC::*VALID_UTC*)
+        ((= const 240) 'ublox_msgs::NavTIMEUTC::*VALID_UTC_STANDARD_MASK*)
+        ((= const 0) 'ublox_msgs::NavTIMEUTC::*UTC_STANDARD_NOT_AVAILABLE*)
+        ((= const 16) 'ublox_msgs::NavTIMEUTC::*UTC_STANDARD_CRL*)
+        ((= const 32) 'ublox_msgs::NavTIMEUTC::*UTC_STANDARD_NIST*)
+        ((= const 48) 'ublox_msgs::NavTIMEUTC::*UTC_STANDARD_USNO*)
+        ((= const 64) 'ublox_msgs::NavTIMEUTC::*UTC_STANDARD_BIPM*)
+        ((= const 80) 'ublox_msgs::NavTIMEUTC::*UTC_STANDARD_EL*)
+        ((= const 96) 'ublox_msgs::NavTIMEUTC::*UTC_STANDARD_SU*)
+        ((= const 112) 'ublox_msgs::NavTIMEUTC::*UTC_STANDARD_NTSC*)
+        ((= const 240) 'ublox_msgs::NavTIMEUTC::*UTC_STANDARD_UNKNOWN*)
+        (t nil)))
+
 (defclass ublox_msgs::NavTIMEUTC
   :super ros::object
   :slots (_iTOW _tAcc _nano _year _month _day _hour _min _sec _valid ))

@@ -18,6 +18,13 @@
 (intern "*MESSAGE_ID*" (find-package "UBLOX_MSGS::NAVCLOCK"))
 (shadow '*MESSAGE_ID* (find-package "UBLOX_MSGS::NAVCLOCK"))
 (defconstant ublox_msgs::NavCLOCK::*MESSAGE_ID* 34)
+
+(defun ublox_msgs::NavCLOCK-to-symbol (const)
+  (cond
+        ((= const 1) 'ublox_msgs::NavCLOCK::*CLASS_ID*)
+        ((= const 34) 'ublox_msgs::NavCLOCK::*MESSAGE_ID*)
+        (t nil)))
+
 (defclass ublox_msgs::NavCLOCK
   :super ros::object
   :slots (_iTOW _clkB _clkD _tAcc _fAcc ))

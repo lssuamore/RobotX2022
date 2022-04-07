@@ -33,6 +33,18 @@
 (intern "*AGE_EPH_MASK*" (find-package "UBLOX_MSGS::RXMSVSI_SV"))
 (shadow '*AGE_EPH_MASK* (find-package "UBLOX_MSGS::RXMSVSI_SV"))
 (defconstant ublox_msgs::RxmSVSI_SV::*AGE_EPH_MASK* 240)
+
+(defun ublox_msgs::RxmSVSI_SV-to-symbol (const)
+  (cond
+        ((= const 15) 'ublox_msgs::RxmSVSI_SV::*FLAG_URA_MASK*)
+        ((= const 16) 'ublox_msgs::RxmSVSI_SV::*FLAG_HEALTHY*)
+        ((= const 32) 'ublox_msgs::RxmSVSI_SV::*FLAG_EPH_VAL*)
+        ((= const 64) 'ublox_msgs::RxmSVSI_SV::*FLAG_ALM_VAL*)
+        ((= const 128) 'ublox_msgs::RxmSVSI_SV::*FLAG_NOT_AVAIL*)
+        ((= const 15) 'ublox_msgs::RxmSVSI_SV::*AGE_ALM_MASK*)
+        ((= const 240) 'ublox_msgs::RxmSVSI_SV::*AGE_EPH_MASK*)
+        (t nil)))
+
 (defclass ublox_msgs::RxmSVSI_SV
   :super ros::object
   :slots (_svid _svFlag _azim _elev _age ))

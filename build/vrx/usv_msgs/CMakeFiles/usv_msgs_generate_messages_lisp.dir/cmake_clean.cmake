@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
+  "/home/taylor/RobotX2022/devel/share/common-lisp/ros/usv_msgs/msg/RangeBearing.lisp"
   "CMakeFiles/usv_msgs_generate_messages_lisp"
-  "/home/amore/RobotX2022/devel/share/common-lisp/ros/usv_msgs/msg/RangeBearing.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

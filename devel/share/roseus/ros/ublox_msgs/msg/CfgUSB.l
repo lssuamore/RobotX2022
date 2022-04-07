@@ -24,6 +24,15 @@
 (intern "*FLAGS_POWER_MODE*" (find-package "UBLOX_MSGS::CFGUSB"))
 (shadow '*FLAGS_POWER_MODE* (find-package "UBLOX_MSGS::CFGUSB"))
 (defconstant ublox_msgs::CfgUSB::*FLAGS_POWER_MODE* 2)
+
+(defun ublox_msgs::CfgUSB-to-symbol (const)
+  (cond
+        ((= const 6) 'ublox_msgs::CfgUSB::*CLASS_ID*)
+        ((= const 27) 'ublox_msgs::CfgUSB::*MESSAGE_ID*)
+        ((= const 0) 'ublox_msgs::CfgUSB::*FLAGS_RE_ENUM*)
+        ((= const 2) 'ublox_msgs::CfgUSB::*FLAGS_POWER_MODE*)
+        (t nil)))
+
 (defclass ublox_msgs::CfgUSB
   :super ros::object
   :slots (_vendorID _productID _reserved1 _reserved2 _powerConsumption _flags _vendorString _productString _serialNumber ))

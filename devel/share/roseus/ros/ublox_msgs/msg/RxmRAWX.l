@@ -24,6 +24,15 @@
 (intern "*REC_STAT_CLK_RESET*" (find-package "UBLOX_MSGS::RXMRAWX"))
 (shadow '*REC_STAT_CLK_RESET* (find-package "UBLOX_MSGS::RXMRAWX"))
 (defconstant ublox_msgs::RxmRAWX::*REC_STAT_CLK_RESET* 2)
+
+(defun ublox_msgs::RxmRAWX-to-symbol (const)
+  (cond
+        ((= const 2) 'ublox_msgs::RxmRAWX::*CLASS_ID*)
+        ((= const 21) 'ublox_msgs::RxmRAWX::*MESSAGE_ID*)
+        ((= const 1) 'ublox_msgs::RxmRAWX::*REC_STAT_LEAP_SEC*)
+        ((= const 2) 'ublox_msgs::RxmRAWX::*REC_STAT_CLK_RESET*)
+        (t nil)))
+
 (defclass ublox_msgs::RxmRAWX
   :super ros::object
   :slots (_rcvTOW _week _leapS _numMeas _recStat _version _reserved1 _meas ))
@@ -38,7 +47,7 @@
     ((:recStat __recStat) 0)
     ((:version __version) 0)
     ((:reserved1 __reserved1) (make-array 2 :initial-element 0 :element-type :char))
-    ((:meas __meas) (let (r) (dotimes (i 0) (push (instance ublox_msgs::RxmRAWX_Meas :init) r)) r))
+    ((:meas __meas) ())
     )
    (send-super :init)
    (setq _rcvTOW (float __rcvTOW))

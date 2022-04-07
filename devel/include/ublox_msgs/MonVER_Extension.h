@@ -89,22 +89,22 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsFixedSize< ::ublox_msgs::MonVER_Extension_<ContainerAllocator> >
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::ublox_msgs::MonVER_Extension_<ContainerAllocator> const>
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
 struct IsMessage< ::ublox_msgs::MonVER_Extension_<ContainerAllocator> >
   : TrueType
   { };
 
 template <class ContainerAllocator>
 struct IsMessage< ::ublox_msgs::MonVER_Extension_<ContainerAllocator> const>
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::ublox_msgs::MonVER_Extension_<ContainerAllocator> >
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::ublox_msgs::MonVER_Extension_<ContainerAllocator> const>
   : TrueType
   { };
 
