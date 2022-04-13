@@ -59,6 +59,7 @@ all: sensors/ublox/ublox/all
 all: vrx/usv_msgs/all
 all: amore/all
 all: jetson/all
+all: sensors/sparton_AHRSM2/core_sparton/all
 all: sensors/sparton_ahrs8_driver/all
 all: geonav_transform/all
 all: sensors/ublox/ublox_serialization/all
@@ -82,6 +83,7 @@ preinstall: sensors/ublox/ublox/preinstall
 preinstall: vrx/usv_msgs/preinstall
 preinstall: amore/preinstall
 preinstall: jetson/preinstall
+preinstall: sensors/sparton_AHRSM2/core_sparton/preinstall
 preinstall: sensors/sparton_ahrs8_driver/preinstall
 preinstall: geonav_transform/preinstall
 preinstall: sensors/ublox/ublox_serialization/preinstall
@@ -110,6 +112,7 @@ clean: sensors/ublox/ublox/clean
 clean: vrx/usv_msgs/clean
 clean: amore/clean
 clean: jetson/clean
+clean: sensors/sparton_AHRSM2/core_sparton/clean
 clean: sensors/sparton_ahrs8_driver/clean
 clean: geonav_transform/clean
 clean: sensors/ublox/ublox_serialization/clean
@@ -405,6 +408,24 @@ sensors/rtcm_msgs/clean: sensors/rtcm_msgs/CMakeFiles/rtcm_msgs_geneus.dir/clean
 sensors/rtcm_msgs/clean: sensors/rtcm_msgs/CMakeFiles/rtcm_msgs_generate_messages_lisp.dir/clean
 
 .PHONY : sensors/rtcm_msgs/clean
+
+#=============================================================================
+# Directory level rules for directory sensors/sparton_AHRSM2/core_sparton
+
+# Recursive "all" directory target.
+sensors/sparton_AHRSM2/core_sparton/all:
+
+.PHONY : sensors/sparton_AHRSM2/core_sparton/all
+
+# Recursive "preinstall" directory target.
+sensors/sparton_AHRSM2/core_sparton/preinstall:
+
+.PHONY : sensors/sparton_AHRSM2/core_sparton/preinstall
+
+# Recursive "clean" directory target.
+sensors/sparton_AHRSM2/core_sparton/clean:
+
+.PHONY : sensors/sparton_AHRSM2/core_sparton/clean
 
 #=============================================================================
 # Directory level rules for directory sensors/sparton_ahrs8_driver

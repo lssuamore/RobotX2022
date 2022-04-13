@@ -56,7 +56,7 @@ include vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/progress.ma
 vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen: vrx/vrx_gazebo/msgs/dock_placard.pb.cc
 vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen: vrx/vrx_gazebo/msgs/dock_placard.pb.h
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target dock_placard_msgs"
-	cd /home/taylor/RobotX2022/build/vrx/vrx_gazebo/msgs && /usr/bin/cmake -E cmake_autogen /home/taylor/RobotX2022/build/vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/AutogenInfo.json ""
+	cd /home/taylor/RobotX2022/build/vrx/vrx_gazebo/msgs && /usr/bin/cmake -E cmake_autogen /home/taylor/RobotX2022/build/vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/AutogenInfo.json Release
 
 vrx/vrx_gazebo/msgs/dock_placard.pb.h: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/msgs/dock_placard.proto
 vrx/vrx_gazebo/msgs/dock_placard.pb.h: /usr/bin/protoc

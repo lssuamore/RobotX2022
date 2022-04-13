@@ -3,13 +3,13 @@
 
 # compile C with /usr/bin/cc
 # compile CXX with /usr/bin/c++
-C_FLAGS =  
+C_FLAGS = -O3 -DNDEBUG  
 
 C_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"ublox_gps\"
 
 C_INCLUDES = -I/home/taylor/RobotX2022/src/sensors/ublox/ublox_gps/include -I/home/taylor/RobotX2022/devel/include -I/home/taylor/RobotX2022/src/sensors/ublox/ublox_msgs/include -I/home/taylor/RobotX2022/src/sensors/ublox/ublox_serialization/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp 
 
-CXX_FLAGS =  -std=c++11 -pthread  
+CXX_FLAGS =  -std=c++11 -pthread -O3 -DNDEBUG  
 
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"ublox_gps\"
 

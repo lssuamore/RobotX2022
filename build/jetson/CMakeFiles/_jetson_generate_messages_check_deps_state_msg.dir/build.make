@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/taylor/RobotX2022/build
 include jetson/CMakeFiles/_jetson_generate_messages_check_deps_state_msg.dir/progress.make
 
 jetson/CMakeFiles/_jetson_generate_messages_check_deps_state_msg:
-	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py jetson /home/taylor/RobotX2022/src/jetson/msg/state_msg.msg std_msgs/Int32:std_msgs/Header
+	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py jetson /home/taylor/RobotX2022/src/jetson/msg/state_msg.msg std_msgs/Header:std_msgs/Int32
 
 _jetson_generate_messages_check_deps_state_msg: jetson/CMakeFiles/_jetson_generate_messages_check_deps_state_msg
 _jetson_generate_messages_check_deps_state_msg: jetson/CMakeFiles/_jetson_generate_messages_check_deps_state_msg.dir/build.make

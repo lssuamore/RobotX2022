@@ -1,0 +1,8 @@
+prefix=/home/taylor/RobotX2022/install
+
+Name: core_sparton
+Description: Description of core_sparton
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -56,7 +56,7 @@ include vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen.dir/progre
 vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen: vrx/vrx_gazebo/msgs/light_buoy_colors.pb.cc
 vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen: vrx/vrx_gazebo/msgs/light_buoy_colors.pb.h
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target light_buoy_colors_msgs"
-	cd /home/taylor/RobotX2022/build/vrx/vrx_gazebo/msgs && /usr/bin/cmake -E cmake_autogen /home/taylor/RobotX2022/build/vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen.dir/AutogenInfo.json ""
+	cd /home/taylor/RobotX2022/build/vrx/vrx_gazebo/msgs && /usr/bin/cmake -E cmake_autogen /home/taylor/RobotX2022/build/vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen.dir/AutogenInfo.json Release
 
 vrx/vrx_gazebo/msgs/light_buoy_colors.pb.h: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/msgs/light_buoy_colors.proto
 vrx/vrx_gazebo/msgs/light_buoy_colors.pb.h: /usr/bin/protoc

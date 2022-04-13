@@ -55,7 +55,7 @@ include vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/progress.make
 
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target scoring_plugin"
-	cd /home/taylor/RobotX2022/build/vrx/vrx_gazebo && /usr/bin/cmake -E cmake_autogen /home/taylor/RobotX2022/build/vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/AutogenInfo.json ""
+	cd /home/taylor/RobotX2022/build/vrx/vrx_gazebo && /usr/bin/cmake -E cmake_autogen /home/taylor/RobotX2022/build/vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/AutogenInfo.json Release
 
 scoring_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen
 scoring_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/build.make

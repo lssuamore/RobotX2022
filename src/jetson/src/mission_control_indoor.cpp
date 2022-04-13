@@ -3,7 +3,7 @@
 //  Last Revision Date:							04/04/2022
 //  Author(s) [email]:								Bradley Hacker [bhacker@lssu.edu]
 //  Revisor(s) [email] {Revision Date}:	Bradley Hacker [bhacker@lssu.edu] {03/28/2022}
-//  Organization/Institution:					Lake Superior State University - Team AMORE
+//  Organization/Institution:					Lake Superior State University - Team jetson
 // 
 // ...............................About mission_control.cpp......................................
 //  This code acts as the autonomous state machine of the WAM-V USV.
@@ -27,10 +27,10 @@
 #include "math.h"
 #include "stdio.h"
 #include "nav_msgs/Odometry.h"
-#include "amore/state_msg.h"						// message type used to communicate state for rudimentary codes
+#include "jetson/state_msg.h"						// message type used to communicate state for rudimentary codes
 #include "std_msgs/Bool.h"
-#include "amore/usv_pose_msg.h"				// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
-#include "amore/NED_waypoints.h"				// message that holds array of converted WF goal waypoints w/ headings and number of waypoints
+#include "jetson/usv_pose_msg.h"				// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
+#include "jetson/NED_waypoints.h"				// message that holds array of converted WF goal waypoints w/ headings and number of waypoints
 #include "jetson/task_info.h"				//taks name and state
 //...........................................End of Included Libraries and Message Types....................................
 
@@ -42,7 +42,6 @@
 
 //..............................................................Global Variables............................................................
 int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
-int loop_goal_recieved;         								// this is kept in order to ensure planner doesn't start controller until the goal is published
 
 float x_goal, y_goal, psi_goal;	// arrays to hold the NED goal poses
 float x_usv_NED, y_usv_NED, psi_NED; 		// vehicle position and heading (pose) in NED
@@ -70,13 +69,13 @@ bool navigation_array_initialized = false;							// navigation_array_initialized
 bool propulsion_system_initialized = false;						// propulsion_system_initialized = false means propulsion_system is not initialized
 bool mission_control_initialized = false;							// mission_control_initialized = false means the mission_control is not initialized
 
-amore::usv_pose_msg current_goal_pose_msg;			// "current_goal_pose" message
+jetson::usv_pose_msg current_goal_pose_msg;			// "current_goal_pose" message
 ros::Publisher current_goal_pose_pub;							// "current_goal_pose" publisher
 
-amore::state_msg propulsion_system_state;					// "ps_state" message
+jetson::state_msg propulsion_system_state;					// "ps_state" message
 ros::Publisher ps_state_pub;												// "ps_state" publisher
 
-amore::state_msg navigation_array_state;						// "na_state" message
+jetson::state_msg navigation_array_state;						// "na_state" message
 ros::Publisher na_state_pub;												// "na_state" publisher
 
 ros::Time current_time, last_time;									// creates time variables
@@ -153,6 +152,27 @@ void goal_publish_state_update(const std_msgs::Bool status)
 		//ROS_INFO("WF POINT CONVERTER NOT FINISHED");
 	} // if (status.data)
 } // END OF goal_publish_state_update()
+
+// THIS FUNCTION: Updates the goal NED waypoints converted through the navigation_array
+// ACCEPTS: Goal NED waypoints from "waypoints_NED"
+// RETURNS: (VOID)
+// =============================================================================
+void goal_NED_waypoints_update(const jetson::NED_waypoints::ConstPtr& goal) 
+{
+	if ((mission_control_initialized) && (MC_state == 0))							// if the system is initialized and task 2: wayfinding
+	{
+		if ((NED_waypoints_published) && (!NED_waypoints_recieved))	// if the NED goal waypoints have been published but not recieved yet
+		{
+			x_goal = goal->points[0].x;
+			y_goal = goal->points[0].y;
+			psi_goal = goal->points[0].z;
+			NED_waypoints_recieved = true;
+			
+			// UPDATES STATUSES TO USER ///////////////////////////////////////////////
+			ROS_INFO("GOAL POSES ACQUIRED BY PLANNER. --MC");
+		} // if ((NED_waypoints_published) && (!NED_waypoints_recieved))
+	}
+} // END OF goal_NED_waypoints_update() 
 
 // THIS FUNCTION: Updates the current NED USV pose converted through the navigation_array
 // ACCEPTS: Current NED USV pose and velocities from "nav_ned"
@@ -326,19 +346,20 @@ int main(int argc, char **argv)
   ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
   
   // NodeHandles
-  ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8;
+  ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9;
   
   // Subscribers
   ros::Subscriber task_status_sub = nh1.subscribe("task_info", 1, state_update);																				// VRX task topic
   ros::Subscriber NA_initialization_state_sub = nh2.subscribe("na_initialization_state", 1, NAVIGATION_ARRAY_inspector);		// initialization status of navigation_array
   ros::Subscriber PS_initialization_state_sub = nh3.subscribe("ps_initialization_state", 1, PROPULSION_SYSTEM_inspector);		// initialization status of propulsion_system
   ros::Subscriber nav_NED_sub = nh4.subscribe("nav_ned", 1, pose_update);																						// current USV pose converted to NED
-  ros::Subscriber goal_publish_state_sub = nh5.subscribe("goal_publish_state", 1, goal_publish_state_update);								// whether or not goal waypoints have been converted yet
+  ros::Subscriber goal_publish_state_sub = nh5.subscribe("goal_publish_state", 1, goal_publish_state_update);								// whether or not goal waypoints have been converted yet 
+  ros::Subscriber waypoints_NED_sub = nh9.subscribe("waypoints_ned", 1, goal_NED_waypoints_update);									// goal waypoints converted to NED
   
   // Publishers
-  current_goal_pose_pub = nh6.advertise<amore::usv_pose_msg>("current_goal_pose", 1);								// current goal for low level controller (propulsion_system)
-  ps_state_pub = nh7.advertise<amore::state_msg>("ps_state", 1);																		// current propulsion_system state
-  na_state_pub = nh8.advertise<amore::state_msg>("na_state", 1);																// current navigation_array state
+  current_goal_pose_pub = nh6.advertise<jetson::usv_pose_msg>("current_goal_pose", 1);								// current goal for low level controller (propulsion_system)
+  ps_state_pub = nh7.advertise<jetson::state_msg>("ps_state", 1);																		// current propulsion_system state
+  na_state_pub = nh8.advertise<jetson::state_msg>("na_state", 1);																// current navigation_array state
   
   /* // initialize header sequences
   propulsion_system_state.header.seq = 0;
@@ -365,8 +386,6 @@ int main(int argc, char **argv)
 	  
 	  if ((MC_state == 1) || (MC_state == 2))	// TASK 1: STATION_KEEPING OR TASK 2: WAYFINDING
 	  {
-		  if (loop_count > loop_goal_recieved)
-		  {
 			  if ((MC_state == 2) && (PS_state == 1))
 			  {
 				  // determine error in x and y (position)
@@ -389,7 +408,6 @@ int main(int argc, char **argv)
 				  }
 			  } // if ((MC_state == 2) && (PS_state == 1))
 			  current_goal_pose_publish();
-		  } // if (loop_count > loop_goal_recieved)
 	  } // if ((MC_state == 1) || (MC_state == 2))
 	  
 	  ros::spinOnce();
