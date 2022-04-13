@@ -27,9 +27,9 @@
 #include "math.h"
 #include "stdio.h"
 #include "nav_msgs/Odometry.h"
-#include "amore/state_msg.h"												// message type used to communicate state for rudimentary codes
+#include "jetson/state_msg.h"												// message type used to communicate state for rudimentary codes
 #include "std_msgs/Bool.h"
-#include "amore/usv_pose_msg.h"										// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
+#include "jetson/usv_pose_msg.h"										// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
 #include "std_msgs/Float32.h"												// thruster commands
 //...........................................End of Included Libraries and Message Types....................................
 
@@ -151,7 +151,7 @@ void PROPULSION_SYSTEM_inspector()
 // ACCEPTS: state_msg from "ps_state"
 // RETURNS: (VOID)
 // =============================================================================
-void state_update(const amore::state_msg::ConstPtr& msg) 
+void state_update(const jetson::state_msg::ConstPtr& msg) 
 {
 	// do not start anything until subscribers to sensor data are initialized
 	if (ps_initialization_status.data)
@@ -164,7 +164,7 @@ void state_update(const amore::state_msg::ConstPtr& msg)
 // ACCEPTS: usv_pose_msg from "current_goal_pose"
 // RETURNS: (VOID)
 // =============================================================================
-void goal_pose_update(const amore::usv_pose_msg::ConstPtr& goal) 
+void goal_pose_update(const jetson::usv_pose_msg::ConstPtr& goal) 
 {
 	if (PS_state == 1)						// if the propulsion_system is ON
 	{												// update NED goal position and orientation
@@ -237,7 +237,7 @@ int main(int argc, char **argv)
   // Subscribers
   ros::Subscriber ps_state_sub = nh1.subscribe("ps_state", 1, state_update);																// current position converted to NED
   ros::Subscriber nav_NED_sub = nh2.subscribe("nav_ned", 1, pose_update);															// current pose converted to NED
-  ros::Subscriber current_goal_pose_sub = nh3.subscribe("current_goal_pose", 1, goal_pose_update);				// goal pose given by path planners
+  ros::Subscriber current_goal_pose_sub = nh3.subscribe("current_goal_pose", 1, goal_pose_update);				// goal pose given by user
   
   // Publishers
   ps_initialization_state_pub = nh6.advertise<std_msgs::Bool>("ps_initialization_state", 1);										// state of initialization

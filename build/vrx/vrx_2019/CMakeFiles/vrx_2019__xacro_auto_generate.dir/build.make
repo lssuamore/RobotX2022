@@ -66,8 +66,8 @@ vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate: vrx/vrx_2019/worlds/wind_
 
 
 vrx/vrx_2019/worlds/dock.world: /home/taylor/RobotX2022/src/vrx/vrx_2019/worlds/dock.world.xacro
-vrx/vrx_2019/worlds/dock.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_2019/worlds/dock.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
+vrx/vrx_2019/worlds/dock.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_2019/worlds/dock.world: /home/taylor/RobotX2022/src/vrx/vrx_2019/worlds/sandisland.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "xacro: generating worlds/dock.world from worlds/dock.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_2019 && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_2019/worlds/dock.world worlds/dock.world.xacro
@@ -80,9 +80,9 @@ vrx/vrx_2019/worlds/example_course.world: /home/taylor/RobotX2022/src/vrx/wave_g
 	cd /home/taylor/RobotX2022/src/vrx/vrx_2019 && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_2019/worlds/example_course.world worlds/example_course.world.xacro
 
 vrx/vrx_2019/worlds/navigation_task.world: /home/taylor/RobotX2022/src/vrx/vrx_2019/worlds/navigation_task.world.xacro
-vrx/vrx_2019/worlds/navigation_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
-vrx/vrx_2019/worlds/navigation_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_2019/worlds/navigation_task.world: /home/taylor/RobotX2022/src/vrx/vrx_2019/worlds/sandisland.xacro
+vrx/vrx_2019/worlds/navigation_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/vrx_2019/worlds/navigation_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "xacro: generating worlds/navigation_task.world from worlds/navigation_task.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_2019 && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_2019/worlds/navigation_task.world worlds/navigation_task.world.xacro
 
@@ -92,15 +92,15 @@ vrx/vrx_2019/worlds/ocean.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/wor
 	cd /home/taylor/RobotX2022/src/vrx/vrx_2019 && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_2019/worlds/ocean.world worlds/ocean.world.xacro
 
 vrx/vrx_2019/worlds/perception_task.world: /home/taylor/RobotX2022/src/vrx/vrx_2019/worlds/perception_task.world.xacro
-vrx/vrx_2019/worlds/perception_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_2019/worlds/perception_task.world: /home/taylor/RobotX2022/src/vrx/vrx_2019/worlds/sandisland.xacro
+vrx/vrx_2019/worlds/perception_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "xacro: generating worlds/perception_task.world from worlds/perception_task.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_2019 && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_2019/worlds/perception_task.world worlds/perception_task.world.xacro
 
 vrx/vrx_2019/worlds/sandisland.world: /home/taylor/RobotX2022/src/vrx/vrx_2019/worlds/sandisland.world.xacro
-vrx/vrx_2019/worlds/sandisland.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_2019/worlds/sandisland.world: /home/taylor/RobotX2022/src/vrx/vrx_2019/worlds/sandisland.xacro
 vrx/vrx_2019/worlds/sandisland.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
+vrx/vrx_2019/worlds/sandisland.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "xacro: generating worlds/sandisland.world from worlds/sandisland.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_2019 && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_2019/worlds/sandisland.world worlds/sandisland.world.xacro
 
@@ -119,9 +119,9 @@ vrx/vrx_2019/worlds/stationkeeping_task.world: /home/taylor/RobotX2022/src/vrx/v
 	cd /home/taylor/RobotX2022/src/vrx/vrx_2019 && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_2019/worlds/stationkeeping_task.world worlds/stationkeeping_task.world.xacro
 
 vrx/vrx_2019/worlds/wayfinding_task.world: /home/taylor/RobotX2022/src/vrx/vrx_2019/worlds/wayfinding_task.world.xacro
-vrx/vrx_2019/worlds/wayfinding_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_2019/worlds/wayfinding_task.world: /home/taylor/RobotX2022/src/vrx/vrx_2019/worlds/sandisland.xacro
 vrx/vrx_2019/worlds/wayfinding_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
+vrx/vrx_2019/worlds/wayfinding_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "xacro: generating worlds/wayfinding_task.world from worlds/wayfinding_task.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_2019 && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_2019/worlds/wayfinding_task.world worlds/wayfinding_task.world.xacro
 

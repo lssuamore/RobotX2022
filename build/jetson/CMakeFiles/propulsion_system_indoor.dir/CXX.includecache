@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/taylor/RobotX2022/devel/include/amore/state_msg.h
+/home/taylor/RobotX2022/devel/include/jetson/state_msg.h
 string
 -
 vector
@@ -26,7 +26,7 @@ std_msgs/Header.h
 std_msgs/Int32.h
 -
 
-/home/taylor/RobotX2022/devel/include/amore/usv_pose_msg.h
+/home/taylor/RobotX2022/devel/include/jetson/usv_pose_msg.h
 string
 -
 vector
@@ -69,12 +69,12 @@ stdio.h
 /home/taylor/RobotX2022/src/jetson/src/stdio.h
 nav_msgs/Odometry.h
 /home/taylor/RobotX2022/src/jetson/src/nav_msgs/Odometry.h
-amore/state_msg.h
-/home/taylor/RobotX2022/src/jetson/src/amore/state_msg.h
+jetson/state_msg.h
+/home/taylor/RobotX2022/src/jetson/src/jetson/state_msg.h
 std_msgs/Bool.h
 /home/taylor/RobotX2022/src/jetson/src/std_msgs/Bool.h
-amore/usv_pose_msg.h
-/home/taylor/RobotX2022/src/jetson/src/amore/usv_pose_msg.h
+jetson/usv_pose_msg.h
+/home/taylor/RobotX2022/src/jetson/src/jetson/usv_pose_msg.h
 std_msgs/Float32.h
 /home/taylor/RobotX2022/src/jetson/src/std_msgs/Float32.h
 

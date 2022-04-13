@@ -67,16 +67,16 @@ jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/taylor/RobotX2022/devel
 
 /home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg
-/home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 /home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 /home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from jetson/usv_pose_msg.msg"
 	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg -Ijetson:/home/taylor/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg
 
 /home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js: /home/taylor/RobotX2022/src/jetson/msg/state_msg.msg
-/home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
 /home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from jetson/state_msg.msg"
 	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/taylor/RobotX2022/src/jetson/msg/state_msg.msg -Ijetson:/home/taylor/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/taylor/RobotX2022/devel/share/gennodejs/ros/jetson/msg
 

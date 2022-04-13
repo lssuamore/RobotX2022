@@ -24,12 +24,12 @@ add_custom_target(_jetson_generate_messages_check_deps_${_filename}
 
 get_filename_component(_filename "/home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
 add_custom_target(_jetson_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg" "std_msgs/Float64:std_msgs/Header:geometry_msgs/Point"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg" "std_msgs/Header:std_msgs/Float64:geometry_msgs/Point"
 )
 
 get_filename_component(_filename "/home/taylor/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
 add_custom_target(_jetson_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/taylor/RobotX2022/src/jetson/msg/state_msg.msg" "std_msgs/Int32:std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/taylor/RobotX2022/src/jetson/msg/state_msg.msg" "std_msgs/Header:std_msgs/Int32"
 )
 
 get_filename_component(_filename "/home/taylor/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
@@ -52,13 +52,13 @@ _generate_msg_cpp(jetson
 _generate_msg_cpp(jetson
   "/home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
 )
 _generate_msg_cpp(jetson
   "/home/taylor/RobotX2022/src/jetson/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
 )
 _generate_msg_cpp(jetson
@@ -109,13 +109,13 @@ _generate_msg_eus(jetson
 _generate_msg_eus(jetson
   "/home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
 )
 _generate_msg_eus(jetson
   "/home/taylor/RobotX2022/src/jetson/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
 )
 _generate_msg_eus(jetson
@@ -166,13 +166,13 @@ _generate_msg_lisp(jetson
 _generate_msg_lisp(jetson
   "/home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
 )
 _generate_msg_lisp(jetson
   "/home/taylor/RobotX2022/src/jetson/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
 )
 _generate_msg_lisp(jetson
@@ -223,13 +223,13 @@ _generate_msg_nodejs(jetson
 _generate_msg_nodejs(jetson
   "/home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
 )
 _generate_msg_nodejs(jetson
   "/home/taylor/RobotX2022/src/jetson/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
 )
 _generate_msg_nodejs(jetson
@@ -280,13 +280,13 @@ _generate_msg_py(jetson
 _generate_msg_py(jetson
   "/home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
 )
 _generate_msg_py(jetson
   "/home/taylor/RobotX2022/src/jetson/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
 )
 _generate_msg_py(jetson

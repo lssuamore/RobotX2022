@@ -108,22 +108,22 @@ vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate_to_devel_space_: /home
 	cd /home/taylor/RobotX2022/build/vrx/vrx_gazebo && /usr/bin/cmake -E make_directory /home/taylor/RobotX2022/devel/share/vrx_gazebo/worlds
 
 vrx/vrx_gazebo/worlds/example_course.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/example_course.world.xacro
-vrx/vrx_gazebo/worlds/example_course.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/sydneyregatta.xacro
-vrx/vrx_gazebo/worlds/example_course.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_gazebo/worlds/example_course.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
+vrx/vrx_gazebo/worlds/example_course.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/vrx_gazebo/worlds/example_course.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/sydneyregatta.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "xacro: generating worlds/example_course.world from worlds/example_course.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_gazebo && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_gazebo/worlds/example_course.world worlds/example_course.world.xacro
 
 vrx/vrx_gazebo/worlds/gymkhana.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/gymkhana.world.xacro
-vrx/vrx_gazebo/worlds/gymkhana.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx_gazebo/worlds/gymkhana.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/sydneyregatta.xacro
 vrx/vrx_gazebo/worlds/gymkhana.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/vrx_gazebo/worlds/gymkhana.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "xacro: generating worlds/gymkhana.world from worlds/gymkhana.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_gazebo && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_gazebo/worlds/gymkhana.world worlds/gymkhana.world.xacro
 
 vrx/vrx_gazebo/worlds/perception_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/perception_task.world.xacro
-vrx/vrx_gazebo/worlds/perception_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_gazebo/worlds/perception_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/sydneyregatta.xacro
+vrx/vrx_gazebo/worlds/perception_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "xacro: generating worlds/perception_task.world from worlds/perception_task.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_gazebo && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_gazebo/worlds/perception_task.world worlds/perception_task.world.xacro
 
@@ -142,22 +142,22 @@ vrx/vrx_gazebo/worlds/stationkeeping_task.world: /home/taylor/RobotX2022/src/vrx
 	cd /home/taylor/RobotX2022/src/vrx/vrx_gazebo && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_gazebo/worlds/stationkeeping_task.world worlds/stationkeeping_task.world.xacro
 
 vrx/vrx_gazebo/worlds/sydneyregatta.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/sydneyregatta.world.xacro
-vrx/vrx_gazebo/worlds/sydneyregatta.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
-vrx/vrx_gazebo/worlds/sydneyregatta.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx_gazebo/worlds/sydneyregatta.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/sydneyregatta.xacro
+vrx/vrx_gazebo/worlds/sydneyregatta.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
+vrx/vrx_gazebo/worlds/sydneyregatta.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "xacro: generating worlds/sydneyregatta.world from worlds/sydneyregatta.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_gazebo && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_gazebo/worlds/sydneyregatta.world worlds/sydneyregatta.world.xacro
 
 vrx/vrx_gazebo/worlds/wayfinding_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/wayfinding_task.world.xacro
+vrx/vrx_gazebo/worlds/wayfinding_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_gazebo/worlds/wayfinding_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx_gazebo/worlds/wayfinding_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/sydneyregatta.xacro
-vrx/vrx_gazebo/worlds/wayfinding_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "xacro: generating worlds/wayfinding_task.world from worlds/wayfinding_task.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_gazebo && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_gazebo/worlds/wayfinding_task.world worlds/wayfinding_task.world.xacro
 
 vrx/vrx_gazebo/worlds/wildlife_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/wildlife_task.world.xacro
-vrx/vrx_gazebo/worlds/wildlife_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/sydneyregatta.xacro
 vrx/vrx_gazebo/worlds/wildlife_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
+vrx/vrx_gazebo/worlds/wildlife_task.world: /home/taylor/RobotX2022/src/vrx/vrx_gazebo/worlds/sydneyregatta.xacro
 vrx/vrx_gazebo/worlds/wildlife_task.world: /home/taylor/RobotX2022/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "xacro: generating worlds/wildlife_task.world from worlds/wildlife_task.world.xacro"
 	cd /home/taylor/RobotX2022/src/vrx/vrx_gazebo && /home/taylor/RobotX2022/build/catkin_generated/env_cached.sh xacro -o /home/taylor/RobotX2022/build/vrx/vrx_gazebo/worlds/wildlife_task.world worlds/wildlife_task.world.xacro

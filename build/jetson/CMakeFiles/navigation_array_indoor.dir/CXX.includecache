@@ -6,7 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/taylor/RobotX2022/devel/include/amore/state_msg.h
+/home/taylor/RobotX2022/devel/include/jetson/NED_waypoints.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+geometry_msgs/Point.h
+-
+
+/home/taylor/RobotX2022/devel/include/jetson/state_msg.h
 string
 -
 vector
@@ -43,18 +61,18 @@ stdio.h
 /home/taylor/RobotX2022/src/jetson/src/stdio.h
 nav_msgs/Odometry.h
 /home/taylor/RobotX2022/src/jetson/src/nav_msgs/Odometry.h
-amore/state_msg.h
-/home/taylor/RobotX2022/src/jetson/src/amore/state_msg.h
+jetson/state_msg.h
+/home/taylor/RobotX2022/src/jetson/src/jetson/state_msg.h
 std_msgs/Bool.h
 /home/taylor/RobotX2022/src/jetson/src/std_msgs/Bool.h
 geometry_msgs/Point.h
 /home/taylor/RobotX2022/src/jetson/src/geometry_msgs/Point.h
+jetson/NED_waypoints.h
+/home/taylor/RobotX2022/src/jetson/src/jetson/NED_waypoints.h
 sensor_msgs/NavSatFix.h
 /home/taylor/RobotX2022/src/jetson/src/sensor_msgs/NavSatFix.h
 sensor_msgs/Imu.h
 /home/taylor/RobotX2022/src/jetson/src/sensor_msgs/Imu.h
-geometry_msgs/Vector3Stamped.h
-/home/taylor/RobotX2022/src/jetson/src/geometry_msgs/Vector3Stamped.h
 
 /opt/ros/noetic/include/geometry_msgs/Point.h
 string
@@ -178,26 +196,6 @@ ros/serialization.h
 ros/builtin_message_traits.h
 -
 ros/message_operations.h
--
-
-/opt/ros/noetic/include/geometry_msgs/Vector3Stamped.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-std_msgs/Header.h
--
-geometry_msgs/Vector3.h
 -
 
 /opt/ros/noetic/include/nav_msgs/Odometry.h

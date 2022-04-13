@@ -27,12 +27,12 @@
 #include "math.h"
 #include "stdio.h"
 #include "nav_msgs/Odometry.h"
-#include "amore/state_msg.h"												// message type used to communicate state for rudimentary codes
+#include "jetson/state_msg.h"												// message type used to communicate state for rudimentary codes
 #include "std_msgs/Bool.h"
 #include "geometry_msgs/Point.h"										// message type used to hold the goal waypoints w/headings
+#include "jetson/NED_waypoints.h"										// message created to hold an array of the converted WF goal waypoints w/ headings and the number of goal poses
 #include "sensor_msgs/NavSatFix.h"									// message type of lat and long coordinates given by the GPS
 #include "sensor_msgs/Imu.h"												// message type of orientation quaternion and angular velocities given by the GPS
-#include "geometry_msgs/Vector3Stamped.h"						// message type of linear velocities given by the IMU
 //...........................................End of Included Libraries and Message Types....................................
 
 
@@ -59,9 +59,10 @@ int NA_state = 0;							// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK N
 int goal_poses_quantity = -1;                                   														// used to keep track of the number of goal poses to convert
 
 float qx_goal, qy_goal, qz_goal, qw_goal;									// waypoint headings in quarternion form
-float goal_x, goal_y;																				// waypoint spherical ECEF lat/long coordinates
+float goal_x, goal_y, psi_goal;																				// waypoint spherical ECEF lat/long coordinates
 
-bool lat_lon_goal_recieved = false;                  																// lat_lon_goal_recieved = false, goal waypoint poses in lat and long coordinates have not been acquired
+bool x_y_goal_recieved = false;                  																// x_y_goal_recieved = false, goal waypoint poses in lat and long coordinates have not been acquired
+bool NED_waypoints_converted = false;     																	// NED_waypoints_converted = false, goal waypoints in NED have not been converted
 
 std_msgs::Bool na_initialization_status;																		// "na_initialization_state" message
 ros::Publisher na_initialization_state_pub;																	// "na_initialization_state" publisher
@@ -72,6 +73,9 @@ ros::Publisher goal_publish_state_pub;																		// "goal_publish_state" 
 nav_msgs::Odometry nav_odom_msg, nav_ned_msg;												// "nav_odom" and "nav_ned" messages, respectively
 ros::Publisher nav_odom_pub;																						// "nav_odom" publisher
 ros::Publisher nav_ned_pub;																							// "nav_ned" publisher
+
+jetson::NED_waypoints NED_waypoints_msg;															// "waypoints_NED" message
+ros::Publisher waypoints_ned_pub;																				// "waypoints_NED" publisher
 
 ros::Time current_time, last_time;																				// creates time variables
 //........................................................End of Global Variables........................................................
@@ -101,7 +105,7 @@ void NAVIGATION_ARRAY_inspector()
 // ACCEPTS: state_msg from "na_state"
 // RETURNS: (VOID)
 // =============================================================================
-void state_update(const amore::state_msg::ConstPtr& msg)
+void state_update(const jetson::state_msg::ConstPtr& msg)
 {
 	// do not start anything until subscribers to sensor data are initialized
 	if (na_initialization_status.data)
@@ -117,12 +121,13 @@ void state_update(const amore::state_msg::ConstPtr& msg)
 // =============================================================================
 void GPS_Position_update(const geometry_msgs::Point::ConstPtr& gps_msg)
 {
-	xNED = gps_msg->x; //sets x from gps
-	yNED = gps_msg->y; //sets y from gps
+	//indoor gps gives distance in cm so divide by 100 to get to meters
+	xNED = (gps_msg->x) / 100; //sets x from gps
+	yNED = (gps_msg->y) / 100; //sets y from gps
 } // END OF GPS_Position_update()
 
 // THIS FUNCTION: Updates the USV heading quarternion and angular velocities
-// ACCEPTS: sensor_msgs::Imu from "/wamv/sensors/imu/imu/data"
+// ACCEPTS: sensor_msgs::Imu from Sparton
 // RETURNS: (VOID)
 // =============================================================================
  void IMU_processor(const sensor_msgs::Imu::ConstPtr& imu_msg)
@@ -169,10 +174,10 @@ void GPS_Position_update(const geometry_msgs::Point::ConstPtr& gps_msg)
 // =============================================================================
 //..............................................................End of sensor functions.................................................................
 
-// THIS FUNCTION SUBSCRIBES TO "station_keeping_goal" we will be publishing to this node a pose and orientation
+// THIS FUNCTION SUBSCRIBES TO the user input of a goal pose and orientation
 void VRX_T1_goal_update(const geometry_msgs::Pose::ConstPtr& goal) 
 {
-	if (!lat_lon_goal_recieved)
+	if (!x_y_goal_recieved)
 	{
 		goal_x = goal->position.x;     //only sending it one pose and orientation will update when sent another by user
 		goal_y = goal->position.y;
@@ -180,17 +185,21 @@ void VRX_T1_goal_update(const geometry_msgs::Pose::ConstPtr& goal)
 		qy_goal = goal->orientation.y;
 		qz_goal = goal->orientation.z;
 		qw_goal = goal->orientation.w;
-		lat_lon_goal_recieved = true;
+		x_y_goal_recieved = true;
 		goal_poses_quantity = 1;
 		
+		psi_goal = atan2((2.0*(qz_goal*qw_goal+ qx_goal*qy_goal)) , (1.0 - 2.0*(pow(qy_goal,2.0) + pow(qz_goal,2.0)))); // orientation off x-axis
+		psi_goal = PI/2.0 - psi_goal;
+		
 		goal_publish_status.data = true;
+		NED_waypoints_converted = true;
 		
 		// UPDATES STATUSES TO USER ///////////////////////////////////////////////
-		ROS_INFO("GOAL POSE ACQUIRED FROM VRX TASK 1 GOAL POSE NODE. -- NA");
+		ROS_INFO("GOAL POSE ACQUIRED FROM USER -- NA");
 		//ROS_DEBUG("goal_lat: %.2f", SK_goal_lat);
 		//ROS_DEBUG("goal_long: %.2f", SK_goal_long);
 	}
-} // END OF VRX_T1_goal_update(const geographic_msgs::GeoPoseStamped::ConstPtr& goal)
+} // END OF subscriber from user
 
 //............................................................End of goal pose conversion functions............................................................
 
@@ -206,15 +215,17 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8;
   
 	// Subscribers
-	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);
+	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);                                    //Gives navigationn array status update
 	ros::Subscriber gpspos_sub = nh2.subscribe("point", 10, GPS_Position_update);						// subscribes to GPS position from indoor gps
-	ros::Subscriber imu_sub = nh3.subscribe("/imu/data", 100, IMU_processor);										// subscribes to IMU
+	ros::Subscriber imu_sub = nh3.subscribe("/zed/zed_node/imu/data", 100, IMU_processor);										// subscribes to IMU
 	ros::Subscriber VRX_T1_goal_sub;                                                               			// subscriber for goal pose given by user in geometry_msgs/pose
 	
 	// Publishers
 	na_initialization_state_pub = nh5.advertise<std_msgs::Bool>("na_initialization_state", 1);												// publisher for state of initialization
 	nav_ned_pub = nh6.advertise<nav_msgs::Odometry>("nav_ned", 100); 																			// USV NED state publisher //gps already in NED but will publish anyways using odometry message type
 	goal_publish_state_pub = nh7.advertise<std_msgs::Bool>("goal_publish_state", 1);														// "goal_publish_state" publisher for whether NED converted waypoints have been published
+	
+	waypoints_ned_pub = nh8.advertise<jetson::NED_waypoints>("waypoints_ned", 100); 												// goal poses converted to NED publisher
 	
 	// Initialize global variables
 	goal_publish_status.data = false;
@@ -272,17 +283,26 @@ int main(int argc, char **argv)
 		if  ((NA_state == 2) || (NA_state == 3))						// if Goal Pose Conversion mode 
 		{
 			// first subscribe to goal poses dependent upon which task
-			if (!lat_lon_goal_recieved)
+			if (!x_y_goal_recieved)
 			{	
-				if (NA_state == 2)						// TASK 1: STATION_KEEPING
+				if (NA_state == 2)						// STATION_KEEPING
 				{
-					VRX_T1_goal_sub = nh4.subscribe("station_keeping_goal", 1, VRX_T1_goal_update);					// subscriber for goal pose given by Task1_SK
+					VRX_T1_goal_sub = nh4.subscribe("station_keeping_goal", 1, VRX_T1_goal_update);					// subscriber for goal pose given by the user when NA_state is in stationkeeping mode 
 				}
 				ros::spinOnce();
 				loop_rate.sleep();
-			} // if (!lat_lon_goal_recieved)	
+			} // if (!x_y_goal_recieved)	
 		} // if Goal Pose Conversion mode
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF GOAL POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
+		if  (NED_waypoints_converted) 
+		{
+			geometry_msgs::Point point;
+			point.x = goal_x;
+			point.y = goal_y;
+			point.z = psi_goal;
+			waypoints_ned_pub.publish(NED_waypoints_msg);
+		}
 		
 		last_time = current_time;
 		ros::spinOnce();

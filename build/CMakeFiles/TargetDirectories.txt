@@ -226,6 +226,13 @@
 /home/taylor/RobotX2022/build/jetson/CMakeFiles/jetson_geneus.dir
 /home/taylor/RobotX2022/build/jetson/CMakeFiles/jetson_generate_messages.dir
 /home/taylor/RobotX2022/build/jetson/CMakeFiles/jetson_generate_messages_nodejs.dir
+/home/taylor/RobotX2022/build/sensors/sparton_AHRSM2/core_sparton/CMakeFiles/install/strip.dir
+/home/taylor/RobotX2022/build/sensors/sparton_AHRSM2/core_sparton/CMakeFiles/install/local.dir
+/home/taylor/RobotX2022/build/sensors/sparton_AHRSM2/core_sparton/CMakeFiles/install.dir
+/home/taylor/RobotX2022/build/sensors/sparton_AHRSM2/core_sparton/CMakeFiles/list_install_components.dir
+/home/taylor/RobotX2022/build/sensors/sparton_AHRSM2/core_sparton/CMakeFiles/rebuild_cache.dir
+/home/taylor/RobotX2022/build/sensors/sparton_AHRSM2/core_sparton/CMakeFiles/edit_cache.dir
+/home/taylor/RobotX2022/build/sensors/sparton_AHRSM2/core_sparton/CMakeFiles/test.dir
 /home/taylor/RobotX2022/build/sensors/sparton_ahrs8_driver/CMakeFiles/install/strip.dir
 /home/taylor/RobotX2022/build/sensors/sparton_ahrs8_driver/CMakeFiles/install/local.dir
 /home/taylor/RobotX2022/build/sensors/sparton_ahrs8_driver/CMakeFiles/install.dir
