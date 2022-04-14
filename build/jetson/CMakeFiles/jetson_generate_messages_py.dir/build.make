@@ -43,63 +43,63 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/taylor/RobotX2022/src
+CMAKE_SOURCE_DIR = /home/brad/RobotX2022/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/taylor/RobotX2022/build
+CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
 
 # Utility rule file for jetson_generate_messages_py.
 
 # Include the progress variables for this target.
 include jetson/CMakeFiles/jetson_generate_messages_py.dir/progress.make
 
-jetson/CMakeFiles/jetson_generate_messages_py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py
-jetson/CMakeFiles/jetson_generate_messages_py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py
-jetson/CMakeFiles/jetson_generate_messages_py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py
-jetson/CMakeFiles/jetson_generate_messages_py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_task_info.py
-jetson/CMakeFiles/jetson_generate_messages_py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py
+jetson/CMakeFiles/jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py
+jetson/CMakeFiles/jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py
+jetson/CMakeFiles/jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py
+jetson/CMakeFiles/jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_task_info.py
+jetson/CMakeFiles/jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py
 
 
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py: /home/taylor/RobotX2022/src/jetson/msg/NED_waypoints.msg
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG jetson/NED_waypoints"
-	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/taylor/RobotX2022/src/jetson/msg/NED_waypoints.msg -Ijetson:/home/taylor/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py: /home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG jetson/NED_waypoints"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg
 
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG jetson/usv_pose_msg"
-	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg -Ijetson:/home/taylor/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG jetson/usv_pose_msg"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg
 
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py: /home/taylor/RobotX2022/src/jetson/msg/state_msg.msg
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG jetson/state_msg"
-	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/taylor/RobotX2022/src/jetson/msg/state_msg.msg -Ijetson:/home/taylor/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py: /home/brad/RobotX2022/src/jetson/msg/state_msg.msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG jetson/state_msg"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/RobotX2022/src/jetson/msg/state_msg.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg
 
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_task_info.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_task_info.py: /home/taylor/RobotX2022/src/jetson/msg/task_info.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG jetson/task_info"
-	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/taylor/RobotX2022/src/jetson/msg/task_info.msg -Ijetson:/home/taylor/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_task_info.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_task_info.py: /home/brad/RobotX2022/src/jetson/msg/task_info.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG jetson/task_info"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/RobotX2022/src/jetson/msg/task_info.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg
 
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py
-/home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_task_info.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python msg __init__.py for jetson"
-	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg --initpy
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_task_info.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python msg __init__.py for jetson"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg --initpy
 
 jetson_generate_messages_py: jetson/CMakeFiles/jetson_generate_messages_py
-jetson_generate_messages_py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py
-jetson_generate_messages_py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py
-jetson_generate_messages_py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py
-jetson_generate_messages_py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_task_info.py
-jetson_generate_messages_py: /home/taylor/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py
+jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_NED_waypoints.py
+jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py
+jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state_msg.py
+jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_task_info.py
+jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py
 jetson_generate_messages_py: jetson/CMakeFiles/jetson_generate_messages_py.dir/build.make
 
 .PHONY : jetson_generate_messages_py
@@ -110,10 +110,10 @@ jetson/CMakeFiles/jetson_generate_messages_py.dir/build: jetson_generate_message
 .PHONY : jetson/CMakeFiles/jetson_generate_messages_py.dir/build
 
 jetson/CMakeFiles/jetson_generate_messages_py.dir/clean:
-	cd /home/taylor/RobotX2022/build/jetson && $(CMAKE_COMMAND) -P CMakeFiles/jetson_generate_messages_py.dir/cmake_clean.cmake
+	cd /home/brad/RobotX2022/build/jetson && $(CMAKE_COMMAND) -P CMakeFiles/jetson_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : jetson/CMakeFiles/jetson_generate_messages_py.dir/clean
 
 jetson/CMakeFiles/jetson_generate_messages_py.dir/depend:
-	cd /home/taylor/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/taylor/RobotX2022/src /home/taylor/RobotX2022/src/jetson /home/taylor/RobotX2022/build /home/taylor/RobotX2022/build/jetson /home/taylor/RobotX2022/build/jetson/CMakeFiles/jetson_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brad/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/RobotX2022/src /home/brad/RobotX2022/src/jetson /home/brad/RobotX2022/build /home/brad/RobotX2022/build/jetson /home/brad/RobotX2022/build/jetson/CMakeFiles/jetson_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : jetson/CMakeFiles/jetson_generate_messages_py.dir/depend
 
