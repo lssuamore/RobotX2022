@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/taylor/RobotX2022/devel/lib/amore/mission_control"
-  "/home/taylor/RobotX2022/devel/lib/amore/mission_control.pdb"
+  "/home/brad/RobotX2022/devel/lib/amore/mission_control"
+  "/home/brad/RobotX2022/devel/lib/amore/mission_control.pdb"
   "CMakeFiles/mission_control.dir/src/mission_control.cpp.o"
 )
 
