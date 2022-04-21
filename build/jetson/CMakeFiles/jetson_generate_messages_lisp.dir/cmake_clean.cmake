@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp"
-  "/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp"
-  "/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/task_info.lisp"
-  "/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp"
+  "/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp"
+  "/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp"
+  "/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/task_info.lisp"
+  "/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp"
   "CMakeFiles/jetson_generate_messages_lisp"
 )
 

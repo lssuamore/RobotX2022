@@ -43,53 +43,53 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/RobotX2022/src
+CMAKE_SOURCE_DIR = /home/taylor/RobotX2022/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
+CMAKE_BINARY_DIR = /home/taylor/RobotX2022/build
 
 # Utility rule file for jetson_generate_messages_lisp.
 
 # Include the progress variables for this target.
 include jetson/CMakeFiles/jetson_generate_messages_lisp.dir/progress.make
 
-jetson/CMakeFiles/jetson_generate_messages_lisp: /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp
-jetson/CMakeFiles/jetson_generate_messages_lisp: /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp
-jetson/CMakeFiles/jetson_generate_messages_lisp: /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp
-jetson/CMakeFiles/jetson_generate_messages_lisp: /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/task_info.lisp
+jetson/CMakeFiles/jetson_generate_messages_lisp: /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp
+jetson/CMakeFiles/jetson_generate_messages_lisp: /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp
+jetson/CMakeFiles/jetson_generate_messages_lisp: /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp
+jetson/CMakeFiles/jetson_generate_messages_lisp: /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/task_info.lisp
 
 
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp: /home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from jetson/NED_waypoints.msg"
-	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp: /home/taylor/RobotX2022/src/jetson/msg/NED_waypoints.msg
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from jetson/NED_waypoints.msg"
+	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/taylor/RobotX2022/src/jetson/msg/NED_waypoints.msg -Ijetson:/home/taylor/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg
 
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp: /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from jetson/usv_pose_msg.msg"
-	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp: /home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from jetson/usv_pose_msg.msg"
+	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/taylor/RobotX2022/src/jetson/msg/usv_pose_msg.msg -Ijetson:/home/taylor/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg
 
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp: /home/brad/RobotX2022/src/jetson/msg/state_msg.msg
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from jetson/state_msg.msg"
-	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/brad/RobotX2022/src/jetson/msg/state_msg.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp: /home/taylor/RobotX2022/src/jetson/msg/state_msg.msg
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from jetson/state_msg.msg"
+	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/taylor/RobotX2022/src/jetson/msg/state_msg.msg -Ijetson:/home/taylor/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg
 
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/task_info.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
-/home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/task_info.lisp: /home/brad/RobotX2022/src/jetson/msg/task_info.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from jetson/task_info.msg"
-	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/brad/RobotX2022/src/jetson/msg/task_info.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/task_info.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/task_info.lisp: /home/taylor/RobotX2022/src/jetson/msg/task_info.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from jetson/task_info.msg"
+	cd /home/taylor/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/taylor/RobotX2022/src/jetson/msg/task_info.msg -Ijetson:/home/taylor/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg
 
 jetson_generate_messages_lisp: jetson/CMakeFiles/jetson_generate_messages_lisp
-jetson_generate_messages_lisp: /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp
-jetson_generate_messages_lisp: /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp
-jetson_generate_messages_lisp: /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp
-jetson_generate_messages_lisp: /home/brad/RobotX2022/devel/share/common-lisp/ros/jetson/msg/task_info.lisp
+jetson_generate_messages_lisp: /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/NED_waypoints.lisp
+jetson_generate_messages_lisp: /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/usv_pose_msg.lisp
+jetson_generate_messages_lisp: /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/state_msg.lisp
+jetson_generate_messages_lisp: /home/taylor/RobotX2022/devel/share/common-lisp/ros/jetson/msg/task_info.lisp
 jetson_generate_messages_lisp: jetson/CMakeFiles/jetson_generate_messages_lisp.dir/build.make
 
 .PHONY : jetson_generate_messages_lisp
@@ -100,10 +100,10 @@ jetson/CMakeFiles/jetson_generate_messages_lisp.dir/build: jetson_generate_messa
 .PHONY : jetson/CMakeFiles/jetson_generate_messages_lisp.dir/build
 
 jetson/CMakeFiles/jetson_generate_messages_lisp.dir/clean:
-	cd /home/brad/RobotX2022/build/jetson && $(CMAKE_COMMAND) -P CMakeFiles/jetson_generate_messages_lisp.dir/cmake_clean.cmake
+	cd /home/taylor/RobotX2022/build/jetson && $(CMAKE_COMMAND) -P CMakeFiles/jetson_generate_messages_lisp.dir/cmake_clean.cmake
 .PHONY : jetson/CMakeFiles/jetson_generate_messages_lisp.dir/clean
 
 jetson/CMakeFiles/jetson_generate_messages_lisp.dir/depend:
-	cd /home/brad/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/RobotX2022/src /home/brad/RobotX2022/src/jetson /home/brad/RobotX2022/build /home/brad/RobotX2022/build/jetson /home/brad/RobotX2022/build/jetson/CMakeFiles/jetson_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/taylor/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/taylor/RobotX2022/src /home/taylor/RobotX2022/src/jetson /home/taylor/RobotX2022/build /home/taylor/RobotX2022/build/jetson /home/taylor/RobotX2022/build/jetson/CMakeFiles/jetson_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : jetson/CMakeFiles/jetson_generate_messages_lisp.dir/depend
 

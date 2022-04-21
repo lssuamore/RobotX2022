@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/RobotX2022/devel/lib/jetson/mission_control_indoor"
-  "/home/brad/RobotX2022/devel/lib/jetson/mission_control_indoor.pdb"
+  "/home/taylor/RobotX2022/devel/lib/jetson/mission_control_indoor"
+  "/home/taylor/RobotX2022/devel/lib/jetson/mission_control_indoor.pdb"
   "CMakeFiles/mission_control_indoor.dir/src/mission_control_indoor.cpp.o"
 )
 

@@ -1,0 +1,8 @@
+prefix=/home/taylor/RobotX2022/devel
+
+Name: rtcm_msgs
+Description: Description of rtcm_msgs
+Version: 1.0.0
+Cflags: -I/home/taylor/RobotX2022/devel/include
+Libs: -L${prefix}/lib 
+Requires: std_msgs message_runtime

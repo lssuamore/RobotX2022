@@ -13,21 +13,21 @@ fi
 
 echo_and_run() { echo "+ $@" ; "$@" ; }
 
-echo_and_run cd "/home/brad/RobotX2022/src/geonav_transform"
+echo_and_run cd "/home/taylor/RobotX2022/src/geonav_transform"
 
 # ensure that Python install destination exists
-echo_and_run mkdir -p "$DESTDIR/home/brad/RobotX2022/install/lib/python3/dist-packages"
+echo_and_run mkdir -p "$DESTDIR/home/taylor/RobotX2022/install/lib/python3/dist-packages"
 
 # Note that PYTHONPATH is pulled from the environment to support installing
 # into one location when some dependencies were installed in another
 # location, #123.
 echo_and_run /usr/bin/env \
-    PYTHONPATH="/home/brad/RobotX2022/install/lib/python3/dist-packages:/home/brad/RobotX2022/build/lib/python3/dist-packages:$PYTHONPATH" \
-    CATKIN_BINARY_DIR="/home/brad/RobotX2022/build" \
+    PYTHONPATH="/home/taylor/RobotX2022/install/lib/python3/dist-packages:/home/taylor/RobotX2022/build/lib/python3/dist-packages:$PYTHONPATH" \
+    CATKIN_BINARY_DIR="/home/taylor/RobotX2022/build" \
     "/usr/bin/python3" \
-    "/home/brad/RobotX2022/src/geonav_transform/setup.py" \
+    "/home/taylor/RobotX2022/src/geonav_transform/setup.py" \
      \
-    build --build-base "/home/brad/RobotX2022/build/geonav_transform" \
+    build --build-base "/home/taylor/RobotX2022/build/geonav_transform" \
     install \
     --root="${DESTDIR-/}" \
-    --install-layout=deb --prefix="/home/brad/RobotX2022/install" --install-scripts="/home/brad/RobotX2022/install/bin"
+    --install-layout=deb --prefix="/home/taylor/RobotX2022/install" --install-scripts="/home/taylor/RobotX2022/install/bin"

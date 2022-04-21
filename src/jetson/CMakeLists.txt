@@ -7,10 +7,13 @@ project(jetson)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs nav_msgs sensor_msgs geometry_msgs geographic_msgs message_generation message_runtime)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy cv_bridge std_msgs nav_msgs image_transport sensor_msgs geometry_msgs geographic_msgs message_generation message_runtime)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
+
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 include_directories(${catkin_INCLUDE_DIRS})
 
@@ -138,9 +141,12 @@ add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)
 add_executable(propulsion_system_indoor src/propulsion_system_indoor.cpp)
 add_executable(path_planner_indoor src/path_planner_indoor.cpp)
 
-#add_executable(mission_control_outdoor src/mission_control_outdoor.cpp)
-#add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)
-#add_executable(propulsion_system_outdoor src/propulsion_system_outdoor.cpp)
+add_executable(camera_capture src/camera_capture.cpp)	# COMMENT THIS 1ST CMAKE
+
+add_executable(mission_control_outdoor src/mission_control_outdoor.cpp)
+add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)
+add_executable(propulsion_system_outdoor src/propulsion_system_outdoor.cpp)
+add_executable(path_planner_outdoor src/path_planner_outdoor.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -157,9 +163,12 @@ target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system_indoor ${catkin_LIBRARIES})
 target_link_libraries(path_planner_indoor ${catkin_LIBRARIES})
 
-#target_link_libraries(mission_control_outdoor ${catkin_LIBRARIES})
-#target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})
-#target_link_libraries(propulsion_system_outdoor ${catkin_LIBRARIES})
+target_link_libraries(camera_capture ${catkin_LIBRARIES} ${OpenCV_LIBS})	# COMMENT THIS 1ST CMAKE
+
+target_link_libraries(mission_control_outdoor ${catkin_LIBRARIES})
+target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})
+target_link_libraries(propulsion_system_outdoor ${catkin_LIBRARIES})
+target_link_libraries(path_planner_outdoor ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############
