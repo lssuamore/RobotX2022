@@ -107,8 +107,8 @@ void state_update(const jetson::state_msg::ConstPtr& msg)
 void GPS_Position_update(const geometry_msgs::Point::ConstPtr& gps_msg)
 {
 	//	indoor gps gives distance in cm so divide by 100 to get to meters
-	xNED = (gps_msg->x) / 100; //sets x from gps
-	yNED = (gps_msg->y) / 100; //sets y from gps
+	xNED = (gps_msg->x) / 1000; //sets x from gps
+	yNED = (gps_msg->y) / 1000; //sets y from gps
 } // END OF GPS_Position_update()
 
 // THIS FUNCTION: Updates the USV heading quarternion and angular velocities
@@ -174,8 +174,8 @@ int main(int argc, char **argv)
   
 	// Subscribers
 	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);                                    // Gives navigationn array status update
-	//ros::Subscriber gpspos_sub = nh2.subscribe("point", 10, GPS_Position_update);							// subscribes to GPS position from indoor gps
-	//ros::Subscriber imu_sub = nh3.subscribe("/zed/zed_node/imu/data", 100, IMU_processor);			// subscribes to IMU
+	ros::Subscriber gpspos_sub = nh2.subscribe("point", 10, GPS_Position_update);							// subscribes to GPS position from indoor gps
+	ros::Subscriber imu_sub = nh3.subscribe("/zed2i/zed_node/imu/data", 100, IMU_processor);			// subscribes to IMU
 	
 	// Publishers
 	na_initialization_state_pub = nh5.advertise<std_msgs::Bool>("na_initialization_state", 1);				// publisher for state of initialization
@@ -206,12 +206,12 @@ int main(int argc, char **argv)
 				nav_ned_msg.child_frame_id = "base_link";				// child frame
 			
 				// Fill the USV pose in NED
-				nav_ned_msg.pose.pose.position.x = 0.0; //xNED;														// FIX THIS BACK LATER 
-				nav_ned_msg.pose.pose.position.y = 0.0; //yNED;														// FIX THIS BACK LATER 
+				nav_ned_msg.pose.pose.position.x = xNED;														// FIX THIS BACK LATER 
+				nav_ned_msg.pose.pose.position.y = yNED;														// FIX THIS BACK LATER 
 				nav_ned_msg.pose.pose.position.z = 0.0; //zNED;
 				nav_ned_msg.pose.pose.orientation.x = 0.0; //phiNED;
 				nav_ned_msg.pose.pose.orientation.y = 0.0; //thetaNED;
-				nav_ned_msg.pose.pose.orientation.z = 0.0; //psiNED;												// FIX THIS BACK LATER 
+				nav_ned_msg.pose.pose.orientation.z = psiNED;												// FIX THIS BACK LATER 
 				nav_ned_msg.pose.pose.orientation.w = 1.23456;
 				nav_ned_msg.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 			

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/RobotX2022/src
+CMAKE_SOURCE_DIR = /home/taylor/RobotX2022/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
+CMAKE_BINARY_DIR = /home/taylor/RobotX2022/build
 
 # Utility rule file for jetson_geneus.
 
@@ -63,10 +63,10 @@ jetson/CMakeFiles/jetson_geneus.dir/build: jetson_geneus
 .PHONY : jetson/CMakeFiles/jetson_geneus.dir/build
 
 jetson/CMakeFiles/jetson_geneus.dir/clean:
-	cd /home/brad/RobotX2022/build/jetson && $(CMAKE_COMMAND) -P CMakeFiles/jetson_geneus.dir/cmake_clean.cmake
+	cd /home/taylor/RobotX2022/build/jetson && $(CMAKE_COMMAND) -P CMakeFiles/jetson_geneus.dir/cmake_clean.cmake
 .PHONY : jetson/CMakeFiles/jetson_geneus.dir/clean
 
 jetson/CMakeFiles/jetson_geneus.dir/depend:
-	cd /home/brad/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/RobotX2022/src /home/brad/RobotX2022/src/jetson /home/brad/RobotX2022/build /home/brad/RobotX2022/build/jetson /home/brad/RobotX2022/build/jetson/CMakeFiles/jetson_geneus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/taylor/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/taylor/RobotX2022/src /home/taylor/RobotX2022/src/jetson /home/taylor/RobotX2022/build /home/taylor/RobotX2022/build/jetson /home/taylor/RobotX2022/build/jetson/CMakeFiles/jetson_geneus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : jetson/CMakeFiles/jetson_geneus.dir/depend
 
