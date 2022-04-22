@@ -202,7 +202,7 @@ void nav_odom_publish()
 int main(int argc, char **argv)
 {
 	// names the program for visual purposes
-	ros::init(argc, argv, "navigation_array");
+	ros::init(argc, argv, "navigation_array_outdoor");
 	
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
   

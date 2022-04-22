@@ -67,14 +67,14 @@ set(geonav_transform_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(geonav_transform_SOURCE_PREFIX /home/taylor/RobotX2022/src/geonav_transform)
-  set(geonav_transform_DEVEL_PREFIX /home/taylor/RobotX2022/devel)
+  set(geonav_transform_SOURCE_PREFIX /home/brad/RobotX2022/src/geonav_transform)
+  set(geonav_transform_DEVEL_PREFIX /home/brad/RobotX2022/devel)
   set(geonav_transform_INSTALL_PREFIX "")
   set(geonav_transform_PREFIX ${geonav_transform_DEVEL_PREFIX})
 else()
   set(geonav_transform_SOURCE_PREFIX "")
   set(geonav_transform_DEVEL_PREFIX "")
-  set(geonav_transform_INSTALL_PREFIX /home/taylor/RobotX2022/install)
+  set(geonav_transform_INSTALL_PREFIX /home/brad/RobotX2022/install)
   set(geonav_transform_PREFIX ${geonav_transform_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/taylor/RobotX2022/install/lib;/opt/ros/noetic/lib)
+    foreach(path /home/brad/RobotX2022/install/lib;/home/brad/RobotX2022/devel/lib;/home/brad/vrx_amore/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

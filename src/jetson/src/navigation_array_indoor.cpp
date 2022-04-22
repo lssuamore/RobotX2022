@@ -165,7 +165,7 @@ void GPS_Position_update(const geometry_msgs::Point::ConstPtr& gps_msg)
 int main(int argc, char **argv)
 {
 	// names the program for visual purposes
-	ros::init(argc, argv, "navigation_array");
+	ros::init(argc, argv, "navigation_array_indoor");
 	
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
   

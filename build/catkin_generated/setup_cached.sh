@@ -7,10 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/taylor/RobotX2022/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/taylor/RobotX2022/devel/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/home/taylor/RobotX2022/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PWD='/home/taylor/RobotX2022/build'
-export PYTHONPATH="/home/taylor/RobotX2022/devel/lib/python3/dist-packages:$PYTHONPATH"
-export ROSLISP_PACKAGE_DIRECTORIES='/home/taylor/RobotX2022/devel/share/common-lisp'
-export ROS_PACKAGE_PATH="/home/taylor/RobotX2022/src:$ROS_PACKAGE_PATH"
+export PWD='/home/brad/RobotX2022/build'

@@ -1,0 +1,11 @@
+<launch>
+
+  <!-- This is the format for a comment in HTML -->
+  <node pkg="rosserial_python" type="serial_node.py" name="Teensy" args="/dev/ttyACM1">
+  </node>
+  <node pkg="rosserial_python" type="serial_node.py" name="Pozyx" args="/dev/ttyUSB0">
+  </node>
+  <node pkg="zed_wrapper" type="zed2i.launch" name="Zed2i">
+  </node>
+
+</launch>
