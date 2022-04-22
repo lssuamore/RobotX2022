@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/taylor/RobotX2022/devel/lib/jetson/camera_capture"
-  "/home/taylor/RobotX2022/devel/lib/jetson/camera_capture.pdb"
+  "/home/brad/RobotX2022/devel/lib/jetson/camera_capture"
+  "/home/brad/RobotX2022/devel/lib/jetson/camera_capture.pdb"
   "CMakeFiles/camera_capture.dir/src/camera_capture.cpp.o"
 )
 

@@ -136,17 +136,12 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(mission_control_indoor src/mission_control_indoor.cpp)
-add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)
-add_executable(propulsion_system_indoor src/propulsion_system_indoor.cpp)
-add_executable(path_planner_indoor src/path_planner_indoor.cpp)
-
 add_executable(camera_capture src/camera_capture.cpp)	# COMMENT THIS 1ST CMAKE
-
-add_executable(mission_control_outdoor src/mission_control_outdoor.cpp)
+add_executable(mission_control src/mission_control.cpp)
+add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)
 add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)
-add_executable(propulsion_system_outdoor src/propulsion_system_outdoor.cpp)
-add_executable(path_planner_outdoor src/path_planner_outdoor.cpp)
+add_executable(propulsion_system src/propulsion_system.cpp)
+add_executable(path_planner src/path_planner.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -158,17 +153,12 @@ add_executable(path_planner_outdoor src/path_planner_outdoor.cpp)
 ## same as for the library above
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(mission_control_indoor ${catkin_LIBRARIES})
-target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
-target_link_libraries(propulsion_system_indoor ${catkin_LIBRARIES})
-target_link_libraries(path_planner_indoor ${catkin_LIBRARIES})
-
 target_link_libraries(camera_capture ${catkin_LIBRARIES} ${OpenCV_LIBS})	# COMMENT THIS 1ST CMAKE
-
-target_link_libraries(mission_control_outdoor ${catkin_LIBRARIES})
+target_link_libraries(mission_control ${catkin_LIBRARIES})
+target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
 target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})
-target_link_libraries(propulsion_system_outdoor ${catkin_LIBRARIES})
-target_link_libraries(path_planner_outdoor ${catkin_LIBRARIES})
+target_link_libraries(propulsion_system ${catkin_LIBRARIES})
+target_link_libraries(path_planner ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############
@@ -206,7 +196,10 @@ target_link_libraries(path_planner_outdoor ${catkin_LIBRARIES})
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 install(FILES launch/amore_indoor.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
-#install(FILES launch/amore_outdoor.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(FILES launch/amore_outdoor.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(FILES launch/indoor_sensors.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(FILES launch/outdoor_sensors.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(FILES launch/ardusimple.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 # install(FILES
 #   # myfile1
 #   # myfile2

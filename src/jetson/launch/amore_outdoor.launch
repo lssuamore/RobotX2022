@@ -4,8 +4,8 @@
 
 
   <!-- Launches the geonav_transform file --> 
-  <include file="$(find geonav_transform)/launch/geonav_transform.launch" >
-  </include>
+  <!-- include file="$(find geonav_transform)/launch/geonav_transform.launch" -->
+  <!-- /include -->
 
   <!-- creates all the parameters --> 
   <param name="/Kp_xy_G" value="0.7" />
@@ -14,13 +14,22 @@
   <param name="/Kd_psi_G" value="1.0" />
   <param name="/Ki_xy_G" value="0.0" />
   <param name="/Ki_psi_G" value="0.0" />
-
+  
+  <param name="/MC_state_G" value="0" />			<!-- SET THIS TO 0:ON STANDBY, 1:STATION-KEEPING, 2:WAYFINDING -->
+  <param name="/LL_state_G" value="1" />			<!-- SET THIS TO 1:DUAL-AZIMUTHING STATION-KEEPING, 2:DIFFERENTIAL WAYFINDING -->
+  
+  <param name="/x_goal_G" value="0.0" />			<!-- SET THIS IN METERS -->
+  <param name="/y_goal_G" value="0.0" />			<!-- SET THIS IN METERS -->
+  <param name="/psi_goal_G" value="0.0" />			<!-- SET THIS BETWEEN -PI AND PI RADIANS -->
+  
   <!-- Launches codes -->
-  <node pkg="amore" type="navigation_array_outdoor" name="navigation_array_outdoor" output="screen">
+  <node pkg="jetson" type="navigation_array_outdoor" name="navigation_array_outdoor" output="screen">
   </node>
-  <node pkg="amore" type="propulsion_system_outdoor" name="propulsion_system_outdoor" output="screen">
+  <node pkg="jetson" type="propulsion_system" name="propulsion_system" output="screen">
   </node>
-  <node pkg="amore" type="mission_control_outdoor" name="mission_control_outdoor" output="screen">
+  <node pkg="jetson" type="path_planner" name="path_planner" output="screen">
+  </node>
+  <node pkg="jetson" type="mission_control" name="mission_control" output="screen">
   </node>
   
 </launch>

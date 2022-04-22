@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/taylor/RobotX2022/devel/lib/jetson/path_planner_outdoor"
-  "/home/taylor/RobotX2022/devel/lib/jetson/path_planner_outdoor.pdb"
+  "/home/brad/RobotX2022/devel/lib/jetson/path_planner_outdoor"
+  "/home/brad/RobotX2022/devel/lib/jetson/path_planner_outdoor.pdb"
   "CMakeFiles/path_planner_outdoor.dir/src/path_planner_outdoor.cpp.o"
 )
 

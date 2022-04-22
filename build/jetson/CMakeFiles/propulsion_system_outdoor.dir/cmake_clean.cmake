@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/taylor/RobotX2022/devel/lib/jetson/propulsion_system_outdoor"
-  "/home/taylor/RobotX2022/devel/lib/jetson/propulsion_system_outdoor.pdb"
+  "/home/brad/RobotX2022/devel/lib/jetson/propulsion_system_outdoor"
+  "/home/brad/RobotX2022/devel/lib/jetson/propulsion_system_outdoor.pdb"
   "CMakeFiles/propulsion_system_outdoor.dir/src/propulsion_system_outdoor.cpp.o"
 )
 
