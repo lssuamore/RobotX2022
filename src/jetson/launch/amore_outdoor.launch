@@ -4,23 +4,23 @@
 
 
   <!-- Launches the geonav_transform file --> 
-  <!-- include file="$(find geonav_transform)/launch/geonav_transform.launch" -->
-  <!-- /include -->
+  <include file="$(find geonav_transform)/launch/geonav_transform.launch">
+  </include>
 
   <!-- creates all the parameters --> 
-  <param name="/Kp_xy_G" value="0.7" />
+  <param name="/Kp_xy_G" value="1.0" />
   <param name="/Kp_psi_G" value="1.0" />
-  <param name="/Kd_xy_G" value="2.0" />
+  <param name="/Kd_xy_G" value="1.0" />
   <param name="/Kd_psi_G" value="1.0" />
   <param name="/Ki_xy_G" value="0.0" />
   <param name="/Ki_psi_G" value="0.0" />
   
-  <param name="/MC_state_G" value="0" />			<!-- SET THIS TO 0:ON STANDBY, 1:STATION-KEEPING, 2:WAYFINDING -->
-  <param name="/LL_state_G" value="1" />			<!-- SET THIS TO 1:DUAL-AZIMUTHING STATION-KEEPING, 2:DIFFERENTIAL WAYFINDING -->
+  <param name="/MC_state_G" value="1" />	<!-- SET THIS TO 0:ON STANDBY, 1:STATION-KEEPING, 2:WAYFINDING -->
+  <param name="/LL_state_G" value="1" />	<!-- SET THIS TO 1:DUAL-AZIMUTHING STATION-KEEPING, 2:DIFFERENTIAL WAYFINDING -->
   
-  <param name="/x_goal_G" value="0.0" />			<!-- SET THIS IN METERS -->
-  <param name="/y_goal_G" value="0.0" />			<!-- SET THIS IN METERS -->
-  <param name="/psi_goal_G" value="0.0" />			<!-- SET THIS BETWEEN -PI AND PI RADIANS -->
+  <param name="/x_goal_G" value="245.0" />	<!-- SET THIS IN METERS -->
+  <param name="/y_goal_G" value="-50.0" />	<!-- SET THIS IN METERS -->
+  <param name="/psi_goal_G" value="0.0" />	<!-- SET THIS BETWEEN -PI AND PI RADIANS -->
   
   <!-- Launches codes -->
   <node pkg="jetson" type="navigation_array_outdoor" name="navigation_array_outdoor" output="screen">

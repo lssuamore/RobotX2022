@@ -13,8 +13,8 @@
   <param name="/MC_state_G" value="0" />			<!-- SET THIS TO 0:ON STANDBY, 1:STATION-KEEPING, 2:WAYFINDING -->
   <param name="/LL_state_G" value="1" />			<!-- SET THIS TO 1:DUAL-AZIMUTHING STATION-KEEPING, 2:DIFFERENTIAL WAYFINDING -->
   
-  <param name="/x_goal_G" value="0.0" />			<!-- SET THIS IN METERS -->
-  <param name="/y_goal_G" value="0.0" />			<!-- SET THIS IN METERS -->
+  <param name="/x_goal_G" value="5" />			<!-- SET THIS IN METERS -->
+  <param name="/y_goal_G" value="5" />			<!-- SET THIS IN METERS -->
   <param name="/psi_goal_G" value="0.0" />			<!-- SET THIS BETWEEN -PI AND PI RADIANS -->
   
   <!-- Launches codes -->
