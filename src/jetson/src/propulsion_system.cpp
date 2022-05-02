@@ -51,8 +51,7 @@ int PP_state = 0;	//	0 = On standby		//	1 = Task 1: Station-Keeping			//	2 = Tas
 
 //	STATES CONCERNED WITH "propulsion_system"
 int PS_state = 0;	//	0 = On standby		//	1 = Propulsion system ON
-
-int LL_state = 1;	//	1 = PID HP Dual-azimuthing station keeping controller	//	2 = PID HP Differential wayfinding controller
+int LL_state = 1;	//	1 = PID HP Dual-azimuthing station-keeping	//	2 = PID HP Differential wayfinding
 
 float dt = 0.5;//0.25;				// [s] used for differential term
 
@@ -228,8 +227,8 @@ void goal_pose_update(const jetson::usv_pose_msg::ConstPtr& goal)
 	{
 		x_goal = goal->position.x;
 		y_goal = goal->position.y;
-		ros::param::get("/psi_goal_G", psi_goal);
-		//psi_goal = goal->psi.data;
+		//ros::param::get("/psi_goal_G", psi_goal);
+		psi_goal = goal->psi.data;
 	}
 } // END OF goal_pose_update()
 
@@ -240,18 +239,18 @@ void goal_pose_update(const jetson::usv_pose_msg::ConstPtr& goal)
 void update_gains_LL_controller()
 {
 	// Get the LL_state which decides which controller to use
-	ros::param::get("/LL_state_G", LL_state);
+	ros::param::get("/LL", LL_state);
 	ROS_DEBUG("LL_state: %i	 ~ 1 = Dual-azimuthing station keeping controller, 2 = Differential wayfinding controller ~ --PS", LL_state);
 	// Get the PID gains
-	ros::param::get("/Kp_xy_G", Kp_x);
+	ros::param::get("/kp_xy", Kp_x);
 	Kp_y = Kp_x; //ros::param::get("/Kp_y_G", Kp_y);
-	ros::param::get("/Kp_psi_G", Kp_psi);
-	ros::param::get("/Kd_xy_G", Kd_x);
+	ros::param::get("/kp_psi", Kp_psi);
+	ros::param::get("/kd_xy", Kd_x);
 	Kd_y = Kd_x; //ros::param::get("/Kd_y_G", Kd_y);
-	ros::param::get("/Kd_psi_G", Kd_psi);
-	ros::param::get("/Ki_xy_G", Ki_x);
+	ros::param::get("/kd_psi", Kd_psi);
+	ros::param::get("/ki_xy", Ki_x);
 	Ki_y = Ki_x; //::param::get("/Ki_y_G", Ki_y);
-	ros::param::get("/Ki_psi_G", Ki_psi);
+	ros::param::get("/ki_psi", Ki_psi);
 } // END OF update_gains_LL_controller()
 
 // THIS FUNCTION DISPLAYS THE UPDATED GAINS
@@ -518,22 +517,12 @@ int main(int argc, char **argv)
 			// UNCOMMENT ASAP
 			// Do not give desired heading at goal until within 10.0 meters of goal position
 			// Until then, give the desired heading to travel to goal location
-			if ((LL_state == 2) || (e_xy > 15.0))
+			if ((LL_state == 2) || (e_xy > 10.0))
 			{
-				psi_goal = atan2(e_y,e_x);       // [radians]
+				psi_goal = atan2(e_y,e_x);       // [radians] atan2 returns between -PI and PI 
 			}
 
 			e_psi = psi_goal - psi_NED;
-
-			// correct discontinuity in heading error
-			if (e_psi < ((-2.0*PI) + (0.1*2.0*PI)))
-			{
-				e_psi = e_psi + 2.0*PI;
-			}
-			if (e_psi > ((2.0*PI) - (0.1*2.0*PI)))
-			{
-				e_psi = e_psi - 2.0*PI;
-			}
 
 			while ((e_psi < -PI) || (e_psi >PI))
 			{
@@ -547,6 +536,26 @@ int main(int argc, char **argv)
 					e_psi = e_psi - 2.0*PI;
 				}
 			}
+			
+			// correct discontinuity in heading error
+			if (e_psi < (-PI + 0.1*PI))
+			{
+				e_psi = e_psi + 2.0*PI;
+			}
+			if (e_psi > (PI - 0.1*PI))
+			{
+				e_psi = e_psi - 2.0*PI;
+			}
+			
+			// correct discontinuity in heading error
+			// if (e_psi < ((-2.0*PI) + (0.1*2.0*PI)))
+			// {
+				// e_psi = e_psi + 2.0*PI;
+			// }
+			// if (e_psi > ((2.0*PI) - (0.1*2.0*PI)))
+			// {
+				// e_psi = e_psi - 2.0*PI;
+			// }
 
 			/* // if within error, have selective gains
 			if ((float)abs(e_psi) < 0.1)
@@ -580,9 +589,10 @@ int main(int argc, char **argv)
 			ROS_DEBUG("e_y: %.2f --PS", e_y);		// y posn. error
 			ROS_DEBUG("e_xy: %.2f --PS", e_xy);		// magnitude of posn. error
 			ROS_DEBUG("e_psi: %.2f --PS\n", e_psi);		// heading error
-
+			
+			// perhaps comment out the following if 
 			// if within a meter only control heading
-			if (e_xy < 5.0)
+			if (e_xy < 1.0)
 			{
 				T_x = 0.0;
 				T_y = 0.0;

@@ -1,8 +1,0 @@
-prefix=/home/amore/RobotX2022/devel
-
-Name: sparton_ahrs8_driver
-Description: Description of sparton_ahrs8_driver
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
