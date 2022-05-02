@@ -117,22 +117,26 @@ void GPS_Position_update(const sensor_msgs::NavSatFix::ConstPtr& gps_msg)
 	altitude = gps_msg->altitude; //sets altitude rom gps
 } // END OF GPS_Position_update()
 
+// THIS FUNCTION: Updates the USV heading given by the sparkfun compass 
+// ACCEPTS: std_msgs::Float32 from "/wamv/sensors/compass_vaule"
+// RETURNS: (VOID)
+// =============================================================================
 void sparkfun_update(const std_msgs::Float32::ConstPtr& compass_msg)
 {
 	compass_psi = compass_msg->data;
 	psiNED = compass_psi*(PI/180.0);
 	while ((psiNED < -PI) || (psiNED > PI))
-        {
-                // Adjust psiNED back within -PI and PI
-                if (psiNED < -PI)
-                {
-                        psiNED = psiNED + 2.0*PI;
-                }
-                if (psiNED > PI)
-                {
-                        psiNED = psiNED - 2.0*PI;
-                }
-        }
+	{
+		// Adjust psiNED back within -PI and PI
+		if (psiNED < -PI)
+		{
+			psiNED = psiNED + 2.0*PI;
+		}
+		if (psiNED > PI)
+		{
+			psiNED = psiNED - 2.0*PI;
+		}
+	}
 }
 
 /*
@@ -332,12 +336,12 @@ int main(int argc, char **argv)
 				nav_ned_msg.child_frame_id = "base_link";	// child frame
 
 				// Fill the USV pose in NED
-				nav_ned_msg.pose.pose.position.x = xNED;	// FIX THIS BACK LATER
-				nav_ned_msg.pose.pose.position.y = yNED;	// FIX THIS BACK LATER
+				nav_ned_msg.pose.pose.position.x = xNED;
+				nav_ned_msg.pose.pose.position.y = yNED;
 				nav_ned_msg.pose.pose.position.z = 0.0;		// zNED;
 				nav_ned_msg.pose.pose.orientation.x = 0.0;	// phiNED;
 				nav_ned_msg.pose.pose.orientation.y = 0.0;	// thetaNED;
-				nav_ned_msg.pose.pose.orientation.z = psiNED;	// FIX THIS BACK LATER
+				nav_ned_msg.pose.pose.orientation.z = psiNED;
 				nav_ned_msg.pose.pose.orientation.w = 1.23456;
 				nav_ned_msg.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 

@@ -7,14 +7,26 @@ project(jetson)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy cv_bridge std_msgs nav_msgs image_transport sensor_msgs geometry_msgs geographic_msgs message_generation message_runtime)
+find_package(catkin REQUIRED COMPONENTS
+	roscpp
+	rospy
+	cv_bridge
+	std_msgs
+	nav_msgs
+	image_transport
+	sensor_msgs
+	geometry_msgs
+	geographic_msgs
+	message_generation
+	message_runtime
+	message_filters
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
-
 include_directories(${catkin_INCLUDE_DIRS})
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -136,7 +148,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(camera_capture src/camera_capture.cpp)	# COMMENT THIS 1ST CMAKE
+add_executable(camera_capture src/camera_capture.cpp)
 add_executable(mission_control src/mission_control.cpp)
 add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)
 add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)
@@ -153,7 +165,7 @@ add_executable(path_planner src/path_planner.cpp)
 ## same as for the library above
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(camera_capture ${catkin_LIBRARIES} ${OpenCV_LIBS})	# COMMENT THIS 1ST CMAKE
+target_link_libraries(camera_capture ${catkin_LIBRARIES} ${OpenCV_LIBS})
 target_link_libraries(mission_control ${catkin_LIBRARIES})
 target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
 target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})
@@ -168,10 +180,10 @@ target_link_libraries(path_planner ${catkin_LIBRARIES})
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+ catkin_install_python(PROGRAMS
+   scripts/data_compiler.py
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html

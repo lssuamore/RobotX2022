@@ -8,19 +8,28 @@
   </include>
 
   <!-- creates all the parameters --> 
-  <param name="/Kp_xy_G" value="1.0" />
-  <param name="/Kp_psi_G" value="1.0" />
-  <param name="/Kd_xy_G" value="1.0" />
-  <param name="/Kd_psi_G" value="1.0" />
-  <param name="/Ki_xy_G" value="0.0" />
-  <param name="/Ki_psi_G" value="0.0" />
+  <param name="/kp_xy" value="0.5" />
+  <param name="/kp_psi" value="1.0" />
+  <param name="/kd_xy" value="0.9" />
+  <param name="/kd_psi" value="1.0" />
+  <param name="/ki_xy" value="0.0" />
+  <param name="/ki_psi" value="0.0" />
   
-  <param name="/MC_state_G" value="1" />	<!-- SET THIS TO 0:ON STANDBY, 1:STATION-KEEPING, 2:WAYFINDING -->
-  <param name="/LL_state_G" value="1" />	<!-- SET THIS TO 1:DUAL-AZIMUTHING STATION-KEEPING, 2:DIFFERENTIAL WAYFINDING -->
+  <!-- SET THIS TO 0:ON STANDBY, 1:STATION-KEEPING, 2:WAYFINDING -->
+  <param name="/MC" value="1" />
   
-  <param name="/x_goal_G" value="245.0" />	<!-- SET THIS IN METERS -->
-  <param name="/y_goal_G" value="-50.0" />	<!-- SET THIS IN METERS -->
-  <param name="/psi_goal_G" value="0.0" />	<!-- SET THIS BETWEEN -PI AND PI RADIANS -->
+  <!-- SET THIS TO 1:DUAL-AZIMUTHING STATION-KEEPING, 2:DIFFERENTIAL WAYFINDING -->
+  <param name="/LL" value="1" />
+  
+  <param name="/x_G" value="0.0" />		<!-- SET THIS IN METERS -->
+  <param name="/y_G" value="0.0" />		<!-- SET THIS IN METERS -->
+  <param name="/psi_G" value="0.0" />		<!-- SET THIS BETWEEN -PI AND PI RADIANS -->
+  
+  <param name="/x_north" value="20.0" />	<!-- SET THIS IN METERS -->
+  <param name="/y_north" value="0.0" />	<!-- SET THIS IN METERS -->
+  
+  <param name="/x_south" value="-20.0" />	<!-- SET THIS IN METERS -->
+  <param name="/y_south" value="0.0" />	<!-- SET THIS IN METERS -->
   
   <!-- Launches codes -->
   <node pkg="jetson" type="navigation_array_outdoor" name="navigation_array_outdoor" output="screen">

@@ -87,7 +87,7 @@ ros::Time current_time, last_time;						// creates time variables
 // =====================================================
 void parameters_function()
 {
-	ros::param::get("/MC_state_G", MC_state);
+	ros::param::get("/MC", MC_state);
 } // END OF parameters_function()
 
 // THIS FUNCTION: Updates and publishes all subsytem states, as well as mission_control state dependent on current system statuses
@@ -133,6 +133,16 @@ void state_update()						// NOTE: To simplify, use just message variables !!!!!!
 		else if (MC_state == 2)
 		{
 			// DO WAYFINDING
+			NA_state = 1;
+			PP_state = 2;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;										// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;										// Propulsion system on standby
+			}
 		}
 		else
 		{
@@ -240,20 +250,17 @@ void pp_USV_pose_update_state_update(const std_msgs::Bool status)
 // =============================================================================
 void NED_goal_pose_published_update(const std_msgs::Bool status)
 {
-	//NED_goal_pose_published = status.data;
 	if (status.data)
 	{
 		if (!NED_goal_pose_published)			// if the goal pose has been published and hasn't been updated
 		{
 			NED_goal_pose_published = true;
-			//ROS_INFO("GOAL POSE PUBLISHED TO PROPULSION_SYSTEM");
 			loop_goal_published = loop_count;
 		}
 	}
 	else
 	{
 		NED_goal_pose_published = false;
-		//ROS_INFO("GOAL POSE NOT PUBLISHED TO PROPULSION_SYSTEM");
 	}
 } // END OF NED_goal_pose_published_update()
 

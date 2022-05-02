@@ -54,13 +54,25 @@ int point = 0;                     		    		// number of points on trajectory rea
 int goal_poses;              					// total number of poses to reach
 
 float x_goal[100], y_goal[100], psi_goal[100];			// arrays to hold the NED goal poses
+float x_North, y_North, x_mid, y_mid, x_South, y_South;				// positions of North and South points for figure 8
 float x_usv_NED, y_usv_NED, psi_NED; 				// vehicle position and heading (pose) in NED
 float e_x, e_y, e_xy, e_psi;					// current errors between goal pose and usv pose
 
 bool E_reached = false;        					// false means the last point has not been reached
+bool calculations_done = false; 				// false means the array of waypoints have not been created
 
-float e_xy_allowed = 1.0;       				// positional error tolerance threshold; NOTE: make as small as possible
+float e_xy_allowed = 1.4;       				// positional error tolerance threshold; NOTE: make as small as possible
 float e_psi_allowed = 0.4;      				// heading error tolerance threshold; NOTE: make as small as possible
+
+//Array of poses for making the circle for the turtle
+float x_N[5];
+float y_N[5];
+float psi_N[5];
+
+//Array of poses for making the circle for the platypus
+float x_S[5];
+float y_S[5];
+float psi_S[5];
 
 std_msgs::Bool pp_initialization_status;			// "pp_initialization_state" message
 ros::Publisher pp_initialization_state_pub;			// "pp_initialization_state" publisher
@@ -85,10 +97,28 @@ ros::Time current_time, last_time;				// creates time variables
 // =====================================================
 void parameters_function()
 {
-	ros::param::get("/x_goal_G", x_goal[0]);
-	ros::param::get("/y_goal_G", y_goal[0]);
-	ros::param::get("/psi_goal_G", psi_goal[0]);
-	point = 0;				// take this out with wayfinding addition
+	if (PP_state == 1)	//	1 = Task 1: Station-Keeping
+	{
+		ros::param::get("/x_G", x_goal[0]);
+		ros::param::get("/y_G", y_goal[0]);
+		ros::param::get("/psi_G", psi_goal[0]);
+		while ((psi_goal[0] < -PI) || (psi_goal[0] > PI))
+		{
+			// Adjust psi_goal[0] back within -PI and PI
+			if (psi_goal[0] < -PI)
+			{
+				psi_goal[0] = psi_goal[0] + 2.0*PI;
+			}
+			if (psi_goal[0] > PI)
+			{
+				psi_goal[0] = psi_goal[0] - 2.0*PI;
+			}
+		}
+	}
+	ros::param::get("/x_north", x_North);
+	ros::param::get("/y_north", y_North);
+	ros::param::get("/x_south", x_South);
+	ros::param::get("/y_south", y_South);
 } // END OF parameters_function()
 
 // THIS FUNCTION: Updates the current NED USV goal pose
@@ -97,7 +127,7 @@ void parameters_function()
 // =============================================================================
 void goal_pose_update()
 {
-	if (PP_state == 1) // if path_planner is in station keeping mode
+	if (PP_state == 1)	//	1 = Task 1: Station-Keeping
 	{
 		// Update NED USV goal pose to station keep at from launch file
 		parameters_function();
@@ -151,6 +181,10 @@ void pp_state_update(const jetson::state_msg::ConstPtr& msg)
 	if (pp_initialization_status.data)
 	{
 		PP_state = msg->state.data;
+		if (PP_state == 1)	//	1 = Task 1: Station-Keeping
+		{
+			point = 0;
+		}
 	}
 } // END OF pp_state_update()
 
@@ -205,6 +239,96 @@ void current_goal_pose_publish()
 	current_goal_pose_pub.publish(current_goal_pose_msg);		// publish goal usv pose to "current_goal_pose"
 	goal_pose_publish_status.data = true;
 } // END OF current_goal_pose_publish()
+
+// THIS FUNCTION: Generates the figure 8 pattern 
+// ACCEPTS: (VOID) Uses global North and South points
+// RETURNS: (VOID) Populates array of poses 
+// =============================================================================
+void calculate_path()
+{
+	// first calculate the midpoint
+	x_mid = (x_North + x_South)/2.0;
+	y_mid = (y_North + y_South)/2.0;
+	
+	// now fill array of poses
+	int cur_point = 0;
+	float r = 8.0;									// [m] radius of circles around north and south points of figure 8
+	
+	// first pose - mid point 
+	x_goal[cur_point] = x_mid;
+	y_goal[cur_point] = y_mid;
+	psi_goal[cur_point] = 0.0;
+	cur_point++;
+	
+	// next 5 poses around North point
+	// second pose - left
+	x_goal[cur_point] = x_North;
+	y_goal[cur_point] = y_North-r;
+	psi_goal[cur_point] = 0.0;
+	cur_point++;
+	// third pose
+	x_goal[cur_point] = x_North+r*0.707107;
+	y_goal[cur_point] = y_North-r*0.707107;
+	psi_goal[cur_point] = PI/4.0;;
+	cur_point++;
+	// fourth pose - top
+	x_goal[cur_point] = x_North+r;
+	y_goal[cur_point] = y_North;
+	psi_goal[cur_point] = PI/2.0;
+	cur_point++;
+	// fifth pose
+	x_goal[cur_point] = x_North+r*0.707107;
+	y_goal[cur_point] = y_North+r*0.707107;
+	psi_goal[cur_point] = 3.0*PI/4.0;
+	cur_point++;
+	// sixth pose - right 
+	x_goal[cur_point] = x_North;
+	y_goal[cur_point] = y_North+r;
+	psi_goal[cur_point] = PI;
+	cur_point++;
+	
+	// seventh pose - mid point 
+	x_goal[cur_point] = x_mid;
+	y_goal[cur_point] = y_mid;
+	psi_goal[cur_point] = PI;
+	cur_point++;
+	
+	// next 5 poses around North point
+	// eighth pose - left
+	x_goal[cur_point] = x_South;
+	y_goal[cur_point] = y_South-r;
+	psi_goal[cur_point] = PI;
+	cur_point++;
+	// ninth pose
+	x_goal[cur_point] = x_South-r*0.707107;
+	y_goal[cur_point] = y_South-r*0.707107;
+	psi_goal[cur_point] = 3.0*PI/4.0;
+	cur_point++;
+	// tenth pose - bottom
+	x_goal[cur_point] = x_South-r;
+	y_goal[cur_point] = y_South;
+	psi_goal[cur_point] = PI/2.0;
+	cur_point++;
+	// eleventh pose
+	x_goal[cur_point] = x_South-r*0.707107;
+	y_goal[cur_point] = y_South+r*0.707107;
+	psi_goal[cur_point] = PI/4.0;
+	cur_point++;
+	// twelfth pose - right 
+	x_goal[cur_point] = x_South;
+	y_goal[cur_point] = y_South+r;
+	psi_goal[cur_point] = 0.0;
+	cur_point++;
+	
+	// thirteenth pose - mid point 
+	x_goal[cur_point] = x_mid;
+	y_goal[cur_point] = y_mid;
+	psi_goal[cur_point] = 0.0;
+	cur_point++;
+	
+	goal_poses = cur_point;
+	calculations_done = true;
+} // end of calculate_path()
 //............................................................End of Functions............................................................
 
 int main(int argc, char **argv)
@@ -251,56 +375,73 @@ int main(int argc, char **argv)
 		//	0 = On standby
 		//	1 = Station-Keeping
 		//	2 = Wayfinding
-
 		switch(PP_state)
 		{
 			case 0:						// On standby
 				// reset all variables to be used for next run
 				goal_pose_publish_status.data = false;
 				E_reached = false;
-				e_xy_allowed = 0.4;    			// positional error tolerance threshold; NOTE: make as small as possible
-				e_psi_allowed = 0.4;   			// heading error tolerance threshold; NOTE: make as small as possible
+				calculations_done = false;
 				break;
 			case 1:						// Station-Keeping
 				current_goal_pose_publish();
 				break;
 			case 2:						// Wayfinding
-				if ((NA_state == 1) && (PP_state == 2) && (PS_state == 1))	// if the navigation_array is providing NED USV state, Wayfinding planner is active, and the propulsion_system is ON
+				if (calculations_done)
 				{
-					// determine error in x and y (position)
-					e_x = x_goal[point] - x_usv_NED;		// calculate error in x position
-					e_y = y_goal[point] - y_usv_NED;		// calculate error in y position
-					e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));		// calculate magnitude of positional error
-					e_psi = psi_goal[point] - psi_NED;
-
-					if ((e_xy < e_xy_allowed) && (e_psi < e_psi_allowed) && (!E_reached))
+					if ((NA_state == 1) && (PS_state == 1))		// if the navigation_array is providing NED USV state, and the propulsion_system is ON
 					{
-						point += 1;
-						ROS_INFO("Point %i of %i reached. --MC", point, goal_poses);
-						if (point==goal_poses)
+						// determine error in x and y (position)
+						e_x = x_goal[point] - x_usv_NED;                                       // calculate error in x position
+						e_y = y_goal[point] - y_usv_NED;                                       // calculate error in y position
+						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
+						e_psi = psi_goal[point] - psi_NED;
+						
+						while ((e_psi < -PI) || (e_psi > PI))
 						{
-						  E_reached = true;
-						  ROS_INFO("End point has been reached. --MC\n");
+							// Adjust e_psi back within -PI and PI
+							if (e_psi < -PI)
+							{
+								e_psi = e_psi + 2.0*PI;
+							}
+							if (e_psi > PI)
+							{
+								e_psi = e_psi - 2.0*PI;
+							}
 						}
-					}
+						
+						if ((e_xy < e_xy_allowed) && (abs(e_psi) < e_psi_allowed) && (!E_reached))	// CAUTION: might need to type cast float on abs(e_psi)
+						{
+							point += 1;
+							ROS_INFO("Point %i of %i reached. --MC", point, goal_poses);
+							if (point==goal_poses)
+							{
+							  E_reached = true;
+							  ROS_INFO("End point has been reached. --MC\n");
+							}
+						}
 
-					if (E_reached)		// reset and go to points again once last point has been reached with a smaller tolerance threshold
-					{
-						point = 0;
-						e_xy_allowed /= 2;
-						e_psi_allowed = e_psi_allowed - 0.1;
-						E_reached = false;
-					}
-				} // if (PP_state == 2)
-				current_goal_pose_publish();
+						if (E_reached)
+						{
+							point = 0;			// station-keep at first point in array
+						}
+					} // if ((NA_state == 1) && (PS_state == 1))
+					current_goal_pose_publish();
+					calculations_done = false;
+				}
+				else
+				{
+					calculate_path();																// this function will generate the updated array of poses
+					goal_pose_publish_status.data = false;
+				}
 				break;
 			default:
 				break;
 		}	// switch(PP_state)
 
-		ros::spinOnce();			// update subscribers
-		loop_rate.sleep();			// sleep for set loop_rate
-		last_time = current_time;		// update last_time
+		ros::spinOnce();					// update subscribers
+		loop_rate.sleep();				// sleep for set loop_rate
+		last_time = current_time;	// update last_time
 	} // while(ros::ok())
 
 	ros::spinOnce();

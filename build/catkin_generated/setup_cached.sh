@@ -7,5 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PATH='/opt/ros/melodic/bin:/home/amore/.local/bin:/usr/local/cuda-10.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
-export PWD='/home/amore/RobotX2022/build'
+export PWD='/home/brad/RobotX2022/build'
