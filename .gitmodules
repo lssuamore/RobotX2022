@@ -1,9 +1,27 @@
-[submodule "src/vrx"]
-	path = src/vrx
-	url = https://github.com/osrf/vrx.git
-[submodule "opencv"]
-	path = opencv
-	url = https://github.com/opencv/opencv.git
+[submodule "Pozyx-Arduino-library"]
+	path = src/sensors/Pozyx-Arduino-library
+	url = https://github.com/pozyxLabs/Pozyx-Arduino-library.git
+[submodule "Pozyx-Python-library"]
+	path = src/sensors/Pozyx-Python-library
+	url = https://github.com/pozyxLabs/Pozyx-Python-library.git
+[submodule "pozyx_drivers"]
+	path = src/sensors/pozyx_drivers
+	url = https://github.com/srv/pozyx_drivers.git
+[submodule "rosserial"]
+	path = src/sensors/rosserial
+	url = https://github.com/ros-drivers/rosserial.git
+[submodule "rtcm_msgs"]
+	path = src/sensors/rtcm_msgs
+	url = https://github.com/tilk/rtcm_msgs.git
+[submodule "sparton_ahrs8_driver"]
+	path = src/sensors/sparton_ahrs8_driver
+	url = https://github.com/Mayankm96/sparton_ahrs8_driver.git
+[submodule "ublox"]
+	path = src/sensors/ublox
+	url = https://github.com/KumarRobotics/ublox.git
 [submodule "geonav_transform"]
 	path = src/geonav_transform
 	url = https://github.com/bsb808/geonav_transform.git
+[submodule "zed-ros-wrapper"]
+	path = src/sensors/zed-ros-wrapper
+	url = https://github.com/stereolabs/zed-ros-wrapper.git
