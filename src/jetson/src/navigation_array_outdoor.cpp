@@ -117,6 +117,7 @@ void gps_processor(const sensor_msgs::NavSatFix::ConstPtr& gps_msg)
 	altitude = gps_msg->altitude; //sets altitude rom gps
 } // END OF gps_processor()
 
+/*
 // THIS FUNCTION: Updates the USV heading given by the sparkfun compass 
 // ACCEPTS: std_msgs::Float32 from "/wamv/sensors/compass_vaule"
 // RETURNS: (VOID)
@@ -138,6 +139,7 @@ void sparkfun_update(const std_msgs::Float32::ConstPtr& compass_msg)
 		}
 	}
 }
+*/
 
 /*
 void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
@@ -163,7 +165,7 @@ void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
 }
 */
 
-/*
+
 // THIS FUNCTION: Updates the USV heading quarternion and angular velocities
 // ACCEPTS: sensor_msgs::Imu from Sparton
 // RETURNS: (VOID)
@@ -188,7 +190,7 @@ void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
 	// Convert the orientation to NED from ENU
 	//phiNED = theta;
 	//thetaNED = phi;
-	psiNED = PI/2.0 - psi;
+	psiNED = -psi;
 
 	while ((psiNED < -PI) || (psiNED > PI))
 	{
@@ -204,7 +206,6 @@ void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
 	}
 	//ROS_INFO("Sparton_heading: %6.2f  -- NA", psiNED);
 } // END OF imu_processor()
-*/
 
 /*
 // THIS FUNCTION: Updates the USV heading quarternion from the ardusimple
@@ -297,8 +298,8 @@ int main(int argc, char **argv)
 	// Subscribers
 	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);			// Gives navigationn array status update
 	ros::Subscriber gpspos_sub = nh2.subscribe("/gps/fix", 10, gps_processor);		// subscribes to GPS position from indoor gps
-	ros::Subscriber compass_sub = nh3.subscribe("compass_value", 10, sparkfun_update);
-	//ros::Subscriber imu_sub = nh3.subscribe("/imu/data", 100, imu_processor);	// subscribes to IMU
+	//ros::Subscriber compass_sub = nh3.subscribe("compass_value", 10, sparkfun_update);
+	ros::Subscriber imu_sub = nh3.subscribe("/imu/data", 100, imu_processor);	// subscribes to IMU
 	//ros::Subscriber compass_sub = nh3.subscribe("/zed2i/zed_node/imu/mag", 10, compass_update);      // subscribes to IMU
 	ros::Subscriber geonav_odom_sub = nh4.subscribe("geonav_odom", 10, ned_func);
 	//ros::Subscriber gpsheading_sub = nh5.subscribe("/gps/navheading", 10, GPS_heading);		// subscribes to GPS position from indoor gps

@@ -3,11 +3,15 @@
   <!-- This is the format for a comment in HTML -->
   <include file="$(find jetson)/launch/ardusimple.launch">
   </include>
+  <include file="$(find sparton_ahrs8_driver)/launch/ahrs-8.launch">
+  </include>
+  <!-- include file="$(find sparton_ahrsm2_driver)/launch/ahrs-M2.launch" -->
+  <!-- /include -->
   <!-- include file="$(find zed_wrapper)/launch/zed2i.launch" -->
   <!-- /include -->
   <node pkg="rosserial_python" type="serial_node.py" name="Teensy" args="/dev/ttyACM2">
   </node>
-  <node pkg="rosserial_python" type="serial_node.py" name="Compass" args="/dev/ttyACM1">
-  </node>
+  <!-- node pkg="rosserial_python" type="serial_node.py" name="Compass" args="/dev/ttyACM1" -->
+  <!-- /node -->
 
 </launch>

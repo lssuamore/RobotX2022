@@ -59,8 +59,8 @@ class task_info {
 
   static getMessageSize(object) {
     let length = 0;
-    length += _getByteLength(object.name);
-    length += _getByteLength(object.state);
+    length += object.name.length;
+    length += object.state.length;
     return length + 8;
   }
 
