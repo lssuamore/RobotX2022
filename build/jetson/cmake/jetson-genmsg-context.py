@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg;/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg;/home/brad/RobotX2022/src/jetson/msg/state_msg.msg;/home/brad/RobotX2022/src/jetson/msg/task_info.msg"
+messages_str = "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg;/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg;/home/brad/RobotX2022/src/jetson/msg/state_msg.msg;/home/brad/RobotX2022/src/jetson/msg/task_info.msg;/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg"
 services_str = ""
 pkg_name = "jetson"
 dependencies_str = "geometry_msgs;std_msgs"

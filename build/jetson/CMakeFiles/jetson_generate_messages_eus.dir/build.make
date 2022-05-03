@@ -57,6 +57,7 @@ jetson/CMakeFiles/jetson_generate_messages_eus: /home/brad/RobotX2022/devel/shar
 jetson/CMakeFiles/jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/usv_pose_msg.l
 jetson/CMakeFiles/jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/state_msg.l
 jetson/CMakeFiles/jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/task_info.l
+jetson/CMakeFiles/jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/control_efforts.l
 jetson/CMakeFiles/jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetson/manifest.l
 
 
@@ -68,9 +69,9 @@ jetson/CMakeFiles/jetson_generate_messages_eus: /home/brad/RobotX2022/devel/shar
 
 /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/usv_pose_msg.l: /opt/ros/noetic/lib/geneus/gen_eus.py
 /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/usv_pose_msg.l: /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg
+/home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/usv_pose_msg.l: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/usv_pose_msg.l: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/usv_pose_msg.l: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/usv_pose_msg.l: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from jetson/usv_pose_msg.msg"
 	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg
 
@@ -86,8 +87,14 @@ jetson/CMakeFiles/jetson_generate_messages_eus: /home/brad/RobotX2022/devel/shar
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from jetson/task_info.msg"
 	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/RobotX2022/src/jetson/msg/task_info.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg
 
+/home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/control_efforts.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/control_efforts.l: /home/brad/RobotX2022/src/jetson/msg/control_efforts.msg
+/home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/control_efforts.l: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp code from jetson/control_efforts.msg"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/RobotX2022/src/jetson/msg/control_efforts.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg
+
 /home/brad/RobotX2022/devel/share/roseus/ros/jetson/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp manifest code for jetson"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating EusLisp manifest code for jetson"
 	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/brad/RobotX2022/devel/share/roseus/ros/jetson jetson geometry_msgs std_msgs
 
 jetson_generate_messages_eus: jetson/CMakeFiles/jetson_generate_messages_eus
@@ -95,6 +102,7 @@ jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetso
 jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/usv_pose_msg.l
 jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/state_msg.l
 jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/task_info.l
+jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetson/msg/control_efforts.l
 jetson_generate_messages_eus: /home/brad/RobotX2022/devel/share/roseus/ros/jetson/manifest.l
 jetson_generate_messages_eus: jetson/CMakeFiles/jetson_generate_messages_eus.dir/build.make
 

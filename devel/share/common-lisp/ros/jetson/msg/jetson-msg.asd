@@ -8,6 +8,8 @@
   :components ((:file "_package")
     (:file "NED_waypoints" :depends-on ("_package_NED_waypoints"))
     (:file "_package_NED_waypoints" :depends-on ("_package"))
+    (:file "control_efforts" :depends-on ("_package_control_efforts"))
+    (:file "_package_control_efforts" :depends-on ("_package"))
     (:file "state_msg" :depends-on ("_package_state_msg"))
     (:file "_package_state_msg" :depends-on ("_package"))
     (:file "task_info" :depends-on ("_package_task_info"))
