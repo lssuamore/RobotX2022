@@ -43,6 +43,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
     "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg"
     "/home/brad/RobotX2022/src/jetson/msg/task_info.msg"
+    "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg"
     )
 endif()
 
@@ -91,6 +92,10 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/jetson" TYPE FILE FILES "/home/brad/RobotX2022/src/jetson/package.xml")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/jetson" TYPE PROGRAM FILES "/home/brad/RobotX2022/build/jetson/catkin_generated/installspace/data_compiler.py")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)

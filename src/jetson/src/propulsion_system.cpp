@@ -31,6 +31,8 @@
 #include "std_msgs/Bool.h"
 #include "jetson/usv_pose_msg.h"	// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
 #include "std_msgs/Int32.h"		// thruster commands
+#include "std_msgs/Float64.h"		// control_efforts values
+#include "jetson/control_efforts.h"		// message that holds tx,ty, and m_z
 //...........................................End of Included Libraries and Message Types....................................
 
 
@@ -51,13 +53,13 @@ int PP_state = 0;	//	0 = On standby		//	1 = Task 1: Station-Keeping			//	2 = Tas
 
 //	STATES CONCERNED WITH "propulsion_system"
 int PS_state = 0;	//	0 = On standby		//	1 = Propulsion system ON
-int LL_state = 1;	//	1 = PID HP Dual-azimuthing station-keeping	//	2 = PID HP Differential wayfinding
+int LL_state = 1;	//	1 = PID HP Dual-azimuthing station-keeping					//	2 = PID HP Differential wayfinding				//	3 = PID HP Ackermann wayfinding
 
-float dt = 0.5;//0.25;				// [s] used for differential term
+float dt = 0.5;		// [s] time interval in between calculations, which is used for differential term
 
-float x_goal, y_goal, psi_goal;			// [m, m, radians] desired position and heading
-float x_usv_NED, y_usv_NED, psi_NED; 		// vehicle position and heading (pose) in NED
-float e_x, e_y, e_xy, e_psi;			// current errors between goal pose and usv pose
+float x_goal, y_goal, psi_goal;						// [m, m, radians] desired position and heading
+float x_usv_NED, y_usv_NED, psi_NED; 	// vehicle position and heading (pose) in NED
+float e_x, e_y, e_xy, e_psi;							// current errors between goal pose and usv pose
 
 // initialize accumulated total errors for integral term
 float e_x_total = 0;
@@ -72,29 +74,33 @@ float e_psi_prev = 0;
 
 float T_x;			// thrust to set in x-direction in earth-fixed frame
 float T_y;			// thrust to set in y-direction in earth-fixed frame
-float T_x_bf;			// thrust in x-direction in body-fixed frame
-float T_y_bf;			// thrust in y-direction in body-fixed frame
+float T_x_bf;		// thrust in x-direction in body-fixed frame
+float T_y_bf;		// thrust in y-direction in body-fixed frame
 float M_z;			// desired moment around the z-axis
 
 // matrix to hold outputs of controlller
 //float tau[3][1];
 
-float T_p;			// used to set the port (left) thruster output
-float T_s;			// used to set the starboard (right) thruster output
-float A_p;			// used to set the port (left) thruster angle
-float A_s;			// used to set the starboard (right) thruster angle
+float T_p;			// port (left) thruster output
+float T_s;			// starboard (right) thruster output
+float A_p;			// port (left) thruster angle
+float A_s;			// starboard (right) thruster angle
 
 // Used for correction of saturated thrust values
-float T_p_C;			// Corrected port (left) thrust output
-float T_s_C;			// Corrected starboard (right) thrust output
+float T_p_C;		// corrected port (left) thrust output
+float T_s_C;		// corrected starboard (right) thrust output
 
 float Kp_x, Kp_y, Kp_psi;	// Proportional gains
 float Kd_x, Kd_y, Kd_psi;	// Differential gains
-float Ki_x, Ki_y, Ki_psi;	// Integration gains
+float Ki_x, Ki_y, Ki_psi;		// Integration gains
 
-float B = 2.0;                  // [m] FAU FOUND IT TO BE 2.0
+// USV system id
+float B = 2.0;							// [m] FAU FOUND IT TO BE 2.0
+float lx = 2.3;							// [m] bf x-offset of thrusters
+float ly = 1.0;							// [m] bf y-offset of thrusters
 /*
 float L = 4.6;			// [m] length of USV, 16 ft or 4.88 m
+
 
 // Transformation Matrix to convert from external dynamics to internal dynamics
 float Transform[3][4] = {
@@ -122,13 +128,16 @@ float Transform_pseudoinverse[4][3] = {
 };
 
 // Control Allocation output
-float F_xp;					// force in the x-direction on the port side
-float F_yp;					// force in the y-direction on the port side
-float F_xs;					// force in the x-direction on the starboard side
-float F_ys;					// force in the y-direction on the starboard side
+float F_xp;					// force in the x-direction on port side
+float F_yp;					// force in the y-direction on port side
+float F_xs;					// force in the x-direction on starboard side
+float F_ys;					// force in the y-direction on starboard side
 
 std_msgs::Bool ps_initialization_status;	// "ps_initialization_state" message
 ros::Publisher ps_initialization_state_pub;	// "ps_initialization_state" publisher
+
+jetson::control_efforts control_efforts_msg;	// "control_efforts_topic" message
+ros::Publisher control_efforts_pub;	// "ps_initialization_state" publisher
 
 ros::Time current_time, last_time;		// creates time variables
 //..............................................................End of Global Variables............................................................
@@ -227,7 +236,6 @@ void goal_pose_update(const jetson::usv_pose_msg::ConstPtr& goal)
 	{
 		x_goal = goal->position.x;
 		y_goal = goal->position.y;
-		//ros::param::get("/psi_goal_G", psi_goal);
 		psi_goal = goal->psi.data;
 	}
 } // END OF goal_pose_update()
@@ -429,7 +437,7 @@ int main(int argc, char **argv)
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
 
 	// NodeHandles
-	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11;
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12;
 
 	// Subscribers
 	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, na_state_update);
@@ -440,10 +448,11 @@ int main(int argc, char **argv)
 
 	// Publishers
 	ps_initialization_state_pub = nh7.advertise<std_msgs::Bool>("ps_initialization_state", 1);	// state of initialization
-	ros::Publisher stbd_T_pub = nh7.advertise<std_msgs::Int32>("thruster_int_right", 10);		// float value between -1.0 and 1.0, speed to right thruster
-	ros::Publisher port_T_pub = nh8.advertise<std_msgs::Int32>("thruster_int_left", 10);		// float value between -1.0 and 1.0, speed to left thruster
-	ros::Publisher stbd_A_pub = nh9.advertise<std_msgs::Int32>("angle_int_right", 10);		// float value between -PI to PI, angle to right thruster
-	ros::Publisher port_A_pub = nh10.advertise<std_msgs::Int32>("angle_int_left", 10);		// float value between -PI to PI, angle to left thruster
+	control_efforts_pub = nh8.advertise<jetson::control_efforts>("control_efforts_topic", 1);		// control_efforts
+	ros::Publisher stbd_T_pub = nh9.advertise<std_msgs::Int32>("thruster_int_right", 10);			// speed to right thruster
+	ros::Publisher port_T_pub = nh10.advertise<std_msgs::Int32>("thruster_int_left", 10);			// speed to left thruster
+	ros::Publisher stbd_A_pub = nh11.advertise<std_msgs::Int32>("angle_int_right", 10);			// angle to right thruster
+	ros::Publisher port_A_pub = nh12.advertise<std_msgs::Int32>("angle_int_left", 10);				// angle to left thruster
 
 	// Local variables
 	std_msgs::Int32 LT, RT, LA, RA;									// LT is left thrust, RT is right thrust, LA is left thruster angle, RA is right thruster angle
@@ -492,7 +501,7 @@ int main(int argc, char **argv)
 					T_x = Kp_x*e_x;
 					T_y = Kp_y*e_y;
 				}
-				else if (LL_state == 2)		// 2 = PID HP Differential wayfinding controller
+				else if ((LL_state == 2) || (LL_state == 3))		// 2 = PID HP Differential wayfinding controller		//	3 = PID HP Ackermann wayfinding controller
 				{
 					T_x = Kp_x*e_xy;
 				}
@@ -507,7 +516,7 @@ int main(int argc, char **argv)
 					T_x = Kp_x*e_x + Kd_x*((e_x - e_x_prev)/dt) + Ki_x*e_x_total;
 					T_y = Kp_y*e_y + Kd_y*((e_y - e_y_prev)/dt) + Ki_y*e_y_total;
 				}
-				else if (LL_state == 2)		// 2 = PID HP Differential wayfinding controller
+				else if ((LL_state == 2) || (LL_state == 3))		// 2 = PID HP Differential wayfinding controller		//	3 = PID HP Ackermann wayfinding controller
 				{
 					e_xy_total = e_xy_total + ((e_xy_prev + e_xy)/2.0)*dt;	// trapezoidal integration of errors for integral term
 					T_x = Kp_x*e_xy+ Kd_x*((e_xy - e_xy_prev)/dt) + Ki_x*e_xy_total;
@@ -515,11 +524,11 @@ int main(int argc, char **argv)
 			}
 
 			// UNCOMMENT ASAP
-			// Do not give desired heading at goal until within 10.0 meters of goal position
+			// Do not give desired heading at goal until within 15.0 meters of goal position
 			// Until then, give the desired heading to travel to goal location
-			if ((LL_state == 2) || (e_xy > 10.0))
+			if ((LL_state == 2) || (LL_state == 3) || (e_xy > 15.0))
 			{
-				psi_goal = atan2(e_y,e_x);       // [radians] atan2 returns between -PI and PI 
+				psi_goal = atan2(e_y,e_x);       // [radians] atan2() returns between -PI and PI 
 			}
 
 			e_psi = psi_goal - psi_NED;
@@ -537,15 +546,15 @@ int main(int argc, char **argv)
 				}
 			}
 			
-			// correct discontinuity in heading error
-			if (e_psi < (-PI + 0.1*PI))
-			{
-				e_psi = e_psi + 2.0*PI;
-			}
-			if (e_psi > (PI - 0.1*PI))
-			{
-				e_psi = e_psi - 2.0*PI;
-			}
+			//correct discontinuity in heading error
+			// if (e_psi < (-PI + 0.1*PI))
+			// {
+				// e_psi = e_psi + 2.0*PI;
+			// }
+			// if (e_psi > (PI - 0.1*PI))
+			// {
+				// e_psi = e_psi - 2.0*PI;
+			// }
 			
 			// correct discontinuity in heading error
 			// if (e_psi < ((-2.0*PI) + (0.1*2.0*PI)))
@@ -592,11 +601,11 @@ int main(int argc, char **argv)
 			
 			// perhaps comment out the following if 
 			// if within a meter only control heading
-			if (e_xy < 1.0)
-			{
-				T_x = 0.0;
-				T_y = 0.0;
-			}
+			// if (e_xy < 1.0)
+			// {
+				// T_x = 0.0;
+				// T_y = 0.0;
+			// }
 
 			// only control heading if heading is off by more than 45 degree
 			//if ((float)abs(e_psi) > 0.785)
@@ -604,7 +613,13 @@ int main(int argc, char **argv)
 			//	T_x = 0.0;
 			//	T_y = 0.0;
 			//}
-
+			
+			// fill out control_efforts message and publish to "control_efforts_topic"
+			control_efforts_msg.t_x.data = T_x;
+			control_efforts_msg.t_y.data = T_y;
+			control_efforts_msg.m_z.data = M_z;
+			control_efforts_pub.publish(control_efforts_msg);
+			// print control efforts to terminal window
 			ROS_DEBUG("\nControl Efforts --PS");
 			ROS_DEBUG("T_x_G: %.3f --PS", T_x);
 			ROS_DEBUG("T_y_G: %.3f --PS", T_y);
@@ -623,7 +638,8 @@ int main(int argc, char **argv)
 			{
 				M_z = 0.0;
 			} */
-
+			
+			// ALLOCATION to go from efforts to thruster commands
 			if (LL_state == 1)				//	1 = PID HP Dual-azimuthing station keeping controller
 			{
 				// Convert to USV body-fixed frame from global frame
@@ -692,6 +708,16 @@ int main(int argc, char **argv)
 
 				ROS_DEBUG("LT is: %f\n", T_p);		// displays left thrust value
 				ROS_DEBUG("RT is: %f\n", T_s);		// displays right thrust value */
+			}
+			else if (LL_state == 3)		// 3 = PID HP Ackermann wayfinding controller
+			{
+				// Use Ackermann drive configuration to set angles to thrusters 
+				A_p = -atan(lx/(M_z+ly));
+				A_s = -atan(lx/(M_z-ly));
+				
+				// Calculate torque to thrusters
+				T_p = T_x/(cos(A_p)+cos(A_s));
+				T_s = T_p;
 			}
 
 			ROS_DEBUG("Before corrections --------------");

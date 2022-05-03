@@ -110,12 +110,12 @@ void state_update(const jetson::state_msg::ConstPtr& msg)
 // ACCEPTS: sensor_msgs::NavSatFix from "/wamv/sensors/gps/gps/fix"
 // RETURNS: (VOID)
 // =============================================================================
-void GPS_Position_update(const sensor_msgs::NavSatFix::ConstPtr& gps_msg)
+void gps_processor(const sensor_msgs::NavSatFix::ConstPtr& gps_msg)
 {
 	latitude = gps_msg->latitude; //sets latitude from gps
 	longitude = gps_msg->longitude; //sets longitude from gps
 	altitude = gps_msg->altitude; //sets altitude rom gps
-} // END OF GPS_Position_update()
+} // END OF gps_processor()
 
 // THIS FUNCTION: Updates the USV heading given by the sparkfun compass 
 // ACCEPTS: std_msgs::Float32 from "/wamv/sensors/compass_vaule"
@@ -168,7 +168,7 @@ void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
 // ACCEPTS: sensor_msgs::Imu from Sparton
 // RETURNS: (VOID)
 // =============================================================================
- void IMU_processor(const sensor_msgs::Imu::ConstPtr& imu_msg)
+ void imu_processor(const sensor_msgs::Imu::ConstPtr& imu_msg)
 {
 	// gather orientation quaternion
 	q1 = imu_msg->orientation.x;
@@ -185,10 +185,10 @@ void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
 	//phi = atan2((2.0*(q1*q0 + q3*q2)) , (1.0 - 2.0*(pow(q1,2.0) + pow(q2,2.0))));
 	//theta = asin(2.0*(q0*q2 - q1*q3));
 	psi = atan2((2.0*(q3*q0 + q1*q2)) , (1.0 - 2.0*(pow(q2,2.0) + pow(q3,2.0)))); // orientation off x-axis
-	// Convert the orientation to NED from NWU
+	// Convert the orientation to NED from ENU
 	//phiNED = theta;
 	//thetaNED = phi;
-	psiNED = -1.0*psi + PI;// + 1.57;	// the heading of the Zed imu is offset from the gps by -90 degrees
+	psiNED = PI/2.0 - psi;
 
 	while ((psiNED < -PI) || (psiNED > PI))
 	{
@@ -201,9 +201,9 @@ void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
 		{
 			psiNED = psiNED - 2.0*PI;
 		}
-	}							// NEW
-//	ROS_INFO("Zed_heading: %6.2f  -- NA", psiNED);
-} // END OF IMU_processor()
+	}
+	//ROS_INFO("Sparton_heading: %6.2f  -- NA", psiNED);
+} // END OF imu_processor()
 */
 
 /*
@@ -240,13 +240,13 @@ void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
 // ACCEPTS: nav_msgs::Odometry from "geonav_odom"
 // RETURNS: (VOID)
 // =============================================================================
-void NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
+void ned_func(const nav_msgs::Odometry::ConstPtr& enu_state)
 {
 	// Convert the position to NED from ENU
 	xNED = enu_state->pose.pose.position.y;
 	yNED = enu_state->pose.pose.position.x;
 	zNED = -(enu_state->pose.pose.position.z);
-} // END OF NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
+} // END OF ned_func(const nav_msgs::Odometry::ConstPtr& enu_state)
 
 void nav_odom_publish()
 {
@@ -296,11 +296,11 @@ int main(int argc, char **argv)
 
 	// Subscribers
 	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);			// Gives navigationn array status update
-	ros::Subscriber gpspos_sub = nh2.subscribe("/gps/fix", 10, GPS_Position_update);		// subscribes to GPS position from indoor gps
+	ros::Subscriber gpspos_sub = nh2.subscribe("/gps/fix", 10, gps_processor);		// subscribes to GPS position from indoor gps
 	ros::Subscriber compass_sub = nh3.subscribe("compass_value", 10, sparkfun_update);
-	//ros::Subscriber imu_sub = nh3.subscribe("/zed2i/zed_node/imu/data", 100, IMU_processor);	// subscribes to IMU
+	//ros::Subscriber imu_sub = nh3.subscribe("/imu/data", 100, imu_processor);	// subscribes to IMU
 	//ros::Subscriber compass_sub = nh3.subscribe("/zed2i/zed_node/imu/mag", 10, compass_update);      // subscribes to IMU
-	ros::Subscriber geonav_odom_sub = nh4.subscribe("geonav_odom", 10, NED_Func);
+	ros::Subscriber geonav_odom_sub = nh4.subscribe("geonav_odom", 10, ned_func);
 	//ros::Subscriber gpsheading_sub = nh5.subscribe("/gps/navheading", 10, GPS_heading);		// subscribes to GPS position from indoor gps
 
 	// Publishers
