@@ -100,8 +100,8 @@ void state_update(const jetson::state_msg::ConstPtr& msg)
 } // END OF state_update()
 
 //..................................................................Sensor functions.................................................................
-// THIS FUNCTION: Updates the USV position in spherical ECEF coordinates 
-// ACCEPTS: sensor_msgs::NavSatFix from "/wamv/sensors/gps/gps/fix"
+// THIS FUNCTION: Updates the USV position in NED Pozyx frame 
+// ACCEPTS: geometry_msgs::Point"
 // RETURNS: (VOID)
 // =============================================================================
 void GPS_Position_update(const geometry_msgs::Point::ConstPtr& gps_msg)
@@ -173,25 +173,25 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8;
   
 	// Subscribers
-	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);                                    // Gives navigationn array status update
-	ros::Subscriber gpspos_sub = nh2.subscribe("point", 10, GPS_Position_update);							// subscribes to GPS position from indoor gps
-	ros::Subscriber imu_sub = nh3.subscribe("/zed2i/zed_node/imu/data", 100, IMU_processor);			// subscribes to IMU
+	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);			// Gives navigationn array status update
+	ros::Subscriber gpspos_sub = nh2.subscribe("point", 10, GPS_Position_update);			// subscribes to GPS position from indoor gps
+	ros::Subscriber imu_sub = nh3.subscribe("/zed2i/zed_node/imu/data", 100, IMU_processor);	// subscribes to IMU
 	
 	// Publishers
-	na_initialization_state_pub = nh5.advertise<std_msgs::Bool>("na_initialization_state", 1);				// publisher for state of initialization
-	nav_ned_pub = nh6.advertise<nav_msgs::Odometry>("nav_ned", 100); 											// USV NED state publisher //gps already in NED but will publish anyways using odometry message type	
+	na_initialization_state_pub = nh5.advertise<std_msgs::Bool>("na_initialization_state", 1);	// publisher for state of initialization
+	nav_ned_pub = nh6.advertise<nav_msgs::Odometry>("nav_ned", 100); 				// USV NED state publisher //gps already in NED but will publish anyways using odometry message type	
 	
 	// Initialize global variables
 	na_initialization_status.data = false;
-	current_time = ros::Time::now();   											// sets current time to the time it is now
-	last_time = ros::Time::now();        											// sets last time to the time it is now
+	current_time = ros::Time::now();   								// sets current time to the time it is now
+	last_time = ros::Time::now();        								// sets last time to the time it is now
 	  
 	// Set the loop sleep rate
-	ros::Rate loop_rate(100);															// {Hz} GPS update rate: 20 Hz, IMU update rate: 100 Hz
+	ros::Rate loop_rate(100);									// {Hz} GPS update rate: 20 Hz, IMU update rate: 100 Hz
 
 	while(ros::ok())
 	{		
-		NAVIGATION_ARRAY_inspector();									// check, update, and publish na_initialization_status
+		NAVIGATION_ARRAY_inspector();								// check, update, and publish na_initialization_status
 		
 		switch(NA_state)
 		{
@@ -200,7 +200,7 @@ int main(int argc, char **argv)
 				break;
 			case 1:						// Station-Keeping
 				// Fill the odometry header for nav_ned_msg, the USV state in NED
-				nav_ned_msg.header.seq +=1;										// sequence number
+				nav_ned_msg.header.seq +=1;						// sequence number
 				nav_ned_msg.header.stamp = current_time;				// sets stamp to current time
 				nav_ned_msg.header.frame_id = "odom";					// header frame
 				nav_ned_msg.child_frame_id = "base_link";				// child frame

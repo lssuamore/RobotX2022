@@ -11,7 +11,9 @@
   <!-- /include -->
   <node pkg="rosserial_python" type="serial_node.py" name="Teensy" args="/dev/ttyACM2">
   </node>
-  <!-- node pkg="rosserial_python" type="serial_node.py" name="Compass" args="/dev/ttyACM1" -->
+  <node pkg="rosserial_python" type="serial_node.py" name="Compass" args="/dev/ttyACM1">
+  </node>
+  <!-- node pkg="rosserial_python" type="serial_node.py" name="Pozyx" args="/dev/ttyUSB0" -->
   <!-- /node -->
 
 </launch>

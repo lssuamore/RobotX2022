@@ -269,10 +269,10 @@ void display_gains()
 {
 	// PROPORTIONAL GAINS
 	ROS_DEBUG("Kp_xy is: %.2f --PS", Kp_x);
-	ROS_DEBUG("Kp_psi is: %.2f --PS\n", Kp_psi);
+	ROS_DEBUG("Kp_psi is: %.2f --PS", Kp_psi);
 	// DERIVATIVE GAINS
 	ROS_DEBUG("Kd_xy is: %.2f --PS", Kd_x);
-	ROS_DEBUG("Kd_psi is: %.2f --PS\n", Kd_psi);
+	ROS_DEBUG("Kd_psi is: %.2f --PS", Kd_psi);
 	// INTEGRAL GAINS
 	ROS_DEBUG("Ki_xy is: %.2f --PS", Ki_x);
 	ROS_DEBUG("Ki_psi is: %.2f --PS\n", Ki_psi);
@@ -384,8 +384,8 @@ void thrust_saturation_check()
 		}
 		T_p = T_p_C;
 		T_s = T_s_C;
-		ROS_DEBUG("Port Thrust corrected: %.2f --PS", T_p);
-		ROS_DEBUG("Stbd Thrust corrected: %.2f --PS\n", T_s);
+		//ROS_DEBUG("Port Thrust corrected: %.2f --PS", T_p);
+		//ROS_DEBUG("Stbd Thrust corrected: %.2f --PS\n", T_s);
 	}
 	/*
 	// make less aggressive by only allowing half the output possible
@@ -594,6 +594,11 @@ int main(int argc, char **argv)
 			ROS_DEBUG("y_usv: %.2f --PS", y_usv_NED);
 			ROS_DEBUG("psi_NED: %.2f --PS\n", psi_NED);
 
+			ROS_DEBUG("e_x_prev: %.2f --PS", e_x_prev);		// x posn. error
+			ROS_DEBUG("e_y_prev: %.2f --PS", e_y_prev);		// y posn. error
+			//ROS_DEBUG("e_xy_prev: %.2f --PS", e_xy_prev);		// magnitude of posn. error
+			ROS_DEBUG("e_psi_prev: %.2f --PS\n", e_psi_prev);		// heading error
+
 			ROS_DEBUG("e_x: %.2f --PS", e_x);		// x posn. error
 			ROS_DEBUG("e_y: %.2f --PS", e_y);		// y posn. error
 			ROS_DEBUG("e_xy: %.2f --PS", e_xy);		// magnitude of posn. error
@@ -620,7 +625,7 @@ int main(int argc, char **argv)
 			control_efforts_msg.m_z.data = M_z;
 			control_efforts_pub.publish(control_efforts_msg);
 			// print control efforts to terminal window
-			ROS_DEBUG("\nControl Efforts --PS");
+			ROS_DEBUG("Control Efforts --PS");
 			ROS_DEBUG("T_x_G: %.3f --PS", T_x);
 			ROS_DEBUG("T_y_G: %.3f --PS", T_y);
 			ROS_DEBUG("M_z: %.3f --PS\n", M_z);
@@ -720,26 +725,31 @@ int main(int argc, char **argv)
 				T_s = T_p;
 			}
 
-			ROS_DEBUG("Before corrections --------------");
-			ROS_DEBUG("Port Thrust: %.2f", T_p);
-			ROS_DEBUG("Stbd Thrust: %.2f", T_s);
-			ROS_DEBUG("Port Angle: %.2f", A_p);
-			ROS_DEBUG("Stbd Angle: %.2f", A_s);
+			//ROS_DEBUG("Before corrections --------------");
+			//ROS_DEBUG("Port Thrust: %.2f", T_p);
+			//ROS_DEBUG("Stbd Thrust: %.2f", T_s);
+			//ROS_DEBUG("Port Angle: %.2f", A_p);
+			//ROS_DEBUG("Stbd Angle: %.2f", A_s);
 
 			negative_thrust_correction_check();
 			angle_correction_check();
 
-			ROS_DEBUG("After corrections before saturation check ---------------");
+			//ROS_DEBUG("After corrections before saturation check ---------------");
+			//ROS_DEBUG("Port Thrust: %.2f", T_p);
+			//ROS_DEBUG("Stbd Thrust: %.2f", T_s);
+			//ROS_DEBUG("Port Angle: %.2f", A_p);
+			//ROS_DEBUG("Stbd Angle: %.2f\n", A_s);
+
+			thrust_saturation_check();
+
+			//ROS_DEBUG("After saturation check ---------------");
+			//ROS_DEBUG("Port Thrust: %.2f", T_p);
+			//ROS_DEBUG("Stbd Thrust: %.2f", T_s);
+
 			ROS_DEBUG("Port Thrust: %.2f", T_p);
 			ROS_DEBUG("Stbd Thrust: %.2f", T_s);
 			ROS_DEBUG("Port Angle: %.2f", A_p);
 			ROS_DEBUG("Stbd Angle: %.2f\n", A_s);
-
-			thrust_saturation_check();
-
-			ROS_DEBUG("After saturation check ---------------");
-			ROS_DEBUG("Port Thrust: %.2f", T_p);
-			ROS_DEBUG("Stbd Thrust: %.2f", T_s);
 
 			// only print to thrusters if far enough into loop to have correct calculations
 			// for some reason the first 4 times through loop the current pose variables do not update
