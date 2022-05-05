@@ -58,10 +58,16 @@ float x_North, y_North, x_mid, y_mid, x_South, y_South;				// positions of North
 float x_usv_NED, y_usv_NED, psi_NED; 				// vehicle position and heading (pose) in NED
 float e_x, e_y, e_xy, e_psi;					// current errors between goal pose and usv pose
 
+// initialize previous errors for calculating differential term
+float e_x_prev = 0;
+float e_y_prev = 0;
+float e_xy_prev = 0;
+float e_psi_prev = 0;
+
 bool E_reached = false;        					// false means the last point has not been reached
 bool calculations_done = false; 				// false means the array of waypoints have not been created
 
-float e_xy_allowed = 1.4;       				// positional error tolerance threshold; NOTE: make as small as possible
+float e_xy_allowed = 4.5;       				// positional error tolerance threshold; NOTE: make as small as possible
 float e_psi_allowed = 0.4;      				// heading error tolerance threshold; NOTE: make as small as possible
 
 //Array of poses for making the circle for the turtle
@@ -114,26 +120,14 @@ void parameters_function()
 				psi_goal[0] = psi_goal[0] - 2.0*PI;
 			}
 		}
+		point = 0;
+		goal_poses = 1;
 	}
 	ros::param::get("/x_north", x_North);
 	ros::param::get("/y_north", y_North);
 	ros::param::get("/x_south", x_South);
 	ros::param::get("/y_south", y_South);
 } // END OF parameters_function()
-
-// THIS FUNCTION: Updates the current NED USV goal pose
-// ACCEPTS: (VOID)
-// RETURNS: (VOID)
-// =============================================================================
-void goal_pose_update()
-{
-	if (PP_state == 1)	//	1 = Task 1: Station-Keeping
-	{
-		// Update NED USV goal pose to station keep at from launch file
-		parameters_function();
-		goal_poses = 1;
-	}
-} // END OF goal_pose_update()
 
 // THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "pp_initialization_state"
 // ACCEPTS: (VOID)
@@ -143,7 +137,7 @@ void PATH_PLANNER_inspector()
 {
 	current_time = ros::Time::now();   		// sets current_time to the time it is now
 	loop_count += 1;				// increment loop counter
-	goal_pose_update();
+	parameters_function();
 	if (loop_count > 5)
 	{
 		pp_initialization_status.data = true;
@@ -181,10 +175,6 @@ void pp_state_update(const jetson::state_msg::ConstPtr& msg)
 	if (pp_initialization_status.data)
 	{
 		PP_state = msg->state.data;
-		if (PP_state == 1)	//	1 = Task 1: Station-Keeping
-		{
-			point = 0;
-		}
 	}
 } // END OF pp_state_update()
 
@@ -252,7 +242,7 @@ void calculate_path()
 	
 	// now fill array of poses
 	int cur_point = 0;
-	float r = 8.0;									// [m] radius of circles around north and south points of figure 8
+	float r = 4.0;									// [m] radius of circles around north and south points of figure 8
 	
 	// first pose - mid point 
 	x_goal[cur_point] = x_mid;
@@ -325,7 +315,8 @@ void calculate_path()
 	y_goal[cur_point] = y_mid;
 	psi_goal[cur_point] = 0.0;
 	cur_point++;
-	
+
+	point = 0;
 	goal_poses = cur_point;
 	calculations_done = true;
 } // end of calculate_path()
@@ -365,7 +356,7 @@ int main(int argc, char **argv)
 	last_time = current_time;								// sets last time to the current_time
 
 	//sets the frequency for which the program sleeps at. 10=1/10 second
-	ros::Rate loop_rate(50);
+	ros::Rate loop_rate(5);		// was 50
 
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())
@@ -391,6 +382,10 @@ int main(int argc, char **argv)
 				{
 					if ((NA_state == 1) && (PS_state == 1))		// if the navigation_array is providing NED USV state, and the propulsion_system is ON
 					{
+						e_x_prev = e_x;
+						e_y_prev = e_y;
+						e_xy_prev = e_xy;
+						e_psi_prev = e_psi;
 						// determine error in x and y (position)
 						e_x = x_goal[point] - x_usv_NED;                                       // calculate error in x position
 						e_y = y_goal[point] - y_usv_NED;                                       // calculate error in y position
@@ -409,8 +404,9 @@ int main(int argc, char **argv)
 								e_psi = e_psi - 2.0*PI;
 							}
 						}
-						
-						if ((e_xy < e_xy_allowed) && (abs(e_psi) < e_psi_allowed) && (!E_reached))	// CAUTION: might need to type cast float on abs(e_psi)
+
+						float sign_change_check = e_x/e_x_prev;
+						if ((e_xy < e_xy_allowed) && (!E_reached) || ((sign_change_check < 0) && (x_goal[point] == 0)))	//  && (abs(e_psi) < e_psi_allowed) CAUTION: might need to type cast float on abs(e_psi)
 						{
 							point += 1;
 							ROS_INFO("Point %i of %i reached. --MC", point, goal_poses);
@@ -427,7 +423,6 @@ int main(int argc, char **argv)
 						}
 					} // if ((NA_state == 1) && (PS_state == 1))
 					current_goal_pose_publish();
-					calculations_done = false;
 				}
 				else
 				{

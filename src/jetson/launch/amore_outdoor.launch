@@ -1,3 +1,4 @@
+
 <launch>
 
   <!-- This is the format for a comment in HTML --> 
@@ -11,12 +12,12 @@
   <param name="/kp_xy" value="0.5" />
   <param name="/kp_psi" value="1.0" />
   <param name="/kd_xy" value="0.9" />
-  <param name="/kd_psi" value="1.0" />
+  <param name="/kd_psi" value="2.0" />
   <param name="/ki_xy" value="0.0" />
-  <param name="/ki_psi" value="0.0" />
+  <param name="/ki_psi" value="0.05" />
   
   <!-- SET THIS TO 0:ON STANDBY, 1:STATION-KEEPING, 2:WAYFINDING -->
-  <param name="/MC" value="1" />
+  <param name="/MC" value="0" />
   
   <!-- SET THIS TO 1:DUAL-AZIMUTHING STATION-KEEPING, 2:DIFFERENTIAL WAYFINDING, 3:ACKERMANN WAYFINDING -->
   <param name="/LL" value="1" />

@@ -45,6 +45,9 @@
 int loop_count = 0;                     // loop counter, first 10 loops used to intitialize subscribers
 int loop_count_ON = 0;                  // loop count holder for when the the controller is turned on, used to ensure differential and integral terms are not started until they are calculated
 bool PS_state_ON = false;		// used to set and reset the above count
+
+int MC_state = 0;
+
 //	STATES CONCERNED WITH "navigation_array"
 int NA_state = 0;	//	0 = On standby		//	1 = USV NED pose converter
 
@@ -178,6 +181,14 @@ void na_state_update(const jetson::state_msg::ConstPtr& msg)
 	}
 } // END OF na_state_update()
 
+void mc_state_update(const jetson::state_msg::ConstPtr& msg)
+{
+        if (ps_initialization_status.data)
+        {
+                MC_state = msg->state.data;
+        }
+} // END OF mc_state_update()
+
 // THIS FUNCTION: Updates the state of "path_planner" given by "mission_control"
 // ACCEPTS: path_planner state_msg from "pp_state"
 // RETURNS: (VOID)		Updates global variables
@@ -268,14 +279,15 @@ void update_gains_LL_controller()
 void display_gains()
 {
 	// PROPORTIONAL GAINS
-	ROS_DEBUG("Kp_xy is: %.2f --PS", Kp_x);
-	ROS_DEBUG("Kp_psi is: %.2f --PS", Kp_psi);
-	// DERIVATIVE GAINS
-	ROS_DEBUG("Kd_xy is: %.2f --PS", Kd_x);
-	ROS_DEBUG("Kd_psi is: %.2f --PS", Kd_psi);
-	// INTEGRAL GAINS
-	ROS_DEBUG("Ki_xy is: %.2f --PS", Ki_x);
-	ROS_DEBUG("Ki_psi is: %.2f --PS\n", Ki_psi);
+	ROS_DEBUG("Position gains");
+	ROS_DEBUG("P: %.2f", Kp_x);
+	ROS_DEBUG("D: %.2f --PS", Kd_x);
+	ROS_DEBUG("I: %.2f --PS\n", Ki_x);
+
+	ROS_DEBUG("Heading gains");
+	ROS_DEBUG("P: %.2f --PS", Kp_psi);
+	ROS_DEBUG("D: %.2f --PS", Kd_psi);
+	ROS_DEBUG("I: %.2f --PS\n", Ki_psi);
 } // END OF display_gains()
 
 // THIS FUNCTION: Resets the integral term once the errors become minimal
@@ -297,7 +309,7 @@ void Integral_reset()
 	{
 	  e_xy_total = 0.0;
 	}
-	if ((float)abs(e_psi) < 0.3)	// NOTE: this value may need adjusting
+	if (((float)abs(e_psi) < 0.05) || (e_xy > 3.0))	// NOTE: this value may need adjusting
 	{
 	  e_psi_total = 0.0;
 	}
@@ -440,11 +452,12 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12;
 
 	// Subscribers
-	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, na_state_update);
-	ros::Subscriber pp_state_sub = nh2.subscribe("pp_state", 1, pp_state_update);
-	ros::Subscriber ps_state_sub = nh3.subscribe("ps_state", 1, ps_state_update);
-	ros::Subscriber nav_NED_sub = nh4.subscribe("nav_ned", 1, pose_update);					// Obtains the USV pose in global NED from mission_control
-	ros::Subscriber current_goal_pose_sub = nh5.subscribe("current_goal_pose", 1, goal_pose_update);	// goal pose given by path planners
+	ros::Subscriber mc_state_sub = nh1.subscribe("mc_state", 1, mc_state_update);
+	ros::Subscriber na_state_sub = nh2.subscribe("na_state", 1, na_state_update);
+	ros::Subscriber pp_state_sub = nh3.subscribe("pp_state", 1, pp_state_update);
+	ros::Subscriber ps_state_sub = nh4.subscribe("ps_state", 1, ps_state_update);
+	ros::Subscriber nav_NED_sub = nh5.subscribe("nav_ned", 1, pose_update);					// Obtains the USV pose in global NED from mission_control
+	ros::Subscriber current_goal_pose_sub = nh6.subscribe("current_goal_pose", 1, goal_pose_update);	// goal pose given by path planners
 
 	// Publishers
 	ps_initialization_state_pub = nh7.advertise<std_msgs::Bool>("ps_initialization_state", 1);	// state of initialization
@@ -528,7 +541,7 @@ int main(int argc, char **argv)
 			// Until then, give the desired heading to travel to goal location
 			if ((LL_state == 2) || (LL_state == 3) || (e_xy > 15.0))
 			{
-				psi_goal = atan2(e_y,e_x);       // [radians] atan2() returns between -PI and PI 
+				psi_goal = atan2(e_y,e_x);       // [radians] atan2() returns between -PI and PI
 			}
 
 			e_psi = psi_goal - psi_NED;
@@ -547,14 +560,14 @@ int main(int argc, char **argv)
 			}
 			
 			//correct discontinuity in heading error
-			// if (e_psi < (-PI + 0.1*PI))
-			// {
-				// e_psi = e_psi + 2.0*PI;
-			// }
-			// if (e_psi > (PI - 0.1*PI))
-			// {
-				// e_psi = e_psi - 2.0*PI;
-			// }
+			if (e_psi < (-PI + 0.1*PI))
+			{
+				e_psi = e_psi + 2.0*PI;
+			}
+			if (e_psi > (PI - 0.1*PI))
+			{
+				e_psi = e_psi - 2.0*PI;
+			}
 			
 			// correct discontinuity in heading error
 			// if (e_psi < ((-2.0*PI) + (0.1*2.0*PI)))
