@@ -47,14 +47,11 @@
 int loop_count = 0;	// loop counter, first 10 loops used to intitialize subscribers
 
 // Variables
-// imu and MagneticField 
-float q1, q2, q3, q0, q1A, q2A, q3A, q0A;	// imu orientation
-float phi, theta, psi, psiA;			// conversion to radians
-float comp_x, comp_y, comp_psi;			// compass data
-// Sparkfun compass
-float compass_psi;
-double xNED, yNED, zNED, xNED_Pozyx, yNED_Pozyx;			// NED position
-float phiNED, thetaNED, psiNED, psiNEDA;
+float q1, q2, q3, q0;	// Sparton imu quarternion
+float phi, theta, psi, psiA;	// conversion to radians
+float compass_psi;	// Sparkfun compass
+double xNED, yNED, zNED;			// NED position
+float phiNED, thetaNED, psiNED;
 double latitude, longitude, altitude;		// LAT and LONG from ardusimple
 float omega_x, omega_y, omega_z;		// angular velocities
 
@@ -117,17 +114,6 @@ void gps_processor(const sensor_msgs::NavSatFix::ConstPtr& gps_msg)
 	altitude = gps_msg->altitude; //sets altitude rom gps
 } // END OF gps_processor()
 
-// THIS FUNCTION: Updates the USV position in NED Pozyx frame 
-// ACCEPTS: geometry_msgs::Point"
-// RETURNS: (VOID)
-// =============================================================================
-void GPS_Position_update(const geometry_msgs::Point::ConstPtr& gps_msg)
-{
-	//	indoor gps gives distance in cm so divide by 100 to get to meters
-	xNED_Pozyx = (gps_msg->x) / 1000; //sets x from gps
-	yNED_Pozyx = (gps_msg->y) / 1000; //sets y from gps
-} // END OF GPS_Position_update()
-
 
 // THIS FUNCTION: Updates the USV heading given by the sparkfun compass 
 // ACCEPTS: std_msgs::Float32 from "/wamv/sensors/compass_vaule"
@@ -150,31 +136,8 @@ void sparkfun_update(const std_msgs::Float32::ConstPtr& compass_msg)
 	}
 }
 
-/*
-void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
-{
-	// gather magnetic field in x,y,z micro Teslas
-	comp_x = compass_msg->magnetic_field.x;
-	comp_y = compass_msg->magnetic_field.y;
-	//ROS_INFO("comp_x: %.10f comp_y: %.10f", comp_x, comp_y);
-	comp_psi = atan2(comp_y,comp_x)+PI;
-	while ((comp_psi < -PI) || (comp_psi > PI))
-	{
-		ROS_INFO("Entering while after atan2, shouldn't");
-                // Adjust psiNED back within -PI and PI
-                if (comp_psi < -PI)
-                {
-                        comp_psi = comp_psi + 2.0*PI;
-                }
-                if (comp_psi > PI)
-                {
-                        comp_psi = comp_psi - 2.0*PI;
-                }
-        }
-}
-*/
-
 // THIS FUNCTION: Updates the USV heading quarternion and angular velocities
+//									and converts NED Euler angles.
 // ACCEPTS: sensor_msgs::Imu from Sparton
 // RETURNS: (VOID)
 // =============================================================================
@@ -187,17 +150,17 @@ void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
 	q0 = imu_msg->orientation.w;
 
 	// gather body-fixed angular velocity
-	//omega_x = imu_msg->angular_velocity.x;
-	//omega_y = imu_msg->angular_velocity.y;
-	//omega_z = imu_msg->angular_velocity.z;
+	omega_x = imu_msg->angular_velocity.x;
+	omega_y = imu_msg->angular_velocity.y;
+	omega_z = imu_msg->angular_velocity.z;
 
 	//converts to radians
-	//phi = atan2((2.0*(q1*q0 + q3*q2)) , (1.0 - 2.0*(pow(q1,2.0) + pow(q2,2.0))));
-	//theta = asin(2.0*(q0*q2 - q1*q3));
+	phi = atan2((2.0*(q1*q0 + q3*q2)) , (1.0 - 2.0*(pow(q1,2.0) + pow(q2,2.0))));
+	theta = asin(2.0*(q0*q2 - q1*q3));
 	psi = atan2((2.0*(q3*q0 + q1*q2)) , (1.0 - 2.0*(pow(q2,2.0) + pow(q3,2.0)))); // orientation off x-axis
 	// Convert the orientation to NED from ENU
-	//phiNED = theta;
-	//thetaNED = phi;
+	phiNED = theta;
+	thetaNED = phi;
 	psiNED = -psi -0.525;
 
 	while ((psiNED < -PI) || (psiNED > PI))
@@ -215,36 +178,6 @@ void compass_update(const sensor_msgs::MagneticField::ConstPtr& compass_msg)
 	}
 	//ROS_INFO("Sparton_heading: %6.2f  -- NA", psiNED);
 } // END OF imu_processor()
-
-/*
-// THIS FUNCTION: Updates the USV heading quarternion from the ardusimple
-// ACCEPTS: heading from ardusimple
-// RETURNS: (VOID)
-// =============================================================================
- void GPS_heading(const sensor_msgs::Imu::ConstPtr& imu_msg)
-{
-	// gather orientation quaternion
-	q1A = imu_msg->orientation.x;
-	q2A = imu_msg->orientation.y;
-	q3A = imu_msg->orientation.z;
-	q0A = imu_msg->orientation.w;
-
-	psiA = atan2((2.0*(q3A*q0A + q1A*q2A)) , (1.0 - 2.0*(pow(q2A,2.0) + pow(q3A,2.0)))); // orientation off x-axis
-
-	psiNEDA = psiA;
-
-	// Adjust psiNED back within -PI and PI
-	if (psiNEDA < -PI)
-	{
-		psiNEDA = psiNEDA + 2.0*PI;
-	}
-	if (psiNEDA > PI)
-	{
-		psiNEDA = psiNEDA - 2.0*PI;
-	}
-	ROS_INFO("GPS_heading: %6.2f  -- NA", psiNEDA);
-} // END OF GPS_heading()
-*/
 
 // THIS FUNCTION: Converts the current pose from ENU -> NED
 // ACCEPTS: nav_msgs::Odometry from "geonav_odom"
@@ -307,12 +240,9 @@ int main(int argc, char **argv)
 	// Subscribers
 	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);			// Gives navigationn array status update
 	ros::Subscriber gpspos_sub = nh2.subscribe("/gps/fix", 10, gps_processor);		// subscribes to GPS position from indoor gps
-	//ros::Subscriber gps_point_sub = nh3.subscribe("point", 10, GPS_Position_update);			// subscribes to GPS position from indoor gps
 	ros::Subscriber compass_sub = nh4.subscribe("compass_value", 10, sparkfun_update);
 	ros::Subscriber imu_sub = nh5.subscribe("/imu/data", 100, imu_processor);	// subscribes to IMU
-	//ros::Subscriber compass_sub = nh3.subscribe("/zed2i/zed_node/imu/mag", 10, compass_update);      // subscribes to IMU
 	ros::Subscriber geonav_odom_sub = nh6.subscribe("geonav_odom", 10, ned_func);
-	//ros::Subscriber gpsheading_sub = nh5.subscribe("/gps/navheading", 10, GPS_heading);		// subscribes to GPS position from indoor gps
 
 	// Publishers
 	na_initialization_state_pub = nh7.advertise<std_msgs::Bool>("na_initialization_state", 1);	// publisher for state of initialization
@@ -349,9 +279,9 @@ int main(int argc, char **argv)
 				// Fill the USV pose in NED
 				nav_ned_msg.pose.pose.position.x = xNED;
 				nav_ned_msg.pose.pose.position.y = yNED;
-				nav_ned_msg.pose.pose.position.z = 0.0;		// zNED;
-				nav_ned_msg.pose.pose.orientation.x = xNED_Pozyx;	// phiNED;
-				nav_ned_msg.pose.pose.orientation.y = yNED_Pozyx;	// thetaNED;
+				nav_ned_msg.pose.pose.position.z = zNED;
+				nav_ned_msg.pose.pose.orientation.x = phiNED;
+				nav_ned_msg.pose.pose.orientation.y = thetaNED;
 				nav_ned_msg.pose.pose.orientation.z = psiNED;
 				nav_ned_msg.pose.pose.orientation.w = compass_psi;
 				nav_ned_msg.pose.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
@@ -360,9 +290,9 @@ int main(int argc, char **argv)
 				nav_ned_msg.twist.twist.linear.x = 0.0;
 				nav_ned_msg.twist.twist.linear.y = 0.0;
 				nav_ned_msg.twist.twist.linear.z = 0.0;
-				nav_ned_msg.twist.twist.angular.x = 0.0;	//omega_x;
-				nav_ned_msg.twist.twist.angular.y = 0.0;	//omega_y;
-				nav_ned_msg.twist.twist.angular.z = 0.0;	//omega_z;
+				nav_ned_msg.twist.twist.angular.x = omega_x;
+				nav_ned_msg.twist.twist.angular.y = omega_y;
+				nav_ned_msg.twist.twist.angular.z = omega_z;
 				nav_ned_msg.twist.covariance = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
 				// publish the NED USV state

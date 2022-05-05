@@ -9,14 +9,14 @@ import message_filters
 import math
 from nav_msgs.msg import Odometry
 from jetson.msg import usv_pose_msg
-from jetson.msg import control_efforts
+#from jetson.msg import control_efforts
 
 
-file = open("data.txt", "w")
-file.write("Cosstrack_Error,Angular_Error,x,y,theta,x_desired,y_desired,theta_desired, T_X, T_Y, M_Z\n")
+file = open("pose_data.txt", "w")
+file.write("Cosstrack_Error,Angular_Error,x,y,theta,x_desired,y_desired,theta_desired\n")
 file.close
 
-def callback(desiredData, locationData, controlData):
+def callback(desiredData, locationData):	# , controlData
     desiredX = desiredData.position.x
     desiredY = desiredData.position.y
     desiredPsi = desiredData.psi.data
@@ -28,13 +28,13 @@ def callback(desiredData, locationData, controlData):
 
     ang = desiredPsi-currentPsi
 
-    controlX = controlData.t_x.data
-    controlY = controlData.t_y.data
-    controlPsi = controlData.m_z.data
+    #controlX = controlData.t_x.data
+    #controlY = controlData.t_y.data
+    #controlPsi = controlData.m_z.data
 
     rospy.loginfo(dist)
 
-    file = open("data.txt", "a")
+    file = open("pose_data.txt", "a")
     file.write(str(dist))
     file.write(",")
     file.write(str(ang))
@@ -50,28 +50,24 @@ def callback(desiredData, locationData, controlData):
     file.write(str(desiredY))
     file.write(",")
     file.write(str(desiredPsi))
-    file.write(",")
-    file.write(str(controlX))
-    file.write(",")
-    file.write(str(controlY))
-    file.write(",")
-    file.write(str(controlPsi))
+    #file.write(",")
+    #file.write(str(controlX))
+    #file.write(",")
+    #file.write(str(controlY))
+    #file.write(",")
+    #file.write(str(controlPsi))
     file.write("\n")
     file.close
 
 
 def listener():
-    #rospy.init_node('error_calc')
     rospy.init_node('data_compiler')
     
     desiredSub = message_filters.Subscriber("current_goal_pose", usv_pose_msg)
     locationSub = message_filters.Subscriber("nav_ned", Odometry)
-    effortSub = message_filters.Subscriber("control_effort_topic", control_efforts)
-    #desiredSub = message_filters.Subscriber("/traj_desired_state", Float32MultiArray)
-    #locationSub = message_filters.Subscriber("/vehicle_pose", Pose2D)
-    # effortSub = message_filters.Subscriber("/control_effort", control_effort)
+    #controlSub = message_filters.Subscriber("control_efforts_topic", control_efforts)
 
-    ts = message_filters.ApproximateTimeSynchronizer([desiredSub, locationSub, effortSub], 10, 1, allow_headerless=True)
+    ts = message_filters.ApproximateTimeSynchronizer([desiredSub, locationSub], 10, 1, allow_headerless=True)
     ts.registerCallback(callback)
 
     rospy.spin()

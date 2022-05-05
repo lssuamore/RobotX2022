@@ -1,6 +1,6 @@
 //  Filename:											path_planner.cpp
 //  Creation Date:									04/07/2022
-//  Last Revision Date:							04/07/2022
+//  Last Revision Date:						04/07/2022
 //  Author(s) [email]:								Bradley Hacker [bhacker@lssu.edu]
 //  Revisor(s) [email] {Revision Date}:	Bradley Hacker [bhacker@lssu.edu] {04/07/2022}
 //  Organization/Institution:						Lake Superior State University - Team AMORE
@@ -50,11 +50,11 @@ int PP_state = 0;		//	0 = On standby		//	1 = Task 1: Station-Keeping			//	2 = Ta
 //	STATES CONCERNED WITH "propulsion_system"
 int PS_state = 0;		//	0 = On standby		//	1 = Propulsion system ON
 
-int point = 0;                     		    		// number of points on trajectory reached
-int goal_poses;              					// total number of poses to reach
+int point = 0;                     		    		// running total of points reached on path
+int goal_poses = 0;              				// total number of poses to reach in current path 
 
 float x_goal[100], y_goal[100], psi_goal[100];			// arrays to hold the NED goal poses
-float x_North, y_North, x_mid, y_mid, x_South, y_South;				// positions of North and South points for figure 8
+float x_North, y_North, x_mid, y_mid, x_South, y_South;				// positions of North, mid, and South points for figure 8
 float x_usv_NED, y_usv_NED, psi_NED; 				// vehicle position and heading (pose) in NED
 float e_x, e_y, e_xy, e_psi;					// current errors between goal pose and usv pose
 
@@ -67,7 +67,7 @@ float e_psi_prev = 0;
 bool E_reached = false;        					// false means the last point has not been reached
 bool calculations_done = false; 				// false means the array of waypoints have not been created
 
-float e_xy_allowed = 4.5;       				// positional error tolerance threshold; NOTE: make as small as possible
+float e_xy_allowed = 3.0;       				// positional error tolerance threshold; NOTE: make as small as possible
 float e_psi_allowed = 0.4;      				// heading error tolerance threshold; NOTE: make as small as possible
 
 //Array of poses for making the circle for the turtle
@@ -79,6 +79,13 @@ float psi_N[5];
 float x_S[5];
 float y_S[5];
 float psi_S[5];
+
+float r = 4.0;									// [m] radius of circles around north and south points of figure 8
+float r1 = 2.5;
+float r2 = 5.5;
+
+float theta_0 = 0.5;
+float theta_usv, r_usv;
 
 std_msgs::Bool pp_initialization_status;			// "pp_initialization_state" message
 ros::Publisher pp_initialization_state_pub;			// "pp_initialization_state" publisher
@@ -241,83 +248,82 @@ void calculate_path()
 	y_mid = (y_North + y_South)/2.0;
 	
 	// now fill array of poses
-	int cur_point = 0;
-	float r = 4.0;									// [m] radius of circles around north and south points of figure 8
+	point = 0;
 	
 	// first pose - mid point 
-	x_goal[cur_point] = x_mid;
-	y_goal[cur_point] = y_mid;
-	psi_goal[cur_point] = 0.0;
-	cur_point++;
+	x_goal[point] = x_mid;
+	y_goal[point] = y_mid;
+	psi_goal[point] = 0.0;
+	point++;
 	
 	// next 5 poses around North point
 	// second pose - left
-	x_goal[cur_point] = x_North;
-	y_goal[cur_point] = y_North-r;
-	psi_goal[cur_point] = 0.0;
-	cur_point++;
+	x_goal[point] = x_North;
+	y_goal[point] = y_North-r;
+	psi_goal[point] = 0.0;
+	point++;
 	// third pose
-	x_goal[cur_point] = x_North+r*0.707107;
-	y_goal[cur_point] = y_North-r*0.707107;
-	psi_goal[cur_point] = PI/4.0;;
-	cur_point++;
+	x_goal[point] = x_North+r*0.707107;
+	y_goal[point] = y_North-r*0.707107;
+	psi_goal[point] = PI/4.0;;
+	point++;
 	// fourth pose - top
-	x_goal[cur_point] = x_North+r;
-	y_goal[cur_point] = y_North;
-	psi_goal[cur_point] = PI/2.0;
-	cur_point++;
+	x_goal[point] = x_North+r;
+	y_goal[point] = y_North;
+	psi_goal[point] = PI/2.0;
+	point++;
 	// fifth pose
-	x_goal[cur_point] = x_North+r*0.707107;
-	y_goal[cur_point] = y_North+r*0.707107;
-	psi_goal[cur_point] = 3.0*PI/4.0;
-	cur_point++;
+	x_goal[point] = x_North+r*0.707107;
+	y_goal[point] = y_North+r*0.707107;
+	psi_goal[point] = 3.0*PI/4.0;
+	point++;
 	// sixth pose - right 
-	x_goal[cur_point] = x_North;
-	y_goal[cur_point] = y_North+r;
-	psi_goal[cur_point] = PI;
-	cur_point++;
+	x_goal[point] = x_North;
+	y_goal[point] = y_North+r;
+	psi_goal[point] = PI;
+	point++;
 	
 	// seventh pose - mid point 
-	x_goal[cur_point] = x_mid;
-	y_goal[cur_point] = y_mid;
-	psi_goal[cur_point] = PI;
-	cur_point++;
+	x_goal[point] = x_mid;
+	y_goal[point] = y_mid;
+	psi_goal[point] = PI;
+	point++;
 	
 	// next 5 poses around North point
 	// eighth pose - left
-	x_goal[cur_point] = x_South;
-	y_goal[cur_point] = y_South-r;
-	psi_goal[cur_point] = PI;
-	cur_point++;
+	x_goal[point] = x_South;
+	y_goal[point] = y_South-r;
+	psi_goal[point] = PI;
+	point++;
 	// ninth pose
-	x_goal[cur_point] = x_South-r*0.707107;
-	y_goal[cur_point] = y_South-r*0.707107;
-	psi_goal[cur_point] = 3.0*PI/4.0;
-	cur_point++;
+	x_goal[point] = x_South-r*0.707107;
+	y_goal[point] = y_South-r*0.707107;
+	psi_goal[point] = 3.0*PI/4.0;
+	point++;
 	// tenth pose - bottom
-	x_goal[cur_point] = x_South-r;
-	y_goal[cur_point] = y_South;
-	psi_goal[cur_point] = PI/2.0;
-	cur_point++;
+	x_goal[point] = x_South-r;
+	y_goal[point] = y_South;
+	psi_goal[point] = PI/2.0;
+	point++;
 	// eleventh pose
-	x_goal[cur_point] = x_South-r*0.707107;
-	y_goal[cur_point] = y_South+r*0.707107;
-	psi_goal[cur_point] = PI/4.0;
-	cur_point++;
+	x_goal[point] = x_South-r*0.707107;
+	y_goal[point] = y_South+r*0.707107;
+	psi_goal[point] = PI/4.0;
+	point++;
 	// twelfth pose - right 
-	x_goal[cur_point] = x_South;
-	y_goal[cur_point] = y_South+r;
-	psi_goal[cur_point] = 0.0;
-	cur_point++;
+	x_goal[point] = x_South;
+	y_goal[point] = y_South+r;
+	psi_goal[point] = 0.0;
+	point++;
 	
 	// thirteenth pose - mid point 
-	x_goal[cur_point] = x_mid;
-	y_goal[cur_point] = y_mid;
-	psi_goal[cur_point] = 0.0;
-	cur_point++;
+	x_goal[point] = x_mid;
+	y_goal[point] = y_mid;
+	psi_goal[point] = 0.0;
+	point++;
 
-	point = 0;
-	goal_poses = cur_point;
+	goal_poses = point;
+	point = 0;		// reset to start by feeding first point
 	calculations_done = true;
 } // end of calculate_path()
 //............................................................End of Functions............................................................
@@ -373,6 +379,8 @@ int main(int argc, char **argv)
 				goal_pose_publish_status.data = false;
 				E_reached = false;
 				calculations_done = false;
+				point = 0;
+				goal_poses = 0;
 				break;
 			case 1:						// Station-Keeping
 				current_goal_pose_publish();
@@ -404,9 +412,9 @@ int main(int argc, char **argv)
 								e_psi = e_psi - 2.0*PI;
 							}
 						}
-
-						float sign_change_check = e_x/e_x_prev;
-						if ((e_xy < e_xy_allowed) && (!E_reached) || ((sign_change_check < 0) && (x_goal[point] == 0)))	//  && (abs(e_psi) < e_psi_allowed) CAUTION: might need to type cast float on abs(e_psi)
+						
+						//float sign_change_check = e_x/e_x_prev;
+						if ((e_xy < e_xy_allowed) && (!E_reached))	//  && (abs(e_psi) < e_psi_allowed)  || ((sign_change_check < 0) && (x_goal[point] == 0))
 						{
 							point += 1;
 							ROS_INFO("Point %i of %i reached. --MC", point, goal_poses);
@@ -416,6 +424,19 @@ int main(int argc, char **argv)
 							  ROS_INFO("End point has been reached. --MC\n");
 							}
 						}
+						
+						/* // New method for feeding point
+						r_usv = sqrt(pow(e_x,2.0)+pow(e_y,2.0));
+						if ((e_xy < e_xy_allowed) && (!E_reached))	//  && (abs(e_psi) < e_psi_allowed)  || ((sign_change_check < 0) && (x_goal[point] == 0))
+						{
+							point += 1;
+							ROS_INFO("Point %i of %i reached. --MC", point, goal_poses);
+							if (point==goal_poses)
+							{
+							  E_reached = true;
+							  ROS_INFO("End point has been reached. --MC\n");
+							}
+						} */
 
 						if (E_reached)
 						{
@@ -427,6 +448,7 @@ int main(int argc, char **argv)
 				else
 				{
 					calculate_path();																// this function will generate the updated array of poses
+					E_reached = false;
 					goal_pose_publish_status.data = false;
 				}
 				break;

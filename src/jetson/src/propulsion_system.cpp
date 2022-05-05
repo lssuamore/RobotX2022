@@ -211,7 +211,7 @@ void ps_state_update(const jetson::state_msg::ConstPtr& msg)
 	{
 		PS_state = msg->state.data;
 	}
-	if ((!PS_state_ON) && (PP_state == 1))
+	if ((!PS_state_ON) && (PS_state == 1))
 	{
 		PS_state_ON = true;
 		loop_count_ON = loop_count;
@@ -259,7 +259,7 @@ void update_gains_LL_controller()
 {
 	// Get the LL_state which decides which controller to use
 	ros::param::get("/LL", LL_state);
-	ROS_DEBUG("LL_state: %i	 ~ 1 = Dual-azimuthing station keeping controller, 2 = Differential wayfinding controller ~ --PS", LL_state);
+	ROS_DEBUG("LL_state: %i	 ~ 1 = Dual-azimuthing, 2 = Differential, 3 = Ackermann ~ --PS", LL_state);
 	// Get the PID gains
 	ros::param::get("/kp_xy", Kp_x);
 	Kp_y = Kp_x; //ros::param::get("/Kp_y_G", Kp_y);
@@ -569,15 +569,17 @@ int main(int argc, char **argv)
 				e_psi = e_psi - 2.0*PI;
 			}
 			
+			/*
 			// correct discontinuity in heading error
-			// if (e_psi < ((-2.0*PI) + (0.1*2.0*PI)))
-			// {
-				// e_psi = e_psi + 2.0*PI;
-			// }
-			// if (e_psi > ((2.0*PI) - (0.1*2.0*PI)))
-			// {
-				// e_psi = e_psi - 2.0*PI;
-			// }
+			if (e_psi < ((-2.0*PI) + (0.1*2.0*PI)))
+			{
+				e_psi = e_psi + 2.0*PI;
+			}
+			if (e_psi > ((2.0*PI) - (0.1*2.0*PI)))
+			{
+				e_psi = e_psi - 2.0*PI;
+			}
+			*/
 
 			/* // if within error, have selective gains
 			if ((float)abs(e_psi) < 0.1)
@@ -637,11 +639,14 @@ int main(int argc, char **argv)
 			control_efforts_msg.t_y.data = T_y;
 			control_efforts_msg.m_z.data = M_z;
 			control_efforts_pub.publish(control_efforts_msg);
+			
+			/*
 			// print control efforts to terminal window
 			ROS_DEBUG("Control Efforts --PS");
 			ROS_DEBUG("T_x_G: %.3f --PS", T_x);
 			ROS_DEBUG("T_y_G: %.3f --PS", T_y);
 			ROS_DEBUG("M_z: %.3f --PS\n", M_z);
+			*/
 
 			/* // if errors are small enough, do not try to correct for them
 			if ((float)abs(e_x) < 0.1)
@@ -663,8 +668,8 @@ int main(int argc, char **argv)
 				// Convert to USV body-fixed frame from global frame
 				T_x_bf = T_x*cos(psi_NED) + T_y*sin(psi_NED);
 				T_y_bf = T_y*cos(psi_NED) - T_x*sin(psi_NED);
-				/* T_x = (float)abs(T_x_bf);
-				T_y = (float)abs(T_y_bf); */
+				//T_x = (float)abs(T_x_bf);
+				//T_y = (float)abs(T_y_bf);
 
 				T_x = T_x_bf;
 				T_y = T_y_bf;
@@ -680,7 +685,8 @@ int main(int argc, char **argv)
 				T_s = sqrt(pow(F_xs,2.0)+pow(F_ys,2.0));	// calculate magnitude of starboard thrust
 				A_p = atan2(F_yp,F_xp);			// calculate angle of port thrust
 				A_s = atan2(F_ys,F_xs);			// calculate angle of starboard thrust
-
+				
+				
 				// DEBUG INFORMATION ////////////////////////////////////////////////////////////
 				/* // Proportional, Derivative, and Integral amounts of control effort
 				ROS_DEBUG("Control Effort Information");

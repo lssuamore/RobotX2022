@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/amore/RobotX2022/src
-# Build directory: /home/amore/RobotX2022/build
+# Source directory: /home/brad/RobotX2022/src
+# Build directory: /home/brad/RobotX2022/build
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
@@ -22,7 +22,6 @@ subdirs("jetson")
 subdirs("sensors/rosserial/rosserial_server")
 subdirs("sensors/pozyx_drivers")
 subdirs("sensors/sparton_ahrs8_driver")
-subdirs("sensors/sparton_ahrsm2_driver")
 subdirs("sensors/rosserial/rosserial_embeddedlinux")
 subdirs("sensors/rosserial/rosserial_test")
 subdirs("sensors/rosserial/rosserial_windows")
@@ -30,7 +29,3 @@ subdirs("geonav_transform")
 subdirs("sensors/ublox/ublox_serialization")
 subdirs("sensors/ublox/ublox_msgs")
 subdirs("sensors/ublox/ublox_gps")
-subdirs("sensors/zed-ros-wrapper/zed-ros-interfaces")
-subdirs("sensors/zed-ros-wrapper/zed_nodelets")
-subdirs("sensors/zed-ros-wrapper/zed_ros")
-subdirs("sensors/zed-ros-wrapper/zed_wrapper")

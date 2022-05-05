@@ -29,7 +29,7 @@
   <param name="/x_north" value="20.0" />	<!-- SET THIS IN METERS -->
   <param name="/y_north" value="0.0" />	<!-- SET THIS IN METERS -->
   
-  <param name="/x_south" value="-20.0" />	<!-- SET THIS IN METERS -->
+  <param name="/x_south" value="-40.0" />	<!-- SET THIS IN METERS -->
   <param name="/y_south" value="0.0" />	<!-- SET THIS IN METERS -->
   
   <!-- Launches codes -->

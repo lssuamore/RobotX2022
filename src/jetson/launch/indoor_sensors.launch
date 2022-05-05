@@ -1,7 +1,9 @@
 <launch>
 
   <!-- This is the format for a comment in HTML -->
-  <include file="$(find zed_wrapper)/launch/zed2i.launch">
+  <!-- include file="$(find zed_wrapper)/launch/zed2i.launch" -->
+  <!-- /include -->
+  <include file="$(find sparton_ahrs8_driver)/launch/ahrs-8.launch">
   </include>
   <node pkg="rosserial_python" type="serial_node.py" name="Teensy" args="/dev/ttyACM1">
   </node>

@@ -184,6 +184,7 @@ target_link_libraries(path_planner ${catkin_LIBRARIES})
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
    scripts/data_compiler.py
+   scripts/efforts_compiler.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
