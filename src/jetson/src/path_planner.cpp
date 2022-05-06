@@ -69,7 +69,7 @@ bool calculations_done = false; 				// false means the array of waypoints have n
 
 float e_xy_allowed = 3.0;       				// positional error tolerance threshold; NOTE: make as small as possible
 float e_psi_allowed = 0.4;      				// heading error tolerance threshold; NOTE: make as small as possible
-
+float position_tolerance;
 //Array of poses for making the circle for the turtle
 float x_N[5];
 float y_N[5];
@@ -80,7 +80,7 @@ float x_S[5];
 float y_S[5];
 float psi_S[5];
 
-float r = 4.0;									// [m] radius of circles around north and south points of figure 8
+float r = 6.0;									// [m] radius of circles around north and south points of figure 8
 float r1 = 2.5;
 float r2 = 5.5;
 
@@ -237,25 +237,25 @@ void current_goal_pose_publish()
 	goal_pose_publish_status.data = true;
 } // END OF current_goal_pose_publish()
 
-// THIS FUNCTION: Generates the figure 8 pattern 
+// THIS FUNCTION: Generates the figure 8 pattern
 // ACCEPTS: (VOID) Uses global North and South points
-// RETURNS: (VOID) Populates array of poses 
+// RETURNS: (VOID) Populates array of poses
 // =============================================================================
 void calculate_path()
 {
 	// first calculate the midpoint
 	x_mid = (x_North + x_South)/2.0;
 	y_mid = (y_North + y_South)/2.0;
-	
+
 	// now fill array of poses
 	point = 0;
-	
-	// first pose - mid point 
+
+	// first pose - mid point
 	x_goal[point] = x_mid;
 	y_goal[point] = y_mid;
 	psi_goal[point] = 0.0;
 	point++;
-	
+
 	// next 5 poses around North point
 	// second pose - left
 	x_goal[point] = x_North;
@@ -277,18 +277,18 @@ void calculate_path()
 	y_goal[point] = y_North+r*0.707107;
 	psi_goal[point] = 3.0*PI/4.0;
 	point++;
-	// sixth pose - right 
+	// sixth pose - right
 	x_goal[point] = x_North;
 	y_goal[point] = y_North+r;
 	psi_goal[point] = PI;
 	point++;
-	
-	// seventh pose - mid point 
-	x_goal[point] = x_mid;
-	y_goal[point] = y_mid;
-	psi_goal[point] = PI;
-	point++;
-	
+
+	// seventh pose - mid point
+//	x_goal[point] = x_mid;
+//	y_goal[point] = y_mid;
+//	psi_goal[point] = PI;
+//	point++;
+
 	// next 5 poses around North point
 	// eighth pose - left
 	x_goal[point] = x_South;
@@ -310,16 +310,16 @@ void calculate_path()
 	y_goal[point] = y_South+r*0.707107;
 	psi_goal[point] = PI/4.0;
 	point++;
-	// twelfth pose - right 
+	// twelfth pose - right
 	x_goal[point] = x_South;
 	y_goal[point] = y_South+r;
 	psi_goal[point] = 0.0;
 	point++;
-	
-	// thirteenth pose - mid point 
+
+	// thirteenth pose - mid point
 	x_goal[point] = x_mid;
 	y_goal[point] = y_mid;
-	psi_goal[point] = 0.0;
+	psi_goal[point] = 1.57;
 	point++;
 
 	goal_poses = point;
@@ -399,7 +399,7 @@ int main(int argc, char **argv)
 						e_y = y_goal[point] - y_usv_NED;                                       // calculate error in y position
 						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
 						e_psi = psi_goal[point] - psi_NED;
-						
+
 						while ((e_psi < -PI) || (e_psi > PI))
 						{
 							// Adjust e_psi back within -PI and PI
@@ -412,9 +412,17 @@ int main(int argc, char **argv)
 								e_psi = e_psi - 2.0*PI;
 							}
 						}
-						
+
+						if ((point == 0) || (point == 6))
+						{
+							position_tolerance = e_xy_allowed*1.5;
+						}
+						else
+						{
+							position_tolerance = e_xy_allowed;
+						}
 						//float sign_change_check = e_x/e_x_prev;
-						if ((e_xy < e_xy_allowed) && (!E_reached))	//  && (abs(e_psi) < e_psi_allowed)  || ((sign_change_check < 0) && (x_goal[point] == 0))
+						if ((e_xy < e_xy_allowed) && (!E_reached))	//&& (abs(e_psi) < e_psi_allowed) || ((sign_change_check < 0) && (x_goal[point] == 0))
 						{
 							point += 1;
 							ROS_INFO("Point %i of %i reached. --MC", point, goal_poses);
@@ -424,7 +432,7 @@ int main(int argc, char **argv)
 							  ROS_INFO("End point has been reached. --MC\n");
 							}
 						}
-						
+
 						/* // New method for feeding point
 						r_usv = sqrt(pow(e_x,2.0)+pow(e_y,2.0));
 						if ((e_xy < e_xy_allowed) && (!E_reached))	//  && (abs(e_psi) < e_psi_allowed)  || ((sign_change_check < 0) && (x_goal[point] == 0))

@@ -9,9 +9,9 @@
   </include>
 
   <!-- creates all the parameters --> 
-  <param name="/kp_xy" value="0.5" />
-  <param name="/kp_psi" value="1.0" />
-  <param name="/kd_xy" value="0.9" />
+  <param name="/kp_xy" value="0.1" />
+  <param name="/kp_psi" value="0.8" />
+  <param name="/kd_xy" value="0.5" />
   <param name="/kd_psi" value="2.0" />
   <param name="/ki_xy" value="0.0" />
   <param name="/ki_psi" value="0.05" />

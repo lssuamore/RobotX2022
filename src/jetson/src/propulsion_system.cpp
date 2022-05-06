@@ -495,6 +495,17 @@ int main(int argc, char **argv)
 			e_y = y_goal - y_usv_NED;
 			e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));	// calculate magnitude of positional error
 
+			// dynamic controller selector
+			//if (e_xy > 8.0)
+			//{
+			//	LL_state = 2;	// Differential drive
+			//	Kp_x = Kp_x/2.0;
+			//	Kp_psi = Kp_psi*1.4;
+			//}
+			//else
+			//{
+			//	LL_state = 1;
+			//}
 			/* // if within error, have selective gains
 			if (e_xy < 1.0)
 			{
@@ -539,7 +550,7 @@ int main(int argc, char **argv)
 			// UNCOMMENT ASAP
 			// Do not give desired heading at goal until within 15.0 meters of goal position
 			// Until then, give the desired heading to travel to goal location
-			if ((LL_state == 2) || (LL_state == 3) || (e_xy > 15.0))
+			if ((LL_state == 2) || (LL_state == 3) || (e_xy > 8.0))
 			{
 				psi_goal = atan2(e_y,e_x);       // [radians] atan2() returns between -PI and PI
 			}
@@ -558,7 +569,7 @@ int main(int argc, char **argv)
 					e_psi = e_psi - 2.0*PI;
 				}
 			}
-			
+
 			//correct discontinuity in heading error
 			if (e_psi < (-PI + 0.1*PI))
 			{
@@ -618,14 +629,14 @@ int main(int argc, char **argv)
 			ROS_DEBUG("e_y: %.2f --PS", e_y);		// y posn. error
 			ROS_DEBUG("e_xy: %.2f --PS", e_xy);		// magnitude of posn. error
 			ROS_DEBUG("e_psi: %.2f --PS\n", e_psi);		// heading error
-			
-			// perhaps comment out the following if 
+
+			// perhaps comment out the following if
 			// if within a meter only control heading
-			// if (e_xy < 1.0)
-			// {
-				// T_x = 0.0;
-				// T_y = 0.0;
-			// }
+			if (e_xy < 1.0)
+			{
+				T_x = 0.0;
+				T_y = 0.0;
+			}
 
 			// only control heading if heading is off by more than 45 degree
 			//if ((float)abs(e_psi) > 0.785)
@@ -633,13 +644,13 @@ int main(int argc, char **argv)
 			//	T_x = 0.0;
 			//	T_y = 0.0;
 			//}
-			
+
 			// fill out control_efforts message and publish to "control_efforts_topic"
 			control_efforts_msg.t_x.data = T_x;
 			control_efforts_msg.t_y.data = T_y;
 			control_efforts_msg.m_z.data = M_z;
 			control_efforts_pub.publish(control_efforts_msg);
-			
+
 			/*
 			// print control efforts to terminal window
 			ROS_DEBUG("Control Efforts --PS");
@@ -648,20 +659,20 @@ int main(int argc, char **argv)
 			ROS_DEBUG("M_z: %.3f --PS\n", M_z);
 			*/
 
-			/* // if errors are small enough, do not try to correct for them
-			if ((float)abs(e_x) < 0.1)
-			{
-				T_x = 0.0;
-			}
-			if ((float)abs(e_y) < 0.1)
-			{
-				T_y = 0.0;
-			}
-			if ((float)abs(e_psi) < 0.1)
+			// if errors are small enough, do not try to correct for them
+			//if ((float)abs(e_x) < 0.1)
+			//{
+			//	T_x = 0.0;
+			//}
+			//if ((float)abs(e_y) < 0.1)
+			//{
+			//	T_y = 0.0;
+			//}
+			if ((float)abs(e_psi) < 0.07)
 			{
 				M_z = 0.0;
-			} */
-			
+			}
+
 			// ALLOCATION to go from efforts to thruster commands
 			if (LL_state == 1)				//	1 = PID HP Dual-azimuthing station keeping controller
 			{
@@ -683,8 +694,8 @@ int main(int argc, char **argv)
 
 				T_p = sqrt(pow(F_xp,2.0)+pow(F_yp,2.0));	// calculate magnitude of port thrust
 				T_s = sqrt(pow(F_xs,2.0)+pow(F_ys,2.0));	// calculate magnitude of starboard thrust
-				A_p = atan2(F_yp,F_xp);			// calculate angle of port thrust
-				A_s = atan2(F_ys,F_xs);			// calculate angle of starboard thrust
+				A_p = -atan2(F_yp,F_xp);			// calculate angle of port thrust
+				A_s = -atan2(F_ys,F_xs);			// calculate angle of starboard thrust
 				
 				
 				// DEBUG INFORMATION ////////////////////////////////////////////////////////////
@@ -736,8 +747,8 @@ int main(int argc, char **argv)
 			else if (LL_state == 3)		// 3 = PID HP Ackermann wayfinding controller
 			{
 				// Use Ackermann drive configuration to set angles to thrusters 
-				A_p = -atan(lx/(M_z+ly));
-				A_s = -atan(lx/(M_z-ly));
+				A_p = atan(lx/(M_z+ly));
+				A_s = atan(lx/(M_z-ly));
 				
 				// Calculate torque to thrusters
 				T_p = T_x/(cos(A_p)+cos(A_s));
