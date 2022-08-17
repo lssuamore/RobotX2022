@@ -93,16 +93,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsFixedSize< ::jetson::task_info_<ContainerAllocator> >
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::jetson::task_info_<ContainerAllocator> const>
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
 struct IsMessage< ::jetson::task_info_<ContainerAllocator> >
   : TrueType
   { };
@@ -110,6 +100,16 @@ struct IsMessage< ::jetson::task_info_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsMessage< ::jetson::task_info_<ContainerAllocator> const>
   : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::jetson::task_info_<ContainerAllocator> >
+  : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::jetson::task_info_<ContainerAllocator> const>
+  : FalseType
   { };
 
 template <class ContainerAllocator>

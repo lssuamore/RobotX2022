@@ -26,9 +26,9 @@
   <param name="/y_G" value="0.0" />		<!-- SET THIS IN METERS -->
   <param name="/psi_G" value="0.0" />		<!-- SET THIS BETWEEN -PI AND PI RADIANS -->
   
+  <!-- NORTH AND SOUTH POINTS ARE USED FOR GENERATING FIGURE 8 PATH FOR SENIOR PROJECT DEMO -->
   <param name="/x_north" value="20.0" />	<!-- SET THIS IN METERS -->
   <param name="/y_north" value="0.0" />	<!-- SET THIS IN METERS -->
-  
   <param name="/x_south" value="-40.0" />	<!-- SET THIS IN METERS -->
   <param name="/y_south" value="0.0" />	<!-- SET THIS IN METERS -->
   

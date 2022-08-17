@@ -48,7 +48,7 @@ int loop_count = 0;	// loop counter, first 10 loops used to intitialize subscrib
 
 // Variables
 float q1, q2, q3, q0;	// Sparton imu quarternion
-float phi, theta, psi, psiA;	// conversion to radians
+float phi, theta, psi;	// conversion to radians
 float compass_psi;	// Sparkfun compass
 double xNED, yNED, zNED;			// NED position
 float phiNED, thetaNED, psiNED;
