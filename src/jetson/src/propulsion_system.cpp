@@ -1,10 +1,10 @@
 //  Filename:						        Task1_SK_Controller.cpp
 //  Creation Date:						1/31/2022
 //  Last Revision Date:                1/31/2022
-//  Author(s) [email]:					Brad Hacker [bhacker@lssu.edu]
+//  Author(s) [email]:			Brad Hacker [bhacker@lssu.edu]
 //
 //  Revisor(s) [Revision Date]:
-//  Organization/Institution:			Lake Superior State University
+//  Organization/Institution:  Lake Superior State University
 //
 // ...........................Task1_SK_Controller.cpp.......................
 //  This code takes in a position to reach in the global frame as nav_odom msgs.
@@ -14,9 +14,8 @@
 //   Control allocation is used to solve for the thrusts and azimuthing angles of each thruster.
 //
 //  Inputs and Outputs of the Task1_SK_Controller.cpp file
-//				Inputs: Position (x,y) to reach in global NED frame
-//				Outputs: Thruster outputs and angles for left and right thrusters
-
+//		Inputs: "current_goal_pose" - position (x,y) to reach in global NED frame as well as desired heading
+//		Outputs: "thruster_int_right", "thuster_int_left", "angle_int_right", "angle_int_left" - dual-azimuthing Minn Kota thruster commands
 
 //................................................Included Libraries and Message Types..........................................
 #include "ros/ros.h"
@@ -44,7 +43,7 @@
 //..............................................................Global Variables............................................................
 int loop_count = 0;                     // loop counter, first 10 loops used to intitialize subscribers
 int loop_count_ON = 0;                  // loop count holder for when the the controller is turned on, used to ensure differential and integral terms are not started until they are calculated
-bool PS_state_ON = false;		// used to set and reset the above count
+bool PS_state_ON = false;		// used to set and reset the above count like a oneshot
 
 int MC_state = 0;
 
@@ -518,8 +517,10 @@ int main(int argc, char **argv)
 			} */
 
 			// position control law
-			if (loop_count > (loop_count_ON + 2)) // don't include differential term or integration term first 2 loops after being turned ON
+			if ( (loop_count >= loop_count_ON) && (loop_count < (loop_count_ON + 2)) )  // don't include differential term or integration term first 2 loops after being turned ON
 			{
+				// USE P TERM ONLY TO COMPUTE CONTROL EFFORT SINCE I AND D TERMS ARE NOT YET DEFINED THE LOOP AFTER CONTROLLER IS TURNED ON
+				ROS_INFO("PROPULSION_SYSTEM: P Control");
 				if (LL_state == 1)		// 1 = PID HP Dual-azimuthing station keeping controller
 				{
 					T_x = Kp_x*e_x;
@@ -530,8 +531,10 @@ int main(int argc, char **argv)
 					T_x = Kp_x*e_xy;
 				}
 			}
-			else
+			else if (loop_count >= (loop_count_ON + 2))
 			{
+				// USE PID CONTROLLER ONCE I AND D TERMS ARE DEFINED
+				ROS_INFO("PROPULSION_SYSTEM: PID Control");
 				if (LL_state == 1)		// 1 = PID HP Dual-azimuthing station keeping controller
 				{
 					// trapezoidal integration of errors for integral term
@@ -570,7 +573,7 @@ int main(int argc, char **argv)
 				}
 			}
 
-			//correct discontinuity in heading error
+			// correct discontinuity in heading error
 			if (e_psi < (-PI + 0.1*PI))
 			{
 				e_psi = e_psi + 2.0*PI;
@@ -601,11 +604,11 @@ int main(int argc, char **argv)
 			} */
 
 			// orientation control law
-			if (loop_count > (loop_count_ON + 2)) // don't include differential term or integration term first time through
+			if ( (loop_count >= loop_count_ON) && (loop_count < (loop_count_ON + 2)) )  // don't include differential term or integration term first time through
 			{
 				M_z = Kp_psi*e_psi;
 			}
-			else
+			else if (loop_count >= (loop_count_ON + 2))
 			{
 				e_psi_total = e_psi_total + ((e_psi_prev + e_psi)/2.0)*dt;	// trapezoidal integration of error for integral term
 				M_z = Kp_psi*e_psi + Kd_psi*((e_psi - e_psi_prev)/dt) + Ki_psi*e_psi_total;
@@ -632,11 +635,11 @@ int main(int argc, char **argv)
 
 			// perhaps comment out the following if
 			// if within a meter only control heading
-			if (e_xy < 1.0)
-			{
-				T_x = 0.0;
-				T_y = 0.0;
-			}
+			// if (e_xy < 1.0)
+			// {
+				// T_x = 0.0;
+				// T_y = 0.0;
+			// }
 
 			// only control heading if heading is off by more than 45 degree
 			//if ((float)abs(e_psi) > 0.785)
@@ -668,10 +671,10 @@ int main(int argc, char **argv)
 			//{
 			//	T_y = 0.0;
 			//}
-			if ((float)abs(e_psi) < 0.07)
-			{
-				M_z = 0.0;
-			}
+			// if ((float)abs(e_psi) < 0.07)
+			// {
+				// M_z = 0.0;
+			// }
 
 			// ALLOCATION to go from efforts to thruster commands
 			if (LL_state == 1)				//	1 = PID HP Dual-azimuthing station keeping controller
@@ -679,8 +682,6 @@ int main(int argc, char **argv)
 				// Convert to USV body-fixed frame from global frame
 				T_x_bf = T_x*cos(psi_NED) + T_y*sin(psi_NED);
 				T_y_bf = T_y*cos(psi_NED) - T_x*sin(psi_NED);
-				//T_x = (float)abs(T_x_bf);
-				//T_y = (float)abs(T_y_bf);
 
 				T_x = T_x_bf;
 				T_y = T_y_bf;

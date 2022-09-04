@@ -68,8 +68,8 @@ jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/s
 
 /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from jetson/usv_pose_msg.msg"
 	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
@@ -88,7 +88,7 @@ jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/s
 
 /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/control_efforts.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/control_efforts.js: /home/brad/RobotX2022/src/jetson/msg/control_efforts.msg
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/control_efforts.js: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/control_efforts.js: /opt/ros/noetic/share/std_msgs/msg/Float32.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Javascript code from jetson/control_efforts.msg"
 	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/control_efforts.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
 

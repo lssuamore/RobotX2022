@@ -69,8 +69,8 @@ jetson/CMakeFiles/jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/p
 
 /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg
-/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_usv_pose_msg.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG jetson/usv_pose_msg"
 	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg
@@ -89,7 +89,7 @@ jetson/CMakeFiles/jetson_generate_messages_py: /home/brad/RobotX2022/devel/lib/p
 
 /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_control_efforts.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_control_efforts.py: /home/brad/RobotX2022/src/jetson/msg/control_efforts.msg
-/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_control_efforts.py: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_control_efforts.py: /opt/ros/noetic/share/std_msgs/msg/Float32.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python from MSG jetson/control_efforts"
 	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/RobotX2022/src/jetson/msg/control_efforts.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg
 
