@@ -341,7 +341,7 @@ void MISSION_CONTROL_inspector()
 {
 	current_time = ros::Time::now();  // sets current_time to the time it is now
 	loop_count += 1;  // increment loop counter
-	if ((path_planner_initialized) && (propulsion_system_initialized) && (navigation_array_initialized))  // && (coordinate_converter_initialized) && (perception_array_initialized) && (acoustic_initialized)
+	if ((path_planner_initialized) && (propulsion_system_initialized))  // && (navigation_array_initialized) && (coordinate_converter_initialized) && (perception_array_initialized) && (acoustic_initialized)
 	{
 		system_initialized = true;
 	}
@@ -362,7 +362,7 @@ void MISSION_CONTROL_inspector()
 	// }
 	// if (navigation_array_initialized)
 	// {
-		// ROS_DEBUG("MISSION_CONTROL: navigation_array_initialized");
+		// ROS_INFO("MISSION_CONTROL: navigation_array_initialized");
 	// }
 	// if (coordinate_converter_initialized)
 	// {
@@ -370,15 +370,15 @@ void MISSION_CONTROL_inspector()
 	// }
 	// if (path_planner_initialized)
 	// {
-		// ROS_DEBUG("MISSION_CONTROL: path_planner_initialized");
+		// ROS_INFO("MISSION_CONTROL: path_planner_initialized");
 	// }
 	// if (propulsion_system_initialized)
 	// {
-		// ROS_DEBUG("MISSION_CONTROL: propulsion_system_initialized");
+		// ROS_INFO("MISSION_CONTROL: propulsion_system_initialized");
 	// }
 	// if (perception_array_initialized)
 	// {
-		// ROS_DEBUG("MISSION_CONTROL: perception_array_initialized");
+		// ROS_INFO("MISSION_CONTROL: perception_array_initialized");
 	// }
 }  // END OF MISSION_CONTROL_inspector()
 

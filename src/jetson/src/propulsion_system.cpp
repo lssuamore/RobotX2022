@@ -15,7 +15,7 @@
 //  Inputs and Outputs of the propulsion_system.cpp file
 //				Inputs: ["PP_propulsion_system_topic" - jetson/propulsion_system - goal pose (x,y,psi) to reach in local NED frame and current USV pose from path_planner]
 //
-//				Outputs: "thruster_int_right", "thuster_int_left", "angle_int_right", "angle_int_left" - dual-azimuthing Minn Kota thruster commands
+//				Outputs: "thruster_int_right", "thruster_int_left", "angle_int_right", "angle_int_left" - dual-azimuthing Minn Kota thruster commands
 //								"PORT_MAIN", "STBD_MAIN", "PORT_BOW", "STBD_BOW" - QUT thruster commands
 
 
@@ -457,10 +457,10 @@ int main(int argc, char **argv)
 	PS_control_efforts_topic_pub = nh7.advertise<jetson::control_efforts>("PS_control_efforts_topic", 1);  // control_efforts
 
 	// Simulation thruster topics 
-	ros::Publisher right_thrust_cmd_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_cmd", 10);  // between -1.0 and 1.0, speed to right thruster
-	ros::Publisher left_thrust_cmd_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_cmd", 10);  // value between -1.0 and 1.0, speed to left thruster
-	ros::Publisher right_thrust_angle_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_angle", 10);  // value between -PI to PI, angle to right thruster
-	ros::Publisher left_thrust_angle_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_angle", 10);  // value between -PI to PI, angle to left thruster
+	ros::Publisher right_thrust_cmd_pub = nh7.advertise<std_msgs::Float32>("thruster_int_right", 10);  // between -1.0 and 1.0, speed to right thruster
+	ros::Publisher left_thrust_cmd_pub = nh7.advertise<std_msgs::Float32>("thruster_int_left", 10);  // value between -1.0 and 1.0, speed to left thruster
+	ros::Publisher right_thrust_angle_pub = nh7.advertise<std_msgs::Float32>("angle_int_right", 10);  // value between -PI to PI, angle to right thruster
+	ros::Publisher left_thrust_angle_pub = nh7.advertise<std_msgs::Float32>("angle_int_left", 10);  // value between -PI to PI, angle to left thruster
 	// Simulation variables
 	std_msgs::Float32 left_thrust_cmd_msg, right_thrust_cmd_msg, left_thrust_angle_msg, right_thrust_angle_msg;
 
@@ -720,6 +720,11 @@ int main(int argc, char **argv)
 		// ENTER SERIAL COMMUNICATION PROTOCOL FUNCTION HERE
 		// SEND OUT THE THRUSTER COMMANDS NO SLOWER THAN 10 HERTZ
 		// set thruster message commands
+		// hardcode thruster speeds to 80
+		PM = 80;
+		PB = 80;
+		SM = 80;
+		SB = 80;
 		left_thrust_angle_msg.data = PB;
 		left_thrust_cmd_msg.data = PM;
 		right_thrust_angle_msg.data = SB;
