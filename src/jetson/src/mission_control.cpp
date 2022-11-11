@@ -436,7 +436,7 @@ void A_initialization_state_update(const std_msgs::Bool status)
 	acoustic_initialized = status.data;
 }  // END OF A_initialization_state_update()
 
-// THIS FUNCTION: Subscribes to acoustics to check status
+/* // THIS FUNCTION: Subscribes to acoustics to check status
 // ACCEPTS: std_msgs::Int64 from "A_system_state"
 // RETURNS: (VOID)
 //=============================================================================================================
@@ -447,7 +447,7 @@ void A_system_state_update(const std_msgs::Int64 status)
 	// 2 = buoy channel has been traversed
 	// 3 = exit gate has been traversed
 	acoustic_task_status  = status.data; 
-}  // END OF A_system_state_update()
+}  // END OF A_system_state_update() */
 
 /* // THIS FUNCTION: Updates when VRX Task goal poses have been converted and published
 // ACCEPTS: std_msgs::Bool from "CC_goal_poses_publish_state"
@@ -682,7 +682,7 @@ int main(int argc, char **argv)
 	// set up vrx subscribers
 	//ros::Subscriber task_status_sub = nh7.subscribe("/vrx/task/info", 1, vrx_state_update);  // VRX task topic
 	//ros::Subscriber CC_goal_poses_publish_state_sub = nh8.subscribe("CC_goal_poses_publish_state", 1, CC_goal_poses_publish_state_update);  // whether or not goal waypoints have been converted and published yet
-	ros::Subscriber A_system_state_sub = nh9.subscribe("A_system_state", 1, A_system_state_update);  // subscriber for status of acoustic program
+	//ros::Subscriber A_system_state_sub = nh9.subscribe("A_system_state", 1, A_system_state_update);  // subscriber for status of acoustic program
 
 	// Publishers
 	// these publishers publish all the state topics off all the other programs so that mission_control can tell them all how to operate

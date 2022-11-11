@@ -11,6 +11,7 @@ const _deserializer = _ros_msg_utils.Deserialize;
 const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
+let std_msgs = _finder('std_msgs');
 
 //-----------------------------------------------------------
 
@@ -26,7 +27,7 @@ class task_info {
         this.name = initObj.name
       }
       else {
-        this.name = '';
+        this.name = new std_msgs.msg.Int64();
       }
       if (initObj.hasOwnProperty('state')) {
         this.state = initObj.state
@@ -40,7 +41,7 @@ class task_info {
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type task_info
     // Serialize message field [name]
-    bufferOffset = _serializer.string(obj.name, buffer, bufferOffset);
+    bufferOffset = std_msgs.msg.Int64.serialize(obj.name, buffer, bufferOffset);
     // Serialize message field [state]
     bufferOffset = _serializer.string(obj.state, buffer, bufferOffset);
     return bufferOffset;
@@ -51,7 +52,7 @@ class task_info {
     let len;
     let data = new task_info(null);
     // Deserialize message field [name]
-    data.name = _deserializer.string(buffer, bufferOffset);
+    data.name = std_msgs.msg.Int64.deserialize(buffer, bufferOffset);
     // Deserialize message field [state]
     data.state = _deserializer.string(buffer, bufferOffset);
     return data;
@@ -59,9 +60,8 @@ class task_info {
 
   static getMessageSize(object) {
     let length = 0;
-    length += _getByteLength(object.name);
-    length += _getByteLength(object.state);
-    return length + 8;
+    length += object.state.length;
+    return length + 12;
   }
 
   static datatype() {
@@ -71,16 +71,19 @@ class task_info {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '181acc0441b0be709bbbbfe6dba51bd0';
+    return '8604b4549acbc2637d40681d3885d9ee';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    string name
+    std_msgs/Int64 name
     string state
     
     
+    ================================================================================
+    MSG: std_msgs/Int64
+    int64 data
     `;
   }
 
@@ -91,10 +94,10 @@ class task_info {
     }
     const resolved = new task_info(null);
     if (msg.name !== undefined) {
-      resolved.name = msg.name;
+      resolved.name = std_msgs.msg.Int64.Resolve(msg.name)
     }
     else {
-      resolved.name = ''
+      resolved.name = new std_msgs.msg.Int64()
     }
 
     if (msg.state !== undefined) {

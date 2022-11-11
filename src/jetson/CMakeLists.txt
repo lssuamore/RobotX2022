@@ -61,7 +61,6 @@ include_directories(${catkin_INCLUDE_DIRS})
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  NED_waypoints.msg
   NED_poses.msg
   NED_objects.msg
   NED_acoustic.msg
@@ -69,6 +68,16 @@ add_message_files(
   state.msg
   Task.msg
   control_efforts.msg
+  NED_waypoints.msg
+  usv_pose_msg.msg
+  state_msg.msg
+  task_info.msg
+  control_efforts.msg
+  zed2i_msg.msg
+  AMS_state.msg
+  Acoustics_msg.msg
+  Detect_Dock_Fling.msg
+
 )
 
 ## Generate services in the 'srv' folder
@@ -154,12 +163,13 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(camera_capture src/camera_capture.cpp)
+#add_executable(camera_capture src/camera_capture.cpp)
 add_executable(mission_control src/mission_control.cpp)
-add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)
+#add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)
 add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)
 add_executable(propulsion_system src/propulsion_system.cpp)
 add_executable(path_planner src/path_planner.cpp)
+add_executable(heartbeat src/heartbeat.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -171,12 +181,13 @@ add_executable(path_planner src/path_planner.cpp)
 ## same as for the library above
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(camera_capture ${catkin_LIBRARIES} ${OpenCV_LIBS})
+#target_link_libraries(camera_capture ${catkin_LIBRARIES} ${OpenCV_LIBS})
 target_link_libraries(mission_control ${catkin_LIBRARIES})
-target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
+#target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
 target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system ${catkin_LIBRARIES})
 target_link_libraries(path_planner ${catkin_LIBRARIES})
+target_link_libraries(heartbeat ${catkin_LIBRARIES})
 #]]
 
 #############

@@ -1,6 +1,12 @@
 (cl:defpackage jetson-msg
   (:use )
   (:export
+   "<AMS_STATE>"
+   "AMS_STATE"
+   "<ACOUSTICS_MSG>"
+   "ACOUSTICS_MSG"
+   "<DETECT_DOCK_FLING>"
+   "DETECT_DOCK_FLING"
    "<NED_ACOUSTIC>"
    "NED_ACOUSTIC"
    "<NED_OBJECTS>"
@@ -17,5 +23,13 @@
    "PROPULSION_SYSTEM"
    "<STATE>"
    "STATE"
+   "<STATE_MSG>"
+   "STATE_MSG"
+   "<TASK_INFO>"
+   "TASK_INFO"
+   "<USV_POSE_MSG>"
+   "USV_POSE_MSG"
+   "<ZED2I_MSG>"
+   "ZED2I_MSG"
   ))
 
