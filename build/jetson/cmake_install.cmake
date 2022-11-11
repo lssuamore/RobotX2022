@@ -40,9 +40,12 @@ endif()
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/jetson/msg" TYPE FILE FILES
     "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg"
-    "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
-    "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg"
-    "/home/brad/RobotX2022/src/jetson/msg/task_info.msg"
+    "/home/brad/RobotX2022/src/jetson/msg/NED_poses.msg"
+    "/home/brad/RobotX2022/src/jetson/msg/NED_objects.msg"
+    "/home/brad/RobotX2022/src/jetson/msg/NED_acoustic.msg"
+    "/home/brad/RobotX2022/src/jetson/msg/propulsion_system.msg"
+    "/home/brad/RobotX2022/src/jetson/msg/state.msg"
+    "/home/brad/RobotX2022/src/jetson/msg/Task.msg"
     "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg"
     )
 endif()

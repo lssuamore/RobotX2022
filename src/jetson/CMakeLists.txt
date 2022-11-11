@@ -62,9 +62,12 @@ include_directories(${catkin_INCLUDE_DIRS})
 add_message_files(
   FILES
   NED_waypoints.msg
-  usv_pose_msg.msg
-  state_msg.msg
-  task_info.msg
+  NED_poses.msg
+  NED_objects.msg
+  NED_acoustic.msg
+  propulsion_system.msg
+  state.msg
+  Task.msg
   control_efforts.msg
 )
 
@@ -146,6 +149,8 @@ include_directories(
 ## either from message generation or dynamic reconfigure
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
+# AMORE ADDITION NOTICE: Start of block comment: #[[   End of block comment: ]]
+##[[
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
@@ -172,6 +177,7 @@ target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
 target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system ${catkin_LIBRARIES})
 target_link_libraries(path_planner ${catkin_LIBRARIES})
+#]]
 
 #############
 ## Install ##
@@ -215,6 +221,7 @@ install(FILES launch/amore_outdoor.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DES
 install(FILES launch/indoor_sensors.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 install(FILES launch/outdoor_sensors.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 install(FILES launch/ardusimple.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
 # install(FILES
 #   # myfile1
 #   # myfile2

@@ -27,7 +27,7 @@
 #include "math.h"
 #include "stdio.h"
 #include "nav_msgs/Odometry.h"
-#include "jetson/state_msg.h"			// message type used to communicate state for rudimentary codes
+#include "jetson/state.h"			// message type used to communicate state for rudimentary codes
 #include "std_msgs/Bool.h"
 #include "std_msgs/Float32.h"
 #include "geometry_msgs/Point.h"		// message type used to hold the goal waypoints w/headings
@@ -93,7 +93,7 @@ void NAVIGATION_ARRAY_inspector()
 // ACCEPTS: state_msg from "na_state"
 // RETURNS: (VOID)
 // =============================================================================
-void state_update(const jetson::state_msg::ConstPtr& msg)
+void state_update(const jetson::state::ConstPtr& msg)
 {
 	// do not start anything until subscribers to sensor data are initialized
 	if (na_initialization_status.data)

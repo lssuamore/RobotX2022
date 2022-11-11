@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
 include jetson/CMakeFiles/_jetson_generate_messages_check_deps_usv_pose_msg.dir/progress.make
 
 jetson/CMakeFiles/_jetson_generate_messages_check_deps_usv_pose_msg:
-	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py jetson /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg std_msgs/Float64:geometry_msgs/Point:std_msgs/Header
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py jetson /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg std_msgs/Header:geometry_msgs/Point:std_msgs/Float64
 
 _jetson_generate_messages_check_deps_usv_pose_msg: jetson/CMakeFiles/_jetson_generate_messages_check_deps_usv_pose_msg
 _jetson_generate_messages_check_deps_usv_pose_msg: jetson/CMakeFiles/_jetson_generate_messages_check_deps_usv_pose_msg.dir/build.make

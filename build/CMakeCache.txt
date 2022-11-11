@@ -26,8 +26,6 @@ Boost_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0
 //Path to a file.
 Boost_INCLUDE_DIR:PATH=/usr/include
 
-Boost_REGEX_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
-
 Boost_SYSTEM_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 
 Boost_THREAD_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
@@ -427,9 +425,6 @@ boost_atomic_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_atomic-1.71.0
 //The directory containing a CMake configuration file for boost_headers.
 boost_headers_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0
 
-//The directory containing a CMake configuration file for boost_regex.
-boost_regex_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0
-
 //The directory containing a CMake configuration file for boost_system.
 boost_system_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_system-1.71.0
 
@@ -450,12 +445,6 @@ cpp_common_DIR:PATH=/opt/ros/noetic/share/cpp_common/cmake
 
 //The directory containing a CMake configuration file for cv_bridge.
 cv_bridge_DIR:PATH=/opt/ros/noetic/share/cv_bridge/cmake
-
-//The directory containing a CMake configuration file for diagnostic_msgs.
-diagnostic_msgs_DIR:PATH=/opt/ros/noetic/share/diagnostic_msgs/cmake
-
-//The directory containing a CMake configuration file for diagnostic_updater.
-diagnostic_updater_DIR:PATH=/opt/ros/noetic/share/diagnostic_updater/cmake
 
 //The directory containing a CMake configuration file for gencpp.
 gencpp_DIR:PATH=/opt/ros/noetic/share/gencpp/cmake
@@ -546,7 +535,7 @@ jetson_BINARY_DIR:STATIC=/home/brad/RobotX2022/build/jetson
 jetson_SOURCE_DIR:STATIC=/home/brad/RobotX2022/src/jetson
 
 //Path to a library.
-lib:FILEPATH=/opt/ros/noetic/lib/libdiagnostic_updater.so
+lib:FILEPATH=/opt/ros/noetic/lib/libmessage_filters.so
 
 //The directory containing a CMake configuration file for message_filters.
 message_filters_DIR:PATH=/opt/ros/noetic/share/message_filters/cmake
@@ -710,9 +699,6 @@ rostime_DIR:PATH=/opt/ros/noetic/share/rostime/cmake
 //Value Computed by CMake
 rtcm_msgs_BINARY_DIR:STATIC=/home/brad/RobotX2022/build/sensors/rtcm_msgs
 
-//The directory containing a CMake configuration file for rtcm_msgs.
-rtcm_msgs_DIR:PATH=/home/brad/RobotX2022/devel/share/rtcm_msgs/cmake
-
 //Value Computed by CMake
 rtcm_msgs_SOURCE_DIR:STATIC=/home/brad/RobotX2022/src/sensors/rtcm_msgs
 
@@ -743,47 +729,8 @@ tf2_py_DIR:PATH=/opt/ros/noetic/share/tf2_py/cmake
 //The directory containing a CMake configuration file for tf2_ros.
 tf2_ros_DIR:PATH=/opt/ros/noetic/share/tf2_ros/cmake
 
-//The directory containing a CMake configuration file for tf.
-tf_DIR:PATH=/opt/ros/noetic/share/tf/cmake
-
 //The directory containing a CMake configuration file for topic_tools.
 topic_tools_DIR:PATH=/opt/ros/noetic/share/topic_tools/cmake
-
-//Value Computed by CMake
-ublox_BINARY_DIR:STATIC=/home/brad/RobotX2022/build/sensors/ublox/ublox
-
-//Value Computed by CMake
-ublox_SOURCE_DIR:STATIC=/home/brad/RobotX2022/src/sensors/ublox/ublox
-
-//Value Computed by CMake
-ublox_gps_BINARY_DIR:STATIC=/home/brad/RobotX2022/build/sensors/ublox/ublox_gps
-
-//Dependencies for the target
-ublox_gps_LIB_DEPENDS:STATIC=general;boost_system;general;boost_regex;general;boost_thread;general;/opt/ros/noetic/lib/libtf.so;general;/opt/ros/noetic/lib/libtf2_ros.so;general;/opt/ros/noetic/lib/libactionlib.so;general;/opt/ros/noetic/lib/libmessage_filters.so;general;/opt/ros/noetic/lib/libtf2.so;general;ublox_msgs;general;/opt/ros/noetic/lib/libdiagnostic_updater.so;general;/opt/ros/noetic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0;general;/opt/ros/noetic/lib/librosconsole.so;general;/opt/ros/noetic/lib/librosconsole_log4cxx.so;general;/opt/ros/noetic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0;general;/opt/ros/noetic/lib/libxmlrpcpp.so;general;/opt/ros/noetic/lib/libroscpp_serialization.so;general;/opt/ros/noetic/lib/librostime.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0;general;/opt/ros/noetic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
-
-//Value Computed by CMake
-ublox_gps_SOURCE_DIR:STATIC=/home/brad/RobotX2022/src/sensors/ublox/ublox_gps
-
-//Value Computed by CMake
-ublox_msgs_BINARY_DIR:STATIC=/home/brad/RobotX2022/build/sensors/ublox/ublox_msgs
-
-//The directory containing a CMake configuration file for ublox_msgs.
-ublox_msgs_DIR:PATH=/home/brad/RobotX2022/devel/share/ublox_msgs/cmake
-
-//Dependencies for the target
-ublox_msgs_LIB_DEPENDS:STATIC=general;/opt/ros/noetic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0;general;/opt/ros/noetic/lib/librosconsole.so;general;/opt/ros/noetic/lib/librosconsole_log4cxx.so;general;/opt/ros/noetic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0;general;/opt/ros/noetic/lib/libxmlrpcpp.so;general;/opt/ros/noetic/lib/libroscpp_serialization.so;general;/opt/ros/noetic/lib/librostime.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0;general;/opt/ros/noetic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
-
-//Value Computed by CMake
-ublox_msgs_SOURCE_DIR:STATIC=/home/brad/RobotX2022/src/sensors/ublox/ublox_msgs
-
-//Value Computed by CMake
-ublox_serialization_BINARY_DIR:STATIC=/home/brad/RobotX2022/build/sensors/ublox/ublox_serialization
-
-//The directory containing a CMake configuration file for ublox_serialization.
-ublox_serialization_DIR:PATH=/home/brad/RobotX2022/devel/share/ublox_serialization/cmake
-
-//Value Computed by CMake
-ublox_serialization_SOURCE_DIR:STATIC=/home/brad/RobotX2022/src/sensors/ublox/ublox_serialization
 
 //The directory containing a CMake configuration file for uuid_msgs.
 uuid_msgs_DIR:PATH=/opt/ros/noetic/share/uuid_msgs/cmake
@@ -941,7 +888,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=28
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=24
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -987,7 +934,7 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: EIGEN_INCLUDE_DIR
 EIGEN_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //Details about finding Boost
-FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake][cfound components: system regex thread ][v1.71.0()]
+FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake][cfound components: system thread ][v1.71.0()]
 //Details about finding Eigen
 FIND_PACKAGE_MESSAGE_DETAILS_Eigen:INTERNAL=[/usr/include/eigen3][v()]
 //Details about finding OpenCV
@@ -1079,8 +1026,6 @@ __pkg_config_checked_PC_EIGEN:INTERNAL=1
 boost_atomic_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_headers_DIR
 boost_headers_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: boost_regex_DIR
-boost_regex_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_system_DIR
 boost_system_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_thread_DIR

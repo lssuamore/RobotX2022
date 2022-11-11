@@ -2,15 +2,21 @@
 "use strict";
 
 let NED_waypoints = require('./NED_waypoints.js');
-let usv_pose_msg = require('./usv_pose_msg.js');
-let task_info = require('./task_info.js');
+let state = require('./state.js');
+let NED_poses = require('./NED_poses.js');
+let Task = require('./Task.js');
 let control_efforts = require('./control_efforts.js');
-let state_msg = require('./state_msg.js');
+let NED_objects = require('./NED_objects.js');
+let NED_acoustic = require('./NED_acoustic.js');
+let propulsion_system = require('./propulsion_system.js');
 
 module.exports = {
   NED_waypoints: NED_waypoints,
-  usv_pose_msg: usv_pose_msg,
-  task_info: task_info,
+  state: state,
+  NED_poses: NED_poses,
+  Task: Task,
   control_efforts: control_efforts,
-  state_msg: state_msg,
+  NED_objects: NED_objects,
+  NED_acoustic: NED_acoustic,
+  propulsion_system: propulsion_system,
 };
