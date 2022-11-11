@@ -1,9 +1,8 @@
+<?xml version="1.0"?>
+<!-- HTML comment format -->
+<!-- This launch file launches the GNC high level codes for real-world -->
 
 <launch>
-
-  <!-- This is the format for a comment in HTML --> 
-
-
   <!-- Launches the geonav_transform file --> 
   <include file="$(find geonav_transform)/launch/geonav_transform.launch">
   </include>
@@ -11,26 +10,39 @@
   <!-- creates all the parameters --> 
   <param name="/kp_xy" value="0.1" />
   <param name="/kp_psi" value="0.8" />
-  <param name="/kd_xy" value="0.5" />
-  <param name="/kd_psi" value="2.0" />
   <param name="/ki_xy" value="0.0" />
   <param name="/ki_psi" value="0.05" />
+  <param name="/kd_xy" value="0.5" />
+  <param name="/kd_psi" value="2.0" />
   
-  <!-- SET THIS TO 0:ON STANDBY, 1:STATION-KEEPING, 2:WAYFINDING -->
+  <!-- 0:ON STANDBY, 1: DnD, 11:STATION-KEEPING, 12:FIGURE EIGHT -->
   <param name="/MC" value="0" />
   
-  <!-- SET THIS TO 1:DUAL-AZIMUTHING STATION-KEEPING, 2:DIFFERENTIAL WAYFINDING, 3:ACKERMANN WAYFINDING -->
+  <!-- STATION-KEEPING GOAL (MC = 1) -->
+  <param name="/x_G" value="0.0" />       <!-- SET THIS IN METERS -->
+  <param name="/y_G" value="0.0" />       <!-- SET THIS IN METERS -->
+  <param name="/psi_G" value="0.0" />     <!-- SET THIS BETWEEN -PI AND PI RADIANS -->
+  
+  <!-- NORTH AND SOUTH POINTS ARE USED FOR GENERATING FIGURE EIGHT PATH -->
+  <param name="/x_north" value="20.0" />  <!-- SET THIS IN METERS -->
+  <param name="/y_north" value="0.0" />   <!-- SET THIS IN METERS -->
+  <param name="/x_south" value="-20.0" /> <!-- SET THIS IN METERS -->
+  <param name="/y_south" value="0.0" />   <!-- SET THIS IN METERS -->
+  
+  <!-- Start location for the follow the path task -->
+  <param name="/x_FtP" value="157" />      <!-- Meter value in Local NED frame -->
+  <param name="/y_FtP" value="-533" />      <!-- Meter value in Local NED frame -->
+  <param name="/psi_FtP" value="0.0" />    <!-- Radian value between -Pi and Pi -->
+  
+  <!-- Hard code values for buoy positions wrt USV-->
+  <param name="/updated_buoy_pair" value="0" />      <!-- 0 = false  1 = true -->
+  <param name="/x_LB" value="0" />                   <!-- Meter value -->
+  <param name="/y_LB" value="0" />                   <!-- Meter value -->
+  <param name="/x_RB" value="0" />                   <!-- Meter value -->
+  <param name="/y_RB" value="0" />                   <!-- Meter value -->
+  
+  <!-- 1:DUAL-AZIMUTHING STATION-KEEPING, 2:DIFFERENTIAL WAYFINDING, 3:ACKERMANN WAYFINDING -->
   <param name="/LL" value="1" />
-  
-  <param name="/x_G" value="0.0" />		<!-- SET THIS IN METERS -->
-  <param name="/y_G" value="0.0" />		<!-- SET THIS IN METERS -->
-  <param name="/psi_G" value="0.0" />		<!-- SET THIS BETWEEN -PI AND PI RADIANS -->
-  
-  <!-- NORTH AND SOUTH POINTS ARE USED FOR GENERATING FIGURE 8 PATH FOR SENIOR PROJECT DEMO -->
-  <param name="/x_north" value="20.0" />	<!-- SET THIS IN METERS -->
-  <param name="/y_north" value="0.0" />	<!-- SET THIS IN METERS -->
-  <param name="/x_south" value="-40.0" />	<!-- SET THIS IN METERS -->
-  <param name="/y_south" value="0.0" />	<!-- SET THIS IN METERS -->
   
   <!-- Launches codes -->
   <node pkg="jetson" type="navigation_array_outdoor" name="navigation_array_outdoor" output="screen">

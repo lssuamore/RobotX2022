@@ -1,15 +1,21 @@
 (cl:defpackage jetson-msg
   (:use )
   (:export
+   "<NED_ACOUSTIC>"
+   "NED_ACOUSTIC"
+   "<NED_OBJECTS>"
+   "NED_OBJECTS"
+   "<NED_POSES>"
+   "NED_POSES"
    "<NED_WAYPOINTS>"
    "NED_WAYPOINTS"
+   "<TASK>"
+   "TASK"
    "<CONTROL_EFFORTS>"
    "CONTROL_EFFORTS"
-   "<STATE_MSG>"
-   "STATE_MSG"
-   "<TASK_INFO>"
-   "TASK_INFO"
-   "<USV_POSE_MSG>"
-   "USV_POSE_MSG"
+   "<PROPULSION_SYSTEM>"
+   "PROPULSION_SYSTEM"
+   "<STATE>"
+   "STATE"
   ))
 

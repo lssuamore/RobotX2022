@@ -54,9 +54,12 @@ CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
 include jetson/CMakeFiles/jetson_generate_messages_nodejs.dir/progress.make
 
 jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_waypoints.js
-jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js
-jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js
-jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/task_info.js
+jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_poses.js
+jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_objects.js
+jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_acoustic.js
+jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/propulsion_system.js
+jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state.js
+jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/Task.js
 jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/control_efforts.js
 
 
@@ -66,37 +69,62 @@ jetson/CMakeFiles/jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/s
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from jetson/NED_waypoints.msg"
 	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
 
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from jetson/usv_pose_msg.msg"
-	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_poses.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_poses.js: /home/brad/RobotX2022/src/jetson/msg/NED_poses.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_poses.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from jetson/NED_poses.msg"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/NED_poses.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
 
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js: /home/brad/RobotX2022/src/jetson/msg/state_msg.msg
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from jetson/state_msg.msg"
-	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/state_msg.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_objects.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_objects.js: /home/brad/RobotX2022/src/jetson/msg/NED_objects.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_objects.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_objects.js: /opt/ros/noetic/share/geometry_msgs/msg/PointStamped.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_objects.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from jetson/NED_objects.msg"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/NED_objects.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
 
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/task_info.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
-/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/task_info.js: /home/brad/RobotX2022/src/jetson/msg/task_info.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from jetson/task_info.msg"
-	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/task_info.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_acoustic.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_acoustic.js: /home/brad/RobotX2022/src/jetson/msg/NED_acoustic.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_acoustic.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from jetson/NED_acoustic.msg"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/NED_acoustic.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
+
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/propulsion_system.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/propulsion_system.js: /home/brad/RobotX2022/src/jetson/msg/propulsion_system.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/propulsion_system.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/propulsion_system.js: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/propulsion_system.js: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/propulsion_system.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Javascript code from jetson/propulsion_system.msg"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/propulsion_system.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
+
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state.js: /home/brad/RobotX2022/src/jetson/msg/state.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state.js: /opt/ros/noetic/share/std_msgs/msg/Bool.msg
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state.js: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Javascript code from jetson/state.msg"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/state.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
+
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/Task.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/Task.js: /home/brad/RobotX2022/src/jetson/msg/Task.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Javascript code from jetson/Task.msg"
+	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/Task.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
 
 /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/control_efforts.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/control_efforts.js: /home/brad/RobotX2022/src/jetson/msg/control_efforts.msg
 /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/control_efforts.js: /opt/ros/noetic/share/std_msgs/msg/Float32.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Javascript code from jetson/control_efforts.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Javascript code from jetson/control_efforts.msg"
 	cd /home/brad/RobotX2022/build/jetson && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/RobotX2022/src/jetson/msg/control_efforts.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg
 
 jetson_generate_messages_nodejs: jetson/CMakeFiles/jetson_generate_messages_nodejs
 jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_waypoints.js
-jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/usv_pose_msg.js
-jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state_msg.js
-jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/task_info.js
+jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_poses.js
+jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_objects.js
+jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/NED_acoustic.js
+jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/propulsion_system.js
+jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/state.js
+jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/Task.js
 jetson_generate_messages_nodejs: /home/brad/RobotX2022/devel/share/gennodejs/ros/jetson/msg/control_efforts.js
 jetson_generate_messages_nodejs: jetson/CMakeFiles/jetson_generate_messages_nodejs.dir/build.make
 

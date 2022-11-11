@@ -112,6 +112,17 @@ test/fast: test
 
 .PHONY : test/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -123,17 +134,6 @@ install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -211,6 +211,36 @@ navigation_array_outdoor: jetson/CMakeFiles/navigation_array_outdoor.dir/rule
 navigation_array_outdoor/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/navigation_array_outdoor.dir/build.make jetson/CMakeFiles/navigation_array_outdoor.dir/build
 .PHONY : navigation_array_outdoor/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/navigation_array_indoor.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/navigation_array_indoor.dir/rule
+.PHONY : jetson/CMakeFiles/navigation_array_indoor.dir/rule
+
+# Convenience name for target.
+navigation_array_indoor: jetson/CMakeFiles/navigation_array_indoor.dir/rule
+
+.PHONY : navigation_array_indoor
+
+# fast build rule for target.
+navigation_array_indoor/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/navigation_array_indoor.dir/build.make jetson/CMakeFiles/navigation_array_indoor.dir/build
+.PHONY : navigation_array_indoor/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/camera_capture.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/camera_capture.dir/rule
+.PHONY : jetson/CMakeFiles/camera_capture.dir/rule
+
+# Convenience name for target.
+camera_capture: jetson/CMakeFiles/camera_capture.dir/rule
+
+.PHONY : camera_capture
+
+# fast build rule for target.
+camera_capture/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/camera_capture.dir/build.make jetson/CMakeFiles/camera_capture.dir/build
+.PHONY : camera_capture/fast
 
 # Convenience name for target.
 jetson/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
@@ -468,6 +498,21 @@ roscpp_generate_messages_nodejs/fast:
 .PHONY : roscpp_generate_messages_nodejs/fast
 
 # Convenience name for target.
+jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_acoustic.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_acoustic.dir/rule
+.PHONY : jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_acoustic.dir/rule
+
+# Convenience name for target.
+_jetson_generate_messages_check_deps_NED_acoustic: jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_acoustic.dir/rule
+
+.PHONY : _jetson_generate_messages_check_deps_NED_acoustic
+
+# fast build rule for target.
+_jetson_generate_messages_check_deps_NED_acoustic/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_acoustic.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_acoustic.dir/build
+.PHONY : _jetson_generate_messages_check_deps_NED_acoustic/fast
+
+# Convenience name for target.
 jetson/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 .PHONY : jetson/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
@@ -588,21 +633,6 @@ geometry_msgs_generate_messages_nodejs/fast:
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-jetson/CMakeFiles/_jetson_generate_messages_check_deps_task_info.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/_jetson_generate_messages_check_deps_task_info.dir/rule
-.PHONY : jetson/CMakeFiles/_jetson_generate_messages_check_deps_task_info.dir/rule
-
-# Convenience name for target.
-_jetson_generate_messages_check_deps_task_info: jetson/CMakeFiles/_jetson_generate_messages_check_deps_task_info.dir/rule
-
-.PHONY : _jetson_generate_messages_check_deps_task_info
-
-# fast build rule for target.
-_jetson_generate_messages_check_deps_task_info/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_task_info.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_task_info.dir/build
-.PHONY : _jetson_generate_messages_check_deps_task_info/fast
-
-# Convenience name for target.
 jetson/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 .PHONY : jetson/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
@@ -661,6 +691,36 @@ nav_msgs_generate_messages_lisp: jetson/CMakeFiles/nav_msgs_generate_messages_li
 nav_msgs_generate_messages_lisp/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make jetson/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
 .PHONY : nav_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/mission_control.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/mission_control.dir/rule
+.PHONY : jetson/CMakeFiles/mission_control.dir/rule
+
+# Convenience name for target.
+mission_control: jetson/CMakeFiles/mission_control.dir/rule
+
+.PHONY : mission_control
+
+# fast build rule for target.
+mission_control/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/mission_control.dir/build.make jetson/CMakeFiles/mission_control.dir/build
+.PHONY : mission_control/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
+.PHONY : jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+sensor_msgs_generate_messages_nodejs: jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : sensor_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+sensor_msgs_generate_messages_nodejs/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
+.PHONY : sensor_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 jetson/CMakeFiles/geographic_msgs_generate_messages_py.dir/rule:
@@ -873,19 +933,79 @@ jetson_generate_messages/fast:
 .PHONY : jetson_generate_messages/fast
 
 # Convenience name for target.
-jetson/CMakeFiles/_jetson_generate_messages_check_deps_state_msg.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/_jetson_generate_messages_check_deps_state_msg.dir/rule
-.PHONY : jetson/CMakeFiles/_jetson_generate_messages_check_deps_state_msg.dir/rule
+jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_objects.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_objects.dir/rule
+.PHONY : jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_objects.dir/rule
 
 # Convenience name for target.
-_jetson_generate_messages_check_deps_state_msg: jetson/CMakeFiles/_jetson_generate_messages_check_deps_state_msg.dir/rule
+_jetson_generate_messages_check_deps_NED_objects: jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_objects.dir/rule
 
-.PHONY : _jetson_generate_messages_check_deps_state_msg
+.PHONY : _jetson_generate_messages_check_deps_NED_objects
 
 # fast build rule for target.
-_jetson_generate_messages_check_deps_state_msg/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_state_msg.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_state_msg.dir/build
-.PHONY : _jetson_generate_messages_check_deps_state_msg/fast
+_jetson_generate_messages_check_deps_NED_objects/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_objects.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_objects.dir/build
+.PHONY : _jetson_generate_messages_check_deps_NED_objects/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/_jetson_generate_messages_check_deps_propulsion_system.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/_jetson_generate_messages_check_deps_propulsion_system.dir/rule
+.PHONY : jetson/CMakeFiles/_jetson_generate_messages_check_deps_propulsion_system.dir/rule
+
+# Convenience name for target.
+_jetson_generate_messages_check_deps_propulsion_system: jetson/CMakeFiles/_jetson_generate_messages_check_deps_propulsion_system.dir/rule
+
+.PHONY : _jetson_generate_messages_check_deps_propulsion_system
+
+# fast build rule for target.
+_jetson_generate_messages_check_deps_propulsion_system/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_propulsion_system.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_propulsion_system.dir/build
+.PHONY : _jetson_generate_messages_check_deps_propulsion_system/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_poses.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_poses.dir/rule
+.PHONY : jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_poses.dir/rule
+
+# Convenience name for target.
+_jetson_generate_messages_check_deps_NED_poses: jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_poses.dir/rule
+
+.PHONY : _jetson_generate_messages_check_deps_NED_poses
+
+# fast build rule for target.
+_jetson_generate_messages_check_deps_NED_poses/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_poses.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_NED_poses.dir/build
+.PHONY : _jetson_generate_messages_check_deps_NED_poses/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/_jetson_generate_messages_check_deps_state.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/_jetson_generate_messages_check_deps_state.dir/rule
+.PHONY : jetson/CMakeFiles/_jetson_generate_messages_check_deps_state.dir/rule
+
+# Convenience name for target.
+_jetson_generate_messages_check_deps_state: jetson/CMakeFiles/_jetson_generate_messages_check_deps_state.dir/rule
+
+.PHONY : _jetson_generate_messages_check_deps_state
+
+# fast build rule for target.
+_jetson_generate_messages_check_deps_state/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_state.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_state.dir/build
+.PHONY : _jetson_generate_messages_check_deps_state/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/_jetson_generate_messages_check_deps_Task.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/_jetson_generate_messages_check_deps_Task.dir/rule
+.PHONY : jetson/CMakeFiles/_jetson_generate_messages_check_deps_Task.dir/rule
+
+# Convenience name for target.
+_jetson_generate_messages_check_deps_Task: jetson/CMakeFiles/_jetson_generate_messages_check_deps_Task.dir/rule
+
+.PHONY : _jetson_generate_messages_check_deps_Task
+
+# fast build rule for target.
+_jetson_generate_messages_check_deps_Task/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_Task.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_Task.dir/build
+.PHONY : _jetson_generate_messages_check_deps_Task/fast
 
 # Convenience name for target.
 jetson/CMakeFiles/jetson_generate_messages_cpp.dir/rule:
@@ -916,21 +1036,6 @@ nav_msgs_generate_messages_eus: jetson/CMakeFiles/nav_msgs_generate_messages_eus
 nav_msgs_generate_messages_eus/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make jetson/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
 .PHONY : nav_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-jetson/CMakeFiles/_jetson_generate_messages_check_deps_usv_pose_msg.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/_jetson_generate_messages_check_deps_usv_pose_msg.dir/rule
-.PHONY : jetson/CMakeFiles/_jetson_generate_messages_check_deps_usv_pose_msg.dir/rule
-
-# Convenience name for target.
-_jetson_generate_messages_check_deps_usv_pose_msg: jetson/CMakeFiles/_jetson_generate_messages_check_deps_usv_pose_msg.dir/rule
-
-.PHONY : _jetson_generate_messages_check_deps_usv_pose_msg
-
-# fast build rule for target.
-_jetson_generate_messages_check_deps_usv_pose_msg/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_usv_pose_msg.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_usv_pose_msg.dir/build
-.PHONY : _jetson_generate_messages_check_deps_usv_pose_msg/fast
 
 # Convenience name for target.
 jetson/CMakeFiles/jetson_generate_messages_eus.dir/rule:
@@ -993,21 +1098,6 @@ jetson_generate_messages_lisp/fast:
 .PHONY : jetson_generate_messages_lisp/fast
 
 # Convenience name for target.
-jetson/CMakeFiles/navigation_array_indoor.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/navigation_array_indoor.dir/rule
-.PHONY : jetson/CMakeFiles/navigation_array_indoor.dir/rule
-
-# Convenience name for target.
-navigation_array_indoor: jetson/CMakeFiles/navigation_array_indoor.dir/rule
-
-.PHONY : navigation_array_indoor
-
-# fast build rule for target.
-navigation_array_indoor/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/navigation_array_indoor.dir/build.make jetson/CMakeFiles/navigation_array_indoor.dir/build
-.PHONY : navigation_array_indoor/fast
-
-# Convenience name for target.
 jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
 .PHONY : jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
@@ -1051,51 +1141,6 @@ jetson_genpy: jetson/CMakeFiles/jetson_genpy.dir/rule
 jetson_genpy/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/jetson_genpy.dir/build.make jetson/CMakeFiles/jetson_genpy.dir/build
 .PHONY : jetson_genpy/fast
-
-# Convenience name for target.
-jetson/CMakeFiles/camera_capture.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/camera_capture.dir/rule
-.PHONY : jetson/CMakeFiles/camera_capture.dir/rule
-
-# Convenience name for target.
-camera_capture: jetson/CMakeFiles/camera_capture.dir/rule
-
-.PHONY : camera_capture
-
-# fast build rule for target.
-camera_capture/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/camera_capture.dir/build.make jetson/CMakeFiles/camera_capture.dir/build
-.PHONY : camera_capture/fast
-
-# Convenience name for target.
-jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-.PHONY : jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_nodejs: jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-sensor_msgs_generate_messages_nodejs/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
-.PHONY : sensor_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-jetson/CMakeFiles/mission_control.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/mission_control.dir/rule
-.PHONY : jetson/CMakeFiles/mission_control.dir/rule
-
-# Convenience name for target.
-mission_control: jetson/CMakeFiles/mission_control.dir/rule
-
-.PHONY : mission_control
-
-# fast build rule for target.
-mission_control/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/mission_control.dir/build.make jetson/CMakeFiles/mission_control.dir/build
-.PHONY : mission_control/fast
 
 src/camera_capture.o: src/camera_capture.cpp.o
 
@@ -1273,6 +1318,8 @@ help:
 	@echo "... propulsion_system"
 	@echo "... path_planner"
 	@echo "... navigation_array_outdoor"
+	@echo "... navigation_array_indoor"
+	@echo "... camera_capture"
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... nav_msgs_generate_messages_py"
 	@echo "... sensor_msgs_generate_messages_py"
@@ -1290,6 +1337,7 @@ help:
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... _jetson_generate_messages_check_deps_control_efforts"
 	@echo "... roscpp_generate_messages_nodejs"
+	@echo "... _jetson_generate_messages_check_deps_NED_acoustic"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... uuid_msgs_generate_messages_lisp"
 	@echo "... geographic_msgs_generate_messages_lisp"
@@ -1298,11 +1346,13 @@ help:
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_nodejs"
-	@echo "... _jetson_generate_messages_check_deps_task_info"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... nav_msgs_generate_messages_lisp"
+	@echo "... edit_cache"
+	@echo "... mission_control"
+	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... geographic_msgs_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... geographic_msgs_generate_messages_cpp"
@@ -1317,23 +1367,21 @@ help:
 	@echo "... uuid_msgs_generate_messages_nodejs"
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... jetson_generate_messages"
-	@echo "... _jetson_generate_messages_check_deps_state_msg"
+	@echo "... _jetson_generate_messages_check_deps_NED_objects"
+	@echo "... _jetson_generate_messages_check_deps_propulsion_system"
+	@echo "... _jetson_generate_messages_check_deps_NED_poses"
+	@echo "... _jetson_generate_messages_check_deps_state"
+	@echo "... _jetson_generate_messages_check_deps_Task"
 	@echo "... jetson_generate_messages_cpp"
 	@echo "... install/local"
 	@echo "... nav_msgs_generate_messages_eus"
-	@echo "... _jetson_generate_messages_check_deps_usv_pose_msg"
 	@echo "... jetson_generate_messages_eus"
 	@echo "... jetson_genlisp"
 	@echo "... jetson_geneus"
 	@echo "... jetson_generate_messages_lisp"
-	@echo "... navigation_array_indoor"
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... sensor_msgs_generate_messages_lisp"
 	@echo "... jetson_genpy"
-	@echo "... camera_capture"
-	@echo "... edit_cache"
-	@echo "... sensor_msgs_generate_messages_nodejs"
-	@echo "... mission_control"
 	@echo "... src/camera_capture.o"
 	@echo "... src/camera_capture.i"
 	@echo "... src/camera_capture.s"
