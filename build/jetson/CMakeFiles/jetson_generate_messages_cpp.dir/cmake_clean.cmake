@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "/home/brad/RobotX2022/devel/include/jetson/NED_waypoints.h"
   "/home/brad/RobotX2022/devel/include/jetson/Task.h"
   "/home/brad/RobotX2022/devel/include/jetson/control_efforts.h"
+  "/home/brad/RobotX2022/devel/include/jetson/motorStatus_.h"
   "/home/brad/RobotX2022/devel/include/jetson/propulsion_system.h"
   "/home/brad/RobotX2022/devel/include/jetson/state.h"
   "CMakeFiles/jetson_generate_messages_cpp"

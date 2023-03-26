@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_Task.py"
   "/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/__init__.py"
   "/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_control_efforts.py"
+  "/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_motorStatus_.py"
   "/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_propulsion_system.py"
   "/home/brad/RobotX2022/devel/lib/python3/dist-packages/jetson/msg/_state.py"
   "CMakeFiles/jetson_generate_messages_py"

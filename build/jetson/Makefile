@@ -213,21 +213,6 @@ navigation_array_outdoor/fast:
 .PHONY : navigation_array_outdoor/fast
 
 # Convenience name for target.
-jetson/CMakeFiles/navigation_array_indoor.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/navigation_array_indoor.dir/rule
-.PHONY : jetson/CMakeFiles/navigation_array_indoor.dir/rule
-
-# Convenience name for target.
-navigation_array_indoor: jetson/CMakeFiles/navigation_array_indoor.dir/rule
-
-.PHONY : navigation_array_indoor
-
-# fast build rule for target.
-navigation_array_indoor/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/navigation_array_indoor.dir/build.make jetson/CMakeFiles/navigation_array_indoor.dir/build
-.PHONY : navigation_array_indoor/fast
-
-# Convenience name for target.
 jetson/CMakeFiles/camera_capture.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/camera_capture.dir/rule
 .PHONY : jetson/CMakeFiles/camera_capture.dir/rule
@@ -453,6 +438,21 @@ geometry_msgs_generate_messages_lisp/fast:
 .PHONY : geometry_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
+jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/rule
+.PHONY : jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/rule
+
+# Convenience name for target.
+QUT_LSSU_cereal_interface: jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/rule
+
+.PHONY : QUT_LSSU_cereal_interface
+
+# fast build rule for target.
+QUT_LSSU_cereal_interface/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/build.make jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/build
+.PHONY : QUT_LSSU_cereal_interface/fast
+
+# Convenience name for target.
 jetson/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
 .PHONY : jetson/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
@@ -633,6 +633,21 @@ geometry_msgs_generate_messages_nodejs/fast:
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
+jetson/CMakeFiles/_jetson_generate_messages_check_deps_motorStatus_.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/_jetson_generate_messages_check_deps_motorStatus_.dir/rule
+.PHONY : jetson/CMakeFiles/_jetson_generate_messages_check_deps_motorStatus_.dir/rule
+
+# Convenience name for target.
+_jetson_generate_messages_check_deps_motorStatus_: jetson/CMakeFiles/_jetson_generate_messages_check_deps_motorStatus_.dir/rule
+
+.PHONY : _jetson_generate_messages_check_deps_motorStatus_
+
+# fast build rule for target.
+_jetson_generate_messages_check_deps_motorStatus_/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_motorStatus_.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_motorStatus_.dir/build
+.PHONY : _jetson_generate_messages_check_deps_motorStatus_/fast
+
+# Convenience name for target.
 jetson/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 .PHONY : jetson/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
@@ -721,6 +736,51 @@ sensor_msgs_generate_messages_nodejs: jetson/CMakeFiles/sensor_msgs_generate_mes
 sensor_msgs_generate_messages_nodejs/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
 .PHONY : sensor_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/jetson_genpy.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/jetson_genpy.dir/rule
+.PHONY : jetson/CMakeFiles/jetson_genpy.dir/rule
+
+# Convenience name for target.
+jetson_genpy: jetson/CMakeFiles/jetson_genpy.dir/rule
+
+.PHONY : jetson_genpy
+
+# fast build rule for target.
+jetson_genpy/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/jetson_genpy.dir/build.make jetson/CMakeFiles/jetson_genpy.dir/build
+.PHONY : jetson_genpy/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+.PHONY : jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+sensor_msgs_generate_messages_eus: jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+
+.PHONY : sensor_msgs_generate_messages_eus
+
+# fast build rule for target.
+sensor_msgs_generate_messages_eus/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
+.PHONY : sensor_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+.PHONY : jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+sensor_msgs_generate_messages_lisp: jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : sensor_msgs_generate_messages_lisp
+
+# fast build rule for target.
+sensor_msgs_generate_messages_lisp/fast:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
+.PHONY : sensor_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 jetson/CMakeFiles/geographic_msgs_generate_messages_py.dir/rule:
@@ -1097,50 +1157,32 @@ jetson_generate_messages_lisp/fast:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/jetson_generate_messages_lisp.dir/build.make jetson/CMakeFiles/jetson_generate_messages_lisp.dir/build
 .PHONY : jetson_generate_messages_lisp/fast
 
-# Convenience name for target.
-jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-.PHONY : jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+src/QUT_LSSU_cereal_interface.o: src/QUT_LSSU_cereal_interface.cpp.o
 
-# Convenience name for target.
-sensor_msgs_generate_messages_eus: jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+.PHONY : src/QUT_LSSU_cereal_interface.o
 
-.PHONY : sensor_msgs_generate_messages_eus
+# target to build an object file
+src/QUT_LSSU_cereal_interface.cpp.o:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/build.make jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/src/QUT_LSSU_cereal_interface.cpp.o
+.PHONY : src/QUT_LSSU_cereal_interface.cpp.o
 
-# fast build rule for target.
-sensor_msgs_generate_messages_eus/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
-.PHONY : sensor_msgs_generate_messages_eus/fast
+src/QUT_LSSU_cereal_interface.i: src/QUT_LSSU_cereal_interface.cpp.i
 
-# Convenience name for target.
-jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-.PHONY : jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+.PHONY : src/QUT_LSSU_cereal_interface.i
 
-# Convenience name for target.
-sensor_msgs_generate_messages_lisp: jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+# target to preprocess a source file
+src/QUT_LSSU_cereal_interface.cpp.i:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/build.make jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/src/QUT_LSSU_cereal_interface.cpp.i
+.PHONY : src/QUT_LSSU_cereal_interface.cpp.i
 
-.PHONY : sensor_msgs_generate_messages_lisp
+src/QUT_LSSU_cereal_interface.s: src/QUT_LSSU_cereal_interface.cpp.s
 
-# fast build rule for target.
-sensor_msgs_generate_messages_lisp/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
-.PHONY : sensor_msgs_generate_messages_lisp/fast
+.PHONY : src/QUT_LSSU_cereal_interface.s
 
-# Convenience name for target.
-jetson/CMakeFiles/jetson_genpy.dir/rule:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f CMakeFiles/Makefile2 jetson/CMakeFiles/jetson_genpy.dir/rule
-.PHONY : jetson/CMakeFiles/jetson_genpy.dir/rule
-
-# Convenience name for target.
-jetson_genpy: jetson/CMakeFiles/jetson_genpy.dir/rule
-
-.PHONY : jetson_genpy
-
-# fast build rule for target.
-jetson_genpy/fast:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/jetson_genpy.dir/build.make jetson/CMakeFiles/jetson_genpy.dir/build
-.PHONY : jetson_genpy/fast
+# target to generate assembly for a file
+src/QUT_LSSU_cereal_interface.cpp.s:
+	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/build.make jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/src/QUT_LSSU_cereal_interface.cpp.s
+.PHONY : src/QUT_LSSU_cereal_interface.cpp.s
 
 src/camera_capture.o: src/camera_capture.cpp.o
 
@@ -1195,33 +1237,6 @@ src/mission_control.s: src/mission_control.cpp.s
 src/mission_control.cpp.s:
 	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/mission_control.dir/build.make jetson/CMakeFiles/mission_control.dir/src/mission_control.cpp.s
 .PHONY : src/mission_control.cpp.s
-
-src/navigation_array_indoor.o: src/navigation_array_indoor.cpp.o
-
-.PHONY : src/navigation_array_indoor.o
-
-# target to build an object file
-src/navigation_array_indoor.cpp.o:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/navigation_array_indoor.dir/build.make jetson/CMakeFiles/navigation_array_indoor.dir/src/navigation_array_indoor.cpp.o
-.PHONY : src/navigation_array_indoor.cpp.o
-
-src/navigation_array_indoor.i: src/navigation_array_indoor.cpp.i
-
-.PHONY : src/navigation_array_indoor.i
-
-# target to preprocess a source file
-src/navigation_array_indoor.cpp.i:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/navigation_array_indoor.dir/build.make jetson/CMakeFiles/navigation_array_indoor.dir/src/navigation_array_indoor.cpp.i
-.PHONY : src/navigation_array_indoor.cpp.i
-
-src/navigation_array_indoor.s: src/navigation_array_indoor.cpp.s
-
-.PHONY : src/navigation_array_indoor.s
-
-# target to generate assembly for a file
-src/navigation_array_indoor.cpp.s:
-	cd /home/brad/RobotX2022/build && $(MAKE) -f jetson/CMakeFiles/navigation_array_indoor.dir/build.make jetson/CMakeFiles/navigation_array_indoor.dir/src/navigation_array_indoor.cpp.s
-.PHONY : src/navigation_array_indoor.cpp.s
 
 src/navigation_array_outdoor.o: src/navigation_array_outdoor.cpp.o
 
@@ -1318,7 +1333,6 @@ help:
 	@echo "... propulsion_system"
 	@echo "... path_planner"
 	@echo "... navigation_array_outdoor"
-	@echo "... navigation_array_indoor"
 	@echo "... camera_capture"
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... nav_msgs_generate_messages_py"
@@ -1334,6 +1348,7 @@ help:
 	@echo "... jetson_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... geometry_msgs_generate_messages_lisp"
+	@echo "... QUT_LSSU_cereal_interface"
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... _jetson_generate_messages_check_deps_control_efforts"
 	@echo "... roscpp_generate_messages_nodejs"
@@ -1346,6 +1361,7 @@ help:
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_nodejs"
+	@echo "... _jetson_generate_messages_check_deps_motorStatus_"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
@@ -1353,6 +1369,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... mission_control"
 	@echo "... sensor_msgs_generate_messages_nodejs"
+	@echo "... jetson_genpy"
+	@echo "... sensor_msgs_generate_messages_eus"
+	@echo "... sensor_msgs_generate_messages_lisp"
 	@echo "... geographic_msgs_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... geographic_msgs_generate_messages_cpp"
@@ -1379,18 +1398,15 @@ help:
 	@echo "... jetson_genlisp"
 	@echo "... jetson_geneus"
 	@echo "... jetson_generate_messages_lisp"
-	@echo "... sensor_msgs_generate_messages_eus"
-	@echo "... sensor_msgs_generate_messages_lisp"
-	@echo "... jetson_genpy"
+	@echo "... src/QUT_LSSU_cereal_interface.o"
+	@echo "... src/QUT_LSSU_cereal_interface.i"
+	@echo "... src/QUT_LSSU_cereal_interface.s"
 	@echo "... src/camera_capture.o"
 	@echo "... src/camera_capture.i"
 	@echo "... src/camera_capture.s"
 	@echo "... src/mission_control.o"
 	@echo "... src/mission_control.i"
 	@echo "... src/mission_control.s"
-	@echo "... src/navigation_array_indoor.o"
-	@echo "... src/navigation_array_indoor.i"
-	@echo "... src/navigation_array_indoor.s"
 	@echo "... src/navigation_array_outdoor.o"
 	@echo "... src/navigation_array_outdoor.i"
 	@echo "... src/navigation_array_outdoor.s"

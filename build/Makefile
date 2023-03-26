@@ -1260,19 +1260,6 @@ navigation_array_outdoor/fast:
 .PHONY : navigation_array_outdoor/fast
 
 #=============================================================================
-# Target rules for targets named navigation_array_indoor
-
-# Build rule for target.
-navigation_array_indoor: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 navigation_array_indoor
-.PHONY : navigation_array_indoor
-
-# fast build rule for target.
-navigation_array_indoor/fast:
-	$(MAKE) -f jetson/CMakeFiles/navigation_array_indoor.dir/build.make jetson/CMakeFiles/navigation_array_indoor.dir/build
-.PHONY : navigation_array_indoor/fast
-
-#=============================================================================
 # Target rules for targets named camera_capture
 
 # Build rule for target.
@@ -1468,6 +1455,19 @@ geometry_msgs_generate_messages_lisp/fast:
 .PHONY : geometry_msgs_generate_messages_lisp/fast
 
 #=============================================================================
+# Target rules for targets named QUT_LSSU_cereal_interface
+
+# Build rule for target.
+QUT_LSSU_cereal_interface: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 QUT_LSSU_cereal_interface
+.PHONY : QUT_LSSU_cereal_interface
+
+# fast build rule for target.
+QUT_LSSU_cereal_interface/fast:
+	$(MAKE) -f jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/build.make jetson/CMakeFiles/QUT_LSSU_cereal_interface.dir/build
+.PHONY : QUT_LSSU_cereal_interface/fast
+
+#=============================================================================
 # Target rules for targets named geometry_msgs_generate_messages_py
 
 # Build rule for target.
@@ -1624,6 +1624,19 @@ geometry_msgs_generate_messages_nodejs/fast:
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
+# Target rules for targets named _jetson_generate_messages_check_deps_motorStatus_
+
+# Build rule for target.
+_jetson_generate_messages_check_deps_motorStatus_: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _jetson_generate_messages_check_deps_motorStatus_
+.PHONY : _jetson_generate_messages_check_deps_motorStatus_
+
+# fast build rule for target.
+_jetson_generate_messages_check_deps_motorStatus_/fast:
+	$(MAKE) -f jetson/CMakeFiles/_jetson_generate_messages_check_deps_motorStatus_.dir/build.make jetson/CMakeFiles/_jetson_generate_messages_check_deps_motorStatus_.dir/build
+.PHONY : _jetson_generate_messages_check_deps_motorStatus_/fast
+
+#=============================================================================
 # Target rules for targets named geometry_msgs_generate_messages_cpp
 
 # Build rule for target.
@@ -1700,6 +1713,45 @@ sensor_msgs_generate_messages_nodejs: cmake_check_build_system
 sensor_msgs_generate_messages_nodejs/fast:
 	$(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
 .PHONY : sensor_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named jetson_genpy
+
+# Build rule for target.
+jetson_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 jetson_genpy
+.PHONY : jetson_genpy
+
+# fast build rule for target.
+jetson_genpy/fast:
+	$(MAKE) -f jetson/CMakeFiles/jetson_genpy.dir/build.make jetson/CMakeFiles/jetson_genpy.dir/build
+.PHONY : jetson_genpy/fast
+
+#=============================================================================
+# Target rules for targets named sensor_msgs_generate_messages_eus
+
+# Build rule for target.
+sensor_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sensor_msgs_generate_messages_eus
+.PHONY : sensor_msgs_generate_messages_eus
+
+# fast build rule for target.
+sensor_msgs_generate_messages_eus/fast:
+	$(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
+.PHONY : sensor_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named sensor_msgs_generate_messages_lisp
+
+# Build rule for target.
+sensor_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sensor_msgs_generate_messages_lisp
+.PHONY : sensor_msgs_generate_messages_lisp
+
+# fast build rule for target.
+sensor_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
+.PHONY : sensor_msgs_generate_messages_lisp/fast
 
 #=============================================================================
 # Target rules for targets named geographic_msgs_generate_messages_py
@@ -2025,45 +2077,6 @@ jetson_generate_messages_lisp: cmake_check_build_system
 jetson_generate_messages_lisp/fast:
 	$(MAKE) -f jetson/CMakeFiles/jetson_generate_messages_lisp.dir/build.make jetson/CMakeFiles/jetson_generate_messages_lisp.dir/build
 .PHONY : jetson_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named sensor_msgs_generate_messages_eus
-
-# Build rule for target.
-sensor_msgs_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 sensor_msgs_generate_messages_eus
-.PHONY : sensor_msgs_generate_messages_eus
-
-# fast build rule for target.
-sensor_msgs_generate_messages_eus/fast:
-	$(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
-.PHONY : sensor_msgs_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named sensor_msgs_generate_messages_lisp
-
-# Build rule for target.
-sensor_msgs_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 sensor_msgs_generate_messages_lisp
-.PHONY : sensor_msgs_generate_messages_lisp
-
-# fast build rule for target.
-sensor_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make jetson/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
-.PHONY : sensor_msgs_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named jetson_genpy
-
-# Build rule for target.
-jetson_genpy: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 jetson_genpy
-.PHONY : jetson_genpy
-
-# fast build rule for target.
-jetson_genpy/fast:
-	$(MAKE) -f jetson/CMakeFiles/jetson_genpy.dir/build.make jetson/CMakeFiles/jetson_genpy.dir/build
-.PHONY : jetson_genpy/fast
 
 #=============================================================================
 # Target rules for targets named topic_tools_generate_messages_cpp
@@ -2760,7 +2773,6 @@ help:
 	@echo "... propulsion_system"
 	@echo "... path_planner"
 	@echo "... navigation_array_outdoor"
-	@echo "... navigation_array_indoor"
 	@echo "... camera_capture"
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... nav_msgs_generate_messages_py"
@@ -2776,6 +2788,7 @@ help:
 	@echo "... jetson_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... geometry_msgs_generate_messages_lisp"
+	@echo "... QUT_LSSU_cereal_interface"
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... _jetson_generate_messages_check_deps_control_efforts"
 	@echo "... roscpp_generate_messages_nodejs"
@@ -2788,12 +2801,16 @@ help:
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_nodejs"
+	@echo "... _jetson_generate_messages_check_deps_motorStatus_"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... nav_msgs_generate_messages_lisp"
 	@echo "... mission_control"
 	@echo "... sensor_msgs_generate_messages_nodejs"
+	@echo "... jetson_genpy"
+	@echo "... sensor_msgs_generate_messages_eus"
+	@echo "... sensor_msgs_generate_messages_lisp"
 	@echo "... geographic_msgs_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... geographic_msgs_generate_messages_cpp"
@@ -2819,9 +2836,6 @@ help:
 	@echo "... jetson_genlisp"
 	@echo "... jetson_geneus"
 	@echo "... jetson_generate_messages_lisp"
-	@echo "... sensor_msgs_generate_messages_eus"
-	@echo "... sensor_msgs_generate_messages_lisp"
-	@echo "... jetson_genpy"
 	@echo "... topic_tools_generate_messages_cpp"
 	@echo "... topic_tools_generate_messages_eus"
 	@echo "... topic_tools_generate_messages_lisp"

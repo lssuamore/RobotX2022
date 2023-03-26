@@ -8,6 +8,7 @@ let Task = require('./Task.js');
 let control_efforts = require('./control_efforts.js');
 let NED_objects = require('./NED_objects.js');
 let NED_acoustic = require('./NED_acoustic.js');
+let motorStatus_ = require('./motorStatus_.js');
 let propulsion_system = require('./propulsion_system.js');
 
 module.exports = {
@@ -18,5 +19,6 @@ module.exports = {
   control_efforts: control_efforts,
   NED_objects: NED_objects,
   NED_acoustic: NED_acoustic,
+  motorStatus_: motorStatus_,
   propulsion_system: propulsion_system,
 };

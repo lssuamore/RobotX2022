@@ -61,6 +61,7 @@ jetson/CMakeFiles/jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/incl
 jetson/CMakeFiles/jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/state.h
 jetson/CMakeFiles/jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/Task.h
 jetson/CMakeFiles/jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/control_efforts.h
+jetson/CMakeFiles/jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/motorStatus_.h
 
 
 /home/brad/RobotX2022/devel/include/jetson/NED_waypoints.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
@@ -79,8 +80,8 @@ jetson/CMakeFiles/jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/incl
 
 /home/brad/RobotX2022/devel/include/jetson/NED_objects.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/brad/RobotX2022/devel/include/jetson/NED_objects.h: /home/brad/RobotX2022/src/jetson/msg/NED_objects.msg
-/home/brad/RobotX2022/devel/include/jetson/NED_objects.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 /home/brad/RobotX2022/devel/include/jetson/NED_objects.h: /opt/ros/noetic/share/geometry_msgs/msg/PointStamped.msg
+/home/brad/RobotX2022/devel/include/jetson/NED_objects.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 /home/brad/RobotX2022/devel/include/jetson/NED_objects.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/RobotX2022/devel/include/jetson/NED_objects.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from jetson/NED_objects.msg"
@@ -95,10 +96,10 @@ jetson/CMakeFiles/jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/incl
 
 /home/brad/RobotX2022/devel/include/jetson/propulsion_system.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/brad/RobotX2022/devel/include/jetson/propulsion_system.h: /home/brad/RobotX2022/src/jetson/msg/propulsion_system.msg
+/home/brad/RobotX2022/devel/include/jetson/propulsion_system.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/RobotX2022/devel/include/jetson/propulsion_system.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 /home/brad/RobotX2022/devel/include/jetson/propulsion_system.h: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
 /home/brad/RobotX2022/devel/include/jetson/propulsion_system.h: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
-/home/brad/RobotX2022/devel/include/jetson/propulsion_system.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/RobotX2022/devel/include/jetson/propulsion_system.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from jetson/propulsion_system.msg"
 	cd /home/brad/RobotX2022/src/jetson && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/brad/RobotX2022/src/jetson/msg/propulsion_system.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/include/jetson -e /opt/ros/noetic/share/gencpp/cmake/..
@@ -106,8 +107,8 @@ jetson/CMakeFiles/jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/incl
 /home/brad/RobotX2022/devel/include/jetson/state.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/brad/RobotX2022/devel/include/jetson/state.h: /home/brad/RobotX2022/src/jetson/msg/state.msg
 /home/brad/RobotX2022/devel/include/jetson/state.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/brad/RobotX2022/devel/include/jetson/state.h: /opt/ros/noetic/share/std_msgs/msg/Bool.msg
 /home/brad/RobotX2022/devel/include/jetson/state.h: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+/home/brad/RobotX2022/devel/include/jetson/state.h: /opt/ros/noetic/share/std_msgs/msg/Bool.msg
 /home/brad/RobotX2022/devel/include/jetson/state.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating C++ code from jetson/state.msg"
 	cd /home/brad/RobotX2022/src/jetson && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/brad/RobotX2022/src/jetson/msg/state.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/include/jetson -e /opt/ros/noetic/share/gencpp/cmake/..
@@ -125,6 +126,12 @@ jetson/CMakeFiles/jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/incl
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating C++ code from jetson/control_efforts.msg"
 	cd /home/brad/RobotX2022/src/jetson && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/brad/RobotX2022/src/jetson/msg/control_efforts.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/include/jetson -e /opt/ros/noetic/share/gencpp/cmake/..
 
+/home/brad/RobotX2022/devel/include/jetson/motorStatus_.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/brad/RobotX2022/devel/include/jetson/motorStatus_.h: /home/brad/RobotX2022/src/jetson/msg/motorStatus_.msg
+/home/brad/RobotX2022/devel/include/jetson/motorStatus_.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/RobotX2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating C++ code from jetson/motorStatus_.msg"
+	cd /home/brad/RobotX2022/src/jetson && /home/brad/RobotX2022/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/brad/RobotX2022/src/jetson/msg/motorStatus_.msg -Ijetson:/home/brad/RobotX2022/src/jetson/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p jetson -o /home/brad/RobotX2022/devel/include/jetson -e /opt/ros/noetic/share/gencpp/cmake/..
+
 jetson_generate_messages_cpp: jetson/CMakeFiles/jetson_generate_messages_cpp
 jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/NED_waypoints.h
 jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/NED_poses.h
@@ -134,6 +141,7 @@ jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/propuls
 jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/state.h
 jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/Task.h
 jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/control_efforts.h
+jetson_generate_messages_cpp: /home/brad/RobotX2022/devel/include/jetson/motorStatus_.h
 jetson_generate_messages_cpp: jetson/CMakeFiles/jetson_generate_messages_cpp.dir/build.make
 
 .PHONY : jetson_generate_messages_cpp

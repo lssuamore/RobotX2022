@@ -69,6 +69,7 @@ add_message_files(
   state.msg
   Task.msg
   control_efforts.msg
+  motorStatus_.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -156,10 +157,11 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(camera_capture src/camera_capture.cpp)
 add_executable(mission_control src/mission_control.cpp)
-add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)
+#add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)
 add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)
 add_executable(propulsion_system src/propulsion_system.cpp)
 add_executable(path_planner src/path_planner.cpp)
+add_executable(QUT_LSSU_cereal_interface src/QUT_LSSU_cereal_interface.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -173,10 +175,11 @@ add_executable(path_planner src/path_planner.cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(camera_capture ${catkin_LIBRARIES} ${OpenCV_LIBS})
 target_link_libraries(mission_control ${catkin_LIBRARIES})
-target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
+#target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
 target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system ${catkin_LIBRARIES})
 target_link_libraries(path_planner ${catkin_LIBRARIES})
+target_link_libraries(QUT_LSSU_cereal_interface ${catkin_LIBRARIES})
 #]]
 
 #############
