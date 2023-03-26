@@ -13,10 +13,10 @@
 //  Since the system is over-actuated, control allocation is used to solve for the thruster outputs.
 //
 //  Inputs and Outputs of the propulsion_system.cpp file
-//				Inputs: ["PP_propulsion_system_topic" - jetson/propulsion_system - goal pose (x,y,psi) to reach in local NED frame and current USV pose from path_planner]
+//   Inputs: ["PP_propulsion_system_topic" - jetson/propulsion_system - goal pose (x,y,psi) to reach in local NED frame and current USV pose from path_planner]
 //
-//				Outputs: "thruster_int_right", "thruster_int_left", "angle_int_right", "angle_int_left" - dual-azimuthing Minn Kota thruster commands
-//								"PORT_MAIN", "STBD_MAIN", "PORT_BOW", "STBD_BOW" - QUT thruster commands
+//   Outputs: "thruster_int_right", "thruster_int_left", "angle_int_right", "angle_int_left" - dual-azimuthing Minn Kota thruster commands
+//  "PORT_MAIN", "STBD_MAIN", "PORT_BOW", "STBD_BOW" - QUT thruster commands
 
 
 //...............................................................................................Included Libraries and Message Types.........................................................................................
@@ -46,17 +46,17 @@ int loop_count = 0;  // loop counter
 int loop_new_goal;  // loop number for when the the controller recieves a new goal to ensure differential and integral terms are not started until they are calculated
 bool PS_state_ON = false;  // used to set and reset the above count holder like a oneshot
 	
-//	STATES CONCERNED WITH "propulsion_system"
-//	0 = On standby
-//	1 = Propulsion system ON
+//  STATES CONCERNED WITH "propulsion_system"
+//  0 = On standby
+//  1 = Propulsion system ON
 int PS_state;
-//	drive_config is the drive configuration of the low-level controller
-//	1 = PID HP station-keeping
-//	2 = PID HP Differential wayfinding
-int drive_config = 1;
+//  drive_config is the drive configuration of the low-level controller
+//  1 = PID HP station-keeping
+//  2 = PID HP Differential wayfinding
+int drive_config;
 
-//	STATES CONCERNED WITH "path_planner"
-//	0 = On standby
+//  STATES CONCERNED WITH "path_planner"
+//  0 = On standby
 //  1 = Dynamic navigation demonstration
 //  2 = Entrance and Exit gates
 //  3 = Follow the path
@@ -65,11 +65,11 @@ int drive_config = 1;
 //  6 = Detect and dock
 //  7 = Find and Fling
 //  8 = UAV replenishment
-//	11 = VRX1: Station-Keeping
-//	12 = VRX2: Wayfinding
-//	14 = VRX4: Wildlife Encounter and Avoid
-//	15 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-//	16 = VRX6: Scan and Dock and Deliver
+//  11 = VRX1: Station-Keeping
+//  12 = VRX2: Wayfinding
+//  14 = VRX4: Wildlife Encounter and Avoid
+//  15 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//  16 = VRX6: Scan and Dock and Deliver
 int PP_state;
 
 float dt = 0.1;  // [s] used for differential term  // MAKE THIS A FUNCTION OF THE LOOP RATE
@@ -140,7 +140,6 @@ float Transform[3][4] = {
    {0.0, 1.0, 0.0, 1.0} ,
    {1.0, 1.39, -1.0, 1.39}
 };
-
 float Transform_transpose[4][3] = {
    {1.0, 0.0, 1.0} ,
    {0.0, 1.0, 1.39} ,
@@ -201,12 +200,12 @@ void publish_control_efforts()
 	PS_control_efforts_topic_msg.t_x_P.data = T_x_P;
 	PS_control_efforts_topic_msg.t_x_I.data = T_x_I;
 	PS_control_efforts_topic_msg.t_x_D.data = T_x_D;
-	
+
 	PS_control_efforts_topic_msg.t_y.data = T_y;
 	PS_control_efforts_topic_msg.t_y_P.data = T_y_P;
 	PS_control_efforts_topic_msg.t_y_I.data = T_y_I;
 	PS_control_efforts_topic_msg.t_y_D.data = T_y_D;
-	
+
 	PS_control_efforts_topic_msg.m_z.data = M_z;
 	PS_control_efforts_topic_msg.m_z_P.data = M_z_P;
 	PS_control_efforts_topic_msg.m_z_I.data = M_z_I;
@@ -416,19 +415,19 @@ void thrust_saturation_check()
 		PB_C = PB / max_thrust;
 		SM_C = SM / max_thrust;
 		SB_C = SB / max_thrust;
-		PM = (int)PM_C * 100;
-		PB = (int)PB_C * 100;
-		SM = (int)SM_C * 100;
-		SB = (int)SB_C * 100;
+		PM = PM_C * 100;
+		PB = PB_C * 100;
+		SM = SM_C * 100;
+		SB = SB_C * 100;
 		ROS_WARN("PROPULSION_SYSTEM:----STANDARDIZED THRUSTS----");
 		ROS_WARN("PROPULSION_SYSTEM: PORT_MAIN: %4.2f    PORT_BOW: %4.2f    STBD_MAIN: %4.2f    STBD_BOW: %4.2f\n", PM, PB, SM, SB);
 	}
 	else
 	{
-		PM = (int)PM * 100;
-		PB = (int)PB * 100;
-		SM = (int)SM * 100;
-		SB = (int)SB * 100;
+		PM = PM * 100;
+		PB = PB * 100;
+		SM = SM * 100;
+		SB = SB * 100;
 	}
 }  // END OF thrust_saturation_check()
 //.............................................................................................................END OF Functions...............................................................................................................
@@ -608,13 +607,11 @@ int main(int argc, char **argv)
 			// ROS_INFO("PROPULSION_SYSTEM: y_goal: %.2f", y_goal);
 			// ROS_INFO("PROPULSION_SYSTEM: psi_goal: %.2f", psi_goal);
 			// ROS_INFO("PROPULSION_SYSTEM:---GOAL POSE---\n");
-
 			// ROS_INFO("PROPULSION_SYSTEM:---USV POSE---");  // UPDATE USER
 			// ROS_INFO("PROPULSION_SYSTEM: x_usv: %.2f", x_usv_NED);
 			// ROS_INFO("PROPULSION_SYSTEM: y_usv: %.2f", y_usv_NED);
 			// ROS_INFO("PROPULSION_SYSTEM: psi_usv: %.2f", psi_usv_NED);
 			// ROS_INFO("PROPULSION_SYSTEM:---USV POSE---\n");
-
 			// ROS_INFO("PROPULSION_SYSTEM:--------ERRORS--------");  // UPDATE USER
 			// ROS_INFO("PROPULSION_SYSTEM:     e_x   :  %4.2f", e_x);  // x posn. error
 			// ROS_INFO("PROPULSION_SYSTEM:     e_y   :  %4.2f", e_y);  // y posn. error
@@ -647,7 +644,6 @@ int main(int argc, char **argv)
 				T_x = 0.0;
 				T_y = 0.0;
 			}
-
 			// if errors are small enough, do not try to correct for them
 			if ((float)abs(e_x) < 0.1)
 			{
@@ -663,33 +659,49 @@ int main(int argc, char **argv)
 			} */
 
 			// ALLOCATION to go from control_efforts to thruster commands
-			//ROS_INFO("PROPULSION_SYSTEM:-----Dual-azimuthing station-keeping controller-----\n");
-			// Convert to USV body-fixed frame from global frame
-			T_x_bf = T_x*cos(psi_usv_NED) + T_y*sin(psi_usv_NED);
-			T_y_bf = T_y*cos(psi_usv_NED) - T_x*sin(psi_usv_NED);
+			if (drive_config == 1)
+			{
+				//ROS_INFO("PROPULSION_SYSTEM:-----Dual-azimuthing station-keeping controller-----\n");
+				// Convert to USV body-fixed frame from global frame
+				T_x_bf = T_x*cos(psi_usv_NED) + T_y*sin(psi_usv_NED);
+				T_y_bf = T_y*cos(psi_usv_NED) - T_x*sin(psi_usv_NED);
 
-			// calculate the control allocation outputs
-			// f = Transform_pseudoinverse * tau;
-			PM = Transform_pseudoinverse[0][0]*T_x_bf + Transform_pseudoinverse[0][1]*T_y_bf + Transform_pseudoinverse[0][2]*M_z;
-			PB = Transform_pseudoinverse[1][0]*T_x_bf + Transform_pseudoinverse[1][1]*T_y_bf + Transform_pseudoinverse[1][2]*M_z;
-			SM = Transform_pseudoinverse[2][0]*T_x_bf + Transform_pseudoinverse[2][1]*T_y_bf + Transform_pseudoinverse[2][2]*M_z;
-			SB = Transform_pseudoinverse[3][0]*T_x_bf + Transform_pseudoinverse[3][1]*T_y_bf + Transform_pseudoinverse[3][2]*M_z;
+				// calculate the control allocation outputs
+				// f = Transform_pseudoinverse * tau;
+				PM = Transform_pseudoinverse[0][0]*T_x_bf + Transform_pseudoinverse[0][1]*T_y_bf + Transform_pseudoinverse[0][2]*M_z;
+				PB = Transform_pseudoinverse[1][0]*T_x_bf + Transform_pseudoinverse[1][1]*T_y_bf + Transform_pseudoinverse[1][2]*M_z;
+				SM = Transform_pseudoinverse[2][0]*T_x_bf + Transform_pseudoinverse[2][1]*T_y_bf + Transform_pseudoinverse[2][2]*M_z;
+				SB = Transform_pseudoinverse[3][0]*T_x_bf + Transform_pseudoinverse[3][1]*T_y_bf + Transform_pseudoinverse[3][2]*M_z;
 
-			// DEBUG INFORMATION ////////////////////////////////////////////////////////////
-			// Print thrust control efforts in x and y directions in both the local frame (working frame) and the body-fixed frame (USV frame)
-			// ROS_DEBUG("PROPULSION_SYSTEM: BEFORE SWAP TO BODY-FIXED FRAME");
-			// ROS_DEBUG("PROPULSION_SYSTEM: T_x_G: %f", T_x);
-			// ROS_DEBUG("PROPULSION_SYSTEM: T_y_G: %f", T_y);
-			// ROS_DEBUG("PROPULSION_SYSTEM: AFTER SWAP");
-			// ROS_DEBUG("PROPULSION_SYSTEM: T_x_bf: %f", T_x_bf);
-			// ROS_DEBUG("PROPULSION_SYSTEM: T_y_bf: %f\n", T_y_bf);
+				// DEBUG INFORMATION ////////////////////////////////////////////////////////////
+				// Print thrust control efforts in x and y directions in both the local frame (working frame) and the body-fixed frame (USV frame)
+				// ROS_DEBUG("PROPULSION_SYSTEM: BEFORE SWAP TO BODY-FIXED FRAME");
+				// ROS_DEBUG("PROPULSION_SYSTEM: T_x_G: %f", T_x);
+				// ROS_DEBUG("PROPULSION_SYSTEM: T_y_G: %f", T_y);
+				// ROS_DEBUG("PROPULSION_SYSTEM: AFTER SWAP");
+				// ROS_DEBUG("PROPULSION_SYSTEM: T_x_bf: %f", T_x_bf);
+				// ROS_DEBUG("PROPULSION_SYSTEM: T_y_bf: %f\n", T_y_bf);
 
-			// Print control allocation outputs before saturation check
-			ROS_DEBUG("PROPULSION_SYSTEM: BEFORE THRUSTER SATURATION CHECK");
-			ROS_DEBUG("PROPULSION_SYSTEM: PM: %f", PM);
-			ROS_DEBUG("PROPULSION_SYSTEM: PB: %f", PB);
-			ROS_DEBUG("PROPULSION_SYSTEM: SM: %f", SM);
-			ROS_DEBUG("PROPULSION_SYSTEM: SB: %f\n", SB);
+				// Print control allocation outputs before saturation check
+				ROS_DEBUG("PROPULSION_SYSTEM: BEFORE THRUSTER SATURATION CHECK");
+				ROS_DEBUG("PROPULSION_SYSTEM: PM: %f", PM);
+				ROS_DEBUG("PROPULSION_SYSTEM: PB: %f", PB);
+				ROS_DEBUG("PROPULSION_SYSTEM: SM: %f", SM);
+				ROS_DEBUG("PROPULSION_SYSTEM: SB: %f\n", SB);
+			}
+			else if (drive_config == 2)
+			{
+				//ROS_INFO("PROPULSION_SYSTEM:-----Differential wayfinding controller-----\n");
+				// Calculate torque to thrusters
+				PM = T_x/2.0 + M_z/B;
+				SM = T_x/2.0 - M_z/B;
+				// Set thruster angles to zero since differential drive
+				PB = 0.0;
+				SB = 0.0;
+				
+			}
+
+			
 
 			// adjust thruster outputs to ensure they are in the expected range
 			thrust_saturation_check();
@@ -721,10 +733,10 @@ int main(int argc, char **argv)
 		// SEND OUT THE THRUSTER COMMANDS NO SLOWER THAN 10 HERTZ
 		// set thruster message commands
 		// hardcode thruster speeds to 80
-		PM = 80;
-		PB = 80;
-		SM = 80;
-		SB = 80;
+		//PM = 80;
+		//PB = 80;
+		//SM = 80;
+		//SB = 80;
 		left_thrust_angle_msg.data = PB;
 		left_thrust_cmd_msg.data = PM;
 		right_thrust_angle_msg.data = SB;

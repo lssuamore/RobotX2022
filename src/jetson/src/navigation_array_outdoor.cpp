@@ -238,15 +238,15 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9;
 
 	// Subscribers
-	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);			// Gives navigationn array status update
+	ros::Subscriber na_state_sub = nh1.subscribe("MC_na_state", 1, state_update);			// Gives navigationn array status update
 	ros::Subscriber gpspos_sub = nh2.subscribe("/gps/fix", 10, gps_processor);		// subscribes to GPS position from indoor gps
-	ros::Subscriber compass_sub = nh4.subscribe("compass_value", 10, sparkfun_update);
+	//ros::Subscriber compass_sub = nh4.subscribe("compass_value", 10, sparkfun_update);
 	ros::Subscriber imu_sub = nh5.subscribe("/imu/data", 100, imu_processor);	// subscribes to IMU
 	ros::Subscriber geonav_odom_sub = nh6.subscribe("geonav_odom", 10, ned_func);
 
 	// Publishers
 	na_initialization_state_pub = nh7.advertise<std_msgs::Bool>("na_initialization_state", 1);	// publisher for state of initialization
-	nav_ned_pub = nh8.advertise<nav_msgs::Odometry>("nav_ned", 10); 			// USV NED state publisher //gps already in NED but will publish anyways using odometry message type	
+	nav_ned_pub = nh8.advertise<nav_msgs::Odometry>("NA_nav_ned", 10); 			// USV NED state publisher //gps already in NED but will publish anyways using odometry message type	
 	nav_odom_pub = nh9.advertise<nav_msgs::Odometry>("nav_odom", 10); 			// USV state publisher, this sends the current state to nav_odom, so geonav_transform package can publish the ENU conversion to geonav_odom
 
 	// Initialize global variables

@@ -11,7 +11,7 @@ string
 -
 vector
 -
-map
+memory
 -
 ros/types.h
 -
@@ -24,6 +24,8 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 std_msgs/Int32.h
+-
+std_msgs/Bool.h
 -
 
 /home/brad/RobotX2022/src/jetson/src/navigation_array_outdoor.cpp

@@ -47,6 +47,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/brad/RobotX2022/src/jetson/msg/state.msg"
     "/home/brad/RobotX2022/src/jetson/msg/Task.msg"
     "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg"
+    "/home/brad/RobotX2022/src/jetson/msg/motorStatus_.msg"
     )
 endif()
 

@@ -8,12 +8,12 @@
   </include>
 
   <!-- creates all the parameters --> 
-  <param name="/kp_xy" value="0.1" />
-  <param name="/kp_psi" value="0.8" />
-  <param name="/ki_xy" value="0.0" />
-  <param name="/ki_psi" value="0.05" />
-  <param name="/kd_xy" value="0.5" />
-  <param name="/kd_psi" value="2.0" />
+  <param name="/kp_xy" value="0.1" />   <!-- 0.1 -->
+  <param name="/kp_psi" value="0.8" />  <!-- 0.8 -->
+  <param name="/ki_xy" value="0.0" />  
+  <param name="/ki_psi" value="0.0" /> <!-- 0.05 -->
+  <param name="/kd_xy" value="0.0" />   <!-- 0.5 -->
+  <param name="/kd_psi" value="0.0" />  <!-- 2.0 -->
   
   <!-- 0:ON STANDBY, 1: DnD, 11:STATION-KEEPING, 12:FIGURE EIGHT -->
   <param name="/MC" value="0" />
@@ -29,6 +29,27 @@
   <param name="/x_south" value="-20.0" /> <!-- SET THIS IN METERS -->
   <param name="/y_south" value="0.0" />   <!-- SET THIS IN METERS -->
   
+  <!-- key positions for task 2 hard-code -->
+  <param name="/x_t2_first" value="0" />      <!-- Meter value in Local NED frame -->
+  <param name="/y_t2_first" value="0" />      <!-- Meter value in Local NED frame -->
+  <param name="/psi_t2_first" value="0.0" />    <!-- Radian value between -Pi and Pi -->
+
+  <param name="/x_t2_blackie" value="10" />      <!-- Meter value in Local NED frame -->
+  <param name="/y_t2_blackie" value="100" />      <!-- Meter value in Local NED frame -->
+  <param name="/psi_t2_blackie" value="0" />      <!-- Radian value in Local NED frame -->
+
+  <!-- key positions for task 6 hard-code -->
+  <param name="/x_t6_red" value="0" />      <!-- Meter value in Local NED frame -->
+  <param name="/y_t6_red" value="0" />      <!-- Meter value in Local NED frame -->
+
+  <param name="/x_t6_green" value="0" />      <!-- Meter value in Local NED frame -->
+  <param name="/y_t6_green" value="0" />      <!-- Meter value in Local NED frame -->
+
+  <param name="/x_t6_blue" value="0" />      <!-- Meter value in Local NED frame -->
+  <param name="/y_t6_blue" value="0" />      <!-- Meter value in Local NED frame -->
+  
+  <param name="/psi_t6_dock" value="0.0" />    <!-- Radian value between -Pi and Pi -->
+
   <!-- Start location for the follow the path task -->
   <param name="/x_FtP" value="157" />      <!-- Meter value in Local NED frame -->
   <param name="/y_FtP" value="-533" />      <!-- Meter value in Local NED frame -->
@@ -47,6 +68,8 @@
   <!-- Launches codes -->
   <node pkg="jetson" type="navigation_array_outdoor" name="navigation_array_outdoor" output="screen">
   </node>
+  <!-- node pkg="jetson" type="QUT_cereal" name="QUT_cereal" output="screen">
+  </node -->
   <node pkg="jetson" type="propulsion_system" name="propulsion_system" output="screen">
   </node>
   <node pkg="jetson" type="path_planner" name="path_planner" output="screen">

@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg;/home/brad/RobotX2022/src/jetson/msg/NED_poses.msg;/home/brad/RobotX2022/src/jetson/msg/NED_objects.msg;/home/brad/RobotX2022/src/jetson/msg/NED_acoustic.msg;/home/brad/RobotX2022/src/jetson/msg/propulsion_system.msg;/home/brad/RobotX2022/src/jetson/msg/state.msg;/home/brad/RobotX2022/src/jetson/msg/Task.msg;/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg"
+messages_str = "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg;/home/brad/RobotX2022/src/jetson/msg/NED_poses.msg;/home/brad/RobotX2022/src/jetson/msg/NED_objects.msg;/home/brad/RobotX2022/src/jetson/msg/NED_acoustic.msg;/home/brad/RobotX2022/src/jetson/msg/propulsion_system.msg;/home/brad/RobotX2022/src/jetson/msg/state.msg;/home/brad/RobotX2022/src/jetson/msg/Task.msg;/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg;/home/brad/RobotX2022/src/jetson/msg/motorStatus_.msg"
 services_str = ""
 pkg_name = "jetson"
 dependencies_str = "geometry_msgs;std_msgs"

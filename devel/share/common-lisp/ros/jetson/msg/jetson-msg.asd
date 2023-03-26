@@ -18,6 +18,8 @@
     (:file "_package_Task" :depends-on ("_package"))
     (:file "control_efforts" :depends-on ("_package_control_efforts"))
     (:file "_package_control_efforts" :depends-on ("_package"))
+    (:file "motorStatus_" :depends-on ("_package_motorStatus_"))
+    (:file "_package_motorStatus_" :depends-on ("_package"))
     (:file "propulsion_system" :depends-on ("_package_propulsion_system"))
     (:file "_package_propulsion_system" :depends-on ("_package"))
     (:file "state" :depends-on ("_package_state"))

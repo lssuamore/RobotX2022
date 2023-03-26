@@ -6,24 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/RobotX2022/devel/include/jetson/NED_acoustic.h
-string
--
-vector
--
-memory
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-geometry_msgs/Point.h
--
-
 /home/brad/RobotX2022/devel/include/jetson/NED_objects.h
 string
 -
@@ -40,6 +22,24 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 geometry_msgs/PointStamped.h
+-
+
+/home/brad/RobotX2022/devel/include/jetson/NED_poses.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+geometry_msgs/Point.h
 -
 
 /home/brad/RobotX2022/devel/include/jetson/propulsion_system.h
@@ -123,8 +123,8 @@ std_msgs/Bool.h
 /home/brad/RobotX2022/src/jetson/src/std_msgs/Bool.h
 jetson/propulsion_system.h
 /home/brad/RobotX2022/src/jetson/src/jetson/propulsion_system.h
-jetson/NED_acoustic.h
-/home/brad/RobotX2022/src/jetson/src/jetson/NED_acoustic.h
+jetson/NED_poses.h
+/home/brad/RobotX2022/src/jetson/src/jetson/NED_poses.h
 jetson/NED_objects.h
 /home/brad/RobotX2022/src/jetson/src/jetson/NED_objects.h
 
