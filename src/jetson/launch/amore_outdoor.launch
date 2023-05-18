@@ -1,4 +1,3 @@
-
 <launch>
 
   <!-- This is the format for a comment in HTML --> 
@@ -10,28 +9,59 @@
 
   <!-- creates all the parameters --> 
   <param name="/kp_xy" value="0.1" />
-  <param name="/kp_psi" value="0.8" />
+  <param name="/kp_psi" value="0.7" />
   <param name="/kd_xy" value="0.5" />
-  <param name="/kd_psi" value="2.0" />
+  <param name="/kd_psi" value="10.0" />
   <param name="/ki_xy" value="0.0" />
   <param name="/ki_psi" value="0.05" />
   
+  <!-- Safe Zones for each gate-->
+  <param name="/x_min_entr" value="-20.0" />   		<!-- Meter value -->
+  <param name="/x_max_entr" value="20.0" />                <!-- Meter value -->
+  <param name="/y_min_entr" value="-10.0" />                <!-- Meter value -->
+  <param name="/y_max_entr" value="15.0" />                <!-- Meter value -->
+
+  <param name="/x_min_speed" value="-16.0" />   		<!-- Meter value -->
+  <param name="/x_max_speed" value="15.0" />                <!-- Meter value -->
+  <param name="/y_min_speed" value="-10.0" />                <!-- Meter value -->
+  <param name="/y_max_speed" value="10.0" />                <!-- Meter value -->
+ 
   <!-- SET THIS TO 0:ON STANDBY, 1:STATION-KEEPING, 2:WAYFINDING -->
   <param name="/MC" value="0" />
   
   <!-- SET THIS TO 1:DUAL-AZIMUTHING STATION-KEEPING, 2:DIFFERENTIAL WAYFINDING, 3:ACKERMANN WAYFINDING -->
-  <param name="/LL" value="1" />
+  <param name="/LL" value="2" />
   
   <param name="/x_G" value="0.0" />		<!-- SET THIS IN METERS -->
   <param name="/y_G" value="0.0" />		<!-- SET THIS IN METERS -->
   <param name="/psi_G" value="0.0" />		<!-- SET THIS BETWEEN -PI AND PI RADIANS -->
   
+  <!-- CAUTION: After setting the mission with "MC", examine the variables of interest for the mission and confirm their update by setting "params_Updated" to true -->
+  <param name="/params_Updated" value="false" />  <!-- 0 = false  1 = true -->
+
   <!-- NORTH AND SOUTH POINTS ARE USED FOR GENERATING FIGURE 8 PATH FOR SENIOR PROJECT DEMO -->
   <param name="/x_north" value="20.0" />	<!-- SET THIS IN METERS -->
   <param name="/y_north" value="0.0" />	<!-- SET THIS IN METERS -->
   <param name="/x_south" value="-40.0" />	<!-- SET THIS IN METERS -->
   <param name="/y_south" value="0.0" />	<!-- SET THIS IN METERS -->
   
+  <!-- Start location for the dynamic navigation demonstration in Local NED frame -->
+  <param name="/x_DnD" value="-105" />            <!-- Meter value -->
+  <param name="/y_DnD" value="369" />             <!-- Meter value -->
+  <param name="/psi_DnD" value="0.0" />           <!-- Radian value -->
+  
+  <!-- Start location for the follow the path task in Local NED frame -->
+  <param name="/x_FtP" value="157" />             <!-- Meter value -->
+  <param name="/y_FtP" value="-533" />            <!-- Meter value -->
+  <param name="/psi_FtP" value="0.0" />           <!-- Radian value -->
+  
+  <!-- Hard code values for buoy positions wrt USV-->
+  <param name="/updated_buoy_pair" value="0" />   <!-- 0 = false  1 = true -->
+  <param name="/x_LB" value="0" />                <!-- Meter value -->
+  <param name="/y_LB" value="0" />                <!-- Meter value -->
+  <param name="/x_RB" value="0" />                <!-- Meter value -->
+  <param name="/y_RB" value="0" />                <!-- Meter value -->
+
   <!-- Launches codes -->
   <node pkg="jetson" type="navigation_array_outdoor" name="navigation_array_outdoor" output="screen">
   </node>

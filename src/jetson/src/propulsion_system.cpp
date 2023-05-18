@@ -258,7 +258,7 @@ void update_gains_LL_controller()
 {
 	// Get the LL_state which decides which controller to use
 	ros::param::get("/LL", LL_state);
-	ROS_DEBUG("LL_state: %i	 ~ 1 = Dual-azimuthing, 2 = Differential, 3 = Ackermann ~ --PS", LL_state);
+	//ROS_DEBUG("LL_state: %i	 ~ 1 = Dual-azimuthing, 2 = Differential, 3 = Ackermann ~ --PS", LL_state);
 	// Get the PID gains
 	ros::param::get("/kp_xy", Kp_x);
 	Kp_y = Kp_x; //ros::param::get("/Kp_y_G", Kp_y);
@@ -485,7 +485,7 @@ int main(int argc, char **argv)
 		if (PS_state == 1)
 		{
 			update_gains_LL_controller();		// Update all gain parameters in launch file
-			display_gains();			// UNCOMMENT IF YOU WANT TO PRINT GAINS TO USER
+			//display_gains();			// UNCOMMENT IF YOU WANT TO PRINT GAINS TO USER
 
 			Integral_reset();			// Reset integral term once the errors become minimal
 
@@ -520,7 +520,7 @@ int main(int argc, char **argv)
 			if ( (loop_count >= loop_count_ON) && (loop_count < (loop_count_ON + 2)) )  // don't include differential term or integration term first 2 loops after being turned ON
 			{
 				// USE P TERM ONLY TO COMPUTE CONTROL EFFORT SINCE I AND D TERMS ARE NOT YET DEFINED THE LOOP AFTER CONTROLLER IS TURNED ON
-				ROS_INFO("PROPULSION_SYSTEM: P Control");
+				//ROS_INFO("PROPULSION_SYSTEM: P Control");
 				if (LL_state == 1)		// 1 = PID HP Dual-azimuthing station keeping controller
 				{
 					T_x = Kp_x*e_x;
@@ -534,7 +534,7 @@ int main(int argc, char **argv)
 			else if (loop_count >= (loop_count_ON + 2))
 			{
 				// USE PID CONTROLLER ONCE I AND D TERMS ARE DEFINED
-				ROS_INFO("PROPULSION_SYSTEM: PID Control");
+				//ROS_INFO("PROPULSION_SYSTEM: PID Control");
 				if (LL_state == 1)		// 1 = PID HP Dual-azimuthing station keeping controller
 				{
 					// trapezoidal integration of errors for integral term
@@ -615,23 +615,23 @@ int main(int argc, char **argv)
 			}
 
 			// UPDATES STATUSES TO USER ///////////////////////////////////////////////
-			ROS_DEBUG("x_goal: %.2f --PS", x_goal);
-			ROS_DEBUG("y_goal: %.2f --PS", y_goal);
-			ROS_DEBUG("des_psi: %.2f --PS\n", psi_goal);
+			//ROS_DEBUG("x_goal: %.2f --PS", x_goal);
+			//ROS_DEBUG("y_goal: %.2f --PS", y_goal);
+			//ROS_DEBUG("des_psi: %.2f --PS\n", psi_goal);
 
-			ROS_DEBUG("x_usv: %.2f --PS", x_usv_NED);
-			ROS_DEBUG("y_usv: %.2f --PS", y_usv_NED);
-			ROS_DEBUG("psi_NED: %.2f --PS\n", psi_NED);
+			//ROS_DEBUG("x_usv: %.2f --PS", x_usv_NED);
+			//ROS_DEBUG("y_usv: %.2f --PS", y_usv_NED);
+			//ROS_DEBUG("psi_NED: %.2f --PS\n", psi_NED);
 
-			ROS_DEBUG("e_x_prev: %.2f --PS", e_x_prev);		// x posn. error
-			ROS_DEBUG("e_y_prev: %.2f --PS", e_y_prev);		// y posn. error
+			//ROS_DEBUG("e_x_prev: %.2f --PS", e_x_prev);		// x posn. error
+			//ROS_DEBUG("e_y_prev: %.2f --PS", e_y_prev);		// y posn. error
 			//ROS_DEBUG("e_xy_prev: %.2f --PS", e_xy_prev);		// magnitude of posn. error
-			ROS_DEBUG("e_psi_prev: %.2f --PS\n", e_psi_prev);		// heading error
+			//ROS_DEBUG("e_psi_prev: %.2f --PS\n", e_psi_prev);		// heading error
 
-			ROS_DEBUG("e_x: %.2f --PS", e_x);		// x posn. error
-			ROS_DEBUG("e_y: %.2f --PS", e_y);		// y posn. error
-			ROS_DEBUG("e_xy: %.2f --PS", e_xy);		// magnitude of posn. error
-			ROS_DEBUG("e_psi: %.2f --PS\n", e_psi);		// heading error
+			//ROS_DEBUG("e_x: %.2f --PS", e_x);		// x posn. error
+			//ROS_DEBUG("e_y: %.2f --PS", e_y);		// y posn. error
+			//ROS_DEBUG("e_xy: %.2f --PS", e_xy);		// magnitude of posn. error
+			//ROS_DEBUG("e_psi: %.2f --PS\n", e_psi);		// heading error
 
 			// perhaps comment out the following if
 			// if within a meter only control heading
@@ -777,10 +777,10 @@ int main(int argc, char **argv)
 			//ROS_DEBUG("Port Thrust: %.2f", T_p);
 			//ROS_DEBUG("Stbd Thrust: %.2f", T_s);
 
-			ROS_DEBUG("Port Thrust: %.2f", T_p);
-			ROS_DEBUG("Stbd Thrust: %.2f", T_s);
-			ROS_DEBUG("Port Angle: %.2f", A_p);
-			ROS_DEBUG("Stbd Angle: %.2f\n", A_s);
+			//ROS_DEBUG("Port Thrust: %.2f", T_p);
+			//ROS_DEBUG("Stbd Thrust: %.2f", T_s);
+			//ROS_DEBUG("Port Angle: %.2f", A_p);
+			//ROS_DEBUG("Stbd Angle: %.2f\n", A_s);
 
 			// only print to thrusters if far enough into loop to have correct calculations
 			// for some reason the first 4 times through loop the current pose variables do not update

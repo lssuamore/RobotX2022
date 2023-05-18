@@ -118,7 +118,7 @@ void state_update()						// NOTE: To simplify, use just message variables !!!!!!
 		}
 		else if (MC_state == 1)
 		{
-			// DO STATION KEEPING
+			// Station Keeping
 			NA_state = 1;
 			PP_state = 1;
 			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
@@ -132,7 +132,7 @@ void state_update()						// NOTE: To simplify, use just message variables !!!!!!
 		}
 		else if (MC_state == 2)
 		{
-			// DO WAYFINDING
+			// Task 2 (Entrance and exit gates)
 			NA_state = 1;
 			PP_state = 2;
 			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
@@ -144,6 +144,77 @@ void state_update()						// NOTE: To simplify, use just message variables !!!!!!
 				PS_state = 0;										// Propulsion system on standby
 			}
 		}
+		else if (MC_state == 3)
+		{
+			// Task 3(Follow the path)
+			NA_state = 1;
+			PP_state = 3;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;									// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;									// Propulsion system on standby
+			}
+		}
+		else if (MC_state == 4)
+		{
+			// Task 4(Wildlife finding)
+			NA_state = 1;
+			PP_state = 1;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;									// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;									// Propulsion system on standby
+			}
+		}
+		else if (MC_state == 5)
+		{
+			// Task 5(Station keep)
+			NA_state = 1;
+			PP_state = 1;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;									// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;									// Propulsion system on standby
+			}
+		}
+		else if (MC_state == 6)
+		{
+			// Task 6 (Docking)
+			NA_state = 1;
+			PP_state = 1;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;									// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;									// Propulsion system on standby
+			}
+		}
+		else if (MC_state == 7)
+		{
+			// Task 7 (For now Station Keep)
+			NA_state = 1;
+			PP_state = 1;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;									// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;									// Propulsion system on standby
+			}
+		}
+		
 		else
 		{
 			// ALL CODES ON STANDBY

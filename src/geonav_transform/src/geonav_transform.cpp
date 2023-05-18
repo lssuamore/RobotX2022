@@ -225,9 +225,9 @@ void GeonavTransform::run()
 
     // Check for odometry 
     if ( (ros::Time::now().toSec()-nav_update_time_.toSec()) > 1.0 ){
-      ROS_WARN_STREAM("Haven't received Odometry on <"
-		      << geo_odom_sub.getTopic() << "> for 1.0 seconds!" 
-		      << " Will not broadcast transform!");
+//      ROS_WARN_STREAM("Haven't received Odometry on <"
+//		      << geo_odom_sub.getTopic() << "> for 1.0 seconds!" 
+//		      << " Will not broadcast transform!");
     }
     else{
       // send transforms - particularly odom->base (utm->odom is static)

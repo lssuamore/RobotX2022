@@ -8,13 +8,14 @@
 
 #include <string>
 #include <vector>
-#include <map>
+#include <memory>
 
 #include <ros/types.h>
 #include <ros/serialization.h>
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
+#include <std_msgs/Int64.h>
 
 namespace jetson
 {
@@ -35,10 +36,10 @@ struct task_info_
 
 
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _name_type;
+   typedef  ::std_msgs::Int64_<ContainerAllocator>  _name_type;
   _name_type name;
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _state_type;
+   typedef std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> _state_type;
   _state_type state;
 
 
@@ -93,16 +94,6 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsMessage< ::jetson::task_info_<ContainerAllocator> >
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsMessage< ::jetson::task_info_<ContainerAllocator> const>
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
 struct IsFixedSize< ::jetson::task_info_<ContainerAllocator> >
   : FalseType
   { };
@@ -110,6 +101,16 @@ struct IsFixedSize< ::jetson::task_info_<ContainerAllocator> >
 template <class ContainerAllocator>
 struct IsFixedSize< ::jetson::task_info_<ContainerAllocator> const>
   : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct IsMessage< ::jetson::task_info_<ContainerAllocator> >
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsMessage< ::jetson::task_info_<ContainerAllocator> const>
+  : TrueType
   { };
 
 template <class ContainerAllocator>
@@ -128,12 +129,12 @@ struct MD5Sum< ::jetson::task_info_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "181acc0441b0be709bbbbfe6dba51bd0";
+    return "8604b4549acbc2637d40681d3885d9ee";
   }
 
   static const char* value(const ::jetson::task_info_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x181acc0441b0be70ULL;
-  static const uint64_t static_value2 = 0x9bbbbfe6dba51bd0ULL;
+  static const uint64_t static_value1 = 0x8604b4549acbc263ULL;
+  static const uint64_t static_value2 = 0x7d40681d3885d9eeULL;
 };
 
 template<class ContainerAllocator>
@@ -152,9 +153,13 @@ struct Definition< ::jetson::task_info_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "string name\n"
+    return "std_msgs/Int64 name\n"
 "string state\n"
 "\n"
+"\n"
+"================================================================================\n"
+"MSG: std_msgs/Int64\n"
+"int64 data\n"
 ;
   }
 
@@ -194,9 +199,10 @@ struct Printer< ::jetson::task_info_<ContainerAllocator> >
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::jetson::task_info_<ContainerAllocator>& v)
   {
     s << indent << "name: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.name);
+    s << std::endl;
+    Printer< ::std_msgs::Int64_<ContainerAllocator> >::stream(s, indent + "  ", v.name);
     s << indent << "state: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.state);
+    Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.state);
   }
 };
 

@@ -66,6 +66,11 @@ add_message_files(
   state_msg.msg
   task_info.msg
   control_efforts.msg
+  zed2i_msg.msg
+  NED_objects.msg
+  AMS_state.msg
+  Acoustics_msg.msg
+  Detect_Dock_Fling.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -145,7 +150,7 @@ include_directories(
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
+##[[
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
@@ -155,6 +160,17 @@ add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)
 add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)
 add_executable(propulsion_system src/propulsion_system.cpp)
 add_executable(path_planner src/path_planner.cpp)
+add_executable(task5_sub src/task5_sub.cpp)
+add_executable(heartbeat_pub src/heartbeat_pub.cpp)
+add_executable(task3_pub src/task3_pub.cpp)
+add_executable(task3_sub src/task3_sub.cpp)
+add_executable(task1_sub src/task1_sub.cpp)
+add_executable(task4_sub src/task4_sub.cpp)
+add_executable(task2_sub src/task2_sub.cpp)
+add_executable(task6_sub src/task6_sub.cpp)
+add_executable(task7_sub src/task7_sub.cpp)
+add_executable(task8_sub src/task8_sub.cpp)
+add_executable(heartbeat_control src/heartbeat_control.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -172,7 +188,18 @@ target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
 target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system ${catkin_LIBRARIES})
 target_link_libraries(path_planner ${catkin_LIBRARIES})
-
+target_link_libraries(task5_sub ${catkin_LIBRARIES})
+target_link_libraries(heartbeat_pub ${catkin_LIBRARIES})
+target_link_libraries(task3_pub ${catkin_LIBRARIES})
+target_link_libraries(task3_sub ${catkin_LIBRARIES})
+target_link_libraries(task1_sub ${catkin_LIBRARIES})
+target_link_libraries(task4_sub ${catkin_LIBRARIES})
+target_link_libraries(task2_sub ${catkin_LIBRARIES})
+target_link_libraries(task6_sub ${catkin_LIBRARIES})
+target_link_libraries(task7_sub ${catkin_LIBRARIES})
+target_link_libraries(task8_sub ${catkin_LIBRARIES})
+target_link_libraries(heartbeat_control ${catkin_LIBRARIES})
+##]]
 #############
 ## Install ##
 #############

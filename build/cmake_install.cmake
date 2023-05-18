@@ -1,8 +1,8 @@
-# Install script for directory: /home/brad/RobotX2022/src
+# Install script for directory: /home/amore/RobotX2022/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/brad/RobotX2022/install")
+  set(CMAKE_INSTALL_PREFIX "/home/amore/RobotX2022/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -49,112 +49,114 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/brad/RobotX2022/install/_setup_util.py")
+   "/home/amore/RobotX2022/install/_setup_util.py")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/brad/RobotX2022/install" TYPE PROGRAM FILES "/home/brad/RobotX2022/build/catkin_generated/installspace/_setup_util.py")
+file(INSTALL DESTINATION "/home/amore/RobotX2022/install" TYPE PROGRAM FILES "/home/amore/RobotX2022/build/catkin_generated/installspace/_setup_util.py")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/brad/RobotX2022/install/env.sh")
+   "/home/amore/RobotX2022/install/env.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/brad/RobotX2022/install" TYPE PROGRAM FILES "/home/brad/RobotX2022/build/catkin_generated/installspace/env.sh")
+file(INSTALL DESTINATION "/home/amore/RobotX2022/install" TYPE PROGRAM FILES "/home/amore/RobotX2022/build/catkin_generated/installspace/env.sh")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/brad/RobotX2022/install/setup.bash;/home/brad/RobotX2022/install/local_setup.bash")
+   "/home/amore/RobotX2022/install/setup.bash;/home/amore/RobotX2022/install/local_setup.bash")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/brad/RobotX2022/install" TYPE FILE FILES
-    "/home/brad/RobotX2022/build/catkin_generated/installspace/setup.bash"
-    "/home/brad/RobotX2022/build/catkin_generated/installspace/local_setup.bash"
+file(INSTALL DESTINATION "/home/amore/RobotX2022/install" TYPE FILE FILES
+    "/home/amore/RobotX2022/build/catkin_generated/installspace/setup.bash"
+    "/home/amore/RobotX2022/build/catkin_generated/installspace/local_setup.bash"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/brad/RobotX2022/install/setup.sh;/home/brad/RobotX2022/install/local_setup.sh")
+   "/home/amore/RobotX2022/install/setup.sh;/home/amore/RobotX2022/install/local_setup.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/brad/RobotX2022/install" TYPE FILE FILES
-    "/home/brad/RobotX2022/build/catkin_generated/installspace/setup.sh"
-    "/home/brad/RobotX2022/build/catkin_generated/installspace/local_setup.sh"
+file(INSTALL DESTINATION "/home/amore/RobotX2022/install" TYPE FILE FILES
+    "/home/amore/RobotX2022/build/catkin_generated/installspace/setup.sh"
+    "/home/amore/RobotX2022/build/catkin_generated/installspace/local_setup.sh"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/brad/RobotX2022/install/setup.zsh;/home/brad/RobotX2022/install/local_setup.zsh")
+   "/home/amore/RobotX2022/install/setup.zsh;/home/amore/RobotX2022/install/local_setup.zsh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/brad/RobotX2022/install" TYPE FILE FILES
-    "/home/brad/RobotX2022/build/catkin_generated/installspace/setup.zsh"
-    "/home/brad/RobotX2022/build/catkin_generated/installspace/local_setup.zsh"
+file(INSTALL DESTINATION "/home/amore/RobotX2022/install" TYPE FILE FILES
+    "/home/amore/RobotX2022/build/catkin_generated/installspace/setup.zsh"
+    "/home/amore/RobotX2022/build/catkin_generated/installspace/local_setup.zsh"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/brad/RobotX2022/install/.rosinstall")
+   "/home/amore/RobotX2022/install/.rosinstall")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/brad/RobotX2022/install" TYPE FILE FILES "/home/brad/RobotX2022/build/catkin_generated/installspace/.rosinstall")
+file(INSTALL DESTINATION "/home/amore/RobotX2022/install" TYPE FILE FILES "/home/amore/RobotX2022/build/catkin_generated/installspace/.rosinstall")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/brad/RobotX2022/build/gtest/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_arduino/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_chibios/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_mbed/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_msgs/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_python/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_tivac/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_vex_cortex/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_vex_v5/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_xbee/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_client/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rtcm_msgs/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/ublox/ublox/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/jetson/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_server/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/pozyx_drivers/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/sparton_ahrs8_driver/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_embeddedlinux/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_test/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/rosserial/rosserial_windows/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/geonav_transform/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/ublox/ublox_serialization/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/ublox/ublox_msgs/cmake_install.cmake")
-  include("/home/brad/RobotX2022/build/sensors/ublox/ublox_gps/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/gtest/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_arduino/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_chibios/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_mbed/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_msgs/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_python/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_tivac/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_vex_cortex/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_vex_v5/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_xbee/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_client/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/sensors/rtcm_msgs/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/sensors/ublox/ublox/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/jetson/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/template_gui_package/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_server/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/sensors/pozyx_drivers/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/sensors/sparton_ahrs8_driver/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_embeddedlinux/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_test/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/rosserial/rosserial_windows/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/geonav_transform/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/sensors/ublox/ublox_serialization/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/sensors/ublox/ublox_msgs/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/sensors/ublox/ublox_gps/cmake_install.cmake")
+  include("/home/amore/RobotX2022/build/sensors/ublox/ublox_msg_filters/cmake_install.cmake")
 
 endif()
 
@@ -166,5 +168,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/brad/RobotX2022/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/amore/RobotX2022/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
