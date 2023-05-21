@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/RobotX2022/devel/lib/geonav_transform/geonav_transform_node"
-  "/home/brad/RobotX2022/devel/lib/geonav_transform/geonav_transform_node.pdb"
+  "/home/lssu-robotx/RobotX2022/devel/lib/geonav_transform/geonav_transform_node"
+  "/home/lssu-robotx/RobotX2022/devel/lib/geonav_transform/geonav_transform_node.pdb"
   "CMakeFiles/geonav_transform_node.dir/src/geonav_transform_node.cpp.o"
 )
 

@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="jetson" type="heartbeat" name="heartbeat" output="screen"/>
+    <node pkg="jetson" type="heartbeat_control" name="heartbeat_control" output="screen"/>
+</launch>

@@ -1,8 +1,8 @@
-# Install script for directory: /home/brad/RobotX2022/src/geonav_transform
+# Install script for directory: /home/lssu-robotx/RobotX2022/src/geonav_transform
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/brad/RobotX2022/install")
+  set(CMAKE_INSTALL_PREFIX "/home/lssu-robotx/RobotX2022/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "")
+    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -38,21 +38,21 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/home/brad/RobotX2022/build/geonav_transform/catkin_generated/safe_execute_install.cmake")
+  include("/home/lssu-robotx/RobotX2022/build/geonav_transform/catkin_generated/safe_execute_install.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/brad/RobotX2022/build/geonav_transform/catkin_generated/installspace/geonav_transform.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/lssu-robotx/RobotX2022/build/geonav_transform/catkin_generated/installspace/geonav_transform.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/geonav_transform/cmake" TYPE FILE FILES
-    "/home/brad/RobotX2022/build/geonav_transform/catkin_generated/installspace/geonav_transformConfig.cmake"
-    "/home/brad/RobotX2022/build/geonav_transform/catkin_generated/installspace/geonav_transformConfig-version.cmake"
+    "/home/lssu-robotx/RobotX2022/build/geonav_transform/catkin_generated/installspace/geonav_transformConfig.cmake"
+    "/home/lssu-robotx/RobotX2022/build/geonav_transform/catkin_generated/installspace/geonav_transformConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/geonav_transform" TYPE FILE FILES "/home/brad/RobotX2022/src/geonav_transform/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/geonav_transform" TYPE FILE FILES "/home/lssu-robotx/RobotX2022/src/geonav_transform/package.xml")
 endif()
 

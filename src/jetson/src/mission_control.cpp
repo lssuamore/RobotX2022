@@ -51,7 +51,7 @@ int MC_state = 0;	//	0 = On standby		//	1 = Station-Keeping			//	2 = Wayfinding
 int NA_state = 0;	//	0 = On standby		//	1 = USV NED pose converter
 
 //	STATES CONCERNED WITH "path_planner"
-int PP_state = 0;	//	0 = On standby		//	1 = Task 1: Station-Keeping		//	2 = Task 2: Wayfinding
+std_msgs::Int32 PP_state = 0;	//	0 = On standby		//	1 = Task 1: Station-Keeping		//	2 = Task 2: Wayfinding
 
 //	STATES CONCERNED WITH "propulsion_system"
 int PS_state = 0;	//	0 = On standby		//	1 = Propulsion system ON
@@ -115,10 +115,11 @@ void state_update()						// NOTE: To simplify, use just message variables !!!!!!
 			PP_state = 0;
 			PS_state = 0;
 			NED_goal_pose_published = false;
+
 		}
 		else if (MC_state == 1)
 		{
-			// DO STATION KEEPING
+			// Station Keeping
 			NA_state = 1;
 			PP_state = 1;
 			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
@@ -132,7 +133,7 @@ void state_update()						// NOTE: To simplify, use just message variables !!!!!!
 		}
 		else if (MC_state == 2)
 		{
-			// DO WAYFINDING
+			// Task 2 (Entrance and exit gates)
 			NA_state = 1;
 			PP_state = 2;
 			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
@@ -144,6 +145,77 @@ void state_update()						// NOTE: To simplify, use just message variables !!!!!!
 				PS_state = 0;										// Propulsion system on standby
 			}
 		}
+		else if (MC_state == 3)
+		{
+			// Task 3(Follow the path)
+			NA_state = 1;
+			PP_state = 1;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;									// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;									// Propulsion system on standby
+			}
+		}
+		else if (MC_state == 4)
+		{
+			// Task 4(Wildlife finding)
+			NA_state = 1;
+			PP_state = 1;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;									// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;									// Propulsion system on standby
+			}
+		}
+		else if (MC_state == 5)
+		{
+			// Task 5(Station keep)
+			NA_state = 1;
+			PP_state = 1;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;									// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;									// Propulsion system on standby
+			}
+		}
+		else if (MC_state == 6)
+		{
+			// Task 6 (Docking)
+			NA_state = 1;
+			PP_state = 6;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;									// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;									// Propulsion system on standby
+			}
+		}
+		else if (MC_state == 7)
+		{
+			// Task 7 (For now Station Keep)
+			NA_state = 1;
+			PP_state = 7;
+			if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+			{
+				PS_state = 1;									// Propulsion system ON
+			}
+			else
+			{
+				PS_state = 0;									// Propulsion system on standby
+			}
+		}
+		
 		else
 		{
 			// ALL CODES ON STANDBY
@@ -173,6 +245,9 @@ void state_update()						// NOTE: To simplify, use just message variables !!!!!!
 		ps_state_msg.header.frame_id = "mission_control";		// header frame
 		ps_state_msg.state.data = PS_state;								// set propulsion_system_state
 		ps_state_pub.publish(ps_state_msg);								// publish ps_state_msg to "ps_state"
+
+        MC_state_msg.data = MC_state;
+        MC_state_pub.publish(MC_state_msg);
 
 /*		// UPDATE USER OF EACH CODES STATE
 		ROS_DEBUG("\n----------------- CURRENT STATES --------------------");
@@ -304,17 +379,18 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9;
 
 	// Subscribers
-	ros::Subscriber na_initialization_state_sub = nh1.subscribe("na_initialization_state", 1, NAVIGATION_ARRAY_inspector);		// initialization status of navigation_array
-	ros::Subscriber pp_initialization_state_sub = nh2.subscribe("pp_initialization_state", 1, PATH_PLANNER_inspector);		// initialization status of path_planner
-	ros::Subscriber ps_initialization_state_sub = nh3.subscribe("ps_initialization_state", 1, PROPULSION_SYSTEM_inspector);		// initialization status of propulsion_system
-	//ros::Subscriber nav_NED_sub = nh4.subscribe("nav_ned", 1, pose_update);							// Obtains the USV pose in global NED from mission_control
-	ros::Subscriber goal_pose_publish_state_sub = nh5.subscribe("goal_pose_publish_state", 1, NED_goal_pose_published_update);	// whether or not goal pose has been published to propulsion_system yet 
-	ros::Subscriber pp_USV_pose_update_state_sub = nh6.subscribe("pp_USV_pose_update_state", 1, pp_USV_pose_update_state_update);	// topic containing the status of whether or not the USV pose has been updated in path_planner
+    ros::Subscriber na_initialization_state_sub = nh1.subscribe("/na_initialization_state", 1, NAVIGATION_ARRAY_inspector);		// initialization status of navigation_array
+    ros::Subscriber pp_initialization_state_sub = nh2.subscribe("/pp_initialization_state", 1, PATH_PLANNER_inspector);		// initialization status of path_planner
+    ros::Subscriber ps_initialization_state_sub = nh3.subscribe("/ps_initialization_state", 1, PROPULSION_SYSTEM_inspector);		// initialization status of propulsion_system
+    //ros::Subscriber nav_NED_sub = nh4.subscribe("nav_ned", 1, pose_update);						                     	// Obtains the USV pose in global NED from mission_control
+    ros::Subscriber goal_pose_publish_state_sub = nh5.subscribe("/goal_pose_publish_state", 1, NED_goal_pose_published_update);	// whether or not goal pose has been published to propulsion_system yet
+    ros::Subscriber pp_USV_pose_update_state_sub = nh6.subscribe("/pp_USV_pose_update_state", 1, pp_USV_pose_update_state_update);	// topic containing the status of whether or not the USV pose has been updated in path_planner
 
 	// Publishers
 	na_state_pub = nh7.advertise<jetson::state_msg>("na_state", 1);			// current navigation_array state
 	pp_state_pub = nh8.advertise<jetson::state_msg>("pp_state", 1);			// current path_planner state
 	ps_state_pub = nh9.advertise<jetson::state_msg>("ps_state", 1);			// current propulsion_system state
+    MC_state_pub = nh10.advertise<std_msgs::int>("MC_state", 1);
 
 	// Timers ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Initialize simulation time

@@ -243,7 +243,6 @@ int main(int argc, char **argv)
 	ros::Subscriber compass_sub = nh4.subscribe("compass_value", 10, sparkfun_update);
 	ros::Subscriber imu_sub = nh5.subscribe("/imu/data", 100, imu_processor);	// subscribes to IMU
 	ros::Subscriber geonav_odom_sub = nh6.subscribe("geonav_odom", 10, ned_func);
-
 	// Publishers
 	na_initialization_state_pub = nh7.advertise<std_msgs::Bool>("na_initialization_state", 1);	// publisher for state of initialization
 	nav_ned_pub = nh8.advertise<nav_msgs::Odometry>("nav_ned", 10); 			// USV NED state publisher //gps already in NED but will publish anyways using odometry message type	
@@ -297,6 +296,12 @@ int main(int argc, char **argv)
 
 				// publish the NED USV state
 				nav_ned_pub.publish(nav_ned_msg);
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
 				break;
 			default:
 				break;

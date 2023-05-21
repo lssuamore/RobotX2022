@@ -10,6 +10,8 @@
 
 (in-package "ROS")
 ;;//! \htmlinclude task_info.msg.html
+(if (not (find-package "STD_MSGS"))
+  (ros::roseus-add-msgs "std_msgs"))
 
 
 (defclass jetson::task_info
@@ -19,24 +21,28 @@
 (defmethod jetson::task_info
   (:init
    (&key
-    ((:name __name) "")
+    ((:name __name) (instance std_msgs::Int64 :init))
     ((:state __state) "")
     )
    (send-super :init)
-   (setq _name (string __name))
+   (setq _name __name)
    (setq _state (string __state))
    self)
   (:name
-   (&optional __name)
-   (if __name (setq _name __name)) _name)
+   (&rest __name)
+   (if (keywordp (car __name))
+       (send* _name __name)
+     (progn
+       (if __name (setq _name (car __name)))
+       _name)))
   (:state
    (&optional __state)
    (if __state (setq _state __state)) _state)
   (:serialization-length
    ()
    (+
-    ;; string _name
-    4 (length _name)
+    ;; std_msgs/Int64 _name
+    (send _name :serialization-length)
     ;; string _state
     4 (length _state)
     ))
@@ -44,33 +50,36 @@
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; string _name
-       (write-long (length _name) s) (princ _name s)
+     ;; std_msgs/Int64 _name
+       (send _name :serialize s)
      ;; string _state
        (write-long (length _state) s) (princ _state s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; string _name
-     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _name (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; std_msgs/Int64 _name
+     (send _name :deserialize buf ptr-) (incf ptr- (send _name :serialization-length))
    ;; string _state
      (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _state (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;;
    self)
   )
 
-(setf (get jetson::task_info :md5sum-) "181acc0441b0be709bbbbfe6dba51bd0")
+(setf (get jetson::task_info :md5sum-) "8604b4549acbc2637d40681d3885d9ee")
 (setf (get jetson::task_info :datatype-) "jetson/task_info")
 (setf (get jetson::task_info :definition-)
-      "string name
+      "std_msgs/Int64 name
 string state
 
 
+================================================================================
+MSG: std_msgs/Int64
+int64 data
 ")
 
 
 
-(provide :jetson/task_info "181acc0441b0be709bbbbfe6dba51bd0")
+(provide :jetson/task_info "8604b4549acbc2637d40681d3885d9ee")
 
 

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/RobotX2022/src
+CMAKE_SOURCE_DIR = /home/lssu-robotx/RobotX2022/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/RobotX2022/build
+CMAKE_BINARY_DIR = /home/lssu-robotx/RobotX2022/build
 
 # Utility rule file for actionlib_msgs_generate_messages_cpp.
 
@@ -63,10 +63,10 @@ jetson/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build: actionlib_msgs
 .PHONY : jetson/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
 
 jetson/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/clean:
-	cd /home/brad/RobotX2022/build/jetson && $(CMAKE_COMMAND) -P CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/lssu-robotx/RobotX2022/build/jetson && $(CMAKE_COMMAND) -P CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : jetson/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/clean
 
 jetson/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/depend:
-	cd /home/brad/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/RobotX2022/src /home/brad/RobotX2022/src/jetson /home/brad/RobotX2022/build /home/brad/RobotX2022/build/jetson /home/brad/RobotX2022/build/jetson/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lssu-robotx/RobotX2022/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lssu-robotx/RobotX2022/src /home/lssu-robotx/RobotX2022/src/jetson /home/lssu-robotx/RobotX2022/build /home/lssu-robotx/RobotX2022/build/jetson /home/lssu-robotx/RobotX2022/build/jetson/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : jetson/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/depend
 

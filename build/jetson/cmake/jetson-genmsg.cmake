@@ -1,8 +1,8 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "jetson: 5 messages, 0 services")
+message(STATUS "jetson: 11 messages, 0 services")
 
-set(MSG_I_FLAGS "-Ijetson:/home/brad/RobotX2022/src/jetson/msg;-Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Ijetson:/home/lssu-robotx/RobotX2022/src/jetson/msg;-Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -17,29 +17,59 @@ add_custom_target(jetson_generate_messages ALL)
 
 
 
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
 add_custom_target(_jetson_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg" "geometry_msgs/Point"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg" "geometry_msgs/Point"
 )
 
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
 add_custom_target(_jetson_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg" "std_msgs/Float64:geometry_msgs/Point:std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg" "std_msgs/Header:std_msgs/Float64:geometry_msgs/Point"
 )
 
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
 add_custom_target(_jetson_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg" "std_msgs/Int32:std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg" "std_msgs/Header:std_msgs/Int32"
 )
 
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
 add_custom_target(_jetson_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/brad/RobotX2022/src/jetson/msg/task_info.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg" "std_msgs/Int64"
 )
 
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
 add_custom_target(_jetson_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg" "std_msgs/Float32"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg" "std_msgs/Float32"
+)
+
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg" NAME_WE)
+add_custom_target(_jetson_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg" "std_msgs/Header:geometry_msgs/PointStamped:geometry_msgs/Point"
+)
+
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg" NAME_WE)
+add_custom_target(_jetson_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg" "std_msgs/Header:geometry_msgs/PointStamped:geometry_msgs/Point"
+)
+
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg" NAME_WE)
+add_custom_target(_jetson_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg" ""
+)
+
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg" NAME_WE)
+add_custom_target(_jetson_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg" "std_msgs/Int32"
+)
+
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg" NAME_WE)
+add_custom_target(_jetson_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg" "std_msgs/Header:geometry_msgs/PointStamped:geometry_msgs/Point"
+)
+
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg" NAME_WE)
+add_custom_target(_jetson_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "jetson" "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg" ""
 )
 
 #
@@ -49,33 +79,69 @@ add_custom_target(_jetson_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
 )
 _generate_msg_cpp(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
 )
 _generate_msg_cpp(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
 )
 _generate_msg_cpp(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/task_info.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int64.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
+)
+_generate_msg_cpp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
+)
+_generate_msg_cpp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
+)
+_generate_msg_cpp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
+)
+_generate_msg_cpp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
 )
 _generate_msg_cpp(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
+)
+_generate_msg_cpp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
+)
+_generate_msg_cpp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg"
+  "${MSG_I_FLAGS}"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/jetson
 )
 
@@ -93,15 +159,27 @@ add_custom_target(jetson_generate_messages_cpp
 add_dependencies(jetson_generate_messages jetson_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_cpp _jetson_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -114,33 +192,69 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS jetson_generate_messages_cpp)
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
 )
 _generate_msg_eus(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
 )
 _generate_msg_eus(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
 )
 _generate_msg_eus(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/task_info.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int64.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
+)
+_generate_msg_eus(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
+)
+_generate_msg_eus(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
+)
+_generate_msg_eus(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
+)
+_generate_msg_eus(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
 )
 _generate_msg_eus(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
+)
+_generate_msg_eus(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
+)
+_generate_msg_eus(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg"
+  "${MSG_I_FLAGS}"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/jetson
 )
 
@@ -158,15 +272,27 @@ add_custom_target(jetson_generate_messages_eus
 add_dependencies(jetson_generate_messages jetson_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_eus _jetson_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -179,33 +305,69 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS jetson_generate_messages_eus)
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
 )
 _generate_msg_lisp(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
 )
 _generate_msg_lisp(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
 )
 _generate_msg_lisp(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/task_info.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int64.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
+)
+_generate_msg_lisp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
+)
+_generate_msg_lisp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
+)
+_generate_msg_lisp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
+)
+_generate_msg_lisp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
 )
 _generate_msg_lisp(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
+)
+_generate_msg_lisp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
+)
+_generate_msg_lisp(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg"
+  "${MSG_I_FLAGS}"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/jetson
 )
 
@@ -223,15 +385,27 @@ add_custom_target(jetson_generate_messages_lisp
 add_dependencies(jetson_generate_messages jetson_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_lisp _jetson_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -244,33 +418,69 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS jetson_generate_messages_lisp)
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
 )
 _generate_msg_nodejs(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
 )
 _generate_msg_nodejs(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
 )
 _generate_msg_nodejs(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/task_info.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int64.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
+)
+_generate_msg_nodejs(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
+)
+_generate_msg_nodejs(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
+)
+_generate_msg_nodejs(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
+)
+_generate_msg_nodejs(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
 )
 _generate_msg_nodejs(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
+)
+_generate_msg_nodejs(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
+)
+_generate_msg_nodejs(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg"
+  "${MSG_I_FLAGS}"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/jetson
 )
 
@@ -288,15 +498,27 @@ add_custom_target(jetson_generate_messages_nodejs
 add_dependencies(jetson_generate_messages jetson_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_nodejs _jetson_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -309,33 +531,69 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS jetson_generate_messages_nodejs)
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
 )
 _generate_msg_py(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
 )
 _generate_msg_py(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
 )
 _generate_msg_py(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/task_info.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int64.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
+)
+_generate_msg_py(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
+)
+_generate_msg_py(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
+)
+_generate_msg_py(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
+)
+_generate_msg_py(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
 )
 _generate_msg_py(jetson
-  "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg"
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
+)
+_generate_msg_py(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/PointStamped.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
+)
+_generate_msg_py(jetson
+  "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg"
+  "${MSG_I_FLAGS}"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/jetson
 )
 
@@ -353,15 +611,27 @@ add_custom_target(jetson_generate_messages_py
 add_dependencies(jetson_generate_messages jetson_generate_messages_py)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_waypoints.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/usv_pose_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/state_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/task_info.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/brad/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/control_efforts.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/zed2i_msg.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/NED_objects.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/AMS_state.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Acoustics_msg.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/Detect_Dock_Fling.msg" NAME_WE)
+add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/lssu-robotx/RobotX2022/src/jetson/msg/motorStatus_msg.msg" NAME_WE)
 add_dependencies(jetson_generate_messages_py _jetson_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

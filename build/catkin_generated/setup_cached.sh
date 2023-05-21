@@ -7,4 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PWD='/home/brad/RobotX2022/build'
+export PWD='/home/lssu-robotx/RobotX2022/build'

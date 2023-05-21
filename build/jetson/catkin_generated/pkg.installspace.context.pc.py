@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "${prefix}/include".split(';') if "${prefix}/i
 PROJECT_CATKIN_DEPENDS = "message_generation;message_runtime;roscpp;std_msgs;geometry_msgs".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "jetson"
-PROJECT_SPACE_DIR = "/home/brad/RobotX2022/install"
+PROJECT_SPACE_DIR = "/home/lssu-robotx/RobotX2022/install"
 PROJECT_VERSION = "0.0.0"
