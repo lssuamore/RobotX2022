@@ -74,7 +74,7 @@ add_message_files(
   AMS_state.msg
   Acoustics_msg.msg
   Detect_Dock_Fling.msg
-  motorStatus_msg.msg
+  motorStatus_.msg
 )
 
 ## Generate services in the 'srv' folder
