@@ -3,19 +3,25 @@
   <!-- GPS launch -->
   <include file="$(find jetson)/launch/ardusimple.launch">
   </include>
+  
   <!-- IMU working launch -->
   <include file="$(find sparton_ahrs8_driver)/launch/ahrs-8.launch">
   </include>
+  
+  <!-- Teensy launch -->
+  <node pkg="rosserial_python" type="serial_node.py" name="Teensy" args="/dev/ttyACM0">
+  </node>
+  
+  <!-- Compass launch -->
+  <node pkg="rosserial_python" type="serial_node.py" name="Compass" args="/dev/ttyACM1">
+  </node>
+  
   <!-- IMU launch through true name driver, but maybe doesn't work properly, so we use ^^^ -->
   <!-- include file="$(find sparton_ahrsm2_driver)/launch/ahrs-M2.launch" -->
   <!-- /include -->
+  
+  
   <!-- include file="$(find zed_wrapper)/launch/zed2i.launch" -->
   <!-- /include -->
-  <node pkg="rosserial_python" type="serial_node.py" name="Teensy" args="/dev/ttyACM2">
-  </node>
-  <node pkg="rosserial_python" type="serial_node.py" name="Compass" args="/dev/ttyACM1">
-  </node>
-  <!-- node pkg="rosserial_python" type="serial_node.py" name="Pozyx Indoor GPS" args="/dev/ttyUSB0" -->
-  <!-- /node -->
-
+  
 </launch>
