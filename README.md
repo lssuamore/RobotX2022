@@ -19,7 +19,7 @@ username:
 lssuamore
 ```
 password:
-```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
+```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
 ```
 ## Installation Process:
 
@@ -29,7 +29,7 @@ cd ~
 ```
 git clone https://github.com/lssuamore/RobotX2022.git
 ```
-username:lssuamore    password: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
+username:lssuamore    password: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
 ```
 cd RobotX2022
 ```
