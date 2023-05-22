@@ -69,16 +69,12 @@ add_message_files(
   state.msg
   Task.msg
   control_efforts.msg
-<<<<<<< HEAD
   zed2i_msg.msg
   NED_objects.msg
   AMS_state.msg
   Acoustics_msg.msg
   Detect_Dock_Fling.msg
   motorStatus_msg.msg
-=======
-  motorStatus_.msg
->>>>>>> ee4c9cfb47df4275840cc3828b5c4498e693f21f
 )
 
 ## Generate services in the 'srv' folder
@@ -158,11 +154,8 @@ include_directories(
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-<<<<<<< HEAD
-=======
 
 # AMORE ADDITION NOTICE: Start of block comment: #[[   End of block comment: ]]
->>>>>>> ee4c9cfb47df4275840cc3828b5c4498e693f21f
 ##[[
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
@@ -186,15 +179,7 @@ include_directories(
 #add_executable(task8_sub src/task8_sub.cpp)
 add_executable(heartbeat src/heartbeat.cpp)
 add_executable(heartbeat_control src/heartbeat_control.cpp)
-=======
-add_executable(camera_capture src/camera_capture.cpp)
-add_executable(mission_control src/mission_control.cpp)
-#add_executable(navigation_array_indoor src/navigation_array_indoor.cpp)
-add_executable(navigation_array_outdoor src/navigation_array_outdoor.cpp)
-add_executable(propulsion_system src/propulsion_system.cpp)
-add_executable(path_planner src/path_planner.cpp)
 add_executable(QUT_LSSU_cereal_interface src/QUT_LSSU_cereal_interface.cpp)
->>>>>>> ee4c9cfb47df4275840cc3828b5c4498e693f21f
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -206,7 +191,6 @@ add_executable(QUT_LSSU_cereal_interface src/QUT_LSSU_cereal_interface.cpp)
 ## same as for the library above
 
 ## Specify libraries to link a library or executable target against
-<<<<<<< HEAD
 #target_link_libraries(camera_capture ${catkin_LIBRARIES} ${OpenCV_LIBS})
 #target_link_libraries(mission_control ${catkin_LIBRARIES})
 #target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
@@ -225,18 +209,9 @@ add_executable(QUT_LSSU_cereal_interface src/QUT_LSSU_cereal_interface.cpp)
 #target_link_libraries(task8_sub ${catkin_LIBRARIES})
 target_link_libraries(heartbeat ${catkin_LIBRARIES})
 target_link_libraries(heartbeat_control ${catkin_LIBRARIES})
-#]]
-=======
-target_link_libraries(camera_capture ${catkin_LIBRARIES} ${OpenCV_LIBS})
-target_link_libraries(mission_control ${catkin_LIBRARIES})
-#target_link_libraries(navigation_array_indoor ${catkin_LIBRARIES})
-target_link_libraries(navigation_array_outdoor ${catkin_LIBRARIES})
-target_link_libraries(propulsion_system ${catkin_LIBRARIES})
-target_link_libraries(path_planner ${catkin_LIBRARIES})
 target_link_libraries(QUT_LSSU_cereal_interface ${catkin_LIBRARIES})
 #]]
 
->>>>>>> ee4c9cfb47df4275840cc3828b5c4498e693f21f
 #############
 ## Install ##
 #############
