@@ -684,8 +684,9 @@ int main(int argc, char **argv)
 	// NodeHandles
 	ros::NodeHandle n, nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9;
 
-  // Subscribers 
- 	
+  // Subscribers
+	printf("Starting Subscribers\n");
+
 	ros::Subscriber gpspos_sub = nh2.subscribe("/gps/fix", 10, gps_processor);		// subscribes to GPS position from indoor gps
     ros::Subscriber AMS_status_sub = n.subscribe("/USV_Mode", 1, AMS_status);					//Obtains what is the current AMS state
 
@@ -701,6 +702,8 @@ int main(int argc, char **argv)
     ros::Subscriber Detect_Fling_sub = n.subscribe("/Det_Dock", 1, Dock_Fling);						//Obtains what object the camera recognise, pose of the object and order of recognition
 //--------------------------------------------END OF VISION PROJECT----------------------------------------------------------------------------------------------------------
 	//ros::Subscriber AMS2_status_sub = n.subscribe("AMS_status", 1, AMS2_status);						//Obtains what is the current AMS state 
+
+	printf("Subscribed Successfully\n");
 
 	// Initialize global variables
        strcpy(ip,IP);//----------------------------!!!!!!!!---TEMPORARY---!!!!!!!!------------------------------------------
