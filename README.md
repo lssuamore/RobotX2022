@@ -19,7 +19,8 @@ username:
 lssuamore
 ```
 password:
-```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
+```
+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
 ```
 ## Installation Process:
 
